@@ -3,7 +3,7 @@
 PREFIX	:= ~/
 SRCS	:= $(basename $(wildcard ./**/*.symlink))
 CONF	:= $(PREFIX).dotfilesrc
-LN	:= ln -fFs
+LN	:= ln -fs
 T	:="	"
 
 all:	install-srcs \
@@ -19,10 +19,12 @@ install-srcs:
 	done
 
 install-conf:
-	@echo "make: rcfile"
-	@touch $(CONF)
-	@echo "export DOTDIR="$(CURDIR) >> $(CONF)
-	@echo $(T)"write: "$(CONF)
+	@@if [ ! -f $(CONF) ]; then \
+		echo "make: rcfile"; \
+		touch $(CONF); \
+		echo "export DOTDIR="$(CURDIR) >> $(CONF); \
+		echo $(T)"write: "$(CONF); \
+	fi;
 
 update-submodules:
 	@@if [ -d .git ]; then \
