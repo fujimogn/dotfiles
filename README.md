@@ -5,14 +5,15 @@ Install
 -------
 
 From your cloned directory
-`make install`
+
+* `make install`
 
 This will create symlink for config files in your `${HOME}` directory.
 
 Uninstall
 -------
 
-`make clean`
+* `make clean`
 
 This will remove symlink for your `${HOME}` directory
 
