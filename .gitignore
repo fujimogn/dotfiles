@@ -1,4 +1,6 @@
-*/**
+# ignore all
+*
+
 !.gitignore
 !Makefile
 !README.md
