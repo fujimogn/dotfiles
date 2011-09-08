@@ -1,25 +1,66 @@
 .SUFFIXES: .symlink
 
-LN	:= ln -fFs
+PREFIX	:= ~/
 SRCS	:= $(basename $(wildcard ./**/*.symlink))
-INSTDIR	:= ~
-TAB	:= "	"
+CONF	:= $(PREFIX).dotfilesrc
+LN	:= ln -fFs
+T	:="	"
 
-all	: install
+all:	install-srcs \
+	install-conf \
+	update-submodules
 
-install	: install-symlink
 
-install-symlink	: $(SRCS)
+install-srcs:
+	@echo "ln: symlink"
+	@for file in $(SRCS); do \
+		echo $(T)"ln: "$$file".symlink -> "$(PREFIX).$${file##*/}; \
+		$(LN) $(CURDIR)$$file.symlink $(PREFIX).$${file##*/}; \
+	done
 
-$(SRCS)	:
-	@$(LN) $(CURDIR)/$(addsuffix .symlink, $@) $(INSTDIR)/.$(notdir $@)
-	@echo $(TAB)"ln: "$@".symlink -> "$(INSTDIR)/.$(notdir $@)
+install-conf:
+	@echo "make: rcfile"
+	@touch $(CONF)
+	@echo "export="$(CURFIR) >> $(CONF)
+	@echo $(T)"write: "$(CONF)
 
-clean	: clean-symlink
+clean-conf:
+	@echo "rm: config"
+	@$(RM) $(CONF)
+	@echo $(T)"rm: "$(CONF)
 
-clean-symlink	: 
-	@$(RM) $(INSTDIR)/.$(notdir $(SRCS))
-	@echo $(TAB)"rm: "$(INSTDIR)/.$(notdir $(SRCS))
+update-submodules:
+	@@if [ -d .git ]; then \
+		if git submodule status | grep -q -E '^-'; then \
+			git submodule update --init --recursive; \
+		else \
+			git submodule update --init --recursive --merge; \
+		fi; \
+	fi;
+
+pull-submodules:
+	@@git submodule foreach "git pull \$$(git config remote.origin.url)"
+	@@git submodule summary
+
+pull:	pull_submodules
+	@@git pull ${REMOTE} ${BRANCH}
+
+clean:	clean-srcs \
+	clean-conf
+
+clean-srcs:
+	@echo "rm: symlink"
+	@for file in $(SRCS); do \
+		rm -rf $(PREFIX).$${file##*/}; \
+		echo $(T)"rm: "$(PREFIX).$${file##*/}; \
+	done
 
 help:
-	@echo "	$(SRCS)"
+	@echo "usage:	make"
+	@echo "available targets are:"
+	@echo "	intsall			: install all"
+	@echo "	clean			: uninstall all"
+	@echo "	submodule-update	: update submodule"
+	@echo "	help			: show this text"
+
+.PHONY: all core backup install package clean pull pull-submodules update-submodules
