@@ -21,13 +21,8 @@ install-srcs:
 install-conf:
 	@echo "make: rcfile"
 	@touch $(CONF)
-	@echo "export="$(CURFIR) >> $(CONF)
+	@echo "export DOTDIR="$(CURDIR) >> $(CONF)
 	@echo $(T)"write: "$(CONF)
-
-clean-conf:
-	@echo "rm: config"
-	@$(RM) $(CONF)
-	@echo $(T)"rm: "$(CONF)
 
 update-submodules:
 	@@if [ -d .git ]; then \
@@ -55,12 +50,20 @@ clean-srcs:
 		echo $(T)"rm: "$(PREFIX).$${file##*/}; \
 	done
 
+clean-conf:
+	@echo "rm: config"
+	@$(RM) $(CONF)
+	@echo $(T)"rm: "$(CONF)
+
+
 help:
-	@echo "usage:	make"
-	@echo "available targets are:"
-	@echo "	intsall			: install all"
-	@echo "	clean			: uninstall all"
-	@echo "	submodule-update	: update submodule"
-	@echo "	help			: show this text"
+	@echo "usage:	make [targets]"
+	@echo "available [targets] are:"
+	@echo "  intsall		: install all"
+	@echo "  clean			: uninstall all"
+	@echo "  update-submodules	: init submodules"
+	@echo "  pull-submodules	: pull submodules"
+	@echo "  pull			: pull from repository"
+	@echo "  help			: show this text"
 
 .PHONY: all core backup install package clean pull pull-submodules update-submodules
