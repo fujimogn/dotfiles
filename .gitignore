@@ -1,8 +1,7 @@
 # ignore all
-*
+/*
 
-!.gitignore
-!Makefile
-!README.md
-
+!/.gitignore
+!/Makefile
+!/README.md
 !/zsh
