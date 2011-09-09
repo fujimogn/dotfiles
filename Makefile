@@ -1,9 +1,9 @@
 .SUFFIXES: .symlink
 
 PREFIX	:= ~/
-SRCS	:= $(basename $(wildcard ./**/*.symlink))
+SRCS	:= $(patsubst ./%,%,$(basename $(wildcard ./*/*.symlink)))
 CONF	:= $(PREFIX).dotfilesrc
-LN	:= ln -fs
+LN	:= ln -fFs
 T	:="	"
 
 all:	install-srcs \
@@ -15,7 +15,7 @@ install-srcs:
 	@echo "ln: symlink"
 	@for file in $(SRCS); do \
 		echo $(T)"ln: "$$file".symlink -> "$(PREFIX).$${file##*/}; \
-		$(LN) $(CURDIR)$$file.symlink $(PREFIX).$${file##*/}; \
+		$(LN) $(CURDIR)/$$file.symlink $(PREFIX).$${file##*/}; \
 	done
 
 install-conf:

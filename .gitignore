@@ -5,3 +5,5 @@
 !/Makefile
 !/README.md
 !/zsh
+/zsh/.zsh_history
+/zsh/.history

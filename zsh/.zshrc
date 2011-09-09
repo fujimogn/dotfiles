@@ -4,25 +4,18 @@
 # $Date: 2011-09-07T21:18:53+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
-[ -f ${HOME}/.commonrc ] && source ${HOME}/.commonrc
-
-# {{{ history
-
-HISTFILE=${ZDOTDIR}/.history
+# history
+HISTFILE=${ZDOTDIR}/.zsh_history
 HISTIGNORE='?:??:rm *:\\rm *:r\\m *'
 HISTSIZE=10000
 SAVEHIST=10000
-
-# root のコマンドはヒストリに追加しない
 if [ $UID = 0 ]; then
   unset HISTFILE
   SAVEHIST=0
 fi
-
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
-
 setopt append_history           # 履歴を追加
 setopt extended_history         # ヒストリファイルに開始/終了タイムスタンプを書き込み
 setopt hist_expand              # 補完時にヒストリを自動的に展開
@@ -37,10 +30,7 @@ setopt hist_save_no_dups        # ヒストリファイルに書き出すとき�
 setopt hist_verify              # ヒストリを呼び出してから編集可能な状態にする
 setopt inc_append_history       # 履歴をインクリメンタルに追加
 setopt share_history            # ヒストリを複数端末で共有する
-
-# }}}
-# {{{ setopt
-
+# setopt
 setopt auto_cd                  # ディレクトリ名だけで移動
 setopt auto_name_dirs           # "~$var" でディレクトリにアクセス
 setopt auto_pushd               # 移動したディレクトリを記録しておく
@@ -67,10 +57,7 @@ setopt sh_word_split            # 変数内の文字列分解のデリミタ
 setopt sun_keyboard_hack        # 末尾の ` を無視
 unsetopt flow_control           # C-s, C-q を無効にする
 unsetopt promptcr               # 改行コードで終らない出力もちゃんと出力する
-
-# }}}
-# {{{ completion
-
+# completion
 setopt always_last_prompt       # 補完してもプロンプトの位置を変えない。デフォルトで有効
 setopt always_to_end            # 補完時に文字列末尾へカーソル移動
 setopt auto_list                # 補完候補が複数あるとき自動でメニューをリストアップ。デフォルトで有効
@@ -90,4 +77,3 @@ setopt magic_equal_subst        # = 以降でも補完できるようにする
 setopt rec_exact                # 曖昧さがあっても正確なマッチ
 unsetopt list_beep              # 曖昧な補完にビープ音を鳴らさない
 
-# }}}
