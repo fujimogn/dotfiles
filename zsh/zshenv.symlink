@@ -10,6 +10,15 @@ load_dotfilesrc() {
   fi
 }
 
+load_systemrc() {
+  if [ -n ${DOTDIR} ] && [ -d ${DOTDIR}/system ]; then
+    for file in ${DOTDIR}/system/*
+    do
+      source ${file}
+    done
+  fi
+}
+
 set_zdotdir() {
   if [ -n ${DOTDIR} ] && [ !-n ${ZDOTDIR} ]; then
     export ZDOTDIR=${DOTDIR}/zsh
@@ -22,10 +31,11 @@ load_zshenv(){
   fi
 }
 
-zshenv() {
+zshenv_main() {
   load_dotfilesrc
+  load_systemrc
   set_zdotdir
   load_zshenv
 }
 
-zshenv
+zshenv_main
