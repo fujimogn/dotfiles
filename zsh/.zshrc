@@ -1,12 +1,13 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/.zshrc
-# $Date: 2011-09-10T03:47:34+0900$
+# $Date: 2011-09-10T06:59:41+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
+
 
 load_systemrc() {
   if [ -d ${DOTDIR}/system ]; then
-    for file in ${DOTDIR}/system/*.rc
+    for file in ${DOTDIR}/system/*
     do
       source ${file}
     done
@@ -15,27 +16,32 @@ load_systemrc() {
 
 
 load_dotzshrc() {
-  for dotzshrc in ${ZDOTDIR}/**/*.zshrc
+  for dotzshrc in `find ${ZDOTDIR} -type f -regex ".*/.[a-zA-Z0-9]*\.zshrc\$"` \
+                  `is_cygwin && find ${ZDOTDIR} -path ${ZDOTDIR}/modules -prune -o -type f -regex ".*/.[a-zA-Z0-9]*\.cygwin\.zshrc\$"` \
+                  `is_darwin && find ${ZDOTDIR} -path ${ZDOTDIR}/modules -prune -o -type f -regex ".*/.[a-zA-Z0-9]*\.darwin\.zshrc\$"` \
+                  `is_linux && find ${ZDOTDIR} -path ${ZDOTDIR}/modules -prune -o -type f -regex ".*/.[a-zA-Z0-9]*\.linux\.zshrc\$"` \
+                  `is_solaris && find ${ZDOTDIR} -path ${ZDOTDIR}/modules -prune -o -type f -regex ".*/.[a-zA-Z0-9]*\.solaris\.zshrc\$"`
   do
     source $dotzshrc
   done
 }
 
 load_dotzsh() {
-  for dotzsh in ${DOTDIR}/**/*.zsh
+  for dotzsh in `find ${DOTDIR} -type f -regex ".*/.[a-zA-Z0-9]*\.zsh\$"` \
+                  `is_cygwin && find ${DOTDIR} -path ${ZDOTDIR}/modules -prune -o -type f -regex ".*/.[a-zA-Z0-9]*\.cygwin\.zsh\$"` \
+                  `is_darwin && find ${DOTDIR} -path ${ZDOTDIR}/modules -prune -o -type f -regex ".*/.[a-zA-Z0-9]*\.darwin\.zsh\$"` \
+                  `is_linux && find ${DOTDIR} -path ${ZDOTDIR}/modules -prune -o -type f -regex ".*/.[a-zA-Z0-9]*\.linux\.zsh\$"` \
+                  `is_solaris && find ${DOTDIR} -path ${ZDOTDIR}/modules -prune -o -type f -regex ".*/.[a-zA-Z0-9]*\.solaris\.zsh\$"`
   do
     source $dotzsh
   done
-  if [ is_linux -eq "0" ]; then
-    echo "test"
-  fi
 }
 
 load_module() {
 }
 
-zshrc() {
-  load_commonrc
+zshrc_main() {
+  load_systemrc
   load_dotzshrc
   load_dotzsh
   load_module
@@ -43,5 +49,4 @@ zshrc() {
   compinit
 }
 
-zshrc
-
+zshrc_main
