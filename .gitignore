@@ -9,3 +9,6 @@
 /zsh/.zcompdump
 /zsh/.history
 !/git
+!/system
+!/vim
+/vim/vim.symlink/.netrwhist

@@ -1,0 +1,28 @@
+"-----------------------------------------------------------------
+"
+" rc for MacVim-Kaoriya
+"
+" Last Modified: 2011/08/29 09:17:05
+"
+"-----------------------------------------------------------------
+
+set t_Co=256
+colorscheme desert256
+
+let edark_current_line=1
+let edark_ime_cursor=1
+let edark_insert_status_line=1
+
+set guioptions=egrL
+set lines=40
+set columns=150
+set mouse=a
+set nomousefocus
+set showtabline=2
+set antialias
+
+if has('gui_macvim')
+  set guifont=Ricty:h16
+  set transparency=10
+endif
+
