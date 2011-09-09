@@ -39,7 +39,7 @@ pull-submodules:
 	@@git submodule foreach "git pull \$$(git config remote.origin.url)"
 	@@git submodule summary
 
-pull:	pull_submodules
+pull:	pull-submodules
 	@@git pull ${REMOTE} ${BRANCH}
 
 clean:	clean-srcs \
