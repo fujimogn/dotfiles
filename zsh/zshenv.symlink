@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 #
 # $File: ${DOTDIR}/zsh/zshenv.symlink
-# $Date: 2011-09-10T03:48:13+0900$
+# $Date: 2011-09-10T05:09:31+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 load_dotfilesrc() {
@@ -12,7 +12,7 @@ load_dotfilesrc() {
 
 load_systemenv() {
   if [ -n ${DOTDIR} ] && [ -d ${DOTDIR}/system ]; then
-    for file in ${DOTDIR}/system/*.env
+    for file in ${DOTDIR}/system/*
     do
       source ${file}
     done
@@ -33,7 +33,7 @@ load_zshenv(){
 
 zshenv_main() {
   load_dotfilesrc
-  load_systemrc
+  load_systemenv
   set_zdotdir
   load_zshenv
 }
