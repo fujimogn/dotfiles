@@ -6,5 +6,6 @@
 !/README.md
 !/zsh
 /zsh/.zsh_history
+/zsh/.zcompdump
 /zsh/.history
 !/git
