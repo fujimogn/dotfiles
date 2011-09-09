@@ -1,33 +1,26 @@
 #!/usr/bin/sh
 #
 # $File: ${DOTDIR}/system/ostype
-# $Date: 2011-09-09T23:39:59+0900$
+# $Date: 2011-09-10T03:42:41+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
-if [ -x "/usr/bin/uname" ] || [ -x "/bin/uname" ]; then
-  case `uname -s` in
-    Linux*)   OSTYPE=Linux ;;
-    Solaris*) OSTYPE=Solaris ;;
-    Darwin*)  OSTYPE=Darwin ;;
-    CYGWIN*)  OSTYPE=Cygwin ;;
-    *) ;;
-  esac
-fi
+function is_linux() {
+  [[ $OSTYPE == linux* ]] && return 0
+  return 1
+}
 
-is_linux(){
-  [[ $OSTYPE == Linux ]] && return 0
+function is_solaris() {
+  [[ $OSTYPE == solaris* ]] && return 0
   return 1
 }
-is_solaris(){
-  [[ $OSTYPE == Solaris ]] && return 0
+
+function is_darwin() {
+  [[ $OSTYPE == darwin* ]] && return 0
   return 1
 }
-is_darwin(){
-  [[ $OSTYPE == Darwin ]] && return 0
-  return 1
-}
-is_cygwin(){
-  [[ $OSTYPE == Cygwin ]] && return 0
+
+function is_cygwin() {
+  [[ $OSTYPE == cygwin* ]] && return 0
   return 1
 }
 
