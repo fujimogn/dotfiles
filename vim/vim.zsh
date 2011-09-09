@@ -1,16 +1,26 @@
 #!/bin/zsh
 #
 # $File: ${DOTDIR}/vim/vim.zsh
-# $Date: 2011-09-10T02:24:51+0900$
+# $Date: 2011-09-10T02:48:11+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 export EDITOR=vim
 
+
+
+# for MacVim Kaoriya
+# http://code.google.com/p/macvim-kaoriya/
+# 
+# required command mvim
+# http://repo.or.cz/w/MacVim/KaoriYa.git/blob_plain/HEAD:/src/MacVim/mvim
+#
+# via http://piao-tech.blogspot.com/2008/10/open-new-files-as-tabs-in-current-vim.html
+#
+# alias command "v", "vi", "vi"   -> open CLI MacVim
+# alias command "g", "gv", "gvim" -> open GUI MacVim
+#
 if [ is_darwin ]; then
-  # for MacVim Kaoriya
-  # http://code.google.com/p/macvim-kaoriya/
-  # via http://piao-tech.blogspot.com/2008/10/open-new-files-as-tabs-in-current-vim.html
-  #
+
   MACVIM="/Applications/MacVim.app/Contents/MacOS/Vim"
 
   if [ -f $MACVIM ]; then
@@ -26,9 +36,7 @@ if [ is_darwin ]; then
         fi
       fi
     }
-    # required command mvim
-    # http://repo.or.cz/w/MacVim/KaoriYa.git/blob_plain/HEAD:/src/MacVim/mvim
-    #
+
     alias gvim=v
 
     if which mvim >/dev/null 2>&1; then
@@ -43,6 +51,7 @@ if [ is_darwin ]; then
           fi
         fi
       }
+      # override alias
       alias gvim=gv
       alias g=gvim
     fi

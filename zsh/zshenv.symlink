@@ -1,8 +1,33 @@
 #!/usr/bin/env zsh
 #
 # $File: ${DOTDIR}/zsh/zshenv.symlink
-# $Date: 2011-09-09T22:47:51+0900$
+# $Date: 2011-09-10T03:19:16+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
+
+#                             Login    Zsh   Script   Logout
+# --------------------------------------------------------------
+#
+#   ${HOME}/.zshenv (symlink)   1       1       1       -
+#
+#   ${HOME}/.dotfilerc          2       2       2       -
+#
+#   ${DOTDIR}/system/*          3       3       3       -
+#
+#   ${ZDOTDIR}/.zshenv          4       4       4       -
+#
+#   ${ZDOTDIR}/.zprofile        5       -       -       -
+#
+#   ${ZDOTDIR}/.zshrc           6       5       -       -
+#
+#   ${ZDOTDIR}/**/*.zshrc       7       6       -       -
+#
+#   ${DOTDIR}/**/*.zsh          8       7       -       -
+#
+#   ${ZDOTDIR}/.zlogin          9       -       -       -
+#
+#   ${ZDOTDIR}/.zlogout         -       -       -       1
+#
+
 
 load_dotfilesrc() {
   if [ -f ${HOME}/.dotfilesrc ]; then
