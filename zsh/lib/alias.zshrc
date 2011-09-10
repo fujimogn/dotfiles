@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/alias.zshrc
-# $Date: 2011-09-09T22:42:33+0900$
+# $Date: 2011-09-10T08:20:35+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 alias -g M='|more'
@@ -16,8 +16,8 @@ if which pbcopy >/dev/null 2>&1 ; then
 
   # Mac
   alias -g C='| pbcopy'
-  alias p='pbpaste'
   alias -g P='`pbpaste`'
+  alias p='pbpaste'
 
 elif which xsel >/dev/null 2>&1 ; then
 

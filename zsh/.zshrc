@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/.zshrc
-# $Date: 2011-09-10T06:59:41+0900$
+# $Date: 2011-09-10T14:06:09+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 
@@ -41,7 +41,7 @@ load_module() {
 }
 
 zshrc_main() {
-  load_systemrc
+  #load_systemrc
   load_dotzshrc
   load_dotzsh
   load_module
