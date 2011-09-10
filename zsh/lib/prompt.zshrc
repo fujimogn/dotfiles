@@ -1,11 +1,10 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/prompt.zshrc
-# $Date: 2011-09-09T22:46:58+0900$
+# $Date: 2011-09-11T08:19:54+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # via http://www.dna.bio.keio.ac.jp/~yuji/zsh/zshrc.txt
-
 # <エスケープシーケンス>
 # prompt_bang が有効な場合、!=現在の履歴イベント番号, !!='!' (リテラル)
 # ${WINDOW:+"[$WINDOW]"} = screen 実行時にスクリーン番号を表示 (prompt_subst が必要)
@@ -15,7 +14,7 @@
 # %h or %! = 現在の履歴イベント番号
 # %L = 現在の $SHLVL の値
 # %M = マシンのフルホスト名
-#  %m = ホスト名の最初の `.' までの部分
+# %m = ホスト名の最初の `.' までの部分
 # %S (%s) = 突出モードの開始 (終了)
 # %U (%u) = 下線モードの開始 (終了)
 # %B (%b) = 太字モードの開始 (終了)
@@ -42,95 +41,88 @@
 #         `<' の形式は文字列の左側を切り詰め, `>' の形式は文字列の右側を切り詰めます
 # %c, %., %C = $PWD の後ろ側の構成要素
 
-# via https://github.com/robbyrussell/oh-my-zsh/blob/master/themes/frisk.zsh-theme
+Text=${DarkGray}
 
-if [[ x$WINDOW != x ]]
-then
-  SCREEN_NO="%B$WINDOW%b "
-else
-  SCREEN_NO=""
-fi
+PS1="
+"${Text}'['${Blue}'%?'${Text}']--['${Cyan}'%*'${Text}']--['${Green}'%n'${Text}'@'${Magenta}'%m'${Text}']--['${Red}'%~'${Text}${Yellow}'$(___git_ps1)'${Text}']'${Text}"
+"${DarkRed}'➜  '${None}
 
-# Apply theming defaults
-PS1="%n@%m:%~%# "
+function precmd {
+  case ${TERM} in
+    xterm*|gnome*|konsole*|putty*|screen*)
+      print -Pn "\e]0;%n@%m: %~\a"
+      ;;
+  esac
 
-# Setup the prompt with pretty colors
-setopt prompt_subst
-
-PROMPT=$'
-%{$fg[blue]%}%/%{$reset_color%} $(git_prompt_info)%{$fg[white]%}[%n@%m]%{$reset_color%} %{$fg[white]%}[%T]%{$reset_color%}
-%{$fg_bold[red]%}➜ %{$reset_color%} '
-
-PROMPT2="%{$fg_blod[black]%}%_> %{$reset_color%}"
-
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[green]%}["
-ZSH_THEME_GIT_PROMPT_SUFFIX="]%{$reset_color%} "
-ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}*%{$fg[green]%}"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
-
-# get the name of the branch we are on
-function git_prompt_info() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  if [[ ${TERM} == screen* && ( -n "${TMUX}" || -n "${STY}" ) ]]; then
+    print -n "\a"
+  fi
+  if [[ ${TERM} == screen* ]]; then
+    print -Pn "\ek\e\\"
+  fi
 }
 
-# Checks if working tree is dirty
-parse_git_dirty() {
-  if [[ -n $(git status -s 2> /dev/null) ]]; then
-echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
+function preexec {
+}
+
+
+function ___git_ps1 () {
+  local g p
+  g=$(git rev-parse --git-dir 2>/dev/null) || return
+  if [[ ${g} == ".git" ]]; then
+    __git_ps1 " %s"
+  elif [[ ${g} == ${HOME}"/.git" ]]; then
+    if [[ -f ".gitignore" ]]; then
+      __git_ps1 " %s"
+    else
+      p=$(git rev-parse --show-prefix 2>/dev/null)
+      case ${p} in
+        .dotfiles/*|.vim/*)
+          __git_ps1 " %s"
+          ;;
+      esac
+    fi
   else
-echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
+    __git_ps1 " %s"
   fi
 }
 
-# Checks if there are commits ahead from remote
-function git_prompt_ahead() {
-  if $(echo "$(git log origin/$(current_branch)..HEAD 2> /dev/null)" | grep '^commit' &> /dev/null); then
-echo "$ZSH_THEME_GIT_PROMPT_AHEAD"
-  fi
-}
+function __git_ps1 () {
+  local git_dir action branch
 
-# Formats prompt string for current git commit short SHA
-function git_prompt_short_sha() {
-  SHA=$(git rev-parse --short HEAD 2> /dev/null) && echo "$ZSH_THEME_GIT_PROMPT_SHA_BEFORE$SHA$ZSH_THEME_GIT_PROMPT_SHA_AFTER"
-}
+  git_dir=$(git rev-parse --git-dir 2>/dev/null) || return
+  if [[ -d "$git_dir/rebase-apply" ]]; then
+    if [[ -f "$git_dir/rebase-apply/rebasing" ]]; then
+      action="|REBASE"
+    elif [[ -f "$git_dir/rebase-apply/applying" ]]; then
+      action="|AM"
+    else
+      action="|AM/REBASE"
+    fi
+    branch="$(git symbolic-ref HEAD 2>/dev/null)"
+  elif [[ -f "$git_dir/rebase-merge/interactive" ]]; then
+    action="|REBASE-i"
+    branch="$(cat "$git_dir/rebase-merge/head-name")"
+  elif [[ -d "$git_dir/rebase-merge" ]]; then
+    action="|REBASE-m"
+    branch="$(cat "$git_dir/rebase-merge/head-name")"
+  elif [[ -f "$git_dir/MERGE_HEAD" ]]; then
+    action="|MERGING"
+    branch="$(git symbolic-ref HEAD 2>/dev/null)"
+  else
+    [[ -f "$git_dir/BISECT_LOG" ]] && action="|BISECTING"
+    branch="$(git symbolic-ref HEAD 2>/dev/null)" || \
+      branch="$(git describe --exact-match HEAD 2>/dev/null)" || \
+      branch="$(cut -c1-7 "$git_dir/HEAD")..."
+  fi
 
-# Formats prompt string for current git commit long SHA
-function git_prompt_long_sha() {
-  SHA=$(git rev-parse HEAD 2> /dev/null) && echo "$ZSH_THEME_GIT_PROMPT_SHA_BEFORE$SHA$ZSH_THEME_GIT_PROMPT_SHA_AFTER"
-}
-
-# Get the status of the working tree
-git_prompt_status() {
-  INDEX=$(git status --porcelain 2> /dev/null)
-  STATUS=""
-  if $(echo "$INDEX" | grep '^?? ' &> /dev/null); then
-STATUS="$ZSH_THEME_GIT_PROMPT_UNTRACKED$STATUS"
+  git_dir="${$(readlink -f ${git_dir:h})/$HOME/~}"
+  branch=${branch#refs/heads/}
+  if [[ -n $1 ]]; then
+    printf "$1" "${branch}${action}"
+  else
+    printf " (%s)" "${branch}${action}"
   fi
-if $(echo "$INDEX" | grep '^A ' &> /dev/null); then
-STATUS="$ZSH_THEME_GIT_PROMPT_ADDED$STATUS"
-  elif $(echo "$INDEX" | grep '^M ' &> /dev/null); then
-STATUS="$ZSH_THEME_GIT_PROMPT_ADDED$STATUS"
-  fi
-if $(echo "$INDEX" | grep '^ M ' &> /dev/null); then
-STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
-  elif $(echo "$INDEX" | grep '^AM ' &> /dev/null); then
-STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
-  elif $(echo "$INDEX" | grep '^ T ' &> /dev/null); then
-STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
-  fi
-if $(echo "$INDEX" | grep '^R ' &> /dev/null); then
-STATUS="$ZSH_THEME_GIT_PROMPT_RENAMED$STATUS"
-  fi
-if $(echo "$INDEX" | grep '^ D ' &> /dev/null); then
-STATUS="$ZSH_THEME_GIT_PROMPT_DELETED$STATUS"
-  elif $(echo "$INDEX" | grep '^AD ' &> /dev/null); then
-STATUS="$ZSH_THEME_GIT_PROMPT_DELETED$STATUS"
-  fi
-if $(echo "$INDEX" | grep '^UU ' &> /dev/null); then
-STATUS="$ZSH_THEME_GIT_PROMPT_UNMERGED$STATUS"
-  fi
-echo $STATUS
 }
 
 

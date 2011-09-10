@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/completion.zshrc
-# $Date: 2011-09-09T22:44:53+0900$
+# $Date: 2011-09-10T17:15:40+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 zstyle ':completion:*' completer _expand _complete _match _prefix _approximate _list _history
@@ -27,16 +27,16 @@ zstyle ':completion:*:*:zcompile:*' ignored-patterns '(*~|*.zwc)'
 zstyle ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
 zstyle ':completion:*:correct:*' insert-unambiguous true
 zstyle ':completion:*:correct:*' original true
-zstyle ':completion:*:corrections' format $YELLOW'%B%d '$RED'(errors: %e)%b'$RESET
+zstyle ':completion:*:corrections' format $Yellow'%B%d '$Red'(errors: %e)%b'$Reset
 zstyle ':completion:*:default' menu select=0
-zstyle ':completion:*:descriptions' format $YELLOW'completing %B%d%b'$RESET
+zstyle ':completion:*:descriptions' format $Yellow'completing %B%d%b'$Reset
 zstyle ':completion:*:expand:*' tag-order all-expansions
 zstyle ':completion:*:kill:*' command 'ps -u$USER'
 zstyle ':completion:*:matches' group true
-zstyle ':completion:*:messages' $YELLOW'%d'$RESET
+zstyle ':completion:*:messages' $Yellow'%d'$Reset
 zstyle ':completion:*:options' description true
 zstyle ':completion:*:processes' command 'ps -au$USER'
-zstyle ':completion:*:warnings' format $RED'No matches for:'$YELLOW' %d'$RESET
+zstyle ':completion:*:warnings' format $Red'No matches for:'$Yellow' %d'$Reset
 zstyle ':completion::expand:*' tag-order 'expansions all-expansions'
 
 # history
@@ -54,24 +54,8 @@ zstyle ':completion:*:man:*' menu yes select
 zstyle ':completion:*:urls' local 'www' '/var/www/' 'public_html'
 
 # caching
-if [ -d $ZSH/cache ]; then
+if [ -d $ZDOTDIR/cache ]; then
   zstyle ':completion:*' use-cache yes
-  zstyle ':completion::complete:*' cache-path $ZSH/cache/
+  zstyle ':completion::complete:*' cache-path $ZDOTDIR/cache/
 fi
-
-# host completion
-[ -r ~/.ssh/known_hosts ] && _ssh_hosts=(${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[\|]*}%%\ *}%%,*}) || _ssh_hosts=()
-[ -r /etc/hosts ] && : ${(A)_etc_hosts:=${(s: :)${(ps:\t:)${${(f)~~"$(</etc/hosts)"}%%\#*}##[:blank:]#[^[:blank:]]#}} } || _etc_hosts=()
-hosts=(
-  `hostname`
-  "$_ssh_hosts[@]"
-  "$_etc_hosts[@]"
-  localhost
-)
-zstyle ':completion:*:hosts' hosts $hosts
-
-# compdef
-#if [ -f "/usr/local/bin/jman" ] && [ isdarwin ]; then
-#compdef man jman
-#fi
 
