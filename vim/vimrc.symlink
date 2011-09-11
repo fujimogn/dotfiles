@@ -2,7 +2,7 @@
 "
 " rc for vim 7.3
 "
-" $Date: 2011-09-04T16:21:03+0900$
+" $Date: 2011-09-11T18:40:15+0900$
 "
 "-----------------------------------------------------------------
 
@@ -11,7 +11,7 @@
 "-----------------------------------------------------------------
 
 if has('win32')
-    set runtimepath+=$HOME/.vim,$HOME/.vim/after
+  set runtimepath+=$HOME/.vim,$HOME/.vim/after
 endif
 
 "-----------------------------------------------------------------
@@ -43,24 +43,28 @@ let $LANG='ja'
 set autoindent                  " 自動でインデント
 set autoread                    " 他で書き換えられたら自動で読み直す
 set clipboard+=unnamed          " ヤンクしたときに自動でクリップボードにコピー
+set cmdheight=1                 " コマンドラインの高さ
 set cindent                     " Cプログラムファイルの自動インデントを始める
 set cursorline                  " カーソル行をハイライト
 set display=uhex                " 印字不可能文字を16進数で表示
+set diffopt=filler,vertical     " Diff設定 埋め立て行を表示、常に垂直分割
 set enc=utf-8
 set expandtab                   " Tab を空白に変換
 set fenc=utf-8
 set fencs=utf-8,iso-2022-jp,euc-jp,cp932
 set ffs=unix,dos,mac
 set fileformat=unix
+set formatoptions-=ro           " 改行時のコメントアウト自動継続を無効化
 set formatoptions+=mM           " 日本語の行の連結時には空白を入力しない
-set formatoptions=lmoq          " テキスト整形オプション，マルチバイト系を追加
+set formatoptions+=lmq          " テキスト整形オプション，マルチバイト系を追加
 set hlsearch                    " 検索文字をハイライト
 set hidden                      " 編集結果非保存のバッファから、新しいバッファを開くときに警告を出さない
 set ignorecase                  " 検索時大文字小文字無視
 set incsearch                   " インクリメンタルサーチ
 set iminsert=0
 set imsearch=0
-set laststatus=2                "
+set laststatus=2                " ステータスラインを常時表示させる
+set lazyredraw                  " スクリプト実行中に再描画しない
 set list                        " 不可視文字表示
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%  " 不可視文字の表示形式
 set number                      " 行番号表示
@@ -72,6 +76,7 @@ set nowritebackup               " set writebackupを指定してもオプショ�
 set nrformats-=octal            " 8進数を無効にする。<C-a>,<C-x>に影響する
 set scrolloff=5                 " スクロール時の余白確保
 set shiftwidth=2                " 自動で挿入されるインデント幅
+set shortmess+=I                " 起動時のメッセージを消す
 set showmatch                   " 括弧の対応をハイライト
 set showmode                    " 現在のモードを表示
 set showcmd
@@ -99,6 +104,8 @@ set wrapscan                    " 最後まで検索したら先頭へ戻る
 "カーソルを表示行で移動する。論理行移動は<C-n>, <C-p>
 nnoremap j gj
 nnoremap k gk
+vnoremap j gj
+vnoremap k gk
 " 0,  9で行頭、行末へ
 nmap 1 0
 nmap 0 ^
@@ -107,8 +114,8 @@ nmap 9 $
 noremap ; :
 noremap : ;
 " Ctrl-n, Ctrl-pでタブ移動
-nnoremap <C-N> gt
-nnoremap <C-P> gT
+nnoremap <C-n> gt
+nnoremap <C-p> gT
 " Ctrl-hjkl でsplitウィンドウ移動
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -124,18 +131,18 @@ inoremap <Leader>time <C-R>=strftime('%H:%M')<CR>
 inoremap <Leader>rdate <C-R>=strftime('%A,  %B %d,  %Y %H:%M')<CR>
 inoremap <Leader>w3cdtf <C-R>=strftime('%Y-%m-%dT%H:%M:%S+09:00')<CR>
 " reload .vimrc
-nmap ,s :source ~/.vimrc<cr>
+nmap <Leader>r :source ~/.vimrc<cr>
 " edit .vimrc
-nmap ,v :tabe ~/.vimrc<cr
+nmap <Leader>v :tabe ~/.vimrc<cr>
 
 "-----------------------------------------------------------------
 " autocmd
 "-----------------------------------------------------------------
 
 " ファイルを開いたときに前回の編集箇所に移動
-autocmd bufreadpost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
+" autocmd bufreadpost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 " 保存時に行末の空白を除去する
-" autocmd bufwritepre * :%s/\s\+$//ge
+autocmd bufwritepre * :%s/\s\+$//ge
 " 保存時にtabをスペースに変換する
 " autocmd bufwritepre * :%s/\t/  /ge
 
@@ -204,10 +211,9 @@ endif
 " color
 "-----------------------------------------------------------------
 
-" color
 set t_co=256
-set background=dark
-colorscheme desert256
+"set background=dark
+"colorscheme desert256
 " カレントウィンドウにのみ罫線を引く
 augroup cch
   autocmd! cch
@@ -220,7 +226,12 @@ highlight CursorLine ctermfg=NONE ctermbg=black guibg=black cterm=NONE
 " タブの視覚化
 highlight TagKey guibg=#b5d68f
 match TagKey /  /
-"ステータスラインに文字コードと改行文字を表示する
+
+"-----------------------------------------------------------------
+" statusline
+"-----------------------------------------------------------------
+
+" ステータスラインに文字コードと改行文字を表示する
 if winwidth(0) >= 120
   set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %F%=[%{GetB()}]\ %l,%c%V%8P
 else

@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/opt.zshrc
-# $Date: 2011-09-09T22:41:01+0900$
+# $Date: 2011-09-11T22:52:45+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # {{{ basic
@@ -25,7 +25,7 @@ setopt prompt_subst             # プロンプト内で変数展開
 setopt pushd_ignore_dups        # pushdの履歴は残さない
 setopt pushd_silent             # pushdやpopdの実行時にメッセージを表示しないようにする
 setopt pushd_to_home            # 引数のないpushdは$HOMEをスタックする
-# setopt print_exit_value         # 戻り値が 0 以外の場合終了コードを表示
+setopt print_exit_value         # 戻り値が 0 以外の場合終了コードを表示
 # setopt rm_star_silent           # rm * を実行する前に確認しない
 setopt rm_star_wait             # rm * を実行する前に確認
 setopt sh_word_split            # 変数内の文字列分解のデリミタ

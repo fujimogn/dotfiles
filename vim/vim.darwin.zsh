@@ -1,7 +1,7 @@
-#!/bin/zsh
+#!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/vim/vim.darwin.zsh
-# $Date: 2011-09-10T07:05:32+0900$
+# $Date: 2011-09-11T12:17:27+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # for MacVim Kaoriya

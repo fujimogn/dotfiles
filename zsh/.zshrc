@@ -1,19 +1,8 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/.zshrc
-# $Date: 2011-09-10T14:06:09+0900$
+# $Date: 2011-09-11T21:30:30+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
-
-
-load_systemrc() {
-  if [ -d ${DOTDIR}/system ]; then
-    for file in ${DOTDIR}/system/*
-    do
-      source ${file}
-    done
-  fi
-}
-
 
 load_dotzshrc() {
   for dotzshrc in `find ${ZDOTDIR} -type f -regex ".*/.[a-zA-Z0-9]*\.zshrc\$"` \

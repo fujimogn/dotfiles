@@ -1,30 +1,12 @@
 #!/usr/bin/sh
 #
 # $File: ${DOTDIR}/system/env
-# $Date: 2011-09-11T08:29:25+0900$
+# $Date: 2011-09-11T21:41:38+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
 export LANG=ja_JP.UTF-8
 export TZ=JST-9
 
-if [ -d ${DOTDIR}/bin ]; then
-  export PATH=$PATH:$DOTDIR/bin
-fi
-
 if [[ $OSTYPE == darwin* ]]; then
-
-  if [ -d /Developer/usr/bin ]; then
-    export PATH=$PATH:/Developer/usr/bin
-  fi
-
-  if which brew >/dev/null 2>&1 ; then
-    export PATH="$(brew --prefix)/bin:$PATH"
-  fi
-
-  if [ -f /usr/bin/gcc-4.2 ]; then
-    export CC=/usr/bin/gcc-4.2
-  fi
-
+  export CLICOLOR=1
 fi
-
-
