@@ -2,7 +2,7 @@
 "
 " rc for vim 7.3
 "
-" $Date: 2011-09-12T20:49:33+0900$
+" $Date: 2011-09-12T20:52:52+0900$
 "
 "-----------------------------------------------------------------
 
@@ -141,7 +141,7 @@ set wildmenu                    " コマンド補完を強化
 set wildchar=<tab>              " コマンド補完を開始するキー
 set wildmode=longest:full,list:full
 set wildignore=*.swp,*.bak,*.pyc,*.class
-set wildignorecase
+" set wildignorecase
 set whichwrap=b,s,h,l,<,>,[,]   " カーソルを行頭、行末で止まらないようにする
 set wrapscan                    " 最後まで検索したら先頭へ戻る
 
