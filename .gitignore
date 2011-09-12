@@ -12,3 +12,4 @@
 !/vim
 /vim/vim.symlink/.netrwhist
 !/bin
+!/dircolors
