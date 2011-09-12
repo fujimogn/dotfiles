@@ -2,7 +2,7 @@
 "
 " rc for vim 7.3
 "
-" $Date: 2011-09-12T20:52:52+0900$
+" $Date: 2011-09-12T21:17:53+0900$
 "
 "-----------------------------------------------------------------
 
@@ -44,9 +44,11 @@ filetype plugin indent on
 " {{{
 
 syntax enable
+scriptencoding utf-8
+set keywordprg=:help
 set ambiwidth=double
 set autoindent                  " 自動でインデント
-" set autoread                    " 他で書き換えられたら自動で読み直す
+set autoread                    " 他で書き換えられたら自動で読み直す
 set backspace=indent,eol,start
 set backup backupdir=~/.tmp,/var/tmp,/tmp
 " set clipboard+=unnamed          " ヤンクしたときに自動でクリップボードにコピー
@@ -73,6 +75,7 @@ set formatoptions+=corqn
 " set formatoptions-=ro           " 改行時のコメントアウト自動継続を無効化
 " set formatoptions+=mM           " 日本語の行の連結時には空白を入力しない
 " set formatoptions+=lmq          " テキスト整形オプション，マルチバイト系を追加
+set gdefault
 set helplang=ja,en
 set hlsearch                    " 検索文字をハイライト
 set hidden                      " 編集結果非保存のバッファから、新しいバッファを開くときに警告を出さない
@@ -93,7 +96,7 @@ set mousemodel=popup
 set modeline
 set modelines=5
 set number                      " 行番号表示
-set numberwidth=1
+set numberwidth=3
 set nobackup                    " バックアップ取らない
 set noerrorbells
 set noimcmdline
@@ -112,6 +115,7 @@ set shiftwidth=2                " 自動で挿入されるインデント幅
 set shiftround
 set shortmess=aTItoO
 set shortmess+=I                " 起動時のメッセージを消す
+set showfulltag
 set showmatch                   " 括弧の対応をハイライト
 set showmode                    " 現在のモードを表示
 set showcmd
@@ -141,6 +145,11 @@ set wildmenu                    " コマンド補完を強化
 set wildchar=<tab>              " コマンド補完を開始するキー
 set wildmode=longest:full,list:full
 set wildignore=*.swp,*.bak,*.pyc,*.class
+set wildignore+=.svn,CVS,.git
+set wildignore+=*.o,*.a,*.so
+set wildignore+=*.jpg,*.png,*.gif
+set wildignore+=*.pdf
+set wildignore+=*.pyc,*.pyo
 " set wildignorecase
 set whichwrap=b,s,h,l,<,>,[,]   " カーソルを行頭、行末で止まらないようにする
 set wrapscan                    " 最後まで検索したら先頭へ戻る
@@ -152,7 +161,7 @@ set wrapscan                    " 最後まで検索したら先頭へ戻る
 " {{{
 
 " キーマップリーダ
-" let mapleader = ","
+let mapleader = ","
 " let g:mapleader = ","
 "
 "カーソルを表示行で移動する。論理行移動は<C-n>, <C-p>
