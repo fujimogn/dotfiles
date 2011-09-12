@@ -1,7 +1,7 @@
 #!/usr/bin/sh
 #
 # $File: ${DOTDIR}/system/path
-# $Date: 2011-09-11T21:41:13+0900$
+# $Date: 2011-09-12T11:50:05+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
 
@@ -13,10 +13,11 @@ if [ -d ${DOTDIR}/bin ]; then
   export PATH=$PATH:$DOTDIR/bin
 fi
 
-
 if [[ $OSTYPE == darwin* ]]; then
-
   if [ -d /Developer/usr/bin ]; then
     export PATH=$PATH:/Developer/usr/bin
+  fi
+  if [ -f /usr/local/lib/pkgconfig ]; then
+    export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
   fi
 fi
