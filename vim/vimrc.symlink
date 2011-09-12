@@ -2,7 +2,7 @@
 "
 " rc for vim 7.3
 "
-" $Date: 2011-09-11T18:40:15+0900$
+" $Date: 2011-09-12T14:32:10+0900$
 "
 "-----------------------------------------------------------------
 
@@ -19,7 +19,7 @@ endif
 "-----------------------------------------------------------------
 
 set nocompatible
-"filetype off
+filetype off
 "set rtp+=~/.vim/bundle/vundle/
 "call vundle#rc()
 "" let Vundle manage Vundle
@@ -38,27 +38,30 @@ filetype plugin indent on
 " Basic
 "-----------------------------------------------------------------
 
-syntax on
-let $LANG='ja'
+syntax enable
 set autoindent                  " 自動でインデント
 set autoread                    " 他で書き換えられたら自動で読み直す
 set clipboard+=unnamed          " ヤンクしたときに自動でクリップボードにコピー
-set cmdheight=1                 " コマンドラインの高さ
-set cindent                     " Cプログラムファイルの自動インデントを始める
+" set cmdheight=1                 " コマンドラインの高さ
+set cindent                     " Cの自動インデントを始める
 set cursorline                  " カーソル行をハイライト
+set copyindent
 set display=uhex                " 印字不可能文字を16進数で表示
 set diffopt=filler,vertical     " Diff設定 埋め立て行を表示、常に垂直分割
-set enc=utf-8
+set encoding=utf-8
 set expandtab                   " Tab を空白に変換
-set fenc=utf-8
-set fencs=utf-8,iso-2022-jp,euc-jp,cp932
-set ffs=unix,dos,mac
+set fileencoding=utf-8
+set fileencodings=utf-8,iso-2022-jp,euc-jp,cp932
+set fileformats=unix,dos,mac
 set fileformat=unix
+set foldmethod=indent
+set foldlevel=99
 set formatoptions-=ro           " 改行時のコメントアウト自動継続を無効化
-set formatoptions+=mM           " 日本語の行の連結時には空白を入力しない
-set formatoptions+=lmq          " テキスト整形オプション，マルチバイト系を追加
+" set formatoptions+=mM           " 日本語の行の連結時には空白を入力しない
+" set formatoptions+=lmq          " テキスト整形オプション，マルチバイト系を追加
 set hlsearch                    " 検索文字をハイライト
 set hidden                      " 編集結果非保存のバッファから、新しいバッファを開くときに警告を出さない
+set history=1000
 set ignorecase                  " 検索時大文字小文字無視
 set incsearch                   " インクリメンタルサーチ
 set iminsert=0
@@ -69,13 +72,15 @@ set list                        " 不可視文字表示
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%  " 不可視文字の表示形式
 set number                      " 行番号表示
 set nobackup                    " バックアップ取らない
+set noerrorbells
 set noimcmdline
 set noimdisable
 set noswapfile                  " スワップファイル作らない
 set nowritebackup               " set writebackupを指定してもオプション 'backup' がオンでない限り、バックアップは上書きに成功した後に削除される。
 set nrformats-=octal            " 8進数を無効にする。<C-a>,<C-x>に影響する
-set scrolloff=5                 " スクロール時の余白確保
+" set scrolloff=5                 " スクロール時の余白確保
 set shiftwidth=2                " 自動で挿入されるインデント幅
+set shiftround
 set shortmess+=I                " 起動時のメッセージを消す
 set showmatch                   " 括弧の対応をハイライト
 set showmode                    " 現在のモードを表示
@@ -87,13 +92,17 @@ set smartcase                   " 検索文字列に大文字が含まれてい�
 set softtabstop=2               " Tab 押下時に挿入されるスペース数
 " set tabstop=2                   " ファイル中のタブ文字の表示幅
 set textwidth=0                 " 一行に長い文章を書いていても自動折り返しをしない
-set timeoutlen=3500             " キーコードやマッピングされたキー列が完了するのを待つ時間(ミリ秒)
-set vb t_vb=                    " ビープをならさない
+" set timeoutlen=3500             " キーコードやマッピングされたキー列が完了するのを待つ時間(ミリ秒)
+set title
+set undolevels=1000
+" set vb t_vb=                    " ビープをならさない
 set viminfo='50,<1000,s100,\"50 " viminfoファイルの設定
 set virtualedit=block           " Visual blockモードでフリーカーソルを有効にする
+set visualbell
 set wildmenu                    " コマンド補完を強化
 set wildchar=<tab>              " コマンド補完を開始するキー
 set wildmode=list:full          " リスト表示，最長マッチ
+set wildignore=*.swp,*.bak,*.pyc,*.class
 set whichwrap=b,s,h,l,<,>,[,]   " カーソルを行頭、行末で止まらないようにする
 set wrapscan                    " 最後まで検索したら先頭へ戻る
 
@@ -101,12 +110,15 @@ set wrapscan                    " 最後まで検索したら先頭へ戻る
 " keymap
 "-----------------------------------------------------------------
 
+" キーマップリーダ
+let mapleader = ","
+let g:mapleader = ","
 "カーソルを表示行で移動する。論理行移動は<C-n>, <C-p>
 nnoremap j gj
 nnoremap k gk
 vnoremap j gj
 vnoremap k gk
-" 0,  9で行頭、行末へ
+" 0, 9 で行頭、行末へ
 nmap 1 0
 nmap 0 ^
 nmap 9 $
@@ -125,6 +137,7 @@ nnoremap <C-h> <C-w>h
 inoremap , ,<space>
 " esc 2回で検索ハイライトをクリア
 nmap <esc><esc> ;nohlsearch<cr><esc>
+nnoremap <silent> <leader>/ :nohlsearch<CR>
 " 日時挿入
 inoremap <Leader>date <C-R>=strftime('%A,  %B %d,  %Y')<CR>
 inoremap <Leader>time <C-R>=strftime('%H:%M')<CR>
@@ -133,18 +146,26 @@ inoremap <Leader>w3cdtf <C-R>=strftime('%Y-%m-%dT%H:%M:%S+09:00')<CR>
 " reload .vimrc
 nmap <Leader>r :source ~/.vimrc<cr>
 " edit .vimrc
-nmap <Leader>v :tabe ~/.vimrc<cr>
+nmap <Leader>. :tabe ~/.vimrc<cr>
+" w!! でsudoが必要な場合でも保存
+cmap w!! w !sudo tee % >/dev/null
 
 "-----------------------------------------------------------------
 " autocmd
 "-----------------------------------------------------------------
 
-" ファイルを開いたときに前回の編集箇所に移動
-" autocmd bufreadpost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 " 保存時に行末の空白を除去する
 autocmd bufwritepre * :%s/\s\+$//ge
 " 保存時にtabをスペースに変換する
 " autocmd bufwritepre * :%s/\t/  /ge
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+" file type
+autocmd filetype python set expandtab
+autocmd filetype ruby set shiftwidth=2 tabstop=2
 
 "-----------------------------------------------------------------
 " Encording
@@ -191,21 +212,6 @@ if has('iconv')
   unlet s:enc_euc
   unlet s:enc_jis
 endif
-" 日本語を含まない場合は fileencoding に encoding を使うようにする
-if has('autocmd')
-  function! AU_ReCheck_FENC()
-    if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
-      let &fileencoding=&encoding
-    endif
-  endfunction
-  autocmd BufReadPost * call AU_ReCheck_FENC()
-endif
-" 改行コードの自動認識
-set fileformats=unix,dos,mac
-" □とか○の文字があってもカーソル位置がずれないようにする
-if exists('&ambiwidth')
-  set ambiwidth=double
-endif
 
 "-----------------------------------------------------------------
 " color
@@ -214,29 +220,43 @@ endif
 set t_co=256
 "set background=dark
 "colorscheme desert256
-" カレントウィンドウにのみ罫線を引く
-augroup cch
-  autocmd! cch
-  autocmd WinLeave * set nocursorline
-  autocmd WinEnter,BufRead * set cursorline
-augroup END
-
 " Highlight
 highlight CursorLine ctermfg=NONE ctermbg=black guibg=black cterm=NONE
-" タブの視覚化
-highlight TagKey guibg=#b5d68f
-match TagKey /  /
+
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=black guibg=black
+highlight ExtraWhitespace ctermbg=black guibg=black
+match ExtraWhitespace /\s\+$/
 
 "-----------------------------------------------------------------
 " statusline
 "-----------------------------------------------------------------
 
 " ステータスラインに文字コードと改行文字を表示する
-if winwidth(0) >= 120
-  set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %F%=[%{GetB()}]\ %l,%c%V%8P
-else
-  set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %f%=[%{GetB()}]\ %l,%c%V%8P
-endif
+" if winwidth(0) >= 120
+"   set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %F%=[%{GetB()}]\ %l,%c%V%8P
+" else
+"   set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %f%=[%{GetB()}]\ %l,%c%V%8P
+" endif
+
+" Statusline
+hi User1 guifg=#eea040 guibg=#222222
+hi User2 guifg=#dd3333 guibg=#222222
+hi User3 guifg=#ff66ff guibg=#222222
+hi User4 guifg=#a0ee40 guibg=#222222
+hi User5 guifg=#eeee40 guibg=#222222
+
+set laststatus=2
+set statusline=
+set statusline +=%<[%n]                                     " [<buffer number>]
+set statusline +=%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}  " [<fe>:<ff>]
+set statusline +=%y\                                        " [<ft>]
+" set statusline +=%5*%{fugitive#statusline()}%*            " <git status>
+" set statusline +=%2*%#warningmsg#%*                       " <syntastic warning msg>
+" set statusline +=%2*%{SyntasticStatuslineFlag()}%*        " <syntastic status>
+set statusline +=%f%m%=[%{GetB()}]                          " <filepath><modified flag> [<character>]
+set statusline +=\ %l/%L%4P                                 " <current>/<total> <position>
+
+
 "入力モード時、ステータスラインのカラーを変更
 augroup InsertHook
 autocmd!
@@ -270,6 +290,7 @@ func! String2Hex(str)
   return out
 endfunc
 
+
 "-----------------------------------------------------------------
 " Plugin
 "-----------------------------------------------------------------
@@ -278,3 +299,8 @@ endfunc
 let g:autodate_format = ': %FT%T%z'
 let g:autodate_keyword_pre = '$Date'
 let g:autodate_keyword_post = '\$'
+
+" TagBar
+nnoremap <silent> <F8> :TagbarToggle<CR>
+let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+let g:tagbar_autoshowtag = 1
