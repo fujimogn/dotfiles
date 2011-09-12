@@ -12,4 +12,5 @@
 !/vim
 /vim/vim.symlink/.netrwhist
 !/bin
-!/dircolors
+!/dircolors/
+!/homebrew
