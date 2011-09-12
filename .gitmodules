@@ -1,0 +1,3 @@
+[submodule "dircolors/dircolors"]
+	path = dircolors/dircolors
+	url = git://github.com/jmcantrell/dotfiles-dircolors.git
