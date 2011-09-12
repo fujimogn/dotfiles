@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/color.zshrc
-# $Date: 2011-09-11T08:22:40+0900$
+# $Date: 2011-09-12T09:22:38+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 
@@ -108,26 +108,5 @@ else
   None=""
 fi
 
-if [[ ${TERM} != "dumb" ]]; then
-  
-  case ${OSTYPE} in
-    darwin*)
-      alias ls="ls -FG"
-      ;;
-    *)
-      alias ls="ls -F --color=auto"
-      ;;
-  esac
 
-  if  which dircolors > /dev/null 2>&1 ; then
-    if [ -f ${DOTDIR}"/dircolors/.dircolors-"$terminfo[colors] ]; then
-      eval $(dircolors -b ${DOTDIR}/dircolors/.dircolors-$terminfo[colors])
-    elif [ -f ${DOTDIR}/dircolors/.dircolors ]; then
-      eval $(dircolors -b ${DOTDIR}/dircolors/.dircolors)
-    fi
-    # overwide ls for darwin
-    alias ls="ls -F --color=auto"
-  fi
-  
-  zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-fi
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
