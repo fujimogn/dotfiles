@@ -7,7 +7,7 @@ Install
 Clone your directory from repository
 (e.g.: ` ~/.dotfiles`)
 
-* `cd - && git clone git://github.com/fujimogn/dotfiles ~/.dotfiles`
+* `cd ~ && git clone git://github.com/fujimogn/dotfiles ~/.dotfiles`
 * `cd ~/.dotfiles`
 
 Install dotfiles
