@@ -5,12 +5,12 @@
 !/Makefile
 !/README.md
 !/zsh
-/zsh/.zsh/.zsh_history
-/zsh/.zsh/.zcompdump
+.zsh_history
+.zcompdump
 !/git
 !/system
 !/vim
-/vim/vim.symlink/.netrwhist
+.netrwhist
 !/bin
 !/dircolors/
 !/Homebrew
