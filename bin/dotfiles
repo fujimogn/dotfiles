@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo  `basedir $0`
+echo  ${CURDIR}
+#DOTDIR=${DOTDIR:=}

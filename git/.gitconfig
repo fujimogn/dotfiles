@@ -1,0 +1,46 @@
+[user]
+  name = fujimogn
+  email = fujimogn@gmail.com
+
+[color]
+  status = auto
+  diff = auto
+  branch = auto
+  interactive = auto
+  grep = auto
+
+[alias]
+  br = branch
+  ci = commit -v
+  cia = commit -v --all
+  ciam = commit -v --amend
+  l = log --stat
+  last = log -p --reverse HEAD@{1}..
+  lp = log -p
+  ls = ls-files
+  st = status
+  co = checkout
+  df = diff
+  sm = submodule
+  smadd = submodule add
+  sminit = submodule update --init
+  smco = submodule foreach "git checkout master; git pull origin master"
+  wh = whatchanged
+  zip = archive --format=zip
+
+[core]
+  excludesfile = ~/.gitignore
+  editor = vim
+
+[rerere]
+  enabled = true
+
+[interactive]
+  singlekey = true
+
+[help]
+  autocorrect = -1
+
+[github]
+  user = fujimogn
+  token = 9a9b6510634485cb22c3610705fd3e6c

@@ -1,0 +1,1 @@
+/Users/fujimogn/.dotfiles/vim/.vim
