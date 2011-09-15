@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
-# $File: ${DOTDIR}/zsh/plugin/openurl.zsh
-# $Date: 2011-09-09T22:50:33+0900$
+# $File: ${ZDOTDIR}/plugin/openurl.zsh
+# $Date: 2011-09-16T08:32:12+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 
