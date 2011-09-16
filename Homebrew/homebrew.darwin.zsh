@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/homebrew/homebrew.darwin.zsh
-# $Date: 2011-09-12T11:55:21+0900$
+# $Date: 2011-09-17T02:25:33+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 ! which brew >/dev/null 2>&1 && return
@@ -11,7 +11,7 @@ export HOMEBREW_USE_GCC=1
 export HOMEBREW_LIST_PATH=${DOTDIR}/homebrew
 alias brews='brew list -1'
 
-function brewlist() {
+function brew_list() {
 
   local target\
         cmd\
