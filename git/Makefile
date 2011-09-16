@@ -1,5 +1,5 @@
 PREFIX	:= $(HOME)
-SRCS	:= .gitconfig .gitignore-global
+SRCS	:= .gitconfig .gitignore_global
 
 all:	install
 
