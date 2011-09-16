@@ -1,3 +1,15 @@
 [submodule "dircolors/dircolors"]
 	path = dircolors/dircolors
 	url = git://github.com/jmcantrell/dotfiles-dircolors.git
+[submodule "zsh/.zsh/modules/zsh-completions"]
+	path = zsh/.zsh/modules/zsh-completions
+	url = git://github.com/zsh-users/zsh-completions.git
+[submodule "zsh/.zsh/modules/auto-fu"]
+	path = zsh/.zsh/modules/auto-fu
+	url = git://github.com/hchbaw/auto-fu.zsh.git
+[submodule "zsh/.zsh/modules/zsh-history-substring-search"]
+	path = zsh/.zsh/modules/zsh-history-substring-search
+	url = git://github.com/zsh-users/zsh-history-substring-search.git
+[submodule "zsh/.zsh/modules/zsh-syntax-highlighting"]
+	path = zsh/.zsh/modules/zsh-syntax-highlighting
+	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
