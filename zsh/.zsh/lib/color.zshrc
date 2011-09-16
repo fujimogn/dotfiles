@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/color.zshrc
-# $Date: 2011-09-12T09:22:38+0900$
+# $Date: 2011-09-17T05:12:09+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 
@@ -108,5 +108,3 @@ else
   None=""
 fi
 
-
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
