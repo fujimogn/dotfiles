@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/.zshrc
-# $Date: 2011-09-16T08:42:15+0900$
+# $Date: 2011-09-16T10:14:23+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 load_srcs() {
@@ -28,7 +28,7 @@ load_srcs() {
           [[ $OSTYPE == cygwin* ]] && load_src $1
           ;;
         *)
-          load $1 break
+          load_src $1 break
           ;;
       esac
     fi
