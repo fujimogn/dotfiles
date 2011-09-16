@@ -29,7 +29,7 @@
   zip = archive --format=zip
 
 [core]
-  excludesfile = ~/.gitignore
+  excludesfile = ~/.gitignore_global
   editor = vim
 
 [rerere]

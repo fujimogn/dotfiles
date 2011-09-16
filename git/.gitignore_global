@@ -1,0 +1,17 @@
+#*#
+*.bak
+*.egg
+*.egg
+*.mo
+*.old
+*.swp
+*~
+.#*
+.*~
+.DS_Store
+.Trash
+.svn
+.trash
+Thumbs.db
+tags
+tags-*
