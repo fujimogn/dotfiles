@@ -1,12 +1,12 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/vim/vim.darwin.zsh
-# $Date: 2011-09-11T12:17:27+0900$
+# $Date: 2011-09-17T08:32:13+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # for MacVim Kaoriya
 # http://code.google.com/p/macvim-kaoriya/
-# 
+#
 # required command mvim
 # http://repo.or.cz/w/MacVim/KaoriYa.git/blob_plain/HEAD:/src/MacVim/mvim
 #
@@ -15,6 +15,8 @@
 # alias command "v", "vi", "vi"   -> open CLI MacVim
 # alias command "g", "gv", "gvim" -> open GUI MacVim
 #
+
+! which vim >/dev/null 2>&1 && return
 
 MACVIM="/Applications/MacVim.app/Contents/MacOS/Vim"
 

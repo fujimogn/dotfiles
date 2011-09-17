@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/completion.zshrc
-# $Date: 2011-09-17T05:12:46+0900$
+# $Date: 2011-09-17T07:18:15+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 #fignore=( .BAK .bak .alt .old .aux .toc .swp \~)
@@ -60,5 +60,55 @@ zstyle ':completion:*:descriptions' format $Yellow'completing %B%d%b'$Reset
 if [ -d $ZDOTDIR/cache ]; then
   zstyle ':completion:*' use-cache yes
   zstyle ':completion::complete:*' cache-path $ZDOTDIR/cache
+fi
+
+
+# auto-fu.zsh
+if [ -f ${ZDOTDIR}/modules/auto-fu/auto-fu.zsh ]; then
+  unsetopt sh_wordsplit  autoremoveslash
+  function () {
+    local A
+    A=${ZDOTDIR}/modules/auto-fu/auto-fu.zsh
+    [[ -e "${A:r}.zwc" ]] && [[ "$A" -ot "${A:r}.zwc" ]] ||
+      zsh -c "source $A; auto-fu-zcompile $A ${A:h}" >/dev/null 2>&1
+  }
+  source ${ZDOTDIR}/modules/auto-fu/auto-fu; auto-fu-install
+  zstyle ':auto-fu:var' postdisplay ''
+  # zstyle ':auto-fu:var' track-keymap-skip opp
+  # zstyle ':auto-fu:var' disable magic-space
+  # zstyle ':auto-fu:var' autoable-function/skipwords "^((???)##)"
+
+  function zle-line-init () { auto-fu-init }
+  zle -N zle-line-init
+
+  # delete unambiguous prefix when accepting line
+  # via: http://d.hatena.ne.jp/tarao/20100823/1282543408
+  function afu+delete-unambiguous-prefix () {
+    afu-clearing-maybe
+    local buf; buf="$BUFFER"
+    local bufc; bufc="$buffer_cur"
+    [[ -z "$cursor_new" ]] && cursor_new=-1
+    [[ "$buf[$cursor_new]" == ' ' ]] && return
+    [[ "$buf[$cursor_new]" == '/' ]] && return
+    ((afu_in_p == 1)) && [[ "$buf" != "$bufc" ]] && {
+      # there are more than one completion candidates
+      zle afu+complete-word
+      [[ "$buf" == "$BUFFER" ]] && {
+          # the completion suffix was an unambiguous prefix
+          afu_in_p=0; buf="$bufc"
+      }
+      BUFFER="$buf"
+      buffer_cur="$bufc"
+    }
+  }
+  zle -N afu+delete-unambiguous-prefix
+  function afu-ad-delete-unambiguous-prefix () {
+    local afufun="$1"
+    local code; code=$functions[$afufun]
+    eval "function $afufun () { zle afu+delete-unambiguous-prefix; $code }"
+  }
+  afu-ad-delete-unambiguous-prefix afu+accept-line
+  afu-ad-delete-unambiguous-prefix afu+accept-line-and-down-history
+  afu-ad-delete-unambiguous-prefix afu+accept-and-hold
 fi
 

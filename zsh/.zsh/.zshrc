@@ -1,8 +1,17 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/.zshrc
-# $Date: 2011-09-16T10:14:23+0900$
+# $Date: 2011-09-17T07:26:41+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
+
+load_modules() {
+#  if [ -f ${ZDOTDIR}/modiles/zsh-history-substring-search/zsh-history-substring-search.zsh ]; then
+#    source ${ZDOTDIR}/modules/zsh-history-substring-search/zsh-history-substring-search.zsh
+#  fi
+#  if [ -f ${ZDOTDIR}/modules/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+#    source ${ZDOTDIR}/modules/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#  fi
+}
 
 load_srcs() {
 
@@ -37,12 +46,12 @@ load_srcs() {
 }
 
 
-
 zshrc_main() {
   load_srcs ${ZDOTDIR}/lib/*.zshrc
   load_srcs ${ZDOTDIR}/plugins/*.zsh
   load_srcs in ${DOTDIR}/*/*.zsh
-  autoload -U compinit
+  load_modules
+  autoload -Uz compinit
   compinit
 }
 
