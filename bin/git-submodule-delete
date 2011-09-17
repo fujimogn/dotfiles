@@ -1,0 +1,54 @@
+#!/bin/sh
+#
+# $File: ${DOTDIR}/vim/vim.zsh
+# $Date: 2011-09-18T07:08:14+0900$
+# vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
+
+! which git >/dev/null 2>&1 && exit
+
+__git_submodule_delete() {
+  [ $# -eq 0 ] && exit
+  if [ `git config --file .gitmodules --get submodule.$1.path` ]; then
+    git rm --cached `git config --file .gitmodules --get submodule.$1.path`
+    git config --file .gitmodules --remove-section submodule.$1
+    [ -n "$CMD" ] && eval `echo $CMD`
+  else
+    echo "Error: No available submodule $1"
+    exit
+  fi
+}
+
+__help() {
+  echo "Usage: git-submodule-delete [OPTION] [NAME(PATH)]"
+  echo "Option:"
+  echo "  -c, -commit                  and commit -m 'Removed submodule [NAME]'"
+  exit
+}
+
+if [ $# -ne 0 ]; then
+  while [ $# -gt 0 ];
+  do
+    case $1 in
+      -h|-help)
+        __help
+        break
+        ;;
+      -c|-commit)
+        CMD+="git commit -m 'Removed submodule \$1'"
+        ;;
+      -*)
+        echo "Invalid option -- ${1#-}"
+        echo "Try '--help|-h' for more information"
+        ;;
+      *)
+        break
+      ;;
+    esac
+    shift
+  done
+  [ -n "$1" ] && __git_submodule_delete $1
+else
+  __help
+fi
+
+unset $TARGET $NAME
