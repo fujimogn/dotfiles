@@ -1,7 +1,7 @@
 #!/bin/sh
 #
-# $File: ${DOTDIR}/vim/vim.zsh
-# $Date: 2011-09-18T07:08:14+0900$
+# $File: ${DOTDIR}/bin/git-submodule-delete
+# $Date: 2011-09-18T07:19:21+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 ! which git >/dev/null 2>&1 && exit
@@ -51,4 +51,4 @@ else
   __help
 fi
 
-unset $TARGET $NAME
+unset $CMD
