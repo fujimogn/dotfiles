@@ -10,7 +10,7 @@ case ${OSTYPE} in
 esac
 
 if  which dircolors > /dev/null 2>&1 ; then
-  dircolors=${DOTDIR}/dircolors/dircolors/.dircolors-${terminfo[colors]}
+  dircolors=${DOTDIR}/dircolors/dircolors/dircolors-${terminfo[colors]}
   if [[ -f $dircolors ]]; then
     eval $(dircolors -b $dircolors)
   fi

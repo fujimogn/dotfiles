@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/completion.zshrc
-# $Date: 2011-09-17T07:18:15+0900$
+# $Date: 2011-09-17T11:38:41+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 #fignore=( .BAK .bak .alt .old .aux .toc .swp \~)
@@ -65,7 +65,7 @@ fi
 
 # auto-fu.zsh
 if [ -f ${ZDOTDIR}/modules/auto-fu/auto-fu.zsh ]; then
-  unsetopt sh_wordsplit  autoremoveslash
+  unsetopt sh_wordsplit autoremoveslash
   function () {
     local A
     A=${ZDOTDIR}/modules/auto-fu/auto-fu.zsh
@@ -76,7 +76,7 @@ if [ -f ${ZDOTDIR}/modules/auto-fu/auto-fu.zsh ]; then
   zstyle ':auto-fu:var' postdisplay ''
   # zstyle ':auto-fu:var' track-keymap-skip opp
   # zstyle ':auto-fu:var' disable magic-space
-  # zstyle ':auto-fu:var' autoable-function/skipwords "^((???)##)"
+  zstyle ':auto-fu:var' autoable-function/skipwords "^((??)##)"
 
   function zle-line-init () { auto-fu-init }
   zle -N zle-line-init
@@ -112,3 +112,7 @@ if [ -f ${ZDOTDIR}/modules/auto-fu/auto-fu.zsh ]; then
   afu-ad-delete-unambiguous-prefix afu+accept-and-hold
 fi
 
+
+
+autoload -Uz compinit
+compinit

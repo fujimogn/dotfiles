@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/alias.zshrc
-# $Date: 2011-09-11T21:32:43+0900$
+# $Date: 2011-09-17T10:43:55+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 alias cp="cp -i"
@@ -48,17 +48,19 @@ alias 755='chmod 755'
 
 alias gd='dirs -lv; echo -n "select number: "; read newdir; cd +"$newdir"'
 
-alias utf='export LANG=ja_JP.UTF-8; export LANGUAGE=ja_JP.UTF-8; export LC_ALL=ja_JP.UTF-8'
-alias en='export LANG=en; export LANGUAGE=en; export LC_ALL=en'
-alias eucjp='export LANG=ja_JP.eucJP; export LANGUAGE=ja_JP.eucJP; export LC_ALL=ja_JP.eucJP'
-alias sjis='export LANG=ja_JP.SJIS; export LANGUAGE=ja_JP.SJIS; export LC_ALL=ja_JP.SJIS'
+alias set_utf='export LANG=ja_JP.UTF-8; export LANGUAGE=ja_JP.UTF-8; export LC_ALL=ja_JP.UTF-8'
+alias set_en='export LANG=en; export LANGUAGE=en; export LC_ALL=en'
+alias set_eucjp='export LANG=ja_JP.eucJP; export LANGUAGE=ja_JP.eucJP; export LC_ALL=ja_JP.eucJP'
+alias set_sjis='export LANG=ja_JP.SJIS; export LANGUAGE=ja_JP.SJIS; export LC_ALL=ja_JP.SJIS'
+
+# dotfiles dir, zdotdir
+[ -n DOTDIR ] && alias -g dotfiles=DOTDIR dotdir=DOTDIR
+[ -n ZDOTDIR ] && alias -g zdotfiles=ZDOTDIR zdotdir=ZDOTDIR
 
 alias -g M='|more'
 alias -g T='|tail'
-alias -g V='| vim -R -'
 alias -g H=' --help | head'
 alias -g L=' --help | less'
-alias -g N='|nkf -We'
 
 # via http://d.hatena.ne.jp/mollifier/20100317/p1
 if which pbcopy >/dev/null 2>&1 ; then
