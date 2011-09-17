@@ -1,6 +1,3 @@
-[submodule "dircolors/dircolors"]
-	path = dircolors/dircolors
-	url = git://github.com/jmcantrell/dotfiles-dircolors.git
 [submodule "zsh/.zsh/modules/zsh-completions"]
 	path = zsh/.zsh/modules/zsh-completions
 	url = git://github.com/zsh-users/zsh-completions.git

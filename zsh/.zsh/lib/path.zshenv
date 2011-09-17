@@ -1,7 +1,7 @@
-#!/usr/bin/sh
+#!/usr/bin/zsh
 #
-# $File: ${DOTDIR}/system/path
-# $Date: 2011-09-17T02:18:22+0900$
+# $File: ${ZDOTDIR}/lib/path.zshenv
+# $Date: 2011-09-18T05:38:12+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
 
