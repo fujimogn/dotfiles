@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/abbreviations.zshrc
-# $Date: 2011-09-17T12:03:12+0900$
+# $Date: 2011-09-18T04:25:10+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # via: http://hackerific.net/2009/01/23/zsh-abbreviations/
@@ -45,5 +45,5 @@ __abbreviations() {
   bindkey " " magic-space
 }
 
-__abbreviations
+# __abbreviations
 

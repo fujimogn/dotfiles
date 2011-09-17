@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/.zshrc
-# $Date: 2011-09-17T11:38:00+0900$
+# $Date: 2011-09-18T04:41:03+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 load_modules() {
@@ -18,6 +18,8 @@ zshrc_main() {
   load_srcs ${ZDOTDIR}/plugins/*.zsh
   load_srcs in ${DOTDIR}/*/*.zsh
   load_modules
+  autoload -Uz compinit
+  compinit
 }
 
 zshrc_main

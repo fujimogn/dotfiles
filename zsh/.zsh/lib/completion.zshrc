@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/completion.zshrc
-# $Date: 2011-09-17T11:38:41+0900$
+# $Date: 2011-09-18T04:40:57+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 #fignore=( .BAK .bak .alt .old .aux .toc .swp \~)
@@ -17,7 +17,7 @@ zstyle ':completion:*' list-colors no=00 fi=00 di=01\;34 pi=33 so=01\;35 bd=00\;
 zstyle ':completion:*' list-prompt ''
 zstyle ':completion:*' list-separator '-->'
 zstyle ':completion:*' list-suffixes true
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+#zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 #zstyle ':completion:*' matcher-list '+' '+m:{[:lower:]}={[:upper:]}' '+r:|[._-]=** r:|=**' '+l:|=* r:|=*'
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' prompt ''\''%e'\'''
@@ -32,7 +32,7 @@ zstyle ':completion:*:correct:*' insert-unambiguous true
 zstyle ':completion:*:correct:*' original true
 zstyle ':completion:*:corrections' format $Yellow'%B%d '$Red'(errors: %e)%b'$Reset
 zstyle ':completion:*:default' menu select=0                                                    # 選択状態をハイライトさせる
-zstyle ':completion:*:descriptions' format $Yellow'completing %B%d%b'$Reset
+zstyle ':completion:*:descriptions' format $Yellow'completing %d%b'$Reset
 #zstyle ':completion:*:expand:*' tag-order all-expansions
 #zstyle ':completion:*:kill:*' command 'ps -u$USER'
 #zstyle ':completion:*:matches' group true
@@ -64,55 +64,57 @@ fi
 
 
 # auto-fu.zsh
-if [ -f ${ZDOTDIR}/modules/auto-fu/auto-fu.zsh ]; then
-  unsetopt sh_wordsplit autoremoveslash
-  function () {
-    local A
-    A=${ZDOTDIR}/modules/auto-fu/auto-fu.zsh
-    [[ -e "${A:r}.zwc" ]] && [[ "$A" -ot "${A:r}.zwc" ]] ||
-      zsh -c "source $A; auto-fu-zcompile $A ${A:h}" >/dev/null 2>&1
-  }
-  source ${ZDOTDIR}/modules/auto-fu/auto-fu; auto-fu-install
-  zstyle ':auto-fu:var' postdisplay ''
-  # zstyle ':auto-fu:var' track-keymap-skip opp
-  # zstyle ':auto-fu:var' disable magic-space
-  zstyle ':auto-fu:var' autoable-function/skipwords "^((??)##)"
-
-  function zle-line-init () { auto-fu-init }
-  zle -N zle-line-init
-
-  # delete unambiguous prefix when accepting line
-  # via: http://d.hatena.ne.jp/tarao/20100823/1282543408
-  function afu+delete-unambiguous-prefix () {
-    afu-clearing-maybe
-    local buf; buf="$BUFFER"
-    local bufc; bufc="$buffer_cur"
-    [[ -z "$cursor_new" ]] && cursor_new=-1
-    [[ "$buf[$cursor_new]" == ' ' ]] && return
-    [[ "$buf[$cursor_new]" == '/' ]] && return
-    ((afu_in_p == 1)) && [[ "$buf" != "$bufc" ]] && {
-      # there are more than one completion candidates
-      zle afu+complete-word
-      [[ "$buf" == "$BUFFER" ]] && {
-          # the completion suffix was an unambiguous prefix
-          afu_in_p=0; buf="$bufc"
-      }
-      BUFFER="$buf"
-      buffer_cur="$bufc"
+__auto-fu() {
+  if [ -f ${ZDOTDIR}/modules/auto-fu/auto-fu.zsh ]; then
+    unsetopt sh_wordsplit autoremoveslash
+    function () {
+      local A
+      A=${ZDOTDIR}/modules/auto-fu/auto-fu.zsh
+      [[ -e "${A:r}.zwc" ]] && [[ "$A" -ot "${A:r}.zwc" ]] ||
+        zsh -c "source $A; auto-fu-zcompile $A ${A:h}" >/dev/null 2>&1
     }
-  }
-  zle -N afu+delete-unambiguous-prefix
-  function afu-ad-delete-unambiguous-prefix () {
-    local afufun="$1"
-    local code; code=$functions[$afufun]
-    eval "function $afufun () { zle afu+delete-unambiguous-prefix; $code }"
-  }
-  afu-ad-delete-unambiguous-prefix afu+accept-line
-  afu-ad-delete-unambiguous-prefix afu+accept-line-and-down-history
-  afu-ad-delete-unambiguous-prefix afu+accept-and-hold
-fi
+    source ${ZDOTDIR}/modules/auto-fu/auto-fu; auto-fu-install
+    zstyle ':auto-fu:var' postdisplay ''
+    # zstyle ':auto-fu:var' track-keymap-skip opp
+    # zstyle ':auto-fu:var' disable magic-space
+    zstyle ':auto-fu:var' autoable-function/skipwords "^((??)##)"
 
+    function zle-line-init () { auto-fu-init }
+    zle -N zle-line-init
 
+    # delete unambiguous prefix when accepting line
+    # via: http://d.hatena.ne.jp/tarao/20100823/1282543408
+    function afu+delete-unambiguous-prefix () {
+      afu-clearing-maybe
+      local buf; buf="$BUFFER"
+      local bufc; bufc="$buffer_cur"
+      [[ -z "$cursor_new" ]] && cursor_new=-1
+      [[ "$buf[$cursor_new]" == ' ' ]] && return
+      [[ "$buf[$cursor_new]" == '/' ]] && return
+      ((afu_in_p == 1)) && [[ "$buf" != "$bufc" ]] && {
+        # there are more than one completion candidates
+        zle afu+complete-word
+        [[ "$buf" == "$BUFFER" ]] && {
+            # the completion suffix was an unambiguous prefix
+            afu_in_p=0; buf="$bufc"
+        }
+        BUFFER="$buf"
+        buffer_cur="$bufc"
+      }
+    }
+    zle -N afu+delete-unambiguous-prefix
+    function afu-ad-delete-unambiguous-prefix () {
+      local afufun="$1"
+      local code; code=$functions[$afufun]
+      eval "function $afufun () { zle afu+delete-unambiguous-prefix; $code }"
+    }
+    afu-ad-delete-unambiguous-prefix afu+accept-line
+    afu-ad-delete-unambiguous-prefix afu+accept-line-and-down-history
+    afu-ad-delete-unambiguous-prefix afu+accept-and-hold
+  fi
+}
 
-autoload -Uz compinit
-compinit
+# __auto-fu
+
+# autoload -Uz compinit
+# compinit
