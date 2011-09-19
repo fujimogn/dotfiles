@@ -1,10 +1,10 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/tmux/tmux.zsh
-# $Date: 2011-09-17T11:46:03+0900$
+# $Date: 2011-09-20T08:11:30+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
-! which tmux >/dev/null 2>&1 && return
+! which tmux >/dev/null 2>&1 && return 1
 
 fpath=(${DOTDIR}/tmux $fpath)
 

@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/vim/vim.darwin.zsh
-# $Date: 2011-09-20T07:50:28+0900$
+# $Date: 2011-09-20T08:09:13+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # for MacVim Kaoriya
@@ -16,7 +16,7 @@
 # alias command "g", "gv", "gvim" -> open GUI MacVim
 #
 
-! which vim >/dev/null 2>&1 && return 2
+! which vim >/dev/null 2>&1 && return 1
 
 VIMAPP="MacVim.app/Contents/MacOS/Vim"
 APPDIR="/Applications"
@@ -27,7 +27,7 @@ if [ -f "${APPDIR}/${VIMAPP}" ]; then
 elif [ -d "${BREWDIR}" ]; then
   MACVIM=`find ${BREWDIR} -maxdepth 1 -mindepth 1 -type d | tail -1`"/${VIMAPP}"
 else
-  return 2
+  return 1
 fi
 
 function v {

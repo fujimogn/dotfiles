@@ -13,4 +13,6 @@
 [submodule "dircolors/dircolors"]
 	path = dircolors/dircolors
 	url = git://github.com/fujimogn/dircolors.git
-	ignore = untracked
+[submodule "vim/.vim/bundles/vundle"]
+	path = vim/.vim/bundles/vundle
+	url = git://github.com/gmarik/vundle.git
