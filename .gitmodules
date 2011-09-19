@@ -13,3 +13,6 @@
 [submodule "dircolors/dircolors"]
 	path = dircolors/dircolors
 	url = git@github.com:fujimogn/dircolors.git
+[submodule "dircolors/a"]
+	path = dircolors/a
+	url = git://github.com/fujimogn/dircolors.git
