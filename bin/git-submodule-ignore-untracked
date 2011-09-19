@@ -1,0 +1,73 @@
+#!/bin/sh
+#
+# $File: ${DOTDIR}/bin/git-submodule-ignore-untracked
+# $Date: 2011-09-19T14:51:02+0900$
+# vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
+
+! which git >/dev/null 2>&1 && exit 1
+
+CMD=
+is_file=false
+
+submodule_ignore_untracked() {
+  [ $# -eq 0 ] && exit 1
+  while [ $# -gt 0 ];
+  do
+    path=`git config --file .gitmodules --get submodule.$1.path`
+    if [ -n "$path" ]; then
+        if $is_file ; then
+          git config --file .gitmodules submodule.$1.ignore untracked
+        else
+          git config submodule.$1.ignore untracked
+        fi
+        [ -n "$CMD" ] && eval `echo $CMD`
+    else
+      echo "Error: No available submodule $1" >&2
+      exit 2
+    fi
+    shift
+  done
+}
+
+help() {
+  echo "Usage: `basename $0` [OPTION] {submodule name1} [{submodule name2}] ..."
+  echo "Option:"
+  echo "  -c, --commit                  and commit -m 'Added ignore=untracked submodule {submodule name}'"
+  echo "  -f, --file                    'ignore=untracked' write .gitmodule"
+  exit
+}
+
+main() {
+  if [ $# -ne 0 ]; then
+    while [ $# -gt 0 ];
+    do
+      case $1 in
+        -*h*|--help)
+          help
+          break
+          ;;
+        -*c*|--commit)
+          CMD+="git commit -m 'Added ignore=untracked submodule \$1'"
+          ;;
+        -*f*|--file)
+          is_file=true
+          ;;
+        -*)
+          echo "Invalid option -- ${1#-}" >&2
+          echo "Try '--help|-h' for more information" >&2
+          ;;
+        *)
+          break 2
+        ;;
+      esac
+      shift
+    done
+    [ -n "$1" ] && submodule_ignore_untracked $@
+  else
+    help
+  fi
+}
+
+main "$@"
+
+unset CMD is_file
