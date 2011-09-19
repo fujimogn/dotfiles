@@ -10,9 +10,6 @@
 [submodule "zsh/.zsh/modules/zsh-syntax-highlighting"]
 	path = zsh/.zsh/modules/zsh-syntax-highlighting
 	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
-[submodule "dircolors/dircolors"]
-	path = dircolors/dircolors
-	url = git@github.com:fujimogn/dircolors.git
-[submodule "dircolors/a"]
-	path = dircolors/a
+[submodule "dircolors/direcolors"]
+	path = dircolors/direcolors
 	url = git://github.com/fujimogn/dircolors.git
