@@ -1,23 +1,35 @@
 #!/bin/sh
 #
 # $File: ${DOTDIR}/bin/git-submodule-rm
-# $Date: 2011-09-19T14:12:24+0900$
+# $Date: 2011-09-19T17:57:25+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 ! which git >/dev/null 2>&1 && exit 1
 
 CMD=
+cached=
+quiet=
+commit=false
 
 submodule_rm() {
   [ $# -eq 0 ] && exit 1
 
   while [ $# -gt 0 ];
   do
-    local path=`git config --file .gitmodules --get submodule.$1.path`
-    if [ -n $path ]; then
-      git rm --cached $path
+    path=`git config --file .gitmodules --get submodule.$1.path`
+    if [ -n "$path" ]; then
+
+      git rm $quiet --cached "$path"
+      if [ -z "$cached" ]; then
+        rm -rf "$path"
+      fi
       git config --file .gitmodules --remove-section submodule.$1
-      [ -n "$CMD" ] && eval `echo $CMD`
+      git add .gitmodules
+
+      if $commit ; then
+        git commit -m "Removed submodule $1"
+      fi
+
     else
       echo "Error: No available submodule $1" >&2
     fi
@@ -25,11 +37,49 @@ submodule_rm() {
   done
 }
 
+getopt() {
+  if [ $# -ne 0 ]; then
+    while getopts hcm OPT
+    do
+      case $OPT in
+        h)
+          help break ;;
+        c)
+          option_c ;;
+        m)
+          option_m ;;
+        q)
+          option_q ;;
+      esac
+    done
+  else
+    help
+  fi
+}
+
 help() {
   echo "Usage: `basename $0` [OPTION] {submodule name} [{submodule name}] ..."
   echo "Option:"
-  echo "  -c, --commit                  and commit -m 'Removed submodule {submodule name}'"
+  echo "  -c, --cached                  and 'git rm --cached {submodule name}'"
+  echo "  -q, --quiet                   and 'git rm --quiet' {submodule name}'"
+  echo "  -m, --commit                  and 'git commit -m \"Removed submodule {submodule name}\"'"
   exit
+}
+
+option_invalid(){
+  echo "illegal option -- ${1##*-}" >&2
+}
+
+option_c() {
+  cached="--cached"
+}
+
+option_q() {
+  quiet="--quiet"
+}
+
+option_m() {
+  commit=true
 }
 
 main() {
@@ -37,20 +87,20 @@ main() {
     while [ $# -gt 0 ];
     do
       case $1 in
-        -*h*|-help)
-          help
-          break
-          ;;
-        -*c*|--commit)
-          $CMD+="git commit -m 'Removed submodule \$1'"
-          ;;
+        --help)
+          help break ;;
+        --cached)
+          option_c ;;
+        --commit)
+          option_m ;;
+        --quiet)
+          option_q ;;
+        --*)
+          option_invalid $1 ;;
         -*)
-          echo "Invalid option -- ${1#-}" >&2
-          echo "Try '--help|-h' for more information" >&2
-          ;;
+          getopt $1 ;;
         *)
-          break 2
-        ;;
+          break 2 ;;
       esac
       shift
     done
