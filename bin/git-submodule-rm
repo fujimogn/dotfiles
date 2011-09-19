@@ -1,54 +1,65 @@
 #!/bin/sh
 #
-# $File: ${DOTDIR}/bin/git-submodule-delete
-# $Date: 2011-09-18T07:48:57+0900$
+# $File: ${DOTDIR}/bin/git-submodule-rm
+# $Date: 2011-09-19T14:12:24+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
-! which git >/dev/null 2>&1 && exit
+! which git >/dev/null 2>&1 && exit 1
 
-__git_submodule_delete() {
-  [ $# -eq 0 ] && exit
-  if [ `git config --file .gitmodules --get submodule.$1.path` ]; then
-    git rm --cached `git config --file .gitmodules --get submodule.$1.path`
-    git config --file .gitmodules --remove-section submodule.$1
-    [ -n "$CMD" ] && eval `echo $CMD`
-  else
-    echo "Error: No available submodule $1"
-    exit
-  fi
+CMD=
+
+submodule_rm() {
+  [ $# -eq 0 ] && exit 1
+
+  while [ $# -gt 0 ];
+  do
+    local path=`git config --file .gitmodules --get submodule.$1.path`
+    if [ -n $path ]; then
+      git rm --cached $path
+      git config --file .gitmodules --remove-section submodule.$1
+      [ -n "$CMD" ] && eval `echo $CMD`
+    else
+      echo "Error: No available submodule $1" >&2
+    fi
+    shift
+  done
 }
 
-__help() {
-  echo "Usage: git-submodule-delete [OPTION] [NAME(PATH)]"
+help() {
+  echo "Usage: `basename $0` [OPTION] {submodule name} [{submodule name}] ..."
   echo "Option:"
-  echo "  -c, -commit                  and commit -m 'Removed submodule [NAME]'"
+  echo "  -c, --commit                  and commit -m 'Removed submodule {submodule name}'"
   exit
 }
 
-if [ $# -ne 0 ]; then
-  while [ $# -gt 0 ];
-  do
-    case $1 in
-      -h|-help)
-        __help
-        break
+main() {
+  if [ $# -ne 0 ]; then
+    while [ $# -gt 0 ];
+    do
+      case $1 in
+        -*h*|-help)
+          help
+          break
+          ;;
+        -*c*|--commit)
+          $CMD+="git commit -m 'Removed submodule \$1'"
+          ;;
+        -*)
+          echo "Invalid option -- ${1#-}" >&2
+          echo "Try '--help|-h' for more information" >&2
+          ;;
+        *)
+          break 2
         ;;
-      -c|-commit)
-        CMD+="git commit -m 'Removed submodule \$1'"
-        ;;
-      -*)
-        echo "Invalid option -- ${1#-}"
-        echo "Try '--help|-h' for more information"
-        ;;
-      *)
-        break
-      ;;
-    esac
-    shift
-  done
-  [ -n "$1" ] && __git_submodule_delete $1
-else
-  __help
-fi
+      esac
+      shift
+    done
+    [ -n "$1" ] && submodule_rm $@
+  else
+    help
+  fi
+}
+
+main "$@"
 
 unset CMD
