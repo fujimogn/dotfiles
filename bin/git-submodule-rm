@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # $File: ${DOTDIR}/bin/git-submodule-rm
-# $Date: 2011-09-19T17:57:25+0900$
+# $Date: 2011-09-19T21:05:23+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 ! which git >/dev/null 2>&1 && exit 1
@@ -19,15 +19,15 @@ submodule_rm() {
     path=`git config --file .gitmodules --get submodule.$1.path`
     if [ -n "$path" ]; then
 
-      git rm $quiet --cached "$path"
+      #git rm $quiet --cached "$path"
       if [ -z "$cached" ]; then
-        rm -rf "$path"
+        #rm -rf "$path"
       fi
-      git config --file .gitmodules --remove-section submodule.$1
-      git add .gitmodules
+      #git config --file .gitmodules --remove-section submodule.$1
+      #git add .gitmodules
 
       if $commit ; then
-        git commit -m "Removed submodule $1"
+        #git commit -m "Removed submodule $1"
       fi
 
     else
