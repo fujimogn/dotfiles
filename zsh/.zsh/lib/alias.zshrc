@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/alias.zshrc
-# $Date: 2011-09-17T10:43:55+0900$
+# $Date: 2011-09-19T22:43:55+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 alias cp="cp -i"
@@ -29,6 +29,7 @@ prefix=(e f z ze zf bz)
 for p in $prefix; do
   eval "alias ${p}grep='${p}grep --color=auto'"
 done
+unset prefix
 
 alias df="df -kTh"
 alias du="du -kh"
@@ -38,8 +39,9 @@ alias where="command -v"
 alias pd="pushd"
 alias po="popd"
 
+alias {q,q!}=exit
+
 alias su="su -l"
-alias _="sudo"
 if [[ ! -x $(which sudoedit) ]]; then
       alias sudoedit='sudo -e'
 fi
@@ -54,8 +56,9 @@ alias set_eucjp='export LANG=ja_JP.eucJP; export LANGUAGE=ja_JP.eucJP; export LC
 alias set_sjis='export LANG=ja_JP.SJIS; export LANGUAGE=ja_JP.SJIS; export LC_ALL=ja_JP.SJIS'
 
 # dotfiles dir, zdotdir
-[ -n DOTDIR ] && alias -g dotfiles=DOTDIR dotdir=DOTDIR
-[ -n ZDOTDIR ] && alias -g zdotfiles=ZDOTDIR zdotdir=ZDOTDIR
+# 本当はグローバルと通常でできるようにしたい。スマートなやり方が分かりませぬ
+[ -n "$DOTDIR" ] && alias -g dotfiles=DOTDIR dotdir=DOTDIR
+[ -n "$ZDOTDIR" ] && alias -g zdotfiles=ZDOTDIR zdotdir=ZDOTDIR
 
 alias -g M='|more'
 alias -g T='|tail'
