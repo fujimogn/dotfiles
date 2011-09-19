@@ -1,10 +1,10 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/homebrew/homebrew.darwin.zsh
-# $Date: 2011-09-17T03:32:20+0900$
+# $Date: 2011-09-20T08:12:03+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
-! which brew >/dev/null 2>&1 && return
+! which brew >/dev/null 2>&1 && return 1
 
 export PATH="$(brew --prefix)/bin:$PATH"
 export HOMEBREW_USE_GCC=1
