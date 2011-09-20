@@ -2,39 +2,33 @@
 "
 " rc for vim 7.3
 "
-" $Date: 2011-09-13T01:40:57+0900$
+" $Date: 2011-09-20T10:19:45+0900$
 "
 "-----------------------------------------------------------------
 
-"-----------------------------------------------------------------
-" for Win32
-"-----------------------------------------------------------------
-" {{{
+set nocompatible
+set runtimepath+=$HOME/.vim/runtime
 
-if has('win32')
-  set runtimepath+=$HOME/.vim,$HOME/.vim/after
-endif
-
-" }}}
 "-----------------------------------------------------------------
 " Vundle
 "-----------------------------------------------------------------
 " {{{
 
-set nocompatible
 filetype off
-"set rtp+=~/.vim/bundle/vundle/
-"call vundle#rc()
-"" let Vundle manage Vundle
-"Bundle 'gmarik/vundle'
-"" 使用中のプラグイン
-"Bundle 'Shougo/neocomplcache'
-"Bundle 'Shogo/unite.vim'
-"Bundle 'thinca/vim-ref'
-"Bundle 'thinca/vim-quickrun'
-"Bundle 'scrooloose/nerdcommenter'
-"Bundle 'tpope/vim-surround'
-"Bundle 'ZenCoding.vim'
+
+set runtimepath+=$HOME/.vim/bundles/vundle/
+call vundle#rc( $HOME.'/.vim/bundles' )
+let $vundlerc=$HOME.'/.vim/.vundle'
+com! EditBundles :e $vundlerc
+augroup Vundle
+  au!
+  au BufWritePost $vundlerc call vundle#config#init()
+  au BufWritePost $vundlerc source $vundlerc
+  au BufWritePost $vundlerc BundleClean
+  au BufWritePost $vundlerc BundleInstall
+augroup END
+source $vundlerc
+
 filetype plugin indent on
 
 " }}}
@@ -43,13 +37,12 @@ filetype plugin indent on
 "-----------------------------------------------------------------
 " {{{
 
-syntax enable
+syntax on
 scriptencoding utf-8
 set keywordprg=:help
-set ambiwidth=double
 set autoindent                  " 自動でインデント
 set autoread                    " 他で書き換えられたら自動で読み直す
-set backspace=indent,eol,start
+set backspace=indent,eol,start  " バックスペースで何でも消す
 set backup
 set backupdir=~/.tmp,~/tmp,/var/tmp,/tmp
 " set clipboard+=unnamed          " ヤンクしたときに自動でクリップボードにコピー
@@ -126,9 +119,9 @@ set smarttab                    "
 set smartcase                   " 検索文字列に大文字が含まれている場合は区別して検索する
 set softtabstop=2               " Tab 押下時に挿入されるスペース数
 set suffixes+=.pyc,.pyo,.zwc
-set splitright
-set splitbelow
-set switchbuf=usetab
+set splitright                  " 新規ウィンドウを右に開く
+set splitbelow                  " 新規ウインドウを下部に開く
+set switchbuf=usetab            " バッファ選択でタブを使用
 " set tabstop=2                   " ファイル中のタブ文字の表示幅
 set tags=./tags,tags,~/tags
 " set textwidth=0                 " 一行に長い文章を書いていても自動折り返しをしない
@@ -155,17 +148,19 @@ set wildignore+=*.pyc,*.pyo
 set whichwrap=b,s,h,l,<,>,[,]   " カーソルを行頭、行末で止まらないようにする
 set wrapscan                    " 最後まで検索したら先頭へ戻る
 
+if exists('&ambiwidth')
+  set ambiwidth=double
+endif
+
 " }}}
 "-----------------------------------------------------------------
 " keymap
 "-----------------------------------------------------------------
 " {{{
 
-" キーマップリーダ
+" leader
 let mapleader = ","
-" let g:mapleader = ","
-"
-"カーソルを表示行で移動する。論理行移動は<C-n>, <C-p>
+"カーソルを表示行で移動する
 nnoremap j gj
 nnoremap k gk
 vnoremap j gj
@@ -175,8 +170,7 @@ nmap 1 0
 nmap 0 ^
 nmap 9 $
 " ; でコマンド入力
-noremap ; :
-noremap : ;
+nnoremap ; :
 " Ctrl-n, Ctrl-pでタブ移動
 nnoremap <C-n> gt
 nnoremap <C-p> gT
@@ -185,34 +179,31 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>
-
-" w!! でsudoが必要な場合でも保存
-cmap w!! w !sudo tee % >/dev/null
-
+" 画面移動
+nnoremap <C-j> 5j
+nnoremap <C-k> 5k
+" nnoremap <C-u> <C-u>zz
+" nnoremap <C-d> <C-d>zz
+" 保存
+nnoremap <Space>w :<C-u>write<CR>
+" 終了
+nnoremap <Space>q :<C-u>quit<CR>
 " zz で折り畳みをトグルさせる
 nnoremap zz za
 " zz でヴィジュアル選択を折り畳み
 vnoremap zz zf
-
 " , の後に自動的にスペースを挿入
 " inoremap , ,<space>
-
 " esc 2回で検索ハイライトをクリア
 nmap <esc><esc> ;nohlsearch<cr><esc>
-
+" 挿入モード時の削除
+inoremap <C-d> <Del>
+inoremap <C-h> <BackSpace>
 " 日時挿入
 inoremap <leader>date <C-R>=strftime('%A,  %B %d,  %Y')<CR>
 inoremap <leader>time <C-R>=strftime('%H:%M')<CR>
 inoremap <leader>rdate <C-R>=strftime('%A,  %B %d,  %Y %H:%M')<CR>
 inoremap <leader>w3cdtf <C-R>=strftime('%Y-%m-%dT%H:%M:%S+09:00')<CR>
-
-nmap <silent> ,r :set relativenumber! relativenumber?<cr>
-nmap <silent> ,c :set cursorcolumn!   cursorcolumn?<cr>
-nmap <silent> ,l :set cursorline!     cursorline?<cr>
-nmap <silent> ,n :set number!         number?<cr>
-nmap <silent> ,p :set paste!          paste?<cr>
-nmap <silent> ,w :set wrap!           wrap?<cr>
-
 
 
 " }}}

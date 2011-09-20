@@ -8,6 +8,19 @@
   branch = auto
   interactive = auto
   grep = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
 
 [alias]
   br = branch
@@ -41,6 +54,3 @@
 [help]
   autocorrect = -1
 
-[github]
-  user = fujimogn
-  token = 9a9b6510634485cb22c3610705fd3e6c
