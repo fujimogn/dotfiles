@@ -13,7 +13,7 @@
 /vim/.vim/bundles
 .netrwhist
 !/bin
-!/dircolors/
+!/dircolors
 !/Homebrew
 !/KeyRemap4MacBook
 !/tmux
