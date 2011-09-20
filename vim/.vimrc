@@ -2,7 +2,7 @@
 "
 " rc for vim 7.3
 "
-" $Date: 2011-09-20T10:19:45+0900$
+" $Date: 2011-09-20T13:49:51+0900$
 "
 "-----------------------------------------------------------------
 
@@ -43,13 +43,12 @@ set keywordprg=:help
 set autoindent                  " 自動でインデント
 set autoread                    " 他で書き換えられたら自動で読み直す
 set backspace=indent,eol,start  " バックスペースで何でも消す
-set backup
+set backup                      " ファイルを上書きする前にバックアップファイルを作る
 set backupdir=~/.tmp,~/tmp,/var/tmp,/tmp
-" set clipboard+=unnamed          " ヤンクしたときに自動でクリップボードにコピー
-" set cmdheight=1                 " コマンドラインの高さ
+set clipboard+=unnamed          " ヤンクしたときに自動でクリップボードにコピー
+set cmdheight=1                 " コマンドラインの高さ
 " set cindent                     " Cの自動インデントを始める
 set cursorline                  " カーソル行をハイライト
-set cole=2
 set completeopt=longest,menu,menuone
 " set copyindent
 set display=lastline
@@ -69,81 +68,77 @@ set formatoptions+=corqn
 " set formatoptions-=ro           " 改行時のコメントアウト自動継続を無効化
 " set formatoptions+=mM           " 日本語の行の連結時には空白を入力しない
 " set formatoptions+=lmq          " テキスト整形オプション，マルチバイト系を追加
-set gdefault
+set gdefault                    " :sコマンドで'g'オプションをデフォルトにする
 set helplang=ja,en
 set hlsearch                    " 検索文字をハイライト
 set hidden                      " 編集結果非保存のバッファから、新しいバッファを開くときに警告を出さない
 set history=1000
 set ignorecase                  " 検索時大文字小文字無視
 set incsearch                   " インクリメンタルサーチ
-set infercase
-set linebreak
-set iminsert=0
-set imsearch=0
+set infercase                   " 挿入モードの単語の補完で、大文字、小文字の無視
+set linebreak                   " 入力した行が長い場合に自動的に改行をする
+set iminsert=0                  " 入力モードで自動的に日本語入力を使わない
+set imsearch=0                  " 検索で自動的に日本語入力を使わない
 set laststatus=2                " ステータスラインを常時表示させる
 set lazyredraw                  " スクリプト実行中に再描画しない
 set list                        " 不可視文字表示
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%  " 不可視文字の表示形式
-set mouse=a
-set mousehide
-set mousemodel=popup
-set modeline
-set modelines=5
+" set mouse=a
+" set mousehide
+" set mousemodel=popup
+set modeline                    " モードラインを有効にする
+set modelines=10                " モードラインを上下端から探す行数 / 5
 set number                      " 行番号表示
-set numberwidth=3
+set numberwidth=5               " 行番号表示幅
 " set nobackup                    " バックアップ取らない
-set noerrorbells
-set noimcmdline
-set noimdisable
+set noerrorbells                " エラーメッセージに伴ってベルを発生させない
+set noimcmdline                 " コマンドラインでIMEをオフ
+set noimdisable                 " IMEを使わない
 set noswapfile                  " スワップファイル作らない
 " set nowritebackup               " set writebackupを指定してもオプション 'backup' がオンでない限り、バックアップは上書きに成功した後に削除される。
 set nowrap                      " 折り返さない
 set nrformats-=octal            " 8進数を無効にする。<C-a>,<C-x>に影響する
-set report=0
-set ruler
-set printoptions=paper:letter
-set sbr=↪\
-set scrolloff=5                 " スクロール時の余白確保
-set sidescrolloff=5
+set report=0                    " : コマンドにより変更された行の数の報告が出る最小値
+set ruler                       " カーソルが何行目の何列目に置かれているかを表示する
+set scrolloff=5                 " スクロール時の余白
+set sidescrolloff=5             " 横スクロール時の余白
 set shiftwidth=2                " 自動で挿入されるインデント幅
-set shiftround
-set shortmess=aTItoO
+set shiftround                  " インデントをオプション 'shiftwidth' の値の倍数に丸める
 set shortmess+=I                " 起動時のメッセージを消す
-set showfulltag
+" set showfulltag
 set showmatch                   " 括弧の対応をハイライト
 set showmode                    " 現在のモードを表示
-set showcmd
+set showcmd                     " コマンドをステータスラインに表示する
 set showtabline=2               "
 set smartindent                 " 新しい行を開始したときに、新しい行のインデントを現在行と同じ量にする
 set smarttab                    "
 set smartcase                   " 検索文字列に大文字が含まれている場合は区別して検索する
 set softtabstop=2               " Tab 押下時に挿入されるスペース数
-set suffixes+=.pyc,.pyo,.zwc
+" set suffixes+=.pyc,.pyo,.zwc
 set splitright                  " 新規ウィンドウを右に開く
 set splitbelow                  " 新規ウインドウを下部に開く
 set switchbuf=usetab            " バッファ選択でタブを使用
 " set tabstop=2                   " ファイル中のタブ文字の表示幅
 set tags=./tags,tags,~/tags
 " set textwidth=0                 " 一行に長い文章を書いていても自動折り返しをしない
-set timeoutlen=2000             " キーコードやマッピングされたキー列が完了するのを待つ時間(ミリ秒)
-set title
-set titlestring=%f%(\ [%M]%)
-set ttyfast
+" set timeoutlen=2000             " キーコードやマッピングされたキー列が完了するのを待つ時間(ミリ秒)
+set title                       " ウィンドウのタイトルを変更する
+set titlestring=%f%(\ [%M]%)    " ウィンドウタイトルに使われる文字
+set ttyfast                     " 高速ターミナル接続を行う
 set undolevels=1000
 set undofile undodir=~/.tmp,/var/tmp,/tmp
-" set vb t_vb=                    " ビープをならさない
 set viminfo='1000,<1000,s100,h    " viminfo設定
 set virtualedit=block           " Visual blockモードでフリーカーソルを有効にする
-set visualbell
+set visualbell                  " エラー音の代わりに画面フラッシュを使う
 set wildmenu                    " コマンド補完を強化
 set wildchar=<tab>              " コマンド補完を開始するキー
 set wildmode=longest:full,list:full
-set wildignore=*.swp,*.bak,*.pyc,*.class
-set wildignore+=.svn,CVS,.git
-set wildignore+=*.o,*.a,*.so
-set wildignore+=*.jpg,*.png,*.gif
-set wildignore+=*.pdf
-set wildignore+=*.pyc,*.pyo
+" set wildignore=*.swp,*.bak,*.pyc,*.class
+" set wildignore+=.svn,CVS,.git
+" set wildignore+=*.o,*.a,*.so
+" set wildignore+=*.jpg,*.png,*.gif
+" set wildignore+=*.pdf
+" set wildignore+=*.pyc,*.pyo
 " set wildignorecase
 set whichwrap=b,s,h,l,<,>,[,]   " カーソルを行頭、行末で止まらないようにする
 set wrapscan                    " 最後まで検索したら先頭へ戻る
@@ -174,14 +169,11 @@ nnoremap ; :
 " Ctrl-n, Ctrl-pでタブ移動
 nnoremap <C-n> gt
 nnoremap <C-p> gT
-" Ctrl-hjkl でsplitウィンドウ移動
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap <C-h> <C-w>
 " 画面移動
 nnoremap <C-j> 5j
 nnoremap <C-k> 5k
+nnoremap <C-h> 5h
+nnoremap <C-l> 5l
 " nnoremap <C-u> <C-u>zz
 " nnoremap <C-d> <C-d>zz
 " 保存
@@ -223,6 +215,8 @@ autocmd bufwritepre * :%s/\s\+$//ge
 " file type
 autocmd filetype python set expandtab
 autocmd filetype ruby set shiftwidth=2 tabstop=2
+autocmd BufNewFile,BufRead *.vimrc set filetype=vim
+autocmd BufNewFile,BufRead *.vimperatorrc set filetype=vim
 
 " }}}
 "-----------------------------------------------------------------
@@ -232,7 +226,7 @@ autocmd filetype ruby set shiftwidth=2 tabstop=2
 
 set t_co=256
 set background=dark
-"colorscheme desert256
+colorscheme desert256
 
 " Highlight
 " highlight CursorLine term=reverse cterm=reverse
@@ -264,16 +258,8 @@ set statusline +=%y\                                        " [<ft>]
 " set statusline +=%2*%{SyntasticStatuslineFlag()}%*        " <syntastic status>
 set statusline +=%f%m%r%w
 set statusline +=%=                                         " Left / Right separator
-set statusline +=[%{GetB()}]                                " <filepath><modified flag> [<character>]
+set statusline +=[%{GetB()}]                                " [<character>]
 set statusline +=\ %l/%L%4P                                 " <current>/<total> <position>
-
-
-" "入力モード時、ステータスラインのカラーを変更
-" augroup InsertHook
-" autocmd!
-" autocmd InsertEnter * highlight StatusLine guifg=#ccdc90 guibg=#2E4340
-" autocmd InsertLeave * highlight StatusLine guifg=#2E4340 guibg=#ccdc90
-" augroup END
 
 function! GetB()
   let c = matchstr(getline('.'), '.', col('.') - 1)

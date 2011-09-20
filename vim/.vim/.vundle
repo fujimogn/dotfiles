@@ -2,5 +2,6 @@ Bundle 'gmarik/vundle.git'
 Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/git-vim'
 Bundle 'Shougo/unite.vim.git'
-
+Bundle 'thinca/vim-ref'
+Bundle 'thinca/vim-quickrun'
 Bundle 'desert256.vim'
