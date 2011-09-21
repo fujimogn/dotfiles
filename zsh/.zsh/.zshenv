@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
-# $File: ${DOTDIR}/zsh/.zshenv
-# $Date: 2011-09-22T03:30:49+0900$
+# $File: ${DOTDIR}/zsh/.zsh/.zshenv
+# $Date: 2011-09-22T03:58:08+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 #
 load_srcs() {

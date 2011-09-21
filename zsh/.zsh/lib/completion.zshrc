@@ -1,8 +1,10 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/completion.zshrc
-# $Date: 2011-09-18T04:40:57+0900$
+# $Date: 2011-09-22T04:22:41+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
+
+
 
 #fignore=( .BAK .bak .alt .old .aux .toc .swp \~)
 
@@ -116,5 +118,5 @@ __auto-fu() {
 
 # __auto-fu
 
-# autoload -Uz compinit
-# compinit
+autoload -Uz compinit
+compinit -d ${ZDOTDIR}/cache/.zcompdump
