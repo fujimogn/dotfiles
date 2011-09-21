@@ -4,9 +4,9 @@
 !/.gitignore
 !/Makefile
 !/README.md
-!/zsh
+!/zsh/
+/zsh/.zsh/cache/*
 .zsh_history
-.zcompdump
 !/git
 !/system
 !/vim
