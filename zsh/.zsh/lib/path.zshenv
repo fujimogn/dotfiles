@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/path.zshenv
-# $Date: 2011-09-20T14:46:07+0900$
+# $Date: 2011-09-21T02:11:29+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
 
@@ -19,6 +19,6 @@ if [[ $OSTYPE == darwin* ]]; then
   fi
   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
   export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig
-  #export CC=/usr/bin/gcc-4.2
-  [[ -s "/Users/fujimogn/.rvm/scripts/rvm" ]] && source "/Users/fujimogn/.rvm/scripts/rvm"
+  export CC=/usr/bin/gcc-4.2
+  [[ -s "${HOME}/.rvm/scripts/rvm" ]] && source "${HOME}/.rvm/scripts/rvm"
 fi
