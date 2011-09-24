@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/completion.zshrc
-# $Date: 2011-09-22T04:22:41+0900$
+# $Date: 2011-09-22T15:17:36+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 
@@ -59,15 +59,12 @@ zstyle ':completion:*:descriptions' format $Yellow'completing %d%b'$Reset
 # zstyle ':completion:*:urls' local 'www' '/var/www/' 'public_html'
 
 # caching
-if [ -d $ZDOTDIR/cache ]; then
-  zstyle ':completion:*' use-cache yes
-  zstyle ':completion::complete:*' cache-path $ZDOTDIR/cache
-fi
-
+zstyle ':completion:*' use-cache yes
+zstyle ':completion::complete:*' cache-path ${ZDOTTMP}
 
 # auto-fu.zsh
 __auto-fu() {
-  if [ -f ${ZDOTDIR}/modules/auto-fu/auto-fu.zsh ]; then
+  if [ -f "${ZDOTDIR}/modules/auto-fu/auto-fu.zsh" ]; then
     unsetopt sh_wordsplit autoremoveslash
     function () {
       local A
@@ -119,4 +116,4 @@ __auto-fu() {
 # __auto-fu
 
 autoload -Uz compinit
-compinit -d ${ZDOTDIR}/cache/.zcompdump
+compinit -d ${ZDOTTMP}/.zcompdump

@@ -5,8 +5,9 @@
 !/Makefile
 !/README.md
 !/zsh/
-/zsh/.zsh/cache/*
-.zsh_history
+/zsh/.zsh/.tmp/*
+/zsh/.zsh/*.zwc
+/zsh/.zsh/.history
 !/git
 !/system
 !/vim
