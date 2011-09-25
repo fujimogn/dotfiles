@@ -1,4 +1,4 @@
-@fujimogn's Dotfiles
+Dotfiles
 ===================
 
 Install
