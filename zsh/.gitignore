@@ -1,4 +1,5 @@
 /.zsh/.tmp/*
+!/.zsh/.tmp/empty
 *.zwc
 .history
 
