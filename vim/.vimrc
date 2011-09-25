@@ -2,7 +2,7 @@
 "
 " rc for vim 7.3
 "
-" $Date: 2011-09-20T13:49:51+0900$
+" $Date: 2011-09-25T12:47:05+0900$
 "
 "-----------------------------------------------------------------
 
@@ -225,8 +225,8 @@ autocmd BufNewFile,BufRead *.vimperatorrc set filetype=vim
 " {{{
 
 set t_co=256
-set background=dark
-colorscheme desert256
+" set background=dark
+" colorscheme desert256
 
 " Highlight
 " highlight CursorLine term=reverse cterm=reverse

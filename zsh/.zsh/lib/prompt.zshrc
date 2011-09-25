@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/prompt.zshrc
-# $Date: 2011-09-11T08:19:54+0900$
+# $Date: 2011-09-25T12:56:40+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # via http://www.dna.bio.keio.ac.jp/~yuji/zsh/zshrc.txt
@@ -41,88 +41,34 @@
 #         `<' の形式は文字列の左側を切り詰め, `>' の形式は文字列の右側を切り詰めます
 # %c, %., %C = $PWD の後ろ側の構成要素
 
-Text=${DarkGray}
 
-PS1="
-"${Text}'['${Blue}'%?'${Text}']--['${Cyan}'%*'${Text}']--['${Green}'%n'${Text}'@'${Magenta}'%m'${Text}']--['${Red}'%~'${Text}${Yellow}'$(___git_ps1)'${Text}']'${Text}"
-"${DarkRed}'➜  '${None}
+# via https://gist.github.com/214109
 
-function precmd {
-  case ${TERM} in
-    xterm*|gnome*|konsole*|putty*|screen*)
-      print -Pn "\e]0;%n@%m: %~\a"
-      ;;
-  esac
-
-  if [[ ${TERM} == screen* && ( -n "${TMUX}" || -n "${STY}" ) ]]; then
-    print -n "\a"
+autoload -Uz VCS_INFO_get_data_git; VCS_INFO_get_data_git 2> /dev/null
+function rprompt-git-current-branch {
+  local name st color gitdir action
+  if [[ "$PWD" =~ '/¥.git(/.*)?$' ]]; then
+    return
   fi
-  if [[ ${TERM} == screen* ]]; then
-    print -Pn "\ek\e\\"
+  name=$(basename "`git symbolic-ref HEAD 2> /dev/null`")
+  if [[ -z $name ]]; then
+    return
   fi
-}
 
-function preexec {
-}
+  gitdir=`git rev-parse --git-dir 2> /dev/null`
+  action=`VCS_INFO_git_getaction "$gitdir"` && action="($action)"
 
-
-function ___git_ps1 () {
-  local g p
-  g=$(git rev-parse --git-dir 2>/dev/null) || return
-  if [[ ${g} == ".git" ]]; then
-    __git_ps1 " %s"
-  elif [[ ${g} == ${HOME}"/.git" ]]; then
-    if [[ -f ".gitignore" ]]; then
-      __git_ps1 " %s"
-    else
-      p=$(git rev-parse --show-prefix 2>/dev/null)
-      case ${p} in
-        .dotfiles/*|.vim/*)
-          __git_ps1 " %s"
-          ;;
-      esac
-    fi
+  st=`git status 2> /dev/null`
+  if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
+    color=%F{green}
+  elif [[ -n `echo "$st" | grep "^nothing added"` ]]; then
+    color=%F{yellow}
+  elif [[ -n `echo "$st" | grep "^# Untracked"` ]]; then
+    color=%B%F{red}
   else
-    __git_ps1 " %s"
+    color=%F{red}
   fi
+  echo "$color$name$action%f%b "
 }
-
-function __git_ps1 () {
-  local git_dir action branch
-
-  git_dir=$(git rev-parse --git-dir 2>/dev/null) || return
-  if [[ -d "$git_dir/rebase-apply" ]]; then
-    if [[ -f "$git_dir/rebase-apply/rebasing" ]]; then
-      action="|REBASE"
-    elif [[ -f "$git_dir/rebase-apply/applying" ]]; then
-      action="|AM"
-    else
-      action="|AM/REBASE"
-    fi
-    branch="$(git symbolic-ref HEAD 2>/dev/null)"
-  elif [[ -f "$git_dir/rebase-merge/interactive" ]]; then
-    action="|REBASE-i"
-    branch="$(cat "$git_dir/rebase-merge/head-name")"
-  elif [[ -d "$git_dir/rebase-merge" ]]; then
-    action="|REBASE-m"
-    branch="$(cat "$git_dir/rebase-merge/head-name")"
-  elif [[ -f "$git_dir/MERGE_HEAD" ]]; then
-    action="|MERGING"
-    branch="$(git symbolic-ref HEAD 2>/dev/null)"
-  else
-    [[ -f "$git_dir/BISECT_LOG" ]] && action="|BISECTING"
-    branch="$(git symbolic-ref HEAD 2>/dev/null)" || \
-      branch="$(git describe --exact-match HEAD 2>/dev/null)" || \
-      branch="$(cut -c1-7 "$git_dir/HEAD")..."
-  fi
-
-  git_dir="${$(readlink -f ${git_dir:h})/$HOME/~}"
-  branch=${branch#refs/heads/}
-  if [[ -n $1 ]]; then
-    printf "$1" "${branch}${action}"
-  else
-    printf " (%s)" "${branch}${action}"
-  fi
-}
-
-
+setopt prompt_subst
+RPROMPT='[`rprompt-git-current-branch`%~]'
