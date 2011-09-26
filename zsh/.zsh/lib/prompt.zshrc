@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/prompt.zshrc
-# $Date: 2011-09-25T12:56:40+0900$
+# $Date: 2011-09-25T14:27:03+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # via http://www.dna.bio.keio.ac.jp/~yuji/zsh/zshrc.txt
@@ -42,22 +42,21 @@
 # %c, %., %C = $PWD の後ろ側の構成要素
 
 
-# via https://gist.github.com/214109
 
+# via http://d.hatena.ne.jp/uasi/20091025
 autoload -Uz VCS_INFO_get_data_git; VCS_INFO_get_data_git 2> /dev/null
-function rprompt-git-current-branch {
+
+function __git-current-branch {
   local name st color gitdir action
-  if [[ "$PWD" =~ '/¥.git(/.*)?$' ]]; then
-    return
+  if [[ "$PWD" =~ '/\.git(/.*)?$' ]]; then
+      return
   fi
-  name=$(basename "`git symbolic-ref HEAD 2> /dev/null`")
+  name=`git branch 2> /dev/null | grep '^\*' | cut -b 3-`
   if [[ -z $name ]]; then
     return
   fi
-
   gitdir=`git rev-parse --git-dir 2> /dev/null`
   action=`VCS_INFO_git_getaction "$gitdir"` && action="($action)"
-
   st=`git status 2> /dev/null`
   if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
     color=%F{green}
@@ -68,7 +67,31 @@ function rprompt-git-current-branch {
   else
     color=%F{red}
   fi
-  echo "$color$name$action%f%b "
+
+  echo "$color$name$action%f%b"
 }
-setopt prompt_subst
-RPROMPT='[`rprompt-git-current-branch`%~]'
+
+function __vcs_icon() {
+  if git branch >/dev/null 2>/dev/null; then
+    color=%F{green}
+    echo "$color±%f%b"
+  elif hg root >/dev/null 2>/dev/null; then
+    color=%F{blue}
+    echo "$color☿%f%b"
+  fi
+}
+
+function __collapse_pwd() {
+  #echo `pwd`
+  #| sed -e "s,^$HOME,~,")
+}
+
+
+PS1="
+"'['%?'] '\
+%F{magenta}'%n'%f%b' at '%F{magenta}'%m'%f%b\
+' '`__collapse_pwd`%f%b\
+' '%f%b`__vcs_icon`%f%b`__git-current-branch`"
+"%F{green}'➜  '%f%b
+
+
