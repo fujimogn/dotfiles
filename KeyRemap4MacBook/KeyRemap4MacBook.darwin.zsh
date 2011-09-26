@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/KeyRemap4MacBook/KeyRemap4MacBook.zsh
-# $Date: 2011-09-27T01:52:23+0900$
+# $Date: 2011-09-27T01:57:38+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 
@@ -43,8 +43,6 @@ repeat.initial_wait=200
 #pointing.relative2scroll_rate
 EOF
 
-unset CMD
-
 # }}}
 # {{{ Display the list of identifier name on KeyRemap4MacBook
 
@@ -70,3 +68,5 @@ function kr4mb-list-number {
 }
 
 # }}}
+
+unset CMD
