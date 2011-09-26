@@ -21,3 +21,6 @@
 	path = vim/.vim/bundles/vundle
 	url = git://github.com/gmarik/vundle.git
 	ignore = untracked
+[submodule "zsh/.zsh/modules/zaw"]
+	path = zsh/.zsh/modules/zaw
+	url = git://github.com/zsh-users/zaw.git

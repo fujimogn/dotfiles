@@ -8,15 +8,21 @@
           <name>Global</name>
           <list>
             <item>
-              <name>Control+Delete to Forward Delete</name>
-              <identifier>private.controlDelete2forwarddelete</identifier>
-              <autogen>--KeyToKey-- KeyCode::DELETE, VK_CONTROL, KeyCode::FORWARD_DELETE</autogen>
+              <name>Disable Escape</name>
+              <identifier>private.drop_escape</identifier>
+              <autogen>--KeyToKey-- KeyCode::ESCAPE, KeyCode::VK_NONE</autogen>
             </item>
             <item>
               <name>Control+[ to Escape</name>
-              <identifier>private.emacsmode_controlLeftbracket</identifier>
+              <identifier>private.control_bracket_to_escape</identifier>
               <not>EMACS</not>
               <autogen>--KeyToKey-- KeyCode::BRACKET_LEFT, VK_CONTROL, KeyCode::ESCAPE</autogen>
+            </item>
+            <item>
+              <name>Shift_R to Delete, Contorl+Shift_R to Forward Delete</name>
+              <identifier>private.shift_r_to_delete</identifier>
+              <autogen>--KeyToKey-- KeyCode::SHIFT_R, VK_CONTROL, KeyCode::FORWARD_DELETE</autogen>
+              <autogen>--KeyToKey-- KeyCode::SHIFT_R, KeyCode::DELETE</autogen>
             </item>
           </list>
         </item>
