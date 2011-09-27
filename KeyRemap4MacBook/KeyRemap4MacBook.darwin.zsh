@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/KeyRemap4MacBook/KeyRemap4MacBook.zsh
-# $Date: 2011-09-27T01:58:48+0900$
+# $Date: 2011-09-27T03:11:15+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 
@@ -29,11 +29,11 @@ private.jis_commandL2commandR_toggle_kana_eisuu
 #save.vimode_finder
 #private.vimode_finder_command_v_to_toggle
 #private.vimode_finder_esc_to_off
-repeat.initial_wait=200
-#repeat.wait
-#repeat.consumer_initial_wait
+#repeat.initial_wait=100
+#repeat.wait=43
+#repeat.consumer_initial_wait=200
 #repeat.consumer_wait
-#parameter.keyoverlaidmodifier_initial_modifier_wait
+#parameter.keyoverlaidmodifier_initial_modifier_wait=200
 #parameter.keyoverlaidmodifier_timeout
 #repeat.keyoverlaidmodifier_initial_wait
 #parameter.simultaneouskeypresses_delay

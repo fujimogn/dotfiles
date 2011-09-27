@@ -1,25 +1,25 @@
-PREFIX	:= $(HOME)/Library/Application\ Support/KeyRemap4MacBook
-SRCS	:= private.xml
-
 all:	install
 
-install:install-srcs
+install:
+	@if [ -d $(HOME)/Library/Application\ Support/KeyRemap4MacBook ]; then \
+		ln -snf $(CURDIR)/private.xml $(HOME)/Library/Application\ Support/KeyRemap4MacBook/private.xml && echo "ln: $(CURDIR)/private.xml -> $(HOME)/Library/Application\ Support/KeyRemap4MacBook/private.xml"; \
+	fi
+	@if [ -d /Library/org.pqrs/KeyRemap4MacBook/prefpane ]; then \
+		if [ -f /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml ] && [ ! -L /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml ]; then \
+			sudo cp /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml.old~ && echo "backup: /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml.old~ "; \
+		fi; \
+		sudo ln -snf $(CURDIR)/number.xml /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml && echo "ln: $(CURDIR)/number.xml -> /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml"; \
+	fi
 
-clean:	clean-srcs
+clean:
+	@if [ -d $(HOME)/Library/Application\ Support/KeyRemap4MacBook ]; then \
+		rm -f $(HOME)/Library/Application\ Support/KeyRemap4MacBook/private.xml && echo "rm: $(HOME)/Library/Application\ Support/KeyRemap4MacBook/private.xml"; \
+	fi
+	@if [ -d /Library/org.pqrs/KeyRemap4MacBook/prefpane ]; then \
+		sudo rm -f /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml && echo "rm: /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml"; \
+		if [ -f /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml.old~ ]; then \
+			sudo mv /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml.old~ /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml && echo "restore: /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml"; \
+		fi; \
+	fi
 
-install-srcs:
-	@for file in $(SRCS); do \
-		if [ -e $$file ] && [ -e $(PREFIX) ]; then\
-			[ -f $$file  ] && ln -sf $(CURDIR)/$$file $(PREFIX)/$${file##*/}; \
-			[ -d $$file  ] && ln -snf $(CURDIR)/$$file $(PREFIX)/$${file##*/}; \
-			echo "ln: "$(CURDIR)/$$file" -> "$(PREFIX)/$${file##*/}; \
-		fi;\
-	done
-
-clean-srcs:
-	@for file in $(SRCS); do \
-		rm -rf $(PREFIX)/$${file##*/}; \
-		echo "rm: "$(PREFIX)/$${file##*/}; \
-	done
-
-.PHONY: all install clean install-srcs clean-srcs
+.PHONY: all install clean
