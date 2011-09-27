@@ -16,7 +16,9 @@ clean:
 		rm -f $(HOME)/Library/Application\ Support/KeyRemap4MacBook/private.xml && echo "rm: $(HOME)/Library/Application\ Support/KeyRemap4MacBook/private.xml"; \
 	fi
 	@if [ -d /Library/org.pqrs/KeyRemap4MacBook/prefpane ]; then \
-		sudo rm -f /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml && echo "rm: /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml"; \
+		if [ -f /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml ] && [ -L /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml ]; then \
+			sudo rm -f /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml && echo "rm: /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml"; \
+		fi; \
 		if [ -f /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml.old~ ]; then \
 			sudo mv /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml.old~ /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml && echo "restore: /Library/org.pqrs/KeyRemap4MacBook/prefpane/number.xml"; \
 		fi; \
