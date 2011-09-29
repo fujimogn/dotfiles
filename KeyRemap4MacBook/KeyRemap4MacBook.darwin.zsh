@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/KeyRemap4MacBook/KeyRemap4MacBook.zsh
-# $Date: 2011-09-27T03:11:15+0900$
+# $Date: 2011-09-28T15:00:39+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 
@@ -17,30 +17,18 @@ do
   [[ $line = \#* ]] && continue
   ${CMD} enable ${line}
 done<<EOF
-private.drop_escape
-private.control_bracket_to_escape
-private.shift_r_to_delete
-private.tarminal_escape_with_ime_off
-private.jis_commandL2commandL_toggle_kana_eisuu
-private.jis_commandL2commandR_toggle_kana_eisuu
+#private.drop_escape
+#private.control_bracket_to_escape
+#private.shift_r_to_delete
+#private.tarminal_escape_with_ime_off
+#private.jis_commandL2commandL_toggle_kana_eisuu
+#private.jis_commandL2commandR_toggle_kana_eisuu
 #private.app_finder_return_to_command_o
 #private.app_finder_command_R_to_return
 #private.app_finder_f2_to_return
 #save.vimode_finder
 #private.vimode_finder_command_v_to_toggle
 #private.vimode_finder_esc_to_off
-#repeat.initial_wait=100
-#repeat.wait=43
-#repeat.consumer_initial_wait=200
-#repeat.consumer_wait
-#parameter.keyoverlaidmodifier_initial_modifier_wait=200
-#parameter.keyoverlaidmodifier_timeout
-#repeat.keyoverlaidmodifier_initial_wait
-#parameter.simultaneouskeypresses_delay
-#parameter.simultaneouskeypresses_pointingbutton_delay
-#parameter.doublepressmodifier_threshold
-#parameter.holdingkeytokey_wait
-#pointing.relative2scroll_rate
 EOF
 
 # }}}
