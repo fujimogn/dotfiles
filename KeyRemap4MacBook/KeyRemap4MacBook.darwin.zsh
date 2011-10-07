@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/KeyRemap4MacBook/KeyRemap4MacBook.zsh
-# $Date: 2011-09-28T15:00:39+0900$
+# $Date: 2011-10-01T22:18:16+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 
@@ -17,12 +17,14 @@ do
   [[ $line = \#* ]] && continue
   ${CMD} enable ${line}
 done<<EOF
-#private.drop_escape
-#private.control_bracket_to_escape
-#private.shift_r_to_delete
-#private.tarminal_escape_with_ime_off
-#private.jis_commandL2commandL_toggle_kana_eisuu
-#private.jis_commandL2commandR_toggle_kana_eisuu
+private.drop_escape
+private.control_bracket_to_escape
+private.shift_r_to_delete
+private.space_to_shiftL
+private.sticky_shiftL
+private.tarminal_escape_with_ime_off
+private.jis_commandL2commandL_toggle_kana_eisuu
+private.jis_commandL2commandR_toggle_kana_eisuu
 #private.app_finder_return_to_command_o
 #private.app_finder_command_R_to_return
 #private.app_finder_f2_to_return

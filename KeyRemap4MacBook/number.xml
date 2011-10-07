@@ -3,16 +3,16 @@
   <list>
     <item>
       <name>[Key Repeat] Initial Wait</name>
-      <identifier essential="true" default="200" step="100" baseunit="ms">repeat.initial_wait</identifier>
+      <identifier essential="true" default="300" step="100" baseunit="ms">repeat.initial_wait</identifier>
     </item>
     <item>
       <name>[Key Repeat] Wait</name>
-      <identifier essential="true" default="13" step="10" baseunit="ms">repeat.wait</identifier>
+      <identifier essential="true" default="23" step="10" baseunit="ms">repeat.wait</identifier>
     </item>
 
     <item>
       <name>[Functional Key Repeat] Initial Wait</name>
-      <identifier essential="true" default="200" step="100" baseunit="ms">repeat.consumer_initial_wait</identifier>
+      <identifier essential="true" default="300" step="100" baseunit="ms">repeat.consumer_initial_wait</identifier>
     </item>
     <item>
       <name>[Functional Key Repeat] Wait</name>
@@ -29,7 +29,7 @@
     </item>
     <item>
       <name>[Key Overlaid Modifier's Key Repeat] Initial Wait</name>
-      <identifier essential="true" default="200" step="100" baseunit="ms">repeat.keyoverlaidmodifier_initial_wait</identifier>
+      <identifier essential="true" default="300" step="100" baseunit="ms">repeat.keyoverlaidmodifier_initial_wait</identifier>
     </item>
 
     <item>
@@ -44,12 +44,12 @@
 
     <item>
       <name>[Double Press Modifier] Recognition Threshold</name>
-      <identifier essential="true" default="200" step="100" baseunit="ms">parameter.doublepressmodifier_threshold</identifier>
+      <identifier essential="true" default="300" step="100" baseunit="ms">parameter.doublepressmodifier_threshold</identifier>
     </item>
 
     <item>
       <name>[Holding Key to Key] Holding Threshold</name>
-      <identifier essential="true" default="200" step="50" baseunit="ms">parameter.holdingkeytokey_wait</identifier>
+      <identifier essential="true" default="300" step="50" baseunit="ms">parameter.holdingkeytokey_wait</identifier>
     </item>
 
     <item>

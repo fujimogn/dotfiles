@@ -24,6 +24,16 @@
               <autogen>--KeyToKey-- KeyCode::SHIFT_R, VK_CONTROL, KeyCode::FORWARD_DELETE</autogen>
               <autogen>--KeyToKey-- KeyCode::SHIFT_R, KeyCode::DELETE</autogen>
             </item>
+          <item>
+            <name>Space to Shift_L (SandS)</name>
+            <identifier>private.space_to_shiftL</identifier>
+            <autogen>--KeyOverlaidModifier-- KeyCode::SPACE, KeyCode::SHIFT_L, KeyCode::SPACE</autogen>
+          </item>
+          <item>
+            <name>Shift_L to Shift_L (Sticky Shift)</name>
+            <identifier>private.sticky_shiftL</identifier>
+            <autogen>--KeyOverlaidModifier-- KeyCode::SHIFT_L, KeyCode::SHIFT_L, KeyCode::VK_STICKY_SHIFT_L</autogen>
+          </item>
           </list>
         </item>
         <item>

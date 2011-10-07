@@ -1,7 +1,7 @@
 #!/usr/bin/sh
 #
 # $File: ${DOTDIR}/system/env
-# $Date: 2011-09-29T01:40:57+0900$
+# $Date: 2011-10-02T03:54:00+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
 export LANG=ja_JP.UTF-8
@@ -22,4 +22,9 @@ if [ "$PAGER" = "lv" ]; then
   export LV="-c -l"
 else
   alias lv="$PAGER"
+fi
+
+if [ -x /usr/local/bin/polipo ]; then
+  export http_proxy=http://127.0.0.1:8123/
+  export ALL_PROXY=$http_proxy
 fi
