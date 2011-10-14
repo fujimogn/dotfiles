@@ -10,17 +10,22 @@ clean:	clean-srcs
 
 install-srcs:
 	@for file in $(SRCS); do \
-		if [ -e $$file ] && [ -e $(PREFIX) ]; then\
+		if [ -e $$file ] && [ -e $(PREFIX) ]; then \
 			if [ "$(OS)" = "Cygwin" ]; then \
 				rm -rfv $(PREFIX)/$${file##*/}; \
-				[ -f $$file  ] && cmd /C mklink `cygpath -w $(PREFIX)`\\$${file##*/} `cygpath -w $(CURDIR)`\\$$file; \
-				[ -d $$file  ] && cmd /C mklink /d `cygpath -w $(PREFIX)`\\$${file##*/} `cygpath -w $(CURDIR)`\\$$file; \
-				echo ""; \
+				if [ -f $$file  ]; then \
+					cmd /C mklink `cygpath -w $(PREFIX)`\\$${file##*/} `cygpath -w $(CURDIR)`\\$$file; \
+				elif [ -d $$file  ]; then \
+					cmd /C mklink /d `cygpath -w $(PREFIX)`\\$${file##*/} `cygpath -w $(CURDIR)`\\$$file; \
+				fi; \
 			else \
-				[ -f $$file  ] && ln -sfv $(CURDIR)/$$file $(PREFIX)/$${file##*/}; \
-				[ -d $$file  ] && ln -snfv $(CURDIR)/$$file $(PREFIX)/$${file##*/}; \
-			fi;\
-		fi;\
+				if [ -f $$file  ]; then \
+					ln -sfv $(CURDIR)/$$file $(PREFIX)/$${file##*/}; \
+				elif [ -d $$file  ]; then \
+					ln -snfv $(CURDIR)/$$file $(PREFIX)/$${file##*/}; \
+				fi; \
+			fi; \
+		fi; \
 	done
 
 clean-srcs:
