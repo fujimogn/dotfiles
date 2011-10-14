@@ -2,8 +2,6 @@ PREFIX	:= $(HOME)
 SRC_DIR := $(CURDIR)
 CONF	:= $(PREFIX)/.dotfilesrc
 
-LN	:= ln -fFs
-
 #REMOTE	:=
 #BRANCH	:=
 
@@ -25,13 +23,11 @@ pull:	pull-submodules
 	@echo "Pull..."
 	@@git pull ${REMOTE} ${BRANCH}
 
-
 clean-src:
 	@@for src in $(SRC); do \
 		echo "Uninstall $${src}..."; \
 		cd $(SRC_DIR)/$${src} && make clean; \
 	done
-
 
 install-conf:
 	@@if [ ! -f $(CONF) ]; then \
@@ -39,11 +35,10 @@ install-conf:
 		echo "export DOTDIR="$(CURDIR) >> $(CONF); \
 		echo "write: "$(CONF); \
 	fi;
+
 clean-conf:
 	@echo "Uninstall config file..."
-	@$(RM) $(CONF)
-	@echo "rm: "$(CONF)
-
+	@rm -fv $(CONF)
 
 update-submodules:
 	@echo "Update submodules..."
@@ -59,7 +54,6 @@ pull-submodules:
 	@echo "Pull submodules..."
 	@@git submodule foreach "git pull \$$(git config remote.origin.url)"
 	@@git submodule summary
-
 
 help:
 	@echo "usage:	make [targets]"
