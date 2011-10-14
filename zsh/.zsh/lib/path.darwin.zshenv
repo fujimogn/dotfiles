@@ -11,8 +11,6 @@ export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig
 # xcode
 export CC=/usr/bin/gcc-4.2
 [ -d /Developer/usr/bin ] && export PATH=$PATH:/Developer/usr/bin
-# rvm
-[[ -s "${HOME}/.rvm/scripts/rvm" ]] && source "${HOME}/.rvm/scripts/rvm"
 # node
 [ -d /usr/local/lib/node ] && export NODE_PATH=/usr/local/lib/node
 # npm
