@@ -7,5 +7,5 @@
 # keychain init
 which keychain 1>/dev/null 2>&1 && source ${HOME}/.keychain/$HOST-sh
 # go to saved path if there is one
-[[ -f ${ZDOTTMP}/.zpathdump ]] && cd `cat ${ZDOTTMP}/.zpathdump`
+[ -f ${ZDOTTMP}/.zpathdump ] && cd `cat ${ZDOTTMP}/.zpathdump`
 
