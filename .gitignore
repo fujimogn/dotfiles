@@ -1,13 +1,13 @@
 # ignore all
 /*
 !.gitignore
-!/Homebrew
-!/os
 !/Makefile
 !/README.md
+!/earthquake
 !/bin
 !/dircolors
 !/git
+!/os
 !/system
 !/tmux
 !/vim
