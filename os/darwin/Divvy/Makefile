@@ -17,21 +17,26 @@ install: $(foreach f, $(SRCS), install-src-$(f)) \
 	 $(foreach f, $(APPSSRCS), install-apps-$(f)) \
 	 $(foreach f, $(PREFSRCS), install-pref-$(f))
 
-install-src-%: %
+install-src-%: % check-dir
 	@ln -sfv $(CURDIR)/$(<) $(DIR)/$(<)
 
-install-apps-%: %
+install-apps-%: % check-appsdir
 	@ln -sfv $(CURDIR)/$(<) $(APPSDIR)/$(<)
 
-install-pref-%: % check-prefdir
+install-pref-%: %
 	@if [ -f "$(PREFDIR)/$(<).lockfile" ]; then \
 		rm -f $(PREFDIR)/$(<).lockfile; \
 	fi
 	@ln -sfv $(CURDIR)/$(<) $(PREFDIR)/$(<)
 
-check-prefdir:
-	@if [ ! -d $(LIBDIR) ]; then \
-		mkdir $(LIBDIR); \
+check-dir:
+	@if [ ! -d $(DIR) ]; then \
+		mkdir $(DIR); \
+	fi
+
+check-appsdir:
+	@if [ ! -d $(APPSDIR) ]; then \
+		mkdir $(APPSDIR); \
 	fi
 
 clean: $(foreach f, $(SRCS), clean-src-$(f)) \
@@ -47,4 +52,4 @@ clean-apps-%: %
 clean-pref-%: %
 	@rm -fv $(PREFDIR)/$(<)
 
-.PHONY: all install check-libdir clean
+.PHONY: all install check-dir check-appsdir clean
