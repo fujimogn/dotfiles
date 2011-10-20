@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Activate Item</key>
+	<true/>
+	<key>Activate Item Mode</key>
+	<integer>0</integer>
+	<key>Activate On No Modifiers</key>
+	<false/>
+	<key>Application Exceptions</key>
+	<array>
+		<string>Yorufukurou</string>
+		<string>Skype</string>
+		<string>Sparrow</string>
+	</array>
+	<key>Application Name Color</key>
+	<data>
+	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMBhARm
+	ZmZmgwv5Aj+DC/kCP4ML+QI/AYY=
+	</data>
+	<key>Application Name Shadow</key>
+	<true/>
+	<key>Applications Sort Order</key>
+	<integer>2</integer>
+	<key>Auto-Enabled Once</key>
+	<true/>
+	<key>Background Color</key>
+	<data>
+	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMBhARm
+	ZmZmAAAAg83MTD+G
+	</data>
+	<key>Cancel Item</key>
+	<true/>
+	<key>Cycle All Windows</key>
+	<dict>
+		<key>Backward</key>
+		<dict>
+			<key>Character</key>
+			<string>k</string>
+			<key>Key Code</key>
+			<string>40</string>
+			<key>Modifiers</key>
+			<string>1048840</string>
+			<key>Visual Representation</key>
+			<string>⌘K</string>
+		</dict>
+		<key>Forward</key>
+		<dict>
+			<key>Character</key>
+			<string>j</string>
+			<key>Key Code</key>
+			<string>38</string>
+			<key>Modifiers</key>
+			<string>1048840</string>
+			<key>Visual Representation</key>
+			<string>⌘J</string>
+		</dict>
+	</dict>
+	<key>Cycle Minimized Windows</key>
+	<dict/>
+	<key>Disable Background Process On Quitting</key>
+	<false/>
+	<key>Ignore Non-Standard Windows</key>
+	<true/>
+	<key>Item Height</key>
+	<real>28</real>
+	<key>Keep Cycling</key>
+	<true/>
+	<key>Last Tab</key>
+	<string>triggers</string>
+	<key>Maximum Width</key>
+	<real>0.60074669122695923</real>
+	<key>Panel Delay</key>
+	<integer>0</integer>
+	<key>Panel Shadow</key>
+	<true/>
+	<key>Preview Border Color</key>
+	<data>
+	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMDhAJm
+	ZoPvvQ4/g5qZWT+G
+	</data>
+	<key>Process Windows When Done</key>
+	<false/>
+	<key>Selection Border Color</key>
+	<data>
+	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMBhARm
+	ZmZmAAEAAYY=
+	</data>
+	<key>Selection Color</key>
+	<data>
+	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMBhARm
+	ZmZmAAAAAYY=
+	</data>
+	<key>Show Application Names</key>
+	<true/>
+	<key>Show Panel On Mouse Screen</key>
+	<integer>1</integer>
+	<key>Show Previews</key>
+	<true/>
+	<key>Step Forward Initially</key>
+	<true/>
+	<key>Suppress Background Process Alert</key>
+	<true/>
+	<key>Switch Across Spaces</key>
+	<false/>
+	<key>Window Name Color</key>
+	<data>
+	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMBhARm
+	ZmZmgxZSPz+DFlI/P4MWUj8/AYY=
+	</data>
+	<key>Window Name Shadow</key>
+	<true/>
+	<key>Wrap-Around Scrolling</key>
+	<false/>
+</dict>
+</plist>
