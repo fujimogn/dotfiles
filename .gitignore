@@ -1,6 +1,6 @@
 # ignore all
 /*
-!/.gitignore
+!.gitignore
 !/Homebrew
 !/KeyRemap4MacBook
 !/Makefile
