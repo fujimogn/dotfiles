@@ -1,20 +1,19 @@
 PREFIX	:= $(HOME)
-SRC_DIR := $(CURDIR)
 CONF	:= $(PREFIX)/.dotfilesrc
 
 #REMOTE	:=
 #BRANCH	:=
 
-SRC	:= $(patsubst $(SRC_DIR)/%/Makefile,%,$(wildcard $(SRC_DIR)/*/Makefile))
+SRC	:= $(patsubst $(CURDIR)/%/Makefile,%,$(wildcard $(CURDIR)/*/Makefile))
 
 all:	help
 
 install: $(SRC) install-conf update-submodules
 
 $(SRC):
-	@echo "Install $@..."
-	@@if [ -f $(SRC_DIR)/$@/Makefile ]; then \
-		cd $(SRC_DIR)/$@/ && make; \
+	@@if [ -f $(CURDIR)/$@/Makefile ]; then \
+		echo "Install $@..."; \
+		cd $(CURDIR)/$@/ && make; \
 	fi
 
 clean:	clean-src clean-conf
@@ -26,7 +25,7 @@ pull:	pull-submodules
 clean-src:
 	@@for src in $(SRC); do \
 		echo "Uninstall $${src}..."; \
-		cd $(SRC_DIR)/$${src} && make clean; \
+		cd $(CURDIR)/$${src} && make clean; \
 	done
 
 install-conf:
