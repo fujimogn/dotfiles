@@ -1,0 +1,325 @@
+"-----------------------------------------------------------------
+"
+" rc for Vimperator 3.3 pre
+"
+" Last Modified: 2011/08/29 01:34:43
+"
+"-----------------------------------------------------------------
+
+command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
+
+"-----------------------------------------------------------------
+" Basic
+"-----------------------------------------------------------------
+
+set runtimepath+=~/vimperator,~/.vimperator
+
+" Windowタイトル
+set titlestring='Vimperator'
+set newtab=all
+" 自動入力欄フォーカスを無効化
+set focuscontent
+" 補完設定・順序
+set complete=slb
+" 補完候補
+set suggestengines=google
+" 検索エンジン
+set defsearch=google
+" set wildoptions="auto"
+set maxitems=35
+" GUI
+set gui=addons,nobookmarks,nomenu,nonavigation,tabs
+" スクロールバーを表示しない
+set noscrollbars
+" 検索結果をハイライト
+set hlsearch
+" 検索での大文字小文字を無視する
+set ignorecase
+" ヒントに使用する文字
+set hintchars=asdfghjkl
+" ]] で次へ [[ で前へ
+set nextpattern=\bnext\b, \bmore\b, next, ^次(の)?ページ, \b次.*, →\b, ^>$, ^(>>|≫)$, ^(>|≫), (>|≫)$
+set previouspattern=\bprev|previous\b, prev, ^前(の)?ページ, \b前.*, \b←, ^<$, ^(<<|≪)$, ^(<|≪), (<|≪)$
+" キャレットモードのカーソルを太くする
+set! ui.caretWidth=8
+" エディタ
+" set editor="/usr/local/bin/mvim -f"
+
+"-----------------------------------------------------------------
+" about:config
+"-----------------------------------------------------------------
+
+" ダウンロードウィンドウを完了後自動で閉じる
+set! browser.download.manager.closeWhenDone=true
+
+" ダウンロード履歴を終了時に削除
+set! browser.download.manager.retention=1
+
+" キャッシュをHDDからRAMに
+set! browser.cache.disk.enable=false
+set! browser.cache.memory.enable=true
+
+" 単位(KB)
+set! browser.cache.memory.capacity=-1
+
+" ファイルダウンロード完了時のウイルススキャン機能オフ
+set! browser.download.manager.scanWhenDone=false
+
+" アドオンインストール時の待ち時間カット
+set! security.dialog_enable_delay=0
+
+" ページのアクセスキー無効化
+set! ui.key.generalAccessKey=0
+
+" JavaScriptでのウィンドウ移動・リサイズ拒否
+set! dom.disable_window_move_resize=true
+
+" JavaScriptのステータスバー操作を無効化
+set! dom.event.contextmenu.enabled=false
+
+" 画像の多いタブを閉じた時にすぐにメモリ使用量を減らす
+" via http://space.geocities.yahoo.co.jp/gl/alice0775/view/20110416/1302920985
+set! image.mem.min_discard_timeout_ms=6000
+
+" 新規タブをバックグラウンドで開く
+set! browser.tabs.loadDivertedInBackground=true
+
+" コマンドラインでIMEオフ
+style -name commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
+
+"-----------------------------------------------------------------
+" OSTYPE
+"-----------------------------------------------------------------
+
+js<<EOM
+if (liberator.has("MacUnix")) {
+  /* Mac */
+  liberator.execute("set editor=/usr/local/bin/mvim -f");
+} else if (liberator.has("Win32")) {
+  /* Windows */
+  liberator.execute("set editor=gvim.exe\\ --remote-tab-silent");
+} else {
+  /* Linux */
+}
+EOM
+
+"-----------------------------------------------------------------
+" KeyMap
+"-----------------------------------------------------------------
+
+" キーマップリーダー
+let mapleader = ","
+
+"-----------------------------------------------------------------
+" mapname     normal    visual    ???       insert    commandline
+" noremap     o         o         o         x         x
+" noremap!    x         x         x         o         o
+" nnoremap    o         x         x         x         x
+" vnoremap    x         o         x         x         x
+" onoremap    x         x         o         x         x
+" inoremap    x         x         x         o         x
+" cnoremap    x         x         x         x         o
+"-----------------------------------------------------------------
+
+" ; でコマンドモードへ
+noremap ; :
+
+" jk の移動量を増やす
+noremap j 10j
+noremap k 10k
+
+" h/l でタブ移動
+noremap h gT
+noremap l gt
+
+" Meta-Backspace でタブを閉じる
+noremap <M-BS> :tabclose<CR>
+
+" Ctrl-h/Ctrl-l でタブ順序変更
+noremap <BS> :tabmove! -1<CR><Esc> " KeyRemap4MacBook でCtrl-H to Deleteしてる措置
+noremap <C-h> :tabmove! -1<CR><Esc>
+noremap <C-l> :tabmove! +1<CR><Esc>
+
+" 履歴一覧を開く
+noremap U :undo<Space>
+
+" Backspace 無効にする
+" map <BS> <Nop>
+
+" ++/-- でURL中の数字を増減
+noremap ++ <C-a>
+noremap -- <C-x>
+
+" ! でページのCSSのON/OFFを切り替える
+noremap ! :set invusermode<CR>
+
+" URL デコードしないようにする
+noremap <silent> y :<C-u>js util.copyToClipboard(buffer.URL)<CR>
+
+" ページのエンコーディングを変更
+noremap <Leader>es :set encoding=Shift_JIS<CR>
+noremap <Leader>ec :set encoding=EUC-JP<CR>
+noremap <Leader>eu :set encoding=UTF-8<CR>
+noremap <Leader>ei :set encodeing=ISO-2022-JP<CR>
+
+noremap <Leader>. :source ~/.vimperatorrc<CR>
+noremap <Leader>a :dialog addons<CR>
+noremap <Leader>b :dialog bookmarks<CR>
+noremap <Leader>h :dialog history<CR>
+noremap <Leader>w :winopen<CR>
+noremap <Leader>r :restart<CR>
+noremap <leader>p :set invprivate
+noremap <Leader>q :quitall<CR>
+noremap <Leader>p :dialog preferences<CR>
+noremap <Leader>c :copy<Space>
+noremap <Leader>u :undo<Space>
+noremap <leader>t :buffers<CR>
+
+" s でGoogle検索
+noremap s :set complete=s<CR>:tabopen google<Space>
+" t でtabopen
+noremap t :set complete=slb<CR>:tabopen<Space>
+
+"-----------------------------------------------------------------
+" qmark
+"-----------------------------------------------------------------
+
+" qmarks追加キーMを無効化
+noremap M <Nop>
+
+silent qmark a https://www.google.com/analytics/settings/?pli=1
+silent qmark d http://www.tumblr.com/dashboard
+silent qmark e https://www.evernote.com/Home.action
+silent qmark f https://www.facebook.com
+silent qmark h http://b.hatena.ne.jp/fujimogn/
+silent qmark l http://www.lastfm.jp/user/fujimogn
+silent qmark n http://www.nicovideo.jp
+silent qmark m https://mail.google.com/mail/
+silent qmark p http://plus.google.com
+silent qmark r https://www.google.com/reader/view/
+silent qmark t http://twitter.com
+silent qmark y http://www.youtube.com
+
+
+"-----------------------------------------------------------------
+" Function
+"-----------------------------------------------------------------
+
+" Googleサイト内検索
+javascript <<EOM
+commands.addUserCommand(
+  ['searchsite'],'Search in this site',
+  function(word) {
+  liberator.open("http://www.google.co.jp/search?hl=ja&q="+encodeURIComponent(word)+"+site%3A"+window.content.location.hostname);
+  }
+);
+EOM
+
+" Google検索1年以内
+js <<EOM
+commands.addUserCommand(['searchlastyear'],
+  'GoogleSearch added a Past year option',
+  function (args) {
+    var url = args.string;
+    if (url.indexOf('http') != 0) {
+      url = 'http://www.google.co.jp/search?q=' + encodeURIComponent(args.string) + '&tbs=qdr:y';
+    }
+    liberator.open(url, args.bang? liberator.NEW_TAB : null);
+  });
+EOM
+
+" Google検索1ヶ月以内
+js <<EOM
+commands.addUserCommand(['searchlastmonth'],
+  'GoogleSearch added a Past month option',
+  function (args) {
+    var url = args.string;
+    if (url.indexOf('http') != 0) {
+      url = 'http://www.google.co.jp/search?q=' + encodeURIComponent(args.string) + '&tms=qdr:m';
+    }
+    liberator.open(url, args.bang? liberator.NEW_TAB : null);
+  });
+EOM
+
+" Google検索1週間以内
+js <<EOM
+commands.addUserCommand(['searchlastweek'],
+  'GoogleSearch added a Past month option',
+  function (args) {
+    var url = args.string;
+    if (url.indexOf('http') != 0) {
+      url = 'http://www.google.co.jp/search?q=' + encodeURIComponent(args.string) + '&tms=qdr:w';
+    }
+    liberator.open(url, args.bang? liberator.NEW_TAB : null);
+  });
+EOM
+
+"-----------------------------------------------------------------
+" Colors
+"-----------------------------------------------------------------
+
+" colorscheme fujimogn
+
+"-----------------------------------------------------------------
+" Plugins
+"-----------------------------------------------------------------
+js <<EOM
+liberator.globalVariables.plugin_loader_roots = "~/.vimperator/plugin/ ~/.vimperator/vimperator-plugins/";
+liberator.globalVariables.plugin_loader_plugins = [
+  '_libly',
+  'auto_reload',
+  'auto_source',
+  'auto-focus-frame',
+  'caret-hint',
+  'copy',
+  'direct_bookmark',
+  'feedSomeKeys_3',
+  'hint-tombloo',
+  'imageextender',
+  'ime_controller',
+  'liberator-overlay-ext',
+  'ldrize_cooperation',
+  'migemo_completion',
+  'migemo_hint',
+  'migemo_find',
+  'statusline-toolbar',
+  'sbmcommentsviewer',
+  'tombloo',
+  'twittperator',
+  'x-hint',
+];
+EOM
+
+" auto_source.js
+let g:auto_source_first_time = 1
+
+" direct_bookmark.js
+let g:direct_sbm_use_services_by_tag = "h"
+let g:direct_sbm_use_services_by_post = "h"
+let g:direct_sbm_is_use_migemo = "true"
+let g:direct_sbm_is_normalize = "false"
+noremap a :sbm [
+
+" twittperator
+let g:twittperator_use_chirp = 1
+let g:twittperator_screen_name = "fujimogn"
+let g:twittperator_history_limit = 5000
+let g:twittperator_plugin_echo_tweet = 1
+" twitterperator - add_url_completter
+let g:twittperator_plugin_add_url_completer = 1
+lazy set complete+=T
+
+
+" sbmcommentsviewer.js
+let g:def_sbm_format = "id, tags, comment, timestamp"
+let g:def_sbms = "h"
+noremap ch :viewSBMComments -type h<CR>
+noremap ct :viewSBMComments -type t<CR>
+
+
+
+"-----------------------------------------------------------------
+" PROMPT
+"-----------------------------------------------------------------
+
+echo "Vimperator " + liberator.version
