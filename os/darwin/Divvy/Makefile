@@ -13,9 +13,10 @@ PREFDIR:= $(PREFIX)/Library/Preferences
 
 all: install
 
-install: $(foreach f, $(SRCS), install-src-$(f)) \
-	 $(foreach f, $(APPSSRCS), install-apps-$(f)) \
-	 $(foreach f, $(PREFSRCS), install-pref-$(f))
+install: \
+	$(foreach f, $(SRCS), install-src-$(f)) \
+	$(foreach f, $(APPSSRCS), install-apps-$(f)) \
+	$(foreach f, $(PREFSRCS), install-pref-$(f))
 
 install-src-%: % check-dir
 	@ln -sfv $(CURDIR)/$(<) $(DIR)/$(<)

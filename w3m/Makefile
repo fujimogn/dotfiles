@@ -19,7 +19,8 @@ SRCS   ?= .w3m
 
 all:	install
 
-install:install-srcs
+install: \
+		install-srcs
 
 clean:	clean-srcs
 

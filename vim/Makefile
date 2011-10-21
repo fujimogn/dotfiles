@@ -19,7 +19,8 @@ SRCS   ?= .vim .vimrc .gvimrc
 
 all:	install
 
-install:install-srcs
+install: \
+		install-srcs
 
 clean:	clean-srcs
 

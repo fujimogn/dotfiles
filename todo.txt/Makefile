@@ -19,7 +19,8 @@ SRCS   ?= .todo.cfg
 
 all:	install
 
-install:install-srcs
+install: \
+		install-srcs
 
 clean:	clean-srcs
 

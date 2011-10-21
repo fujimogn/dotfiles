@@ -19,7 +19,8 @@ SRCS   ?= .gitconfig .gitignore_global
 
 all:	install
 
-install:install-srcs
+install: \
+		install-srcs
 
 clean:	clean-srcs
 
