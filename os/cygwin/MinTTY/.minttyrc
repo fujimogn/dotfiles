@@ -1,0 +1,12 @@
+BoldAsFont=yes
+Locale=ja_JP
+Charset=UTF-8
+Term=xterm-256color
+Font=Migu 1M
+FontIsBold=no
+FontHeight=11
+Transparency=medium
+ScrollMod=shift
+Scrollbar=none
+Columns=88
+Rows=58
