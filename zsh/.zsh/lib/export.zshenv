@@ -1,7 +1,7 @@
 #!/usr/bin/sh
 #
 # $File: ${DOTDIR}/system/env
-# $Date: 2011-10-02T03:54:00+0900$
+# $Date: 2011-10-23T00:32:14+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
 export LANG=ja_JP.UTF-8
@@ -11,7 +11,7 @@ if [[ $OSTYPE == darwin* ]]; then
   export CLICOLOR=1
 fi
 
-export GREP_OPTIONS='--color=always --binary-files=without-match'
+# export GREP_OPTIONS='--color=always --binary-files=without-match'
 
 if type lv > /dev/null 2>&1; then
     export PAGER="lv"
