@@ -1,5 +1,5 @@
 PREFIX	:= $(HOME)
-OS	:= $(shell uname -o)
+OS	:= $(shell uname)
 
 ifeq ($(OS), Linux)
 SRC	= linux

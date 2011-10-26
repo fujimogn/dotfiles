@@ -1,4 +1,4 @@
-OS	   := $(shell uname -o)
+OS	   := $(shell uname)
 ifeq ($(OS),Cygwin)
 CURDIR := "$(shell cygpath -w $(CURDIR))"
 PREFIX ?= "$(shell cygpath -w $(HOME))"
@@ -19,10 +19,23 @@ SRCS   ?= .vim .vimrc .gvimrc
 
 all:	install
 
+ifeq ($(OS),Darwin)
 install: \
-		install-srcs
+	install-srcs \
+	install-mvim
+else
+install: \
+	install-srcs
+endif
 
-clean:	clean-srcs
+ifeq ($(OS),Darwin)
+clean: \
+	clean-srcs \
+	clean-mvim
+else
+clean: \
+	clean-srcs
+endif
 
 install-srcs:
 	@for F in $(SRCS); do \
@@ -42,9 +55,15 @@ install-srcs:
 		fi; \
 	done
 
+install-mvim:
+	@sh $(CURDIR)/mvim.sh
+
 clean-srcs:
 	@for F in $(SRCS); do \
 		$(RM) $(PREFIX)$(S)$${F}; \
 	done
 
-.PHONY: all install clean install-srcs clean-srcs
+clean-mvim:
+	@sh $(CURDIR)/mvim.sh clean
+
+.PHONY: all install clean install-srcs install-mvim clean-srcs clean-mvim

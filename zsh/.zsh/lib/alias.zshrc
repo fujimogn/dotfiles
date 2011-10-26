@@ -1,18 +1,18 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/alias.zshrc
-# $Date: 2011-09-19T22:43:55+0900$
+# $Date: 2011-10-26T11:33:24+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
-alias cp="cp -i"
-alias mv="mv -i"
-alias rm="rm -i"
-alias rr="rm -rf"
-alias mkdir="mkdir -p"
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+alias rr='rm -rf'
+alias mkdir='mkdir -p'
 
-alias la="ls -A"
-alias ll="ls -hl"
-alias lla="ll -A"
+alias la='ls -A'
+alias ll='ls -hl'
+alias lla='ll -A'
 alias l.="__ls 'ls -d .*'"
 alias ll.="__ls 'ls -dhl .*'"
 function __ls() {
@@ -31,22 +31,32 @@ for p in $prefix; do
 done
 unset prefix
 
-alias df="df -kTh"
-alias du="du -kh"
-alias history="fc -l 1"
-alias more="less"
-alias where="command -v"
-alias pd="pushd"
-alias po="popd"
+alias cl=clear
+alias df='df -kTh'
+alias du='du -kh'
+alias hi='fc -l 1'
+alias pd=pushd
+alias po=popd
+
+alias more=less
+alias where='command -v'
+
+alias t='tar zxvf'
+alias t-='tar xvf -'
+alias b='bzip2 -dc'
+
+alias yum='sudo yum'
+alias port='sudo port'
 
 alias {q,q!}=exit
 
-alias su="su -l"
+alias su='su -l'
 if [[ ! -x $(which sudoedit) ]]; then
       alias sudoedit='sudo -e'
 fi
-alias 644='chmod 644'
-alias 755='chmod 755'
+
+alias 644="chmod 644"
+alias 755="chmod 755"
 
 alias gd='dirs -lv; echo -n "select number: "; read newdir; cd +"$newdir"'
 
@@ -55,10 +65,8 @@ alias set_en='export LANG=en; export LANGUAGE=en; export LC_ALL=en'
 alias set_eucjp='export LANG=ja_JP.eucJP; export LANGUAGE=ja_JP.eucJP; export LC_ALL=ja_JP.eucJP'
 alias set_sjis='export LANG=ja_JP.SJIS; export LANGUAGE=ja_JP.SJIS; export LC_ALL=ja_JP.SJIS'
 
-# dotfiles dir, zdotdir
-# 本当はグローバルと通常でできるようにしたい。スマートなやり方が分かりませぬ
-[ -n "$DOTDIR" ] && alias -g dotfiles=DOTDIR dotdir=DOTDIR
-[ -n "$ZDOTDIR" ] && alias -g zdotfiles=ZDOTDIR zdotdir=ZDOTDIR
+alias py=python
+alias irb='irb --readline -r irb/completion'
 
 alias -g M='|more'
 alias -g T='|tail'
