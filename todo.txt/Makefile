@@ -1,4 +1,4 @@
-OS	   := $(shell uname -o)
+OS	   := $(shell uname)
 ifeq ($(OS),Cygwin)
 CURDIR := "$(shell cygpath -w $(CURDIR))"
 PREFIX ?= "$(shell cygpath -w $(HOME))"

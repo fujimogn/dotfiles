@@ -16,13 +16,13 @@ all:	install
 install:
 	@if [ -f $(CURDIR)/$(SRC)/Makefile ]; then \
 		echo "Install $(SRC)..."; \
-		cd $(CURDIR)/$(SRC)/ && make; \
+		cd $(CURDIR)/$(SRC) && make; \
 	fi
 
 clean:
 	@if [ -f $(CURDIR)/$(SRC)/Makefile ]; then \
-		echo "Unintall $(SRC)..." \
-		cd $(CURDIR)/$(SRC)/ && make clean; \
+		echo "Unintall $(SRC)..."; \
+		cd $(CURDIR)/$(SRC) && make clean; \
 	fi
 
 .PHONY: all install clean
