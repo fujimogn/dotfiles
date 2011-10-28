@@ -57,10 +57,19 @@ set history=1000
 " }}}
 " Color {{{
 set t_co=256
+if $TERM =~ '^xterm'
+  set t_Co=256
+elseif $TERM =~ '^screen-bce'
+  set t_Co=256
+elseif $TERM =~ '^rxvt'
+  set t_Co=88
+elseif $TERM =~ '^linux'
+  set t_Co=8
+else
+  set t_Co=16
+endif
 set background=dark
-colorscheme molokai
-" CursorLine
-highlight CursorLine ctermfg=NONE ctermbg=black guibg=black cterm=NONE
+colorscheme molokai_fujimogn
 
 " }}}
 " Display {{{
@@ -75,8 +84,10 @@ set ruler
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 set cursorline
+" set cursorcolumn
 set number
 set laststatus=2
+set showtabline=2
 set showmatch
 set lazyredraw
 set ttyfast
@@ -84,12 +95,11 @@ set showcmd
 set showmode
 set wildmenu
 set wildmode=list:longest,full
-set virtualedit=block
-
-set textwidth=85
-if exists('&colorcolumn')
-    set colorcolumn=+1
-endif
+set virtualedit+=block
+set textwidth=80
+" if exists('&colorcolumn')
+    " set colorcolumn=+1
+" endif
 
 if exists('&ambiwidth')
   set ambiwidth=double
@@ -134,22 +144,47 @@ set modelines=10
 " Forlding {{{
 set foldenable
 set foldmethod=marker
-function! MyFoldText() " {{{
-    let line = getline(v:foldstart)
-
-    let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 3
-    let foldedlinecount = v:foldend - v:foldstart
-
-    " expand tabs into spaces
-    let onetab = strpart('          ', 0, &tabstop)
-    let line = substitute(line, '\t', onetab, 'g')
-
-    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
-    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
-endfunction " }}}
-set foldtext=MyFoldText()
+set foldcolumn=2
+set foldlevelstart=0
+set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
+" function! MyFoldText()
+  " let line = getline(v:foldstart)
+  " if match( line, '^[ \t]*\(\/\*\|\/\/\)[*/\\]*[ \t]*$' ) == 0
+    " let initial = substitute( line, '^\([ \t]\)*\(\/\*\|\/\/\)\(.*\)', '\1\2', '' )
+    " let linenum = v:foldstart + 1
+    " while linenum < v:foldend
+      " let line = getline( linenum )
+      " let comment_content = substitute( line, '^\([ \t\/\*]*\)\(.*\)$', '\2', 'g' )
+      " if comment_content != ''
+        " break
+      " endif
+      " let linenum = linenum + 1
+    " endwhile
+    " let sub = initial . ' ' . comment_content
+  " else
+    " let sub = line
+    " let startbrace = substitute( line, '^.*{[ \t]*$', '{', 'g')
+    " if startbrace == '{'
+      " let line = getline(v:foldend)
+      " let endbrace = substitute( line, '^[ \t]*}\(.*\)$', '}', 'g')
+      " if endbrace == '}'
+        " let sub = sub.substitute( line, '^[ \t]*}\(.*\)$', '...}\1', 'g')
+      " endif
+    " endif
+  " endif
+  " let n = v:foldend - v:foldstart + 1
+  " let info = " " . n . " lines"
+  " let sub = sub . "                                                                                                                  "
+  " let num_w = getwinvar( 0, '&number' ) * getwinvar( 0, '&numberwidth' )
+  " let fold_w = getwinvar( 0, '&foldcolumn' )
+  " let sub = strpart( sub, 0, winwidth(0) - strlen( info ) - num_w - fold_w - 1 )
+  " return sub . info
+" endfunction
+" set foldtext=MyFoldText()
+nnoremap <Space> za
+vnoremap <Space> za
+nnoremap zO zCzO
+nnoremap <leader>z zMzvzz
 
 " }}}
 " Search {{{
@@ -166,6 +201,7 @@ nmap * *zz
 nmap # #zz
 nmap g* g*zz
 nmap g# g#zz
+
 " }}}
 " IME {{{
 set iminsert=0
@@ -181,7 +217,7 @@ set ttymouse=xterm2
 " }}}
 " Keymap"{{{
 
-let mapleader=' '
+let mapleader="'"
 
 nnoremap ; :
 
@@ -190,8 +226,8 @@ nnoremap j gj
 nnoremap k gk
 noremap H ^
 noremap L $
-nnoremap J 5j
-nnoremap K 5k
+nnoremap J 5gj
+nnoremap K 5gk
 
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -240,7 +276,6 @@ inoremap <leader>wdate <C-R>=strftime('%Y-%m-%dT%H:%M:%S+09:00')<CR>
 "}}}
 " Misc command {{{
 
-
 command! Editrc edit $MYVIMRC
 command! Editgrc edit $MYGVIMRC
 command! Reloadrc source $MYVIMRC
@@ -280,7 +315,6 @@ autocmd FileType ruby set shiftwidth=2 tabstop=2
 autocmd BufNewFile,BufRead *.vimrc set filetype=vim
 autocmd BufNewFile,BufRead *.vimperatorrc set filetype=vim
 " }}}
-
 " }}}
 " Plugin setting {{{
 " neocomplcache {{{
