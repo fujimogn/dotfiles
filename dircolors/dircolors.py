@@ -17,7 +17,7 @@ def main():
         for n, exts in data['extensions'].items():
             for ext in exts:
                 lines.append(' '.join([ext, fmt.format(n=n)]))
-        open(os.path.splitext(yml)[0], 'w').write(
+        open('.' + os.path.splitext(yml)[0], 'w').write(
                 tmpl.replace('{{DATA}}', '\n'.join(lines))
                 )
 
