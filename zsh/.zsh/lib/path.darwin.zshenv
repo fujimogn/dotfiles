@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/path.darwin.zshenv
-# $Date: 2011-10-24T13:08:01+0900$
+# $Date: 2011-10-28T11:15:51+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
 
@@ -14,14 +14,13 @@ if [ -d /Developer/usr/bin ]; then
   export PATH=$PATH:/Developer/usr/bin
 fi
 
-# node
-if [ -d /usr/local/lib/node ]; then
-  export NODE_PATH=/usr/local/lib/node
-fi
-
-# npm
-if [ -d /usr/local/lib/node_modules/npm/bin ]; then
-  export PATH=$PATH:/usr/local/lib/node_modules/npm/bin
+# ruby
+if [ -d /usr/local/Cellar/ruby ]; then
+  LASTEST=`ls -1v /usr/local/Cellar/ruby | tail -1`
+  if [ -n ${LASTEST} ]; then
+    export PATH=/usr/local/Cellar/ruby/${LASTEST}/bin:${PATH}
+  fi
+  unset LASTEST
 fi
 
 # android-sdk
