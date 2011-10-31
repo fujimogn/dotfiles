@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/w3m/w3m.zsh
-# $Date: 2011-09-26T14:15:36+0900$
+# $Date: 2011-10-29T18:58:12+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 ! which w3m >/dev/null 2>&1 && return 1
@@ -22,3 +22,6 @@ function google() {
   return 0
 }
 
+function w3m-edit-rc {
+  ${EDITOR-vi} ${DOTDIR}/w3m/.w3m/config
+}

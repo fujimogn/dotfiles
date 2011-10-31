@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>AnimateDimming</key>
-	<true/>
+	<false/>
 	<key>AppleAntiAliasingThreshold</key>
 	<integer>1</integer>
 	<key>AppleScrollAnimationEnabled</key>
@@ -1033,11 +1033,11 @@
 	<key>Default Bookmark Guid</key>
 	<string>AACF6772-2D24-4DCA-B846-26AF91FFC3AE</string>
 	<key>DimBackgroundWindows</key>
-	<true/>
+	<false/>
 	<key>DimInactiveSplitPanes</key>
-	<true/>
+	<false/>
 	<key>DimOnlyText</key>
-	<true/>
+	<false/>
 	<key>DisableFullscreenTransparency</key>
 	<true/>
 	<key>EnableRendezvous</key>
@@ -1197,12 +1197,16 @@
 	<true/>
 	<key>MaxVertically</key>
 	<true/>
+	<key>NSColorPanelMode</key>
+	<string>6</string>
+	<key>NSColorPickerSlidersDefaults</key>
+	<string>3</string>
 	<key>NSFontPanelAttributes</key>
 	<string>1, 8</string>
 	<key>NSFontPanelPreviewHeight</key>
 	<real>0.0</real>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Dropbox/Documents/Pictures/Public</string>
+	<string>~/Dropbox/git/dotfiles/os/darwin/iTerm2</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -1235,14 +1239,16 @@
 		<key>TB Size Mode</key>
 		<integer>1</integer>
 	</dict>
+	<key>NSWindow Frame NSColorPanel</key>
+	<string>289 224 214 309 0 0 1366 768 </string>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>418 149 625 270 0 0 1280 1024 </string>
+	<string>539 198 625 270 0 0 1366 768 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>268 139 924 485 0 0 1280 1024 </string>
+	<string>412 135 924 485 0 0 1366 768 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>80 418 592 584 0 0 1280 1002 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>164 121 955 650 0 0 1280 1002 </string>
+	<string>148 67 710 648 0 0 1366 746 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>152 208 710 546 0 0 1280 1002 </string>
 	<key>NeverWarnAboutShortLivedSessions_AACF6772-2D24-4DCA-B846-26AF91FFC3AE</key>
@@ -1275,56 +1281,56 @@
 			<key>Ansi 10 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.17647059261798859</real>
+				<real>0.20413970947265625</real>
 				<key>Green Component</key>
-				<real>0.89019608497619629</real>
+				<real>1</real>
 				<key>Red Component</key>
-				<real>0.65098041296005249</real>
+				<real>0.73293328285217285</real>
 			</dict>
 			<key>Ansi 11 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.11764705926179886</real>
+				<real>0.1266988217830658</real>
 				<key>Green Component</key>
-				<real>0.58431375026702881</real>
+				<real>0.59598857164382935</real>
 				<key>Red Component</key>
-				<real>0.98823529481887817</real>
+				<real>1</real>
 			</dict>
 			<key>Ansi 12 Color</key>
 			<dict>
 				<key>Blue Component</key>
 				<real>1</real>
 				<key>Green Component</key>
-				<real>0.55294120311737061</real>
+				<real>0.54531252384185791</real>
 				<key>Red Component</key>
-				<real>0.76862746477127075</real>
+				<real>0.76180368661880493</real>
 			</dict>
 			<key>Ansi 13 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.45098039507865906</real>
+				<real>0.47262302041053772</real>
 				<key>Green Component</key>
-				<real>0.14509804546833038</real>
+				<real>0.1494714766740799</real>
 				<key>Red Component</key>
-				<real>0.98039215803146362</real>
+				<real>1</real>
 			</dict>
 			<key>Ansi 14 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.94117647409439087</real>
+				<real>1</real>
 				<key>Green Component</key>
-				<real>0.85098040103912354</real>
+				<real>0.90181857347488403</real>
 				<key>Red Component</key>
-				<real>0.40392157435417175</real>
+				<real>0.42268702387809753</real>
 			</dict>
 			<key>Ansi 15 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.94901961088180542</real>
+				<real>1</real>
 				<key>Green Component</key>
-				<real>0.94901961088180542</real>
+				<real>1</real>
 				<key>Red Component</key>
-				<real>0.94901961088180542</real>
+				<real>1</real>
 			</dict>
 			<key>Ansi 2 Color</key>
 			<dict>
@@ -1383,20 +1389,20 @@
 			<key>Ansi 8 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.0</real>
+				<real>0.21358880400657654</real>
 				<key>Green Component</key>
-				<real>0.0</real>
+				<real>0.21358880400657654</real>
 				<key>Red Component</key>
-				<real>0.0</real>
+				<real>0.21358880400657654</real>
 			</dict>
 			<key>Ansi 9 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.13333334028720856</real>
+				<real>0.1698659360408783</real>
 				<key>Green Component</key>
-				<real>0.13333334028720856</real>
+				<real>0.15901413559913635</real>
 				<key>Red Component</key>
-				<real>0.89803922176361084</real>
+				<real>1</real>
 			</dict>
 			<key>Automatically Log</key>
 			<false/>
@@ -1441,20 +1447,20 @@
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.16470588743686676</real>
+				<real>0.20413970947265625</real>
 				<key>Green Component</key>
-				<real>0.59215688705444336</real>
+				<real>1</real>
 				<key>Red Component</key>
-				<real>0.99215686321258545</real>
+				<real>0.73293328285217285</real>
 			</dict>
 			<key>Cursor Text Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.0</real>
+				<real>0.94901961088180542</real>
 				<key>Green Component</key>
-				<real>0.0</real>
+				<real>0.94901961088180542</real>
 				<key>Red Component</key>
-				<real>0.0</real>
+				<real>0.94901961088180542</real>
 			</dict>
 			<key>Cursor Type</key>
 			<integer>0</integer>
@@ -1475,11 +1481,11 @@
 			<key>Foreground Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>1</real>
+				<real>0.94901961088180542</real>
 				<key>Green Component</key>
-				<real>1</real>
+				<real>0.94901961088180542</real>
 				<key>Red Component</key>
-				<real>1</real>
+				<real>0.94901961088180542</real>
 			</dict>
 			<key>Guid</key>
 			<string>AACF6772-2D24-4DCA-B846-26AF91FFC3AE</string>
@@ -1760,11 +1766,11 @@
 			<key>Name</key>
 			<string>Default</string>
 			<key>Non Ascii Font</key>
-			<string>KonatuTohaba 13</string>
+			<string>PanicSans 13</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>KonatuTohaba 13</string>
+			<string>PanicSans 13</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1817,7 +1823,7 @@
 			<key>Silence Bell</key>
 			<true/>
 			<key>Smart Cursor Color</key>
-			<true/>
+			<false/>
 			<key>Smart Selection Rules</key>
 			<array>
 				<dict>

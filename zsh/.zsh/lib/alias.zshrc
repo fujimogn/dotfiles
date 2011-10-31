@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/alias.zshrc
-# $Date: 2011-10-26T11:33:24+0900$
+# $Date: 2011-10-30T04:10:03+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 alias cp='cp -i'
@@ -41,9 +41,9 @@ alias po=popd
 alias more=less
 alias where='command -v'
 
-alias t='tar zxvf'
-alias t-='tar xvf -'
-alias b='bzip2 -dc'
+# alias t='tar zxvf'
+# alias t-='tar xvf -'
+# alias b='bzip2 -dc'
 
 alias yum='sudo yum'
 alias port='sudo port'

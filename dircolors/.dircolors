@@ -161,6 +161,7 @@ EXEC 01;32 # This is for files with execute permission:
 .zprofile 38;5;76
 .zshenv 38;5;76
 .zlogout 38;5;76
+.zlogin 38;5;76
 .bashrc 38;5;77
 .bash_profile 38;5;77
 .bash_logout 38;5;77
@@ -169,6 +170,7 @@ EXEC 01;32 # This is for files with execute permission:
 .vimrc 38;5;82
 .gvimrc 38;5;82
 .exrc 38;5;82
+.vimperatorrc 38;5;83
 .sqlite 38;5;99
 .db 38;5;99
 .mdf 38;5;99
@@ -478,6 +480,7 @@ EXEC 01;32 # This is for files with execute permission:
 .gitignore 38;5;238
 .hgignore 38;5;238
 .bzrignore 38;5;238
+.gitmodules 38;5;238
 .hg 38;5;239
 .bzr 38;5;239
 .svn 38;5;239
@@ -489,6 +492,10 @@ EXEC 01;32 # This is for files with execute permission:
 .old 38;5;240
 .sik 38;5;240
 .tmp 38;5;240
+.history 38;5;240
+.empty 38;5;240
+.DS_Store 38;5;241
+.Thumbs.db 38;5;241
 .pkl 38;5;242
 .dat 38;5;242
 .ser 38;5;242

@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/vim/vim.darwin.zsh
-# $Date: 2011-09-20T08:09:13+0900$
+# $Date: 2011-10-30T05:09:19+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # for MacVim Kaoriya
@@ -19,13 +19,14 @@
 ! which vim >/dev/null 2>&1 && return 1
 
 VIMAPP="MacVim.app/Contents/MacOS/Vim"
-APPDIR="/Applications"
-BREWDIR="/usr/local/Cellar/macvim"
 
-if [ -f "${APPDIR}/${VIMAPP}" ]; then
-  MACVIM="${APPDIR}/${VIMAPP}"
-elif [ -d "${BREWDIR}" ]; then
-  MACVIM=`find ${BREWDIR} -maxdepth 1 -mindepth 1 -type d | tail -1`"/${VIMAPP}"
+APP_DIR="/Applications"
+BREW_DIR="/usr/local/Cellar/macvim"
+
+if [ -f "${APP_DIR}/${VIMAPP}" ]; then
+  MACVIM="${APP_DIR}/${VIMAPP}"
+elif [ -d "${BREW_DIR}" ]; then
+  MACVIM=`find ${BREW_DIR} -maxdepth 1 -mindepth 1 -type d | tail -1`"/${VIMAPP}"
 else
   return 1
 fi
@@ -42,7 +43,12 @@ function v {
   fi
 }
 
+alias vi=v
+alias vim=v
 alias gvim=v
+alias g=v
+
+export EDITOR=v
 
 if which mvim >/dev/null 2>&1; then
   function gv {
@@ -58,11 +64,10 @@ if which mvim >/dev/null 2>&1; then
   }
   # override alias
   alias gvim=gv
-  alias g=gvim
+  alias g=gv
 fi
 
-alias vi=v
-alias vim=v
+compdef _vim v
+compdef _vim gv
 
-
-unset VIMAPP APPDIR BREWDIR
+unset VIMAPP APP_DIR BREW_DIR

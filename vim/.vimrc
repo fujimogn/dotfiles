@@ -96,10 +96,10 @@ set showmode
 set wildmenu
 set wildmode=list:longest,full
 set virtualedit+=block
-set textwidth=80
-" if exists('&colorcolumn')
-    " set colorcolumn=+1
-" endif
+set textwidth=90
+if exists('&colorcolumn')
+    set colorcolumn=+1
+endif
 
 if exists('&ambiwidth')
   set ambiwidth=double
