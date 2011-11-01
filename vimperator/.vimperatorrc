@@ -1,5 +1,5 @@
 ""3.3pre
-" $Date: 2011-11-01T02:26:24+0900$
+" $Date: 2011-11-02T01:04:16+0900$
 
 " Options {{{
 " active // 自動的にタブが選択されるタイミングの設定 {{{
@@ -12,7 +12,9 @@
 " quickmark   : go と gn マッピング
 " tabopen    : :tabopen[!] コマンド
 " paste       : P と gP マッピング
+
 " set activate=
+
 " }}}
 " autocomplete // {{{
 
@@ -28,15 +30,20 @@ set autocomplete
 " h : 履歴
 " S : サジェストエンジン
 " t : 開かれているタブ
+
 set complete=tsl
+
 " }}}
 " defsearch // デフォルトで使用するサーチエンジン {{{
 " (default: google)
+
 " set defsearch=google
+
 " }}}
 " edito // 外部エディタ {{{
 " (default: gvim -f)
 " 挿入モードもしくはテキストエリアモードで <C-i> を押した際に起ち上がる
+
 js<<EOM
 if (liberator.has("MacUnix")) {
   liberator.execute("set editor=/usr/local/bin/mvim");
@@ -45,6 +52,7 @@ if (liberator.has("MacUnix")) {
 } else {
 }
 EOM
+
 " }}}
 " exrc // カレントディレクトリからもRCファイルの読み込みができるようにする {{{
 " (default: off)
@@ -59,7 +67,9 @@ EOM
 " }}}
 " errorbells // エラーメッセージが表示される時にベルを鳴らすか {{{
 " (default: off)
+
 " set noerrorbells
+
 " }}}
 " eventignore // 無視するべきオートコマンドのイベント名のリスト {{{
 " (default: *)
@@ -394,6 +404,7 @@ js liberator.execute('set titlestring=Vimp" '+liberator.version.match(/\d+\.\d+/
 " }}}
 " toolbars // ツールバーを表示 {{{
 " gui の別名?
+
 " set toolbars=
 
 " }}}
