@@ -1,7 +1,9 @@
 ""3.3pre
-" $Date: 2011-11-02T01:04:16+0900$
+" $Date: 2011-11-02T01:07:17+0900$
+
 
 " Options {{{
+
 " active // 自動的にタブが選択されるタイミングの設定 {{{
 " (default: "addons,downloads,extensions,help,homepage,quickmark,tabopen,paste")
 " addons      : :addo[ns] コマンド
@@ -455,8 +457,10 @@ hi Bell display:none
 set animations
 
 " }}}
+
 " }}}
 " about:config ----------------------------------------------- {{{
+
 
 " ダウンロードウィンドウを完了後自動で閉じる
 set! browser.download.manager.closeWhenDone=true
@@ -487,6 +491,7 @@ style -name commandline-ime chrome://* #liberator-commandline-command input {ime
 
 " }}}
 " KeyMap ----------------------------------------------------- {{{
+
 
 "-----------------------------------------------------------------
 " mapname     normal    visual    ???       insert    commandline
@@ -592,6 +597,7 @@ cnoremap <Up> <S-Tab>
 " }}}
 " qmark  ----------------------------------------------------- {{{
 
+
 " qmarks追加キーMを無効化
 noremap M <Nop>
 
@@ -611,10 +617,12 @@ silent qmark y http://www.youtube.com
 " }}}
 " Colorschemea ----------------------------------------------- {{{
 
+
 colorscheme vimpwhite
 
 " }}}
 "Plugin Setting --------------------------------------------- {{{
+
 
 
 " }}}
