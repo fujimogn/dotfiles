@@ -1,62 +1,24 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/prompt.zshrc
-# $Date: 2011-09-25T14:27:03+0900$
+# $Date: 2011-11-02T00:36:03+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
-# via http://www.dna.bio.keio.ac.jp/~yuji/zsh/zshrc.txt
-# <エスケープシーケンス>
-# prompt_bang が有効な場合、!=現在の履歴イベント番号, !!='!' (リテラル)
-# ${WINDOW:+"[$WINDOW]"} = screen 実行時にスクリーン番号を表示 (prompt_subst が必要)
-# %B = underline
-# %/ or %d = ディレクトリ (0=全て, -1=前方からの数)
-# %~ = ディレクトリ
-# %h or %! = 現在の履歴イベント番号
-# %L = 現在の $SHLVL の値
-# %M = マシンのフルホスト名
-# %m = ホスト名の最初の `.' までの部分
-# %S (%s) = 突出モードの開始 (終了)
-# %U (%u) = 下線モードの開始 (終了)
-# %B (%b) = 太字モードの開始 (終了)
-# %t or %@ = 12 時間制, am/pm 形式での現在時刻
-# %n or $USERNAME = ユーザー ($USERNAME は環境変数なので setopt prompt_subst が必要)
-# %N = シェル名
-# %i = %N によって与えられるスクリプト, ソース, シェル関数で, 現在実行されている行の番号 (debug用)
-# %T = 24 時間制での現在時刻
-# %* = 24 時間制での現在時刻, 秒付き
-# %w = `曜日-日' の形式での日付
-# %W = `月/日/年' の形式での日付
-# %D = `年-月-日' の形式での日付
-# %D{string} = strftime 関数を用いて整形された文字列 (man 3 strftime でフォーマット指定が分かる)
-# %l = ユーザがログインしている端末から, /dev/ プレフィックスを取り除いたもの
-# %y = ユーザがログインしている端末から, /dev/ プレフィックスを取り除いたもの (/dev/tty* はソノママ)
-# %? = プロンプトの直前に実行されたコマンドのリターンコード
-# %_ = パーサの状態
-# %E = 行末までクリア
-# %# = 特権付きでシェルが実行されているならば `#', そうでないならば `%' == %(!.#.%%)
-# %v = psvar 配列パラメータの最初の要素の値
-# %{...%} = リテラルのエスケープシーケンスとして文字列をインクルード
-# %(x.true-text.false-text) = 三つ組の式
-# %<string<, %>string>, %[xstring] = プロンプトの残りの部分に対する, 切り詰めの振る舞い
-#         `<' の形式は文字列の左側を切り詰め, `>' の形式は文字列の右側を切り詰めます
-# %c, %., %C = $PWD の後ろ側の構成要素
-
-
-
-# via http://d.hatena.ne.jp/uasi/20091025
 autoload -Uz VCS_INFO_get_data_git; VCS_INFO_get_data_git 2> /dev/null
 
-function __git-current-branch {
+function rprompt-git-current-branch {
   local name st color gitdir action
-  if [[ "$PWD" =~ '/\.git(/.*)?$' ]]; then
-      return
+  if [[ "$PWD" =~ '/¥.git(/.*)?$' ]]; then
+    return
   fi
-  name=`git branch 2> /dev/null | grep '^\*' | cut -b 3-`
+  name=$(basename "`git symbolic-ref HEAD 2> /dev/null`")
   if [[ -z $name ]]; then
     return
   fi
+
   gitdir=`git rev-parse --git-dir 2> /dev/null`
   action=`VCS_INFO_git_getaction "$gitdir"` && action="($action)"
+
   st=`git status 2> /dev/null`
   if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
     color=%F{green}
@@ -68,30 +30,9 @@ function __git-current-branch {
     color=%F{red}
   fi
 
-  echo "$color$name$action%f%b"
+  echo "$color$name$action%f%b "
 }
 
-function __vcs_icon() {
-  if git branch >/dev/null 2>/dev/null; then
-    color=%F{green}
-    echo "$color±%f%b"
-  elif hg root >/dev/null 2>/dev/null; then
-    color=%F{blue}
-    echo "$color☿%f%b"
-  fi
-}
+setopt prompt_subst
 
-function __collapse_pwd() {
-  #echo `pwd`
-  #| sed -e "s,^$HOME,~,")
-}
-
-
-PS1="
-"'['%?'] '\
-%F{magenta}'%n'%f%b' at '%F{magenta}'%m'%f%b\
-' '`__collapse_pwd`%f%b\
-' '%f%b`__vcs_icon`%f%b`__git-current-branch`"
-"%F{green}'➜  '%f%b
-
-
+RPROMPT='[`rprompt-git-current-branch`%~]'

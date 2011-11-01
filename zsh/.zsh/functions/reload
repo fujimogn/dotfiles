@@ -1,5 +1,5 @@
-# zwc add --extension --load ~/.zshenv
-# zwc add --extension --load ${ZDOTDIR}/.z*
+zwc add --extension --load ~/.zshenv
+zwc add --extension --load ${ZDOTDIR}/.z*
 zwc add --extension --load --ostype --suffix . ${ZDOTDIR}/lib/* ${ZDOTTMP}
 zwc add --extension --load --ostype --suffix . ${ZDOTDIR}/misc/*.zsh ${ZDOTTMP}
 zwc add --extension --load --ostype --suffix . ${DOTDIR}/*/*.zsh ${ZDOTTMP}

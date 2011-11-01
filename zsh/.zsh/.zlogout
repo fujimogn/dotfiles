@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/.zsh/.zlogout
-# $Date: 2011-10-26T22:00:39+0900$
+# $Date: 2011-11-01T22:25:59+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 zlogout_main() {

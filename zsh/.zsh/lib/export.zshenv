@@ -1,7 +1,7 @@
 #!/usr/bin/sh
 #
 # $File: ${DOTDIR}/system/env
-# $Date: 2011-10-29T03:03:23+0900$
+# $Date: 2011-11-01T21:43:34+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # Lang
@@ -33,12 +33,9 @@ case "$TERM" in
       TERM='kterm-color'
       export LANG=ja_JP.eucJP;   #w3m とか mutt とかに必要
       export LC_ALL=ja_JP.eucJP;;
-    #vim は TERM='kterm' ではカラー化しない
-    #screen は TERM='kterm-color' ではタイトルバーに情報表示できない
     linux);>LC_ALL=C
 esac
 
-# export GREP_OPTIONS='--color=always --binary-files=without-match'
 
 # PAGER
 if type lv > /dev/null 2>&1; then
@@ -51,6 +48,7 @@ if [ "$PAGER" = "lv" ]; then
 else
   alias lv="$PAGER"
 fi
+
 
 # polipo
 if [ -x /usr/local/bin/polipo ]; then

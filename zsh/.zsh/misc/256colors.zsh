@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
-# $File: ${DOTDIR}/zsh/.zsh/misc/<t_co>colors.zsh
-# $Date: 2011-10-29T05:53:43+0900$
+# $File: ${ZDOTDIR}/misc/<t_co>colors.zsh
+# $Date: 2011-11-01T19:25:20+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 function 256colors {

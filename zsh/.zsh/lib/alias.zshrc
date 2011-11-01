@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/alias.zshrc
-# $Date: 2011-10-30T04:10:03+0900$
+# $Date: 2011-11-01T22:47:33+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 alias cp='cp -i'
@@ -68,10 +68,11 @@ alias set_sjis='export LANG=ja_JP.SJIS; export LANGUAGE=ja_JP.SJIS; export LC_AL
 alias py=python
 alias irb='irb --readline -r irb/completion'
 
-alias -g M='|more'
-alias -g T='|tail'
-alias -g H=' --help | head'
-alias -g L=' --help | less'
+alias -g G='| grep'
+alias -g M='| more'
+alias -g T='| tail'
+alias -g H='| head'
+alias -g L='| less'
 
 # via http://d.hatena.ne.jp/mollifier/20100317/p1
 if which pbcopy >/dev/null 2>&1 ; then

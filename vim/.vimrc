@@ -56,7 +56,7 @@ set history=1000
 
 " }}}
 " Color {{{
-set t_co=256
+
 if $TERM =~ '^xterm'
   set t_Co=256
 elseif $TERM =~ '^screen-bce'
@@ -68,8 +68,9 @@ elseif $TERM =~ '^linux'
 else
   set t_Co=16
 endif
+
 set background=dark
-colorscheme molokai_fujimogn
+highlight CursorLine ctermfg=NONE ctermbg=black guibg=black cterm=NONE
 
 " }}}
 " Display {{{
@@ -109,7 +110,7 @@ endif
 " }}}
 " Wildmenu completion {{{
 set wildmenu
-set wildmode=list:longest
+" set wildmode=list:longest
 set wildignore+=.hg,.git,.svn
 set wildignore+=*.aux,*.out,*.toc
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg

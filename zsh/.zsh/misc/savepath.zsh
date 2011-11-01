@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
-# $File: ${DOTDIR}/zsh/.zsh/misc/savepath.zsh
-# $Date: 2011-09-22T15:09:05+0900$
+# $File: ${ZDOTDIR}/misc/savepath.zsh
+# $Date: 2011-11-01T19:27:14+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # via https://github.com/ryanb/dotfiles
