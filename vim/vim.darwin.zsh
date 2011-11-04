@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/vim/vim.darwin.zsh
-# $Date: 2011-11-01T22:28:24+0900$
+# $Date: 2011-11-04T16:10:09+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # for MacVim Kaoriya
@@ -67,7 +67,7 @@ if which mvim >/dev/null 2>&1; then
   alias g=gv
 fi
 
-compdef _vim v
-compdef _vim gv
+# compdef _vim v
+# compdef _vim gv
 
 unset VIMAPP APP_DIR BREW_DIR

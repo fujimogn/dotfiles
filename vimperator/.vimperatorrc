@@ -1,5 +1,5 @@
 ""3.3pre
-" $Date: 2011-11-02T01:30:28+0900$
+" $Date: 2011-11-02T22:49:12+0900$
 
 
 " Options ---------------------------------------------------------------------------- {{{
@@ -624,9 +624,87 @@ silent qmark y http://www.youtube.com
 
 colorscheme vimpwhite
 
+
 " }}}
 "Plugin Setting ---------------------------------------------------------------------- {{{
 
+js <<EOM
+liberator.globalVariables.plugin_loader_roots = "~/.vimperator/plugin/ ~/.vimperator/vimpr/";
+liberator.globalVariables.plugin_loader_plugins = [
+  '_libly',
+  'auto_reload',
+  'auto_source',
+  'auto-focus-frame',
+  'caret-hint',
+  'command_menu',
+  'commandBookmarklet',
+  'copy',
+  'feedSomeKeys_3',
+  'migemo_completion',
+  'migemo_hint',
+  'migemo_find',
+  'opener',
+  'statusline-toolbar',
+  'twittperator',
+];
+EOM
+
+" copy.js {{{
+
+js <<EOM
+  liberator.globalVariables.copy_templates = [
+    { label: 'titleAndURL',    value : '%TITLE%\n%URL%' },
+    { label: 'title',          value : '%TITLE%' },
+    { label: 'linktag',        value : '<a href="%URL%">%TITLE%</a>' },
+    { label: 'linktagblank',   value : '<a href="%URL%" target="_blank">%TITLE%</a>' },
+    { label: 'htmlblockquote', value : '<blockquote cite="%URL%" title="%TITLE%">%HTMLSEL%</blockquote>' }
+  ];
+EOM
+
+" }}}
+" feedSomekeys_3.js {{{
+
+command! -nargs=+ lazy autocmd VimperatorEnter .*
+
+" Gmail
+lazy fmaps -u='mail\.google\.com/mail' -events=vkeydown,keypress,vkeyup j k
+lazy fmaps -u='mail\.google\.com/mail' c n p o u x s r a ? gi gs gt gd ga gc I
+lazy fmaps -u='mail\.google\.com/mail' -p= d,# s,! e
+lazy fmaps -u='mail\.google\.com/mail/.*/[0-9a-f]+$' c j,n k,p n,j p,k o u x s r a ? gi gs gt gd ga gc
+lazy fmaps -u='mail\.google\.com/mail/.*/[0-9a-f]+$' -p= d,# s,! e
+
+" Google Reader
+lazy fmaps -u='www\.google\.(com|co\.jp)/reader' -events=vkeypress j k n o p m s v A r S N P X O gh ga gs gt gu u / ?
+
+" Tumblr
+lazy fmaps -u='^http://[^\./]*\.tumblr\.com/' t
+
+" Hatena Bookmark
+lazy fmaps -u='^http://b\.hatena\.ne\.jp/(?!(entry|articles|guide))' j k o,oj e a,b
+
+" }}}
+" ime_controller.js {{{{
+
+let g:ex_ime_mode = "inactive"
+let g:textarea_ime_mode = "inactive"
+
+" }}}
+" ldrize_cooperation.js {{{
+
+let g:ldrc_captureMappings = "['j','k','p','o']"
+
+" ldrize_cooperation有効
+" let g:ldrc_intelligence_bind="true"
+
+" j,k でLDRizeでなくVimperatorのスクロールで動く閾値
+" LDRizeで選択される次項目が 画面の高さ×指定値 より画面境界から離れている場合にVimperatorのスクロールに
+" 初期値0.5
+let g:ldrc_skip = "0"
+
+" Shift-sでLDRize無効
+map S :toggleldrc<CR>
+
+" }}}
 
 
 " }}}
