@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Sets reasonable OS X defaults
 #
 # via https://github.com/holman/dotfiles/blob/master/osx/set-defaults.sh
@@ -30,6 +32,13 @@ defaults write com.apple.Finder ShowStatusBar -int 0
 
 # ~/Library を表示
 chflags nohidden ~/Library
+
+# 以下を非表示
+chflags hidden ~/bin
+chflags hidden ~/opt
+chflags hidden ~/lib
+chflags hidden ~/node_modules
+chflags hidden ~/git
 
 # 拡張子を表示
 defaults write -g AppleShowAllExtensions -int 1

@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/opt.zshrc
-# $Date: 2011-11-01T22:54:31+0900$
+# $Date: 2011-11-05T14:06:41+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # {{{ basic
@@ -61,7 +61,7 @@ setopt auto_menu                # 補完要求に対してメニューをリス�
 setopt auto_param_keys          # カッコの対応などを自動的に補完。デフォルトで有効
 setopt auto_param_slash         # ディレクトリ名の補完で末尾の / を自動的に付加。デフォルトで有効
 setopt auto_remove_slash        # 無駄な末尾の / を削除する。デフォルトで有効
-# setopt complete_aliases         # 補完実行時にエイリアスを展開せずにそのままのコマンドとしてエイリアスを扱う
+setopt complete_aliases         # 補完実行時にエイリアスを展開せずにそのままのコマンドとしてエイリアスを扱う
 setopt complete_in_word         # 語の途中でもカーソル位置で補完
 setopt extended_glob            # ファイル名で #,  ~,  ^ の 3 文字を正規表現として扱う
 setopt interactive_comments     # コマンドラインでも # 以降をコメントと見なす

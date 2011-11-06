@@ -110,7 +110,8 @@ endif
 " }}}
 " Wildmenu completion {{{
 set wildmenu
-" set wildmode=list:longest
+set wildmode=full
+" set wildmode=longest:full,full
 set wildignore+=.hg,.git,.svn
 set wildignore+=*.aux,*.out,*.toc
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
@@ -403,6 +404,20 @@ let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 let g:NeoComplCache_SkipCompletionTime = '0.3'
 let g:NeoComplCache_SkipInputTime = '0.1'
 " }}}
+" RSense {{{
+
+if !exists('g:neocomplcache_omni_patterns')
+  let g:neocomplcache_omni_patterns = {}
+endif
+
+let g:rsenseUseOmniFunc = 1
+
+if !empty( $RSENSE_HOME ) && filereadable(expand( $RSENSE_HOME.'/bin/rsense'))
+  let g:rsenseHome = $RSENSE_HOME
+  let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+endif
+
+" }}}
 " unite {{{
 " let g:unite_enable_start_insert=1
 nnoremap <silent> <Leader>ub :<C-u>Unite buffer<CR>
@@ -416,7 +431,7 @@ au FileType unite inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split
 au FileType unite nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
 au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
 "}}}
-" NERD_commentr {{{
+" NERD_commenter {{{
 let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
 nmap <c-o> <Plug>NERDCommenterToggle
@@ -452,11 +467,7 @@ let g:vimfiler_as_default_explorer = 1
 let g:git_command_edit='leftabove vnew'
 " }}}
 " vim-ref {{{
-let g:ref_phpmanual_path=$HOME.'/Reference/php/php-chunked-xhtml'
-" }}}
-" closetag {{{
-autocmd FileType html,xhtml,xml let b:closetag_html_style=1
-autocmd FileType html,xhtml,xml sorce $HOME.'/.vim/bundles/closetag.vim/plugin/closetag.vim'
+let g:ref_phpmanual_path = $HOME.'/Reference/php/php-chunked-xhtml'
 " }}}
 
 " }}}

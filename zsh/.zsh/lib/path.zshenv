@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/path.zshenv
-# $Date: 2011-10-28T10:57:59+0900$
+# $Date: 2011-11-05T09:10:34+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # ${HOME}/bin
@@ -20,9 +20,16 @@ if [ -s "${HOME}/.pythonbrew/etc/bashrc" ]; then
 fi
 
 # rvm
-[[ -s "${HOME}/.rvm/scripts/rvm" ]] && source "${HOME}/.rvm/scripts/rvm"
+if [ -s "${HOME}/.rvm/scripts/rvm" ]; then
+  source "${HOME}/.rvm/scripts/rvm"
+fi
 
-# node
+# Rsense
+if [ -d /usr/lib/rsense ]; then
+  export RSENSE_HOME=/usr/lib/rsense
+fi
+
+# Node.js
 if [ -d /usr/local/lib/node ]; then
   export NODE_PATH=/usr/local/lib/node
 fi
@@ -31,4 +38,3 @@ fi
 if [ -d /usr/local/lib/node_modules/npm/bin ]; then
   export PATH=$PATH:/usr/local/lib/node_modules/npm/bin
 fi
-

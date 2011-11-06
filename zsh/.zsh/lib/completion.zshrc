@@ -1,9 +1,10 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/completion.zshrc
-# $Date: 2011-11-02T00:31:06+0900$
+# $Date: 2011-11-06T02:41:15+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
+fpath=(${ZDOTDIR}/modules/zsh-completions $fpath)
 fignore=( .BAK .bak .alt .old .aux .toc .swp \~)
 
 zstyle ':completion:*' completer _expand _complete _match _prefix _approximate _list _history
@@ -13,8 +14,7 @@ zstyle ':completion:*' group-name ''
 zstyle ':completion:*' ignore-parents parent pwd
 zstyle ':completion:*' insert-tab false
 zstyle ':completion:*' keep-prefix
-# zstyle ':completion:*' list-colors no=00 fi=00 di=01\;34 pi=33 so=01\;35 bd=00\;35 cd=00\;34 or=00\;41 mi=00\;45 ex=01\;32
-zstyle ':completion:*' list-colors di=34 ln=35 so=32 pi=33 ex=31 bd=46\;34 cd=43\;34 su=41\30 sg=46\30 tw=42\30 ow=43\30
+# zstyle ':completion:*' list-colors di=34 ln=35 so=32 pi=33 ex=31 bd=46\;34 cd=43\;34 su=41\30 sg=46\30 tw=42\30 ow=43\30
 zstyle ':completion:*' list-prompt ''
 zstyle ':completion:*' list-separator '-->'
 zstyle ':completion:*' list-suffixes true
@@ -61,55 +61,19 @@ zstyle ':completion:*:man:*' menu yes select
 zstyle ':completion:*' use-cache true
 zstyle ':completion::complete:*' cache-path ${ZDOTTMP}
 
-# auto-fu.zsh
-__auto-fu() {
-  if [ -f "${ZDOTDIR}/modules/auto-fu/auto-fu.zsh" ]; then
-    unsetopt sh_wordsplit autoremoveslash
-    function () {
-      local A
-      A=${ZDOTDIR}/modules/auto-fu/auto-fu.zsh
-      [[ -e "${A:r}.zwc" ]] && [[ "$A" -ot "${A:r}.zwc" ]] ||
-        zsh -c "source $A; auto-fu-zcompile $A ${A:h}" >/dev/null 2>&1
-    }
-    source ${ZDOTDIR}/modules/auto-fu/auto-fu; auto-fu-install
-    zstyle ':auto-fu:var' postdisplay ''
-    # zstyle ':auto-fu:var' track-keymap-skip opp
-    # zstyle ':auto-fu:var' disable magic-space
-    zstyle ':auto-fu:var' autoable-function/skipwords "^((??)##)"
+# filetypes based completion
+compctl -g '*.Z *.gz *.tgz' + -g '*' zcat zless zgrep gunzip gzip
+compctl -g '*.bz2' + -g '*' bzip2 bunzip2
+compctl -g '*.tar.Z *.tar.gz *.tgz *.tar.bz2' + -g '*' tar
+compctl -g '*.zip *.ZIP' + -g '*' unzip zip
+compctl -g '*(-/) *.pl *.PL *.cgi *.pm *.PM *.t *.xpl' perl
+compctl -g '*(-/) *.pl *.PL *.pm *.PM *.pod' -K perldoc pod
+compctl -g '*(-/) *.rb' ruby
+compctl -g '*(-/) *.py *.pyc' python
+compctl -g '*(-/) *.c' splint
 
-    function zle-line-init () { auto-fu-init }
-    zle -N zle-line-init
 
-    # delete unambiguous prefix when accepting line
-    # via: http://d.hatena.ne.jp/tarao/20100823/1282543408
-    function afu+delete-unambiguous-prefix () {
-      afu-clearing-maybe
-      local buf; buf="$BUFFER"
-      local bufc; bufc="$buffer_cur"
-      [[ -z "$cursor_new" ]] && cursor_new=-1
-      [[ "$buf[$cursor_new]" == ' ' ]] && return
-      [[ "$buf[$cursor_new]" == '/' ]] && return
-      ((afu_in_p == 1)) && [[ "$buf" != "$bufc" ]] && {
-        # there are more than one completion candidates
-        zle afu+complete-word
-        [[ "$buf" == "$BUFFER" ]] && {
-            # the completion suffix was an unambiguous prefix
-            afu_in_p=0; buf="$bufc"
-        }
-        BUFFER="$buf"
-        buffer_cur="$bufc"
-      }
-    }
-    zle -N afu+delete-unambiguous-prefix
-    function afu-ad-delete-unambiguous-prefix () {
-      local afufun="$1"
-      local code; code=$functions[$afufun]
-      eval "function $afufun () { zle afu+delete-unambiguous-prefix; $code }"
-    }
-    afu-ad-delete-unambiguous-prefix afu+accept-line
-    afu-ad-delete-unambiguous-prefix afu+accept-line-and-down-history
-    afu-ad-delete-unambiguous-prefix afu+accept-and-hold
-  fi
-}
+autoload -Uz compinit
+compinit -d ${ZDOTTMP}/.zcompdump
 
-# __auto-fu
+

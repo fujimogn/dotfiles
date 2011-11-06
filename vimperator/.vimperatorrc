@@ -529,6 +529,10 @@ nnoremap K <C-u>
 nnoremap h gT
 nnoremap l gt
 
+" p/P を入れ替え
+nnoremap p P
+nnoremap P p
+
 " Home/End でタブの先頭/最後に移動
 nnoremap <Home> :tabfirst<CR>
 nnoremap <End> :tablast<CR>
