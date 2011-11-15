@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/opt.zshrc
-# $Date: 2011-11-05T14:06:41+0900$
+# $Date: 2011-11-06T12:31:45+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # {{{ basic
@@ -73,6 +73,7 @@ setopt list_types               # 補完候補で ls -F。デフォルトで有�
 setopt mark_dirs                # ファイル名の展開でディレクトリにマッチした場合 末尾に / を付加
 # setopt menu_complete          # 補完候補リストを表示せずにメニュー補完
 setopt magic_equal_subst        # = 以降でも補完できるようにする
+setopt nullglob
 setopt rec_exact                # 曖昧さがあっても正確なマッチ
 unsetopt list_beep              # 曖昧な補完にビープ音を鳴らさない
 

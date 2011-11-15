@@ -26,7 +26,7 @@ clean:	clean-srcs
 
 install-srcs:
 	@for F in $(SRCS); do \
-		if [ "$(OS)" = "Cygwin" ]; then \
+		if [ "$(OS)" = "Cygwin" ] || [ "$(OS)" = "Windows_NT"  ]; then \
 			[ -x /usr/bin/iconv ] && [ $${LANG##*.} = "UTF-8" ] && CONV=" | iconv -f SJIS -t $${LANG##*.}"; \
 			if [ -f $${F} ]; then \
 				$(RM) $(PREFIX)$(S)$${F} && $(LN) $(PREFIX)$(S)$${F} $(CURDIR)$(S)$${F}$${CONV}; \

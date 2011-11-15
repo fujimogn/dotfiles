@@ -1,5 +1,5 @@
 ""3.3pre
-" $Date: 2011-11-02T22:49:12+0900$
+" $Date: 2011-11-15T17:32:12+0900$
 
 
 " Options ---------------------------------------------------------------------------- {{{
@@ -116,7 +116,7 @@ set focuscontent
 " navigation  : メインツールバーを表示
 " tabs        : タブを表示
 
-set gui=addons,nobookmarks,nomenu,nonavigation,notabs
+set gui=noaddons,nobookmarks,nomenu,nonavigation,notabs
 
 "}}}
 " helpfile          // ヘルプページ閲覧時ステータスラインに表示されるchromeURL末尾部分 {{{
@@ -509,17 +509,19 @@ style -name commandline-ime chrome://* #liberator-commandline-command input {ime
 "   -------------------------------------------------------------------
 
 " キーマップリーダー
-let mapleader = "'"
+let mapleader = ","
 
-" BackSpace を無効化
-map <Backspace> <Nop>
+map <Left> <Nop>
+map <Right> <Nop>
+map <Up> <Nop>
+map <Down> <Nop>
 
 " ; でコマンドモードへ
 nnoremap ; :
 
 " j/k の移動量を増やす
-nnoremap j 5<C-e>
-nnoremap k 5<C-y>
+nnoremap j 10<C-e>
+nnoremap k 10<C-y>
 
 " J/K を C-d/C-u 互換に
 nnoremap J <C-d>
@@ -598,10 +600,6 @@ vnoremap p y<Esc><Esc>p
 " C-j を無効 SKKとキーマップの競合を避ける
 cnoremap <C-j> <Nop>
 
-" コマンドラインで Up/Down を使用
-cnoremap <Down> <Tab>
-cnoremap <Up> <S-Tab>
-
 " }}}
 " qmark  ----------------------------------------------------------------------------- {{{
 
@@ -639,10 +637,12 @@ liberator.globalVariables.plugin_loader_plugins = [
   'auto_reload',
   'auto_source',
   'auto-focus-frame',
+  'bookmarktoolbar-hint',
   'caret-hint',
   'command_menu',
   'commandBookmarklet',
   'copy',
+  'direct_bookmark',
   'feedSomeKeys_3',
   'migemo_completion',
   'migemo_hint',
@@ -664,6 +664,15 @@ js <<EOM
     { label: 'htmlblockquote', value : '<blockquote cite="%URL%" title="%TITLE%">%HTMLSEL%</blockquote>' }
   ];
 EOM
+
+" }}}
+" direct_bookmark.js {{{
+
+let g:direct_sbm_use_services_by_tag = "h"
+let g:direct_sbm_use_services_by_post = "h"
+" let g:direct_sbm_is_use_migemo = "true"
+nnoremap B :bentry<CR>
+nnoremap a :sbm<Space>
 
 " }}}
 " feedSomekeys_3.js {{{

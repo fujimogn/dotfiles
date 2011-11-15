@@ -1,8 +1,11 @@
 set nocompatible
 
 " vundle {{{
+
 filetype off
+
 set runtimepath+=$HOME/.vim/bundles/vundle/
+
 call vundle#rc( $HOME.'/.vim/bundles' )
 let $vundlerc=$HOME.'/.vim/.vundle'
 com! EditBundles :e $vundlerc
@@ -13,7 +16,9 @@ augroup Vundle
   au BufWritePost $vundlerc BundleClean
   au BufWritePost $vundlerc BundleInstall
 augroup END
+
 source $vundlerc
+
 " }}}
 
 filetype plugin indent on
@@ -32,16 +37,20 @@ set notimeout
 set nottimeout
 
 " Encording {{{
+
 set fileformats=unix,dos,mac
+
 " }}}
 " Save {{{
+
 set autoread
 set autowrite
 set confirm
 autocmd bufwritepre * :%s/\s\+$//ge
 
-" }}}z
+" }}}
 " Backup, History {{{
+
 set backup
 set backupdir=~/.vim/.tmp
 set backupskip=/tmp/*,/private/tmp/*"
@@ -74,6 +83,7 @@ highlight CursorLine ctermfg=NONE ctermbg=black guibg=black cterm=NONE
 
 " }}}
 " Display {{{
+
 set title
 set display=lastline
 set nowrap
@@ -98,6 +108,7 @@ set wildmenu
 set wildmode=list:longest,full
 set virtualedit+=block
 set textwidth=90
+
 if exists('&colorcolumn')
     set colorcolumn=+1
 endif
@@ -106,9 +117,16 @@ if exists('&ambiwidth')
   set ambiwidth=double
 endif
 
-"
+augroup InsertHook
+autocmd!
+autocmd InsertEnter * highlight StatusLine guifg=#ccdc90 guibg=#2E4340 ctermfg=cyan
+autocmd InsertLeave * highlight StatusLine guifg=#2E4340 guibg=#ccdc90 ctermfg=white
+augroup END
+
+
 " }}}
 " Wildmenu completion {{{
+
 set wildmenu
 set wildmode=full
 " set wildmode=longest:full,full
@@ -121,13 +139,17 @@ set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest
 set wildignore+=*.pyc
 set wildignore+=*.swc,*.swf
 set wildignore+=*.DS_Store,*.Thumbs.db
+
 " }}}
 " Edit {{{
+
 set whichwrap=b,s,h,l,<,>,[,]
 set backspace=indent,eol,start
 set keywordprg=:help
+
 " }}}
 " Tab, Indent {{{
+
 set expandtab
 set tabstop=2
 set shiftwidth=2
@@ -139,8 +161,19 @@ set smartindent
 
 " }}}
 " Modeline {{{
+
 set modeline
 set modelines=10
+
+" }}}
+" Tags {{{
+
+if has("autochdir")
+  set autochdir
+  set tags=tags;
+else
+  set tags=./tags,./../tags,./*/tags,./../../tags,./../../../tags,./../../../../tags,./../../../../../tags
+endif
 
 " }}}
 " Forlding {{{
@@ -148,45 +181,10 @@ set foldenable
 set foldmethod=marker
 set foldcolumn=2
 set foldlevelstart=0
-set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
-" function! MyFoldText()
-  " let line = getline(v:foldstart)
-  " if match( line, '^[ \t]*\(\/\*\|\/\/\)[*/\\]*[ \t]*$' ) == 0
-    " let initial = substitute( line, '^\([ \t]\)*\(\/\*\|\/\/\)\(.*\)', '\1\2', '' )
-    " let linenum = v:foldstart + 1
-    " while linenum < v:foldend
-      " let line = getline( linenum )
-      " let comment_content = substitute( line, '^\([ \t\/\*]*\)\(.*\)$', '\2', 'g' )
-      " if comment_content != ''
-        " break
-      " endif
-      " let linenum = linenum + 1
-    " endwhile
-    " let sub = initial . ' ' . comment_content
-  " else
-    " let sub = line
-    " let startbrace = substitute( line, '^.*{[ \t]*$', '{', 'g')
-    " if startbrace == '{'
-      " let line = getline(v:foldend)
-      " let endbrace = substitute( line, '^[ \t]*}\(.*\)$', '}', 'g')
-      " if endbrace == '}'
-        " let sub = sub.substitute( line, '^[ \t]*}\(.*\)$', '...}\1', 'g')
-      " endif
-    " endif
-  " endif
-  " let n = v:foldend - v:foldstart + 1
-  " let info = " " . n . " lines"
-  " let sub = sub . "                                                                                                                  "
-  " let num_w = getwinvar( 0, '&number' ) * getwinvar( 0, '&numberwidth' )
-  " let fold_w = getwinvar( 0, '&foldcolumn' )
-  " let sub = strpart( sub, 0, winwidth(0) - strlen( info ) - num_w - fold_w - 1 )
-  " return sub . info
-" endfunction
-" set foldtext=MyFoldText()
-nnoremap <Space> za
-vnoremap <Space> za
-nnoremap zO zCzO
-nnoremap <leader>z zMzvzz
+nnoremap zz za
+nnoremap Z za
+vnoremap zz zf
+vnoremap Z zf
 
 " }}}
 " Search {{{
@@ -206,74 +204,114 @@ nmap g# g#zz
 
 " }}}
 " IME {{{
+
 set iminsert=0
 set imsearch=0
 set noimcmdline
 set noimdisable
+
 " }}}
 " Mouse {{{
+
 set mouse=a
 set guioptions+=a
 set ttymouse=xterm2
 
 " }}}
-" Keymap"{{{
+" Keymap "{{{
 
-let mapleader="'"
+map <Right> <Nop>
+map <Left> <Nop>
+map <Up> <Nop>
+map <Down> <Nop>
 
+" キーマップリーダー
+let mapleader=","
+
+" : ; 入れ替え
 nnoremap ; :
 
-" move
+" インサートモードを抜ける
+inoremap jj <ESC>
+inoremap kk <ESC>
+
+" 基本移動
+nnoremap h <Left>
 nnoremap j gj
 nnoremap k gk
+nnoremap l <Right>
+
+" 移動支援
 noremap H ^
 noremap L $
-nnoremap J 5gj
-nnoremap K 5gk
+nnoremap J 3gj
+nnoremap K 3gk
 
+" 画面移動
+noremap <Space>j <C-f>
+noremap <Space>k <C-b>
+
+" ウィンドウ移動
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
 
+" ヘルプ
+nnoremap <C-i> :<C-u>help<Space>
+nnoremap <C-i><C-i> :<C-u>help<Space><C-r><C-w><CR>
+
+" ウィンドウ分割
 map <F6> :split<C-m>
 map <F7> :vsp<C-m>
 
+" ヤンク
+nnoremap Y y$
+nnoremap vy vawy
 vnoremap v $h
 
-" save, quit
-nnoremap <Leader>ww :<C-u>w<CR>
-nnoremap <Leader>wq :<C-u>wq<CR>
-nnoremap <Leader>q :<C-u>q<CR>
+" 保存・終了
+nnoremap <Space>ww :<C-u>w<CR>
+nnoremap <Space>wq :<C-u>wq<CR>
+nnoremap <Space>q :<C-u>q<CR>
 
-" tab
+" タブ
 nnoremap <C-n> gt
 nnoremap <C-p> gT
-nnoremap <Leader>tt :<C-u>tabnew<CR>
-nnoremap <Leader>tf :<C-u>tabfirst<CR>
-nnoremap <Leader>tl :<C-u>tablast<CR>
-nnoremap <Leader>tn :<C-u>tabnext<CR>
-nnoremap <Leader>tN :<C-u>tabNext<CR>
-nnoremap <Leader>tp :<C-u>tabprevious<CR>
-nnoremap <Leader>te :<C-u>tabedit
-nnoremap <Leader>tc :<C-u>tabclose<CR>
-nnoremap <Leader>to :<C-u>tabonly<CR>
-nnoremap <Leader>ts :<C-u>tabs<CR>
-nnoremap <Leader>td :<C-u>tabdo
-nnoremap <Leader>tf :<C-u>tabfind
-nnoremap <Leader>tm :<C-u>tabmove
+nnoremap <Space>tt :<C-u>tabnew<CR>
+nnoremap <Space>tf :<C-u>tabfirst<CR>
+nnoremap <Space>tl :<C-u>tablast<CR>
+nnoremap <Space>tn :<C-u>tabnext<CR>
+nnoremap <Space>tN :<C-u>tabNext<CR>
+nnoremap <Space>tp :<C-u>tabprevious<CR>
+nnoremap <Space>te :<C-u>tabedit
+nnoremap <Space>tc :<C-u>tabclose<CR>
+nnoremap <Space>to :<C-u>tabonly<CR>
+nnoremap <Space>ts :<C-u>tabs<CR>
+nnoremap <Space>td :<C-u>tabdo<Space>
+nnoremap <Space>tf :<C-u>tabfind<Space>
+nnoremap <Space>tm :<C-u>tabmove<Space>
 
-" search
-nmap <ESC><ESC> ;nohlsearch<CR><ESC>
+" 検索ハイライトをクリア
+nnoremap <silent><ESC><ESC> :nohlsearch<CR><ESC>
 
-" edit'
-inoremap <C-d> <Del>
-inoremap <C-h> <BackSpace>
+" インサートモード
+imap <C-e> <End>
+imap <C-a> <Home>
+imap <C-h> <Backspace>
+imap <C-d> <Del>
+imap <expr><C-n> pumvisible() ? "\<C-y>\<Down>" : "\<Down>"
+imap <expr><C-p> pumvisible() ? "\<C-y>\<Up>" : "\<Up>"
+imap <expr><C-b> pumvisible() ? "\<C-y>\<Left>" : "\<Left>"
+imap <expr><C-f> pumvisible() ? "\<C-y>\<Right>" : "\<Right>"
 
-inoremap <leader>date <C-R>=strftime('%A,  %B %d,  %Y')<CR>
+" 空行挿入
+inoremap <Leader><Leader> <ESC>:<C-u>call append(expand('.'), '')<CR>ji
+nnoremap <Leader><Leader> :<C-u>call append(expand('.'), '')<CR>j
+
+" 日付挿入
 inoremap <leader>time <C-R>=strftime('%H:%M')<CR>
-inoremap <leader>rdate <C-R>=strftime('%A,  %B %d,  %Y %H:%M')<CR>
-inoremap <leader>wdate <C-R>=strftime('%Y-%m-%dT%H:%M:%S+09:00')<CR>
+inoremap <leader>date <C-R>=strftime('%Y-%m-%dT%H:%M:%S+09:00')<CR>
 
 "}}}
 " Misc command {{{
@@ -290,6 +328,11 @@ command! Iso2022jp edit ++enc=iso-2022-jp
 command! Utf8 edit ++enc=utf-8
 command! Jis Iso2022jp
 command! Sjis Cp932
+" }}}
+" Autocmd {{{
+
+autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
+
 " }}}
 " Filetype {{{
 " HTML {{{
@@ -311,42 +354,72 @@ autocmd FileType javascript setlocal foldmarker={,}
 autocmd FileType python set expandtab
 " }}}
 " Ruby {{{
-autocmd FileType ruby set shiftwidth=2 tabstop=2
+autocmd FileType ruby set expandtab tabstop=2 shiftwidth=2 softtabstop=2
 " }}}
-" Dotfile {{{
-autocmd BufNewFile,BufRead *.vimrc set filetype=vim
-autocmd BufNewFile,BufRead *.vimperatorrc set filetype=vim
+" Help {{{
+
+au FileType help nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+au FileType help inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+au FileType help nnoremap <silent> <buffer> <Space><Space> :q<CR>
+au FileType help inoremap <silent> <buffer> <Space><Space> <ESC>:q<CR>
+
 " }}}
 " }}}
 " Plugin setting {{{
+
 " neocomplcache {{{
 
-" Disable AutoComplPop.
+" AutoComplPopを無効
 let g:acp_enableAtStartup = 0
-" Use neocomplcache.
+" vim起動時に有効化
 let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
+"smart_caseを有効にする．大文字が入力されるまで大文字小文字の区別をなくす
 let g:neocomplcache_enable_smart_case = 1
-" Use camel case completion.
+" CamelCase補完有効化
 let g:neocomplcache_enable_camel_case_completion = 1
-" Use underbar completion.
+" _を区切りとした補完を有効にする
 let g:neocomplcache_enable_underbar_completion = 1
-" Set minimum syntax keyword length.
+" シンタックスをキャッシュするときの最小文字長を3に
 let g:neocomplcache_min_syntax_length = 3
+" neocomplcacheを自動的にロックするバッファ名のパターンを指定
+" ku.vimやfuzzyfinderなど、neocomplcacheと相性が悪いプラグインを使用する場合に設定
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+" 日本語を収集しないようにする.
+" if !exists('g:neocomplcache_keyword_patterns')
+  " let g:neocomplcache_keyword_patterns = {}
+" endif
+" let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+" " リストサイズ
+let g:neocomplcache_max_list = 100
+let g:neocomplcache_max_keyword_width = 20
+"リストの最大幅を指定
+"let g:neocomplcache_max_filename_width = 25
+" Ctags
+let g:neocomplcache_ctags_program = '/usr/local/bin/ctags'
+" スニペットの保存場所
+let g:neocomplcache_snippets_dir = $HOME.'/.vim/snippets'
 
-" Define dictionary.
+" Define dictionary
 let g:neocomplcache_dictionary_filetype_lists = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
+    \ 'default'     : '',
+    \ 'actionscript': $HOME . 'vim/dict/actionscript.dict',
+    \ 'java'        : $HOME . '/.vim/dict/java.dict',
+    \ 'c'           : $HOME . '/.vim/dict/c.dict',
+    \ 'cpp'         : $HOME . '/.vim/dict/cpp.dict',
+    \ 'javascript'  : $HOME . '/.vim/dict/javascript.dict',
+    \ 'ocaml'       : $HOME . '/.vim/dict/ocaml.dict',
+    \ 'objc'        : $HOME . '/.vim/dict/objc.dict',
+    \ 'perl'        : $HOME . '/.vim/dict/perl.dict',
+    \ 'php'         : $HOME . '/.vim/dict/php.dict',
+    \ 'ruby'        : $HOME . '/.vim/dict/ruby.dict',
+    \ 'scheme'      : $HOME . '/.vim/dict/scheme.dict',
+    \ 'vim'         : $HOME . '/.vim/dict/vim.dict',
+    \ 'vimshell'    : $HOME . '/.vimshell_hist',
+    \ }
 
-" Define keyword.
-if !exists('g:neocomplcache_keyword_patterns')
-  let g:neocomplcache_keyword_patterns = {}
-endif
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+"Quick Type, ignore neocomplcache.
+let g:NeoComplCache_SkipCompletionTime = '0.3'
+let g:NeoComplCache_SkipInputTime = '0.1'
 
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neocomplcache_snippets_expand)
@@ -354,10 +427,10 @@ smap <C-k>     <Plug>(neocomplcache_snippets_expand)
 inoremap <expr><C-g>     neocomplcache#undo_completion()
 inoremap <expr><C-l>     neocomplcache#complete_common_string()
 
-" SuperTab like snippets behavior.
-"imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+" SuperTab like snippets behavior. " 試験的に
+imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 
-" Recommended key-mappings.
+" キーマップ
 " <CR>: close popup and save indent.
 inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
 " <TAB>: completion.
@@ -366,8 +439,7 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
-
+" inoremap <expr><C-e>  neocomplcache#cancel_popup()
 " For cursor moving in insert mode(Not recommended)
 inoremap <expr><Left>  neocomplcache#close_popup() . "\<Left>"
 inoremap <expr><Right> neocomplcache#close_popup() . "\<Right>"
@@ -376,7 +448,6 @@ inoremap <expr><Down>  neocomplcache#close_popup() . "\<Down>"
 
 " AutoComplPop like behavior.
 "let g:neocomplcache_enable_auto_select = 1
-
 " Shell like behavior(not recommended).
 "set completeopt+=longest
 "let g:neocomplcache_enable_auto_select = 1
@@ -385,89 +456,117 @@ inoremap <expr><Down>  neocomplcache#close_popup() . "\<Down>"
 "inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
 
 " Enable omni completion.
+autocmd FileType actionscript setlocal omnifunc=actionscriptcomplete#CompleteAS
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType c setlocal omnifunc=ccomplete#Complete
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 
 " Enable heavy omni completion.
 if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
 endif
 let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
-"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
 let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
-"Quick Type, ignore neocomplcache.
-let g:NeoComplCache_SkipCompletionTime = '0.3'
-let g:NeoComplCache_SkipInputTime = '0.1'
+
 " }}}
 " RSense {{{
-
-if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
-endif
 
 let g:rsenseUseOmniFunc = 1
 
 if !empty( $RSENSE_HOME ) && filereadable(expand( $RSENSE_HOME.'/bin/rsense'))
   let g:rsenseHome = $RSENSE_HOME
   let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+  autocmd FileType ref-refe nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+  autocmd FileType ref-refe inoremap <silent> <buffer> <ESC><ESC> :q<CR>
+  autocmd FileType ref-refe nnoremap <silent> <buffer> <Space><Space> <ESC>:q<CR>
+  autocmd FileType ref-refe inoremap <silent> <buffer> <Space><Space> <ESC>:q<CR>
 endif
 
 " }}}
 " unite {{{
-" let g:unite_enable_start_insert=1
-nnoremap <silent> <Leader>ub :<C-u>Unite buffer<CR>
-nnoremap <silent> <Leader>uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> <Leader>ur :<C-u>Unite -buffer-name=register register<CR>
-nnoremap <silent> <Leader>um :<C-u>Unite file_mru<CR>
-nnoremap <silent> <Leader>uu :<C-u>Unite buffer file_mru<CR>
-nnoremap <silent> <Leader>ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
-au FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
-au FileType unite inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
-au FileType unite nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
-au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
-"}}}
+
+let g:unite_enable_start_insert=1
+nnoremap <silent> <Space>ub :<C-u>Unite buffer<CR>
+nnoremap <silent> <Space>uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> <Space>ur :<C-u>Unite -buffer-name=register register<CR>
+nnoremap <silent> <Space>uh :<C-u>Unite refe/
+nnoremap <silent> <Space>um :<C-u>Unite file_mru<CR>
+nnoremap <silent> <Space>uu :<C-u>Unite buffer file_mru<CR>
+nnoremap <silent> <Space>ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+autocmd FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
+autocmd FileType unite inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
+autocmd FileType unite nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+autocmd FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+autocmd FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+autocmd FileType unite inoremap <silent> <buffer> <ESC><ESC> :q<CR>
+autocmd FileType unite nnoremap <silent> <buffer> <Space><Space> <ESC>:q<CR>
+autocmd FileType unite inoremap <silent> <buffer> <Space><Space> <ESC>:q<CR>
+ "}}}
 " NERD_commenter {{{
+
 let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
-nmap <c-o> <Plug>NERDCommenterToggle
-vmap <c-o> <Plug>NERDCommenterToggle
-nmap <Leader>cc <Plug>NERDCommenterAlignLeft
-vmap <Leader>c  <Plug>NERDCommenterComment
-nmap <Leader>C  <Plug>NERDCommenterToEOL
-vmap <Leader>C  <Plug>NERDCommenterAlignLeft
-nmap <Leader>u  <Plug>NERDCommenterUncomment
-vmap <Leader>u  <Plug>NERDCommenterUncomment
-nmap <Leader>xm <Plug>NERDCommenterMinimal
-nmap <Leader>xs <Plug>NERDCommenterSexy
-vmap <Leader>xm <Plug>NERDCommenterMinimal
-vmap <Leader>xs <Plug>NERDCommenterSexy
-nmap <Leader>xa <Plug>NERDCommenterAltDelims
+
+nmap <C-o> <Plug>NERDCommenterToggle
+vmap <C-o> <Plug>NERDCommenterToggle
+vmap <Space>c <Plug>NERDCommenterToggle
+nmap <Space>c <Plug>NERDCommenterToggle
+nmap <Space>xm <Plug>NERDCommenterMinimal
+nmap <Space>xs <Plug>NERDCommenterSexy
+vmap <Space>xm <Plug>NERDCommenterMinimal
+vmap <Space>xs <Plug>NERDCommenterSexy
+nmap <Space>xa <Plug>NERDCommenterAltDelims
+
 " }}}
 " autodate {{{
+
 let g:autodate_format = ': %FT%T%z'
 let g:autodate_keyword_pre = '$Date'
 let g:autodate_keyword_post = '\$'
-" }}}
+
+ " }}}
 " tagbar {{{
 nnoremap <silent> <F8> :TagbarToggle<CR>
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 let g:tagbar_autoshowtag = 1
-" }}}
-" vimfiler {{{
-nnoremap <F3> :VimFiler<CR>
-nnoremap <F4> :VimFilerSimple<CR>
-let g:vimfiler_as_default_explorer = 1
-" }}}
-" git-vim {{{
-let g:git_command_edit='leftabove vnew'
+autocmd FileType tagbar nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+autocmd FileType tagbar nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+autocmd FileType tagbar inoremap <silent> <buffer> <Space><Space> <ESC>:q<CR>
+autocmd FileType tagbar inoremap <silent> <buffer> <Space><Space> <ESC>:q<CR>
 " }}}
 " vim-ref {{{
+
 let g:ref_phpmanual_path = $HOME.'/Reference/php/php-chunked-xhtml'
+
+" }}}
+" quickrun {{{
+"<Leader>r を使わない
+let g:quickrun_no_default_key_mappings = 1
+" quickrun_configの初期化
+if !has("g:quickrun_config")
+  let g:quickrun_config = {}
+endif
+nmap <silent><Space>r <Plug>(quickrun)<CR>
+" use rvm
+" via http://d.hatena.ne.jp/uasi/20110411/1302531017
+if strlen($rvm_bin_path)
+  let g:quickrun_config['ruby'] = {
+\   'command': 'ruby',
+\   'exec': '$rvm_bin_path/ruby %s',
+\   'tempfile': '{tempname()}.rb'
+\ }
+endif
+autocmd FileType quickrun nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+autocmd FileType quickrun inoremap <silent> <buffer> <ESC><ESC> :q<CR>
+autocmd FileType quickrun nnoremap <silent> <buffer> <Space><Space> <ESC>:q<CR>
+autocmd FileType quickrun inoremap <silent> <buffer> <Space><Space> <ESC>:q<CR>
+
 " }}}
 
 " }}}

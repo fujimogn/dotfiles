@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/completion.zshrc
-# $Date: 2011-11-06T02:41:15+0900$
+# $Date: 2011-11-06T12:35:13+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 fpath=(${ZDOTDIR}/modules/zsh-completions $fpath)
@@ -59,7 +59,11 @@ zstyle ':completion:*:man:*' menu yes select
 
 # caching
 zstyle ':completion:*' use-cache true
-zstyle ':completion::complete:*' cache-path ${ZDOTTMP}
+# zstyle ':completion::complete:*' cache-path ${ZDOTTMP}
+
+# url auto quote
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic
 
 # filetypes based completion
 compctl -g '*.Z *.gz *.tgz' + -g '*' zcat zless zgrep gunzip gzip

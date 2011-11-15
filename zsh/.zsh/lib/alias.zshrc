@@ -1,8 +1,9 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/alias.zshrc
-# $Date: 2011-11-06T00:33:54+0900$
+# $Date: 2011-11-06T12:35:42+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
+
 
 alias cp='cp -i'
 alias mv='mv -i'
@@ -56,10 +57,10 @@ alias 755="chmod 755"
 
 alias gd='dirs -lv; echo -n "select number: "; read newdir; cd +"$newdir"'
 
-alias set_utf='export LANG=ja_JP.UTF-8; export LANGUAGE=ja_JP.UTF-8; export LC_ALL=ja_JP.UTF-8'
-alias set_en='export LANG=en; export LANGUAGE=en; export LC_ALL=en'
-alias set_eucjp='export LANG=ja_JP.eucJP; export LANGUAGE=ja_JP.eucJP; export LC_ALL=ja_JP.eucJP'
-alias set_sjis='export LANG=ja_JP.SJIS; export LANGUAGE=ja_JP.SJIS; export LC_ALL=ja_JP.SJIS'
+alias utf-8='export LANG=ja_JP.UTF-8; export LANGUAGE=ja_JP.UTF-8; export LC_ALL=ja_JP.UTF-8'
+alias en='export LANG=en; export LANGUAGE=en; export LC_ALL=en'
+alias eucjp='export LANG=ja_JP.eucJP; export LANGUAGE=ja_JP.eucJP; export LC_ALL=ja_JP.eucJP'
+alias sjis='export LANG=ja_JP.SJIS; export LANGUAGE=ja_JP.SJIS; export LC_ALL=ja_JP.SJIS'
 
 alias py=python
 alias irb='irb --readline -r irb/completion'
@@ -69,23 +70,21 @@ alias -g M='| more'
 alias -g T='| tail'
 alias -g H='| head'
 alias -g L='| less'
+alias -g S='| sort'
+alias -g W='| wc'
 
 # via http://d.hatena.ne.jp/mollifier/20100317/p1
 if which pbcopy >/dev/null 2>&1 ; then
-
-  # Mac
   alias -g C='| pbcopy'
   alias -g P='`pbpaste`'
   alias p='pbpaste'
-
 elif which xsel >/dev/null 2>&1 ; then
-
-  # Linux
   alias -g C='| xsel --input --clipboard'
-
 elif which putclip >/dev/null 2>&1 ; then
-
-  # Cygwin
   alias -g C='| putclip'
-
 fi
+
+# zmv
+# via http://d.hatena.ne.jp/mollifier/20101227/
+autoload -Uz zmv
+alias zmv='noglob zmv -W'

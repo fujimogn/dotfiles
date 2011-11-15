@@ -1,7 +1,7 @@
 #!/usr/bin/sh
 #
 # $File: ${DOTDIR}/system/env
-# $Date: 2011-11-01T21:43:34+0900$
+# $Date: 2011-11-06T13:13:02+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # Lang
@@ -49,9 +49,12 @@ else
   alias lv="$PAGER"
 fi
 
-
-# polipo
-if [ -x /usr/local/bin/polipo ]; then
-  export http_proxy=http://127.0.0.1:8123/
-  export ALL_PROXY=$http_proxy
+# Firefox
+APPS=${HOME}/Library/Application\ Support
+if [ -d "${APPS}/Firefox" ]; then
+  PROF=`sed -n "s/Path=\(.*\)$/\1/p" "${APPS}/Firefox/profiles.ini"`
+  export FIREFOX_PROF_PATH="${APPS}/Firefox/${PROF}"
+  unset PROF
 fi
+unset APPS
+

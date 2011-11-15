@@ -1,13 +1,13 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/w3m/w3m.zsh
-# $Date: 2011-10-29T18:58:12+0900$
+# $Date: 2011-11-08T08:19:21+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 ! which w3m >/dev/null 2>&1 && return 1
 
 export WWW_BROWSER=w3m
-[ -f "${HOME}/.w3m/bookmark.html" ] && export HTTP_HOME="${HOME}/.w3m/bookmark.html"
+export HTTP_HOME="${HOME}/.w3m/bookmark.html"
 
 
 function alc() {

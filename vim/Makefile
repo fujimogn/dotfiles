@@ -1,5 +1,5 @@
-OS	   := $(shell uname)
-ifeq ($(OS),Cygwin)
+OSTYPE	   := $(shell uname)
+ifeq ($(OSTYPE),Cygwin)
 CURDIR := "$(shell cygpath -w $(CURDIR))"
 PREFIX ?= "$(shell cygpath -w $(HOME))"
 LN		= cmd /c mklink
@@ -39,7 +39,7 @@ endif
 
 install-srcs:
 	@for F in $(SRCS); do \
-		if [ "$(OS)" = "Cygwin" ]; then \
+		if [ "$(OS)" = "Cygwin" ] || [ "$(OS)" = "Windows_NT"  ]; then \
 			[ -x /usr/bin/iconv ] && [ $${LANG##*.} = "UTF-8" ] && CONV=" | iconv -f SJIS -t $${LANG##*.}"; \
 			if [ -f $${F} ]; then \
 				$(RM) $(PREFIX)$(S)$${F} && $(LN) $(PREFIX)$(S)$${F} $(CURDIR)$(S)$${F}$${CONV}; \

@@ -1,12 +1,11 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/color.zshrc
-# $Date: 2011-11-02T00:17:10+0900$
+# $Date: 2011-11-06T12:35:55+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # fg bg reset_color
-autoload -U colors
-colors
+autoload -U colors; colors
 
 if [[ "$terminfo[colors]" -gt 8 ]]; then
     colors

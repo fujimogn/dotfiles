@@ -1,13 +1,24 @@
 PREFIX	:= $(HOME)
-OS	:= $(shell uname)
 
-ifeq ($(OS), Linux)
+OSTYPE = $(shell uname)
+
+ifeq ($(OSTYPE),FreeBSD)
+SRC	= freebsd
+endif
+
+ifeq ($(OSTYPE),Linux)
 SRC	= linux
 endif
-ifeq ($(OS), Darwin)
+
+ifeq ($(OSTYPE),Darwin)
 SRC	= darwin
 endif
-ifeq ($(OS), Cygwin)
+
+ifeq ($(OS),Windows_NT)
+SRC	= cygwin
+endif
+
+ifeq ($(OSTYPE),cygwin)
 SRC	= cygwin
 endif
 

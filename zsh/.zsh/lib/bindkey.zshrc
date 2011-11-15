@@ -1,10 +1,10 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/bindkey.zshrc
-# $Date: 2011-11-01T23:06:10+0900$
+# $Date: 2011-11-15T16:17:41+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
-bindkey -v
+bindkey -e
 bindkey '^U' backward-kill-line                     # Ctrl-u でカーソル位置から前方削除
 bindkey "^H" backward-kill-word                     # Ctrl-h で単語ごとに削除
 bindkey "^P" history-beginning-search-backward-end  # Ctrl-p で履歴を後方検索
