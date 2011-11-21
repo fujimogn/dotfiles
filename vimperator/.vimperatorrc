@@ -1,5 +1,5 @@
 ""3.3pre
-" $Date: 2011-11-15T17:32:12+0900$
+" $Date: 2011-11-21T11:17:45+0900$
 
 
 " Options ---------------------------------------------------------------------------- {{{
@@ -116,7 +116,7 @@ set focuscontent
 " navigation  : メインツールバーを表示
 " tabs        : タブを表示
 
-set gui=noaddons,nobookmarks,nomenu,nonavigation,notabs
+set gui=noaddons,bookmarks,nomenu,nonavigation,notabs
 
 "}}}
 " helpfile          // ヘルプページ閲覧時ステータスラインに表示されるchromeURL末尾部分 {{{
@@ -621,14 +621,7 @@ silent qmark t http://twitter.com
 silent qmark y http://www.youtube.com
 
 " }}}
-" Color ------------------------------------------------------------------------------ {{{
-
-
-colorscheme vimpwhite
-
-
-" }}}
-"Plugin Setting ---------------------------------------------------------------------- {{{
+" Plugin Setting ---------------------------------------------------------------------- {{{
 
 js <<EOM
 liberator.globalVariables.plugin_loader_roots = "~/.vimperator/plugin/ ~/.vimperator/vimpr/";
@@ -670,8 +663,7 @@ EOM
 
 let g:direct_sbm_use_services_by_tag = "h"
 let g:direct_sbm_use_services_by_post = "h"
-" let g:direct_sbm_is_use_migemo = "true"
-nnoremap B :bentry<CR>
+let g:direct_sbm_is_use_migemo = "true"
 nnoremap a :sbm<Space>
 
 " }}}
@@ -718,6 +710,13 @@ let g:ldrc_skip = "0"
 map S :toggleldrc<CR>
 
 " }}}
+
+
+" }}}
+" Color ------------------------------------------------------------------------------ {{{
+
+
+colorscheme monokai_fujimogn
 
 
 " }}}

@@ -1,0 +1,319 @@
+" -- vimperator colorscheme --
+" name: vimpwhite
+" author: tlync<Takuya Fujimura>
+" tested: vimperator 3.0, firefox 4.0, mac osx 10.6
+" ----------------------------
+
+
+hi Boolean <<EOM
+  color: #f92672;
+EOM
+
+hi Function <<EOM
+  color: #fd971f;
+EOM
+
+
+hi Null <<EOM
+  color: cornflowerblue;
+EOM
+
+hi Number <<EOM
+  color: #ae81ff;
+EOM
+
+hi Object <<EOM
+  color: #a6e22e;
+EOM
+
+hi String <<EOM
+  color: #e6db74;
+EOM
+
+hi Mapping <<EOM
+  color: #6669ef;
+EOM
+
+hi Key <<EOM
+  font-weight: bold;
+EOM
+
+hi Enabled <<EOM
+  color: #d0ffd0;
+EOM
+
+hi Disabled <<EOM
+  color: #f92672;
+EOM
+
+hi Normal <<EOM
+  color: #f8f8f0;
+  background: #272822;
+  font-size: 14px;
+  opacity: 0.95;
+EOM
+
+hi ErrorMsg <<EOM
+  color: #f8f8f0;
+  background: #f92672;
+  font-size: 12px;
+  min-height: 16px;
+EOM
+
+hi InfoMsg <<EOM
+  color: #f8f8f0;
+  background: #272822;
+  font-size: 12px;
+  min-height: 16px;
+EOM
+
+hi ModeMsg <<EOM
+  color: #f8f8f0;
+  background: #272822;
+  font-size: 12px;
+  min-height: 16px;
+EOM
+
+hi MoreMsg <<EOM
+  color: #d0ffd0;
+  background: #272822;
+  font-size: 12px;
+  min-height: 16px;
+EOM
+
+hi WarningMsg <<EOM
+  color: #f92672;
+  background: #272822;
+  font-size: 12px;
+  min-height: 16px;
+EOM
+
+hi Message <<EOM
+  font-size: 12px;
+  min-height: 16px;
+EOM
+
+hi NonText <<EOM
+  color: #75716e;
+  font-size: 12px;
+  min-height: 16px;
+EOM
+
+hi Preview <<EOM
+  color: #a6e22e;
+EOM
+
+hi Prompt <<EOM
+  background: url("chrome://liberator/skin/prompt.png");
+  width: 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+EOM
+
+hi PromptText <<EOM
+  font-family: "DejaVu Sans Mono", "Ricty", "Lucida Grande", "Segoe UI", monospace;
+  background: -moz-linear-gradient(top, #6BA7EF, #3163AA);
+  text-shadow: 1px 1px #1D3C66;
+  color: white;
+  font-size: 12px;
+  border: 1px solid #3366AD;
+  padding: 3px 4px;
+  border-top: none;
+EOM
+
+hi CmdOutput <<EOM
+  white-space: pre;
+EOM
+
+hi CmdLine <<EOM
+  font-family: "DejaVu Sans Mono", "Ricty", "Lucida Grande", "Segoe UI", monospace;
+  font-size: 14px;
+  background: #272822;
+  color: #f8f8f0;
+EOM
+
+hi CmdLine>* <<EOM
+  font-family: monospace;
+EOM
+
+hi ContentSeparator <<EOM
+  border: none;
+  display: -moz-box;
+EOM
+
+"hi CompGroup
+hi CompGroup:not(:first-of-type) <<EOM
+  margin-top: 1ex;
+EOM
+
+hi CompTitle <<EOM
+  font-size: 14px;
+  background: #49483e;
+  font-weight: bold;
+EOM
+
+hi CompTitle>* <<EOM
+  color: #272822;
+  padding: 1px 0.5ex;
+EOM
+
+hi CompMsg <<EOM
+  font-style: italic;
+  margin-left: 16px;
+EOM
+
+hi CompItem <<EOM
+  font-size: 12px;
+EOM
+
+hi CompItem[selected] <<EOM
+  color: #f8f8f2;
+  background: #49483e;
+EOM
+
+hi CompItem>* <<EOM
+  height: 18px;
+  min-height: 18px;
+  padding: 0 0.5ex;
+EOM
+
+hi CompIcon <<EOM
+  width: 16px;
+  min-width: 16px;
+  display: inline-block;
+  margin-right: .5em;
+EOM
+
+hi CompIcon>img <<EOM
+  max-width: 16px;
+  max-height: 16px;
+  vertical-align: middle;
+EOM
+
+hi CompResult <<EOM
+  width: 500px;
+  max-width: 500px;
+  overflow: hidden;
+EOM
+
+hi CompDesc <<EOM
+  width: 500px;
+  max-width: 500px;
+  color: #75716e;
+EOM
+
+hi Indicator <<EOM
+  color: #a6e22e;
+EOM
+
+hi Filter <<EOM
+  color: #272822;
+  background: #e6db74;
+EOM
+
+hi Keyword <<EOM
+  color: #f92672;
+  background: #e6db74;
+EOM
+
+hi Tag <<EOM
+  color: #6669ef;
+EOM
+
+hi LineNr <<EOM
+  color: #ffd0d0;
+  background: #272822;
+EOM
+
+hi Question <<EOM
+  color: #6669ef;
+  background: #272822;
+  font-weight: bold;
+EOM
+
+hi StatusLine <<EOM
+  color: #75716e;
+  background: transparent;
+  font-weight: normal;
+  font-size: 12px;
+EOM
+
+hi TabNumber <<EOM
+  font-weight: bold;
+  margin: 0px;
+  padding-right: .3ex;
+EOM
+
+hi Title <<EOM
+  color: #f92672;
+  background: #272822;
+  font-weight: bold;
+EOM
+
+hi URL <<EOM
+  text-decoration: none;
+  color: #e6db74;
+EOM
+
+hi URL:hover <<EOM
+  text-decoration: underline;
+  cursor: pointer;
+EOM
+
+hi FrameIndicator <<EOM
+  background-color: #f92672;
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+EOM
+
+hi Bell <<EOM
+  border: none;
+  background-color: #f8f8f0;
+EOM
+
+hi HintElem <<EOM
+  background-color: #fffac6;
+  border-radius: 2px;
+EOM
+
+hi Hint <<EOM
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: normal;
+  background: -moz-linear-gradient(top, #6BA7EF, #3163AA);
+  text-shadow: 0 1px #1D3C66;
+  text-transform: uppercase;
+  color: white;
+  background-color: red;
+  padding: 2px 5px;
+  border-radius: 3px;
+  border: 1px solid #3366AD;
+EOM
+
+style -name customize-toolbar chrome://* <<EOM
+  #liberator-customize-toolbar {
+    border: none !important;
+    background: none !important;
+    -moz-appearance: none !important;
+    opacity: .95;
+    padding: 1px 0 0 0;
+    margin: 0;
+  }
+  #liberator-customize-toolbar > *,
+  #liberator-customize-toolbar > #greasemonkey-tbb .toolbarbutton-menubutton-button,
+  #liberator-customize-toolbar > #greasemonkey-tbb .toolbarbutton-menubutton-dropmarker {
+    border: none !important;
+    background: none !important;
+    -moz-appearance: none !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    vertical-align: middle;
+  }
+
+EOM
+
+" vim: ft=vimperator
