@@ -2,13 +2,13 @@ PREFIX	:= $(HOME)
 
 APP	:= $(shell basename $(CURDIR))
 
-SRCS	:= kana-rule.conf
+SRCS	:=
 DIR	:= $(PREFIX)/Library/$(APP)
 
-APPSSRCS:=
+APPSSRCS:= keymap.conf azik-supp.rule zw.rule
 APPSDIR := $(PREFIX)/Library/Application\ Support/$(APP)
 
-PREFSRCS:= jp.sourceforge.inputmethod.aquaskk.plist
+PREFSRCS:=
 PREFDIR:= $(PREFIX)/Library/Preferences
 
 all: install

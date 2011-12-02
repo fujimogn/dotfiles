@@ -12,26 +12,26 @@ alias kr4mb=${CMD}
 
 # {{{ Setting
 
-while read line
-do
-  [[ $line = \#* ]] && continue
-  ${CMD} enable ${line}
-done<<EOF
-private.drop_escape
-private.control_bracket_to_escape
-private.shift_r_to_delete
-private.space_to_shiftL
-private.sticky_shiftL
-private.tarminal_escape_with_ime_off
-private.jis_commandL2commandL_toggle_kana_eisuu
-private.jis_commandL2commandR_toggle_kana_eisuu
-#private.app_finder_return_to_command_o
-#private.app_finder_command_R_to_return
-#private.app_finder_f2_to_return
-#save.vimode_finder
-#private.vimode_finder_command_v_to_toggle
-#private.vimode_finder_esc_to_off
-EOF
+# while read line
+# do
+  # [[ $line = \#* ]] && continue
+  # ${CMD} enable ${line}
+# done<<EOF
+# private.drop_escape
+# private.control_bracket_to_escape
+# private.shift_r_to_delete
+# private.space_to_shiftL
+# private.sticky_shiftL
+# private.tarminal_escape_with_ime_off
+# private.jis_commandL2commandL_toggle_kana_eisuu
+# private.jis_commandL2commandR_toggle_kana_eisuu
+# private.app_finder_return_to_command_o
+# private.app_finder_command_R_to_return
+# private.app_finder_f2_to_return
+# save.vimode_finder
+# private.vimode_finder_command_v_to_toggle
+# private.vimode_finder_esc_to_off
+# EOF
 
 # }}}
 # {{{ Display the list of identifier name on KeyRemap4MacBook
