@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/prompt.zshrc
-# $Date: 2011-12-03T18:52:10+0900$
+# $Date: 2011-12-03T18:54:53+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 autoload -Uz VCS_INFO_get_data_git; VCS_INFO_get_data_git 2> /dev/null
@@ -63,7 +63,7 @@ function git-since-commit() {
       elif [ ${MINUTES} -gt 1 ]; then
         echo "${MINUTES} mimutes ago"
       elif [ ${MINUTES} -eq 1 ]; then
-        echo "1 mimutes ago"
+        echo "1 mimute ago"
       else
         echo "just now"
       fi
