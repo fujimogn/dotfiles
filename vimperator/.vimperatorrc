@@ -1,470 +1,53 @@
 ""3.3pre
-" $Date: 2011-11-21T11:17:45+0900$
+" $Date: 2011-11-29T12:46:17+0900$
+
 
 
 " Options ---------------------------------------------------------------------------- {{{
 
-" active                                   // 自動的にタブが選択されるタイミングの設定 {{{
-" (default: "addons,downloads,extensions,help,homepage,quickmark,tabopen,paste")
-" addons      : :addo[ns] コマンド
-" downloads   : :downl[oads] コマンド
-" extoptions  : :exto[ptions] コマンド
-" help        : :h[elp] コマンド
-" homepage    : gH マッピング
-" quickmark   : go と gn マッピング
-" tabopen    : :tabopen[!] コマンド
-" paste       : P と gP マッピング
-
-" set activate=
-
-" }}}
-" autocomplete                                                                      // {{{
-
-set autocomplete
-
-" }}}
-" complete // 補完設定・順序 {{{
-" (default: slf)
-" s : サーチエンジンの名前とブックマークキーワード
-" f : ローカルファイル
-" l : Firefox のロケーションバーのエントリ (賢くソートされたブックマーク、履歴)
-" b : ブックマーク
-" h : 履歴
-" S : サジェストエンジン
-" t : 開かれているタブ
-
-set complete=tsl
-
-" }}}
-" defsearch                                      // デフォルトで使用するサーチエンジン {{{
-" (default: google)
-
-" set defsearch=google
-
-" }}}
-" edito                                                                // 外部エディタ {{{
-" (default: gvim -f)
-" 挿入モードもしくはテキストエリアモードで <C-i> を押した際に起ち上がる
-
-js<<EOM
-if (liberator.has("MacUnix")) {
-  liberator.execute("set editor=/usr/local/bin/mvim");
-} else if (liberator.has("Win32")) {
-  liberator.execute("set editor=gvim.exe\\ --remote-tab-silent");
-} else {
-}
-EOM
-
-" }}}
-" exrc             // カレントディレクトリからもRCファイルの読み込みができるようにする {{{
-" (default: off)
-
-" set exrc
-
-" }}}
-" extendedhinttag                         // ; で有効になるヒント要素を指し示すXPath式 {{{
-
-" set extendedhinttag=
-
-" }}}
-" errorbells                         // エラーメッセージが表示される時にベルを鳴らすか {{{
-" (default: off)
-
-" set noerrorbells
-
-" }}}
-" eventignore                        // 無視するべきオートコマンドのイベント名のリスト {{{
-" (default: *)
-
-" set eventignore=*
-
-" }}}
-" fileencoding            // Vimperator がファイルの読み書きに使う文字エンコーディング {{{
-" (default: UTF-8)
-
-" set fileencoding=UTF-8
-
-" }}}
-" focuscontent                                   // 自動で入力欄へのフォーカスを無効化 {{{
-" (default: off)
-
-set focuscontent
-
-" }}}
-" followhints                                   // ヒントモードにおける<Return> の挙動 {{{
-" (default: 0)
-"
-" 0 : 入力されたテキストによってヒントがひとつに絞られた場合すぐにそれを辿ります。
-" 1 : <Return>　で選択されているヒントを辿ります。
-" 2 : <Return> で選択されているヒントを辿りますが、 <Tab> によって選択されていなければなり
-"     ません。
-
-" set followhints
-
-" }}}
-" fullscreen                                                     // フルスクリーン表示 {{{
-" (default: off)
-
-" set nofullscreen
-
-" }}}
-" gui                                                                  // GUIオプション{{{
-"
-" addon       : アドオンバーを表示
-" bookmark    : ブックマークバーを表示
-" menu        : メニューバーを表示
-" navigation  : メインツールバーを表示
-" tabs        : タブを表示
-
-set gui=noaddons,bookmarks,nomenu,nonavigation,notabs
-
-"}}}
-" helpfile          // ヘルプページ閲覧時ステータスラインに表示されるchromeURL末尾部分 {{{
-" (default: intro)
-
-" set helpfile=intro
-
-" }}}
-" hintchar                                      // ヒントの見出し(label)に利用する文字 {{{
-" (default: 0123456789)
-
-set hintchars=hjklasdfgyuiopqwertnmzxcvb
-
-" }}}
-" hintinputs                // 明確な見出しを持たない input 要素のヒントの絞り込み方法 {{{
-" (default: label,value)
-"
-" value : ヒントは、テキスト入力やドロップダウンの選択によって表示された値です。
-" label : 入力要素用にと定義されたラベルの値。手動で追加されたラベルではうまくいかないでし
-"         ょう。
-" name  : input 要素の name 属性が使われます。name 属性はユーザが利用するようにはできてい
-"         ないでしょうが、ほとんどの場合 label でも同じ事です。
-
-" set hintinputs=label,value
-
-" }}}
-" hintmatching                         // ヒントモードにおいてマッチに使うアルゴリズム {{{
-" (default: "contains")
-"
-" contains        : 入力された文字列は空白で区切られ、それぞれの文字列はリンクテキストのど
-"                   こかにマッチする必要があります。
-" wordstartswith  : 入力された文字列はリンクの最初の単語からできるだけ長くマッチされます。
-"                   現在の単語がマッチしない場合、次の単語の最初からマッチがなされます。
-"                   単語はリンクに現れる順番でマッチされます。入力された文字列が空白を含む
-"                   場合、文字列は空白で区切られます。これらの文字列は最初の単語からマッチ
-"                   していき、リンクに現れる順に単語がマッチしていきます。
-" firstletters    : wordstartswith と同様に動作しますが、マッチしない単語をとばしません。
-" custom          : カスタム関数 ( liberator.plugins.customHintMatcher(hintString) ) に処
-"                   理をまかせます。
-
-" set hintmatching=contains
-
-" }}}
-" hinttags                           // f と F で有効になるヒント要素を指し示すXPath式 {{{
-
-" set hinttags
-
-" }}}
-" hinttimeoyt                        // ヒントを自動的に確定するまでのタイムアウト時間 {{{
-" 0 に設定すると <Return> が押されるかヒントがひとつに絞られるまでヒントを確定しません
-" (default: 0)
-
-" set hinttimeout=0
-
-" }}}
-" history                                              // コマンドライン履歴への保存数 {{{
-" (default: 500)
-
-set history=1000
-
-" }}}
-" private                                            // プライベートブラウジングモード {{{
-" (default: off)
-
-" set private
-
-" }}}
-" hlsearch                                                     // 検索結果をハイライト {{{
-" (default: off)
-
-set hlsearch
-
-" }}}
-" ignorecase                                         // 検索での大文字小文字を無視する {{{
-" (default: on)
-
-" set ignorecase
-
-" }}}
-" incsearch                                                  // インクリメンタルサーチ {{{
-" (default: on)
-
-" set incsearch
-
-" }}}
-" insertmode                     // テキストエリアにおいてデフォルトで挿入モードを使用 {{{
-" (default: on)
-
-" set insertmode
-
-" }}}
-" inspectcontentobjects              // JavaScriptデバッガーサービスを補完リストで使う {{{
-" (default: off)
-
-set inspectcontentobjects
-
-" }}}
-" linksearch                                     // 検索対象をリンクテキストのみに制限 {{{
-" (default: off)
-
-" set linksearch
-
-" }}}
-" loadplugins                                // 起動時にプラグインスクリプトを読み込む {{{
-" (default: on)
-
-" set loadplugins
-
-" }}}
-" maxitems                                           // リストの一回における最大表示数 {{{
-" (default: 20)
-
-" set maxitems=20
-
-" }}}
-" messages                                     // メッセージ履歴に保存するメッセージ数 {{{
-" (default: 100)
-
-" set messages=100
-
-" }}}
-" more               // メッセージが一画面に収まりらない場合、メッセージ一覧を一時停止 {{{
-" (default: on)
-
-" set more
-
-" }}}
-" nextpattern/previouspattern         // 次/前のページを推測するために使われるパターン {{{
-
-set nextpattern=\bnext\b,\bmore\b,next,^次(の)?ページ,\b次.*,→\b,^>$,^(>>|≫)$,^(>|≫),(>|≫)$
-set previouspattern=\bprev|previous\b,prev,^前(の)?ページ,\b前.*,\b←,^<$,^(<<|≪)$,^(<|≪),(<|≪)$
-
-" }}}
-" newtab                        // 出力結果を自動的に新しいタブに開く exコマンドの種類 {{{
-" (default: "")
-"
-" all         : 全てのコマンド
-" addons      : addo[ns] コマンド
-" downloads   : downl[oads] コマンド
-" extoptions  : exto[ptions] コマンド
-" help        : h[elp] コマンド
-" javascript  : javascript! と :js! コマンド
-" prefs       : pref[erences]! と :prefs! コマンド
-
-set newtab=all
-
-" }}}
-" online                                        // 'オフライン作業' の状態を表示・設定 {{{
-" (default: on)
-
-" set online
-
-" }}}
-" pageinfo                                         // :pageinfo で出力したい情報を設定 {{{
-" (default: gfm)
-"
-" g : 一般的な情報
-" f : フィード
-" m : メタタグ
-
-" set pageinfo=gfm
-
-" }}}
-" popups                                 // ポップアップウィンドウを表示する場所を設定 {{{
-" (default: tab)
-"
-" tab     : 新しいタブ
-" window  : 新しいウィンドウ
-" resized : 新しいウィンドウにリサイズされてポップアップ
-
-" set popups=tab
-
-" }}}
-" runtimepath                              // ランタイムファイルを検索するディレクトリ {{{
-" 環境変数 $VIMPERATOR_RUNTIME が存在しない場合、この値を環境変数に設定
-" (default: $VIMPERATOR_RUNTIME or Unix, Mac: ~/.vimperator, Windows: ~/vimperator)
-
 set runtimepath=~/.vimperator
 
-" }}}
-" sanitizeitems                          // 削除するプライベート情報のデフォルトリスト {{{
-" (default: cache,commandline,cookies,formdata,history,marks,sessions)
-"
-" cache       : キャッシュ
-" commandline : コマンドライン履歴
-" cookies     : クッキー
-" downloads   : ダウンロード履歴
-" formdata    : 保存されたフォームと検索の履歴
-" history     : ブラウジング履歴
-" marks       : ローカル/URLマーク
-" macros      : マクロ
-" offlineapps : オフラインウェブサイトデータ
-" passwords   : 保存されたパスワード
-" sessions    : 認証されたセッション
-" sitesettings: サイトの設定
-
-" set sanitizeitems=cache,commandline,cookies,formdata,history,marks,sessions
-
-" }}}
-" sanitizetimespan                             // デフォルトのプライベート情報除去期間 {{{
-" (default: 1)
-"
-" 0 : 全ての期間
-" 1 : 1時間以内
-" 2 : 2時間以内
-" 3 : 4時間以内
-" 4 : 今日
-
-" set sanitizetimespan=1
-
-" }}}
-" scroll                                   // <C-u> <C-d> コマンドでスクロールする行数 {{{
-" (default: 0)
-" 0 でウィンドウの高さの半分
-
-" set scroll=0
-
-" }}}
-" shell                             // :! や :run コマンドを実行する際に使われるシェル {{{
-" (default: _$SHELL_ or "sh", Windows: "cmd.exe")
-
-" set shell=
-
-" }}}
-" scrollbars                                                   // スクロールバーを表示 {{{
-" (default: on)
-
-set noscrollbars
-
-" }}}
-" shellcmdflag                  // :! や :run コマンドの実行時にシェルに渡されるフラグ {{{
-" (default: -c, Windows: /c)
-
-" set shellcmdflag=
-
-" }}}
-" showmode                                       // コマンドラインに現在のモードを表示 {{{
-" (default: on)
-
-" set showmode
-
-" }}}
-" showstatuslinks          // カーソルの下にあるリンクのリンク先をステータスバーに表示 {{{
-" (default: 1)
-"
-" 0 : リンク先を表示しない
-" 1 : ステータスラインにリンク先を表示
-" 2 : コマンドラインにリンク先を表示
-
-" set showstatuslinks=1
-
-" }}}
-" smallicons                                                                        // {{{
-
-" set smallicons
-
-" }}}
-" smartcase          // 検索パターンが大文字を含む場合 'ignorecase' オプションを無効に {{{
-" (default: on)
-" 'ignorecase' オプションが有効になっているときのみ使用
-
-" set smartcase
-
-" }}}
-" suggestengines                         // 補完時のサジェストに使用するサーチエンジン {{{
-" (default: google)
-
-" set suggestengines=google
-
-" }}}
-" status                                                                            // {{{
-
-" set status
-
-" }}}
-" tabnumbers                                                       // タブに番号を表示 {{{
-" (default: off)
-
-" set number
-
-" }}}
-" titlestring                                          // ブラウザウィンドウのタイトル {{{
-" (default: Vimperator)
-
+" Title
 js liberator.execute('set titlestring=Vimp" '+liberator.version.match(/\d+\.\d+/)+'"');
 
-" }}}
-" toolbars                                                         // ツールバーを表示 {{{
-" gui の別名?
+set autocomplete
+set complete=tsl
+set focuscontent
+set gui=noaddons,bookmarks,nomenu,nonavigation,tabs
+set hintchars=hjklasdfgyuiopqwertnmzxcvb
+set history=1000
+set hlsearch
+set inspectcontentobjects
+set nextpattern=\bnext\b,\bmore\b,next,^次(の)?ページ,\b次.*,→\b,^>$,^(>>|≫)$,^(>|≫),(>|≫)$
+set previouspattern=\bprev|previous\b,prev,^前(の)?ページ,\b前.*,\b←,^<$,^(<<|≪)$,^(<|≪),(<|≪)$
+set newtab=all
+set noscrollbars
 
-" set toolbars=
+" Editor
+js<<EOM
+  if (liberator.has("MacUnix")) {
+    liberator.execute("set editor=/usr/local/bin/mvim");
+  } else if (liberator.has("Win32")) {
+    liberator.execute("set editor=gvim.exe\\ --remote-tab-silent");
+  } else {
+  }
+EOM
 
-" }}}
-" usermode                                             // 最低限のスタイルシートで表示 {{{
-" (default: off)
-
-" set usermode
-
-" }}}
-" urlseparator                                  // 複数の URL を分割するための正規表現 {{{
-" (default: ",\s")
-
-" set urlseparator=",\s"
-
-" }}}
-" verbose                                    // 表示されるメッセージの種類を設定します {{{
-" 0 より大きい場合、 Vimperator は実行していることに関してのメッセージを表示します。
-" それらは :messages コマンドでいつでも表示できます。
-" 最大値は 15 でもっとも詳細なモードになります。
-" (default: 1)
-
-" set verbose=1
-
-" }}}
-" visualbell                   // エラー時に鳴るビープ音の代わりにビジュアルベルを使用 {{{
-" (default: off)
-
-set visualbell
-hi Bell display:none
-
-" }}}
-" wildmode                                             // コマンドラインの補完動作方法 {{{
-" (default: list:full)
-"
-" ""            : 最初にマッチしたもののみを補完します。
-" full          : マッチしたものを次々と完全に補完していきます。最後の候補はオリジナルの文
-"                 字列です。
-" longest       : 共通する文字列の最も長いところまで補完します。
-" list          : 1 つ以上マッチするものがある場合、すべて一覧表示します。
-" list:full     : 1 つ以上マッチするものがある場合、すべて一覧表示し、次々と完全に補完して
-"                 いきます。
-" list:longest  : 1 つ以上マッチするものがある場合、すべて一覧表示し、共通する文字列のもっ
-"                 とも長いところまで補完します。マッチするものがひとつの場合、無条件で完全
-"                 に補完されます。
-
-" set wildmode=full
-
-" }}}
-" animations                                                // アニメーションの on/off {{{
-" (default: false)
-
-set animations
-
-" }}}
 
 " }}}
 " about:config ----------------------------------------------------------------------- {{{
 
+" アドオン/プラグイン開発用
+set! javascript.options.strict=true
+set! javascript.options.showInConsole=true
+set! browser.dom.window.dump.enabled=true
+
+" Webページが自動的に転送や再読み込みさせようとした場合警告する
+set! accessibility.blockautorefresh=true
+
+" キャッシュ
+set! browser.cache.memory.enable=true
+set! browser.cache.memory.capacity=32768
 
 " ダウンロードウィンドウを完了後自動で閉じる
 set! browser.download.manager.closeWhenDone=true
@@ -475,38 +58,98 @@ set! browser.download.manager.retention=1
 " ファイルダウンロード完了時のウイルススキャン機能オフ
 set! browser.download.manager.scanWhenDone=false
 
+" 検索やフォームの入力履歴を保存しない
+set! browser.formfill.enable=false
+
+" 起動時に前回終了時のウィンドウとタブを表示する
+set! browser.startup.page=3
+
+" タブが選択されるまでページを読み込まない
+set! browser.sessionstore.restore_on_demand=true
+
+" セッションの保存間隔
+set! browser.sessionstore.interval=120000
+
+" undo limit
+set! browser.sessionstore.max_tabs_undo=100
+
+" タブバーを自動で隠さない
+set! browser.tabs.autoHide=false
+
+" 閉じるボタンを表示
+set! browser.tabs.closeButtons=3
+
 " 新規タブをバックグラウンドで開く
 set! browser.tabs.loadDivertedInBackground=true
 
-" アドオンインストール時の待ち時間カット
-set! security.dialog_enable_delay=0
+" Awesomebarの補完対象にBookmarkletを追加、件数を50件に変更
+set! browser.urlbar.filter.javascript=false
+set! browser.urlbar.maxRichResults=50
 
-" ページのアクセスキー無効化
- set! ui.key.generalAccessKey=0
-
- " キャレットモードのカーソルを太くする
-set! ui.caretWidth=8
+" ポップアップを 10000 まで許可する
+set! dom.popup_maximum=10000
 
 " JavaScriptでのウィンドウ移動・リサイズ拒否
 set! dom.disable_window_move_resize=true
 
+" about:configの編集時の警告を無効
+set! general.warnOnAboutConfig=false
+
+" IPv6 無効化
+set! network.dns.disableIPv6=true
+
+" パイプライン
+set! network.http.pipelining=true
+set! network.http.proxy.pipelining=true
+set! network.http.pipelining.maxrequests=10
+
+" 接続数
+set! network.http.max-connections=48
+set! network.http.max-connections-per-server=20
+set! network.http.max-persistent-connections-per-proxy=16
+set! network.http.max-persistent-connections-per-server=8
+
+" レンダリング待ち時間
+set! nglayout.initialpaint.delay=0
+
+" アドオンインストール時の待ち時間カット
+set! security.dialog_enable_delay=0
+
+" サイトのパスワードを保存しない
+set! signon.rememberSignons=false
+
+" ページのアクセスキーを無効化
+set! ui.key.generalAccessKey=0
+
+" サブメニューが表示されるまでに費やす時間
+set! ui.submenuDelay=0
+
+" キャレットモードのカーソルを太くする
+set! ui.caretWidth=8
+
+" }}}
+" Style ------------------------------------------------------------------------------ {{{
+
+" dolipoがブロックした要素を消す
+style -name dolipo-block-hiden * .fast-hidden { display: none; }
+
+" noscript でブロックした要素を消す
+style -name noscript-block-hidden * <<EOM
+  .__noscriptPlaceholder__,
+  .__noscriptObjectPatchMe__ {
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    display: none !important;
+  }
+EOM
+
 " コマンドラインでIMEオフ
 style -name commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
 
+
 " }}}
 " KeyMap ----------------------------------------------------------------------------- {{{
-
-
-"   -------------------------------------------------------------------
-"     mapname     normal    visual    ???       insert    commandline
-"     noremap     o         o         o         x         x
-"     noremap!    x         x         x         o         o
-"     nnoremap    o         x         x         x         x
-"     vnoremap    x         o         x         x         x
-"     onoremap    x         x         o         x         x
-"     inoremap    x         x         x         o         x
-"     cnoremap    x         x         x         x         o
-"   -------------------------------------------------------------------
 
 " キーマップリーダー
 let mapleader = ","
@@ -597,8 +240,19 @@ nnoremap <C-Return> :set invfullscreen<CR>
 vnoremap P y<Esc><Esc>P
 vnoremap p y<Esc><Esc>p
 
-" C-j を無効 SKKとキーマップの競合を避ける
+" SKKとキーマップの競合を避ける
 cnoremap <C-j> <Nop>
+cnoremap <C-l> <Nop>
+cnoremap <C-q> <Nop>
+
+" C-n, C-pでも補完を選択できるように
+cmap <C-n> <TAB>
+cmap <C-p> <S-TAB>
+
+" チェックボックス等のUIをC-n, C-pで操作
+imap <C-n> <Down>
+imap <C-p> <Up>
+
 
 " }}}
 " qmark  ----------------------------------------------------------------------------- {{{
@@ -621,6 +275,11 @@ silent qmark t http://twitter.com
 silent qmark y http://www.youtube.com
 
 " }}}
+" autocmd {{{
+
+command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
+
+" }}}
 " Plugin Setting ---------------------------------------------------------------------- {{{
 
 js <<EOM
@@ -637,6 +296,7 @@ liberator.globalVariables.plugin_loader_plugins = [
   'copy',
   'direct_bookmark',
   'feedSomeKeys_3',
+  'ldrize_cooperation',
   'migemo_completion',
   'migemo_hint',
   'migemo_find',
@@ -664,65 +324,67 @@ EOM
 let g:direct_sbm_use_services_by_tag = "h"
 let g:direct_sbm_use_services_by_post = "h"
 let g:direct_sbm_is_use_migemo = "true"
+
 nnoremap a :sbm<Space>
-
-" }}}
-" feedSomekeys_3.js {{{
-
-command! -nargs=+ lazy autocmd VimperatorEnter .*
-
-" Gmail
-lazy fmaps -u='mail\.google\.com/mail' -events=vkeydown,keypress,vkeyup j k
-lazy fmaps -u='mail\.google\.com/mail' c n p o u x s r a ? gi gs gt gd ga gc I
-lazy fmaps -u='mail\.google\.com/mail' -p= d,# s,! e
-lazy fmaps -u='mail\.google\.com/mail/.*/[0-9a-f]+$' c j,n k,p n,j p,k o u x s r a ? gi gs gt gd ga gc
-lazy fmaps -u='mail\.google\.com/mail/.*/[0-9a-f]+$' -p= d,# s,! e
-
-" Google Reader
-lazy fmaps -u='www\.google\.(com|co\.jp)/reader' -events=vkeypress j k n o p m s v A r S N P X O gh ga gs gt gu u / ?
-
-" Tumblr
-lazy fmaps -u='^http://[^\./]*\.tumblr\.com/' t
-
-" Hatena Bookmark
-lazy fmaps -u='^http://b\.hatena\.ne\.jp/(?!(entry|articles|guide))' j k o,oj e a,b
-
-" }}}
-" ime_controller.js {{{{
-
-let g:ex_ime_mode = "inactive"
-let g:textarea_ime_mode = "inactive"
 
 " }}}
 " ldrize_cooperation.js {{{
 
 let g:ldrc_captureMappings = "['j','k','p','o']"
 
-" ldrize_cooperation有効
-" let g:ldrc_intelligence_bind="true"
+" }}}
+" feedSomekeys_3.js {{{
 
-" j,k でLDRizeでなくVimperatorのスクロールで動く閾値
-" LDRizeで選択される次項目が 画面の高さ×指定値 より画面境界から離れている場合にVimperatorのスクロールに
-" 初期値0.5
-let g:ldrc_skip = "0"
-
-" Shift-sでLDRize無効
-map S :toggleldrc<CR>
+lazy fmaps -u='mail\.google\.com/mail' c / j k n p o u e x s r a # [ ] ? gi gs gt gd ga gc
+lazy fmaps -u='mail\.google\.com/mail/.*/[0-9a-f]+$' c / j,n k,p n,j p,k o u e x s r a # [ ] ? gi gs gt gd ga gc
+lazy fmaps -u='www\.google\.co\.jp/reader' -events=vkeypress j k n p m s v A r S N P X O gh ga gs gt gu u / ? J K
+lazy fmaps -u='(fastladder|livedoor)\.com/reader' j k s a p o v c i,p <Space> <S-Space> z b < > q w e,g
+lazy fmaps -u='https?://www\.rememberthemilk\.com/home/' j k m i c t ? d F,f G,g S,s L,l Y,y H,h M,m <Del> <C-S-Left> <C-S-Right>
+lazy fmaps -u='http://code.google.com/p/vimperator-labs/issues/list' o j k
+lazy fmaps -u='http://code.google.com/p/vimperator-labs/issues/detail' u
+lazy fmaps -u='^http://[^\./]*\.tumblr\.com/' t
 
 " }}}
+" twittperator {{{
 
+let g:twittperator_use_chirp = 1
+let g:twittperator_track_words = "vimperator"
+let g:twittperator_screen_name = "fujimogn"
+let g:twittperator_plugin_add_url_completer = 1
+let g:twittperator_plugin_colorful_log_writer = 1
+let g:twittperator_plugin_echo_tweet = 1
+let g:twittperator_plugin_pong = 1
+
+" }}}
 
 " }}}
 " Color ------------------------------------------------------------------------------ {{{
 
-
 colorscheme monokai_fujimogn
-
 
 " }}}
 
-" .vimperatorrc.local
+" Greasemonkey 0.9.13 patch
+" cf.http://d.hatena.ne.jp/littlefolk/20110625/p1
+js <<EOM
+autocommands.add(
+  'VimperatorEnter', '.*',
+  function () {
+    let Cc = Components.classes['@greasemonkey.mozdev.org/greasemonkey-service;1'];
+    if (Cc) {
+      Cc = Cc.getService().wrappedJSObject;
+      if (Cc.injectScripts.toSource().search('sharedObject') == -1) {
+        Cc.injectScripts = liberator.eval(
+          Cc.injectScripts.toSource()
+            .replace(/(?=(?:var|let) (?:firebugConsole))/,'var sharedObject = {};')
+            .replace(/(?=var requires)/, 'sandbox.sharedObject = sharedObject;')
+            .replace(/(?=}$)/, 'return sharedObject;'),
+        Cc.injectScripts);
+      };
+    };
+  });
+EOM
+
 source! ~/.vimperatorrc.locaal
 
-" コマンドライン初期表示
 echo "Vimperator " + liberator.version

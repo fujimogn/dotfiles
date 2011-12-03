@@ -51,52 +51,47 @@ hi Normal <<EOM
   background: #272822;
   font-size: 14px;
   opacity: 0.95;
+  font-family: "DejaVu Sans Mono", "Ricty", "Lucida Console", Monaco, "Courier New", Courier, monospace !important;
 EOM
 
 hi ErrorMsg <<EOM
   color: #f8f8f0;
   background: #f92672;
-  font-size: 12px;
-  min-height: 16px;
+  font-size: 14px;
 EOM
 
 hi InfoMsg <<EOM
   color: #f8f8f0;
   background: #272822;
-  font-size: 12px;
-  min-height: 16px;
+  font-size: 14px;
 EOM
 
 hi ModeMsg <<EOM
   color: #f8f8f0;
   background: #272822;
-  font-size: 12px;
-  min-height: 16px;
+  font-size: 14px;
 EOM
 
 hi MoreMsg <<EOM
   color: #d0ffd0;
   background: #272822;
-  font-size: 12px;
-  min-height: 16px;
+  font-size: 14px;
 EOM
 
 hi WarningMsg <<EOM
   color: #f92672;
   background: #272822;
-  font-size: 12px;
-  min-height: 16px;
+  font-size: 14px;
 EOM
 
 hi Message <<EOM
-  font-size: 12px;
-  min-height: 16px;
+  font-size: 14px;
 EOM
 
 hi NonText <<EOM
   color: #75716e;
-  font-size: 12px;
-  min-height: 16px;
+  font-size: 14px;
+  font-family: "DejaVu Sans Mono", "Ricty", "Lucida Console", Monaco, "Courier New", Courier, monospace !important;
 EOM
 
 hi Preview <<EOM
@@ -111,14 +106,12 @@ hi Prompt <<EOM
 EOM
 
 hi PromptText <<EOM
-  font-family: "DejaVu Sans Mono", "Ricty", "Lucida Grande", "Segoe UI", monospace;
+  font-family: "DejaVu Sans Mono", "Ricty", "Lucida Console", Monaco, "Courier New", Courier, monospace !important;
   background: -moz-linear-gradient(top, #6BA7EF, #3163AA);
   text-shadow: 1px 1px #1D3C66;
   color: white;
   font-size: 12px;
-  border: 1px solid #3366AD;
-  padding: 3px 4px;
-  border-top: none;
+  padding: 0 .5em;
 EOM
 
 hi CmdOutput <<EOM
@@ -126,14 +119,13 @@ hi CmdOutput <<EOM
 EOM
 
 hi CmdLine <<EOM
-  font-family: "DejaVu Sans Mono", "Ricty", "Lucida Grande", "Segoe UI", monospace;
   font-size: 14px;
   background: #272822;
   color: #f8f8f0;
 EOM
 
 hi CmdLine>* <<EOM
-  font-family: monospace;
+  font-family: "DejaVu Sans Mono", "Ricty", "Lucida Console", Monaco, "Courier New", Courier, monospace !important;
 EOM
 
 hi ContentSeparator <<EOM
@@ -141,20 +133,22 @@ hi ContentSeparator <<EOM
   display: -moz-box;
 EOM
 
-"hi CompGroup
-hi CompGroup:not(:first-of-type) <<EOM
-  margin-top: 1ex;
-EOM
+" "hi CompGroup
+" hi CompGroup:not(:first-of-type) <<EOM
+  " margin-top: 1ex;
+" EOM
 
 hi CompTitle <<EOM
   font-size: 14px;
   background: #49483e;
   font-weight: bold;
+  font-family: "DejaVu Sans Mono", "Ricty", "Lucida Console", Monaco, "Courier New", Courier, monospace !important;
 EOM
 
 hi CompTitle>* <<EOM
   color: #272822;
   padding: 1px 0.5ex;
+  font-family: "DejaVu Sans Mono", "Ricty", "Lucida Console", Monaco, "Courier New", Courier, monospace !important;
 EOM
 
 hi CompMsg <<EOM
@@ -194,12 +188,14 @@ hi CompResult <<EOM
   width: 500px;
   max-width: 500px;
   overflow: hidden;
+  font-family: "DejaVu Sans Mono", "Ricty", "Lucida Console", Monaco, "Courier New", Courier, monospace !important;
 EOM
 
 hi CompDesc <<EOM
   width: 500px;
   max-width: 500px;
   color: #75716e;
+  font-family: "DejaVu Sans Mono", "Ricty", "Lucida Console", Monaco, "Courier New", Courier, monospace !important;
 EOM
 
 hi Indicator <<EOM
@@ -295,23 +291,55 @@ hi Hint <<EOM
 EOM
 
 style -name customize-toolbar chrome://* <<EOM
+
   #liberator-customize-toolbar {
     border: none !important;
     background: none !important;
     -moz-appearance: none !important;
-    opacity: .95;
-    padding: 1px 0 0 0;
-    margin: 0;
+    margin: 0 !important;
+    opacity: 0.95;
+    padding: 0 2px 0 0 !important;
   }
-  #liberator-customize-toolbar > *,
-  #liberator-customize-toolbar > #greasemonkey-tbb .toolbarbutton-menubutton-button,
-  #liberator-customize-toolbar > #greasemonkey-tbb .toolbarbutton-menubutton-dropmarker {
+
+  #liberator-customize-toolbar > statusbar {
     border: none !important;
     background: none !important;
     -moz-appearance: none !important;
-    min-width: 0 !important;
+     margin: 0 !important;
+    padding: 0 i!important;
+  }
+
+  #liberator-customize-toolbar > toolbarbutton {
+    border: none !important;
+    background: none !important;
+    -moz-appearance: none !important;
+    margin: 2px 0 0 0 !important;
+    padding: 0 2px 0 0 !important;
+  }
+
+  #liberator-customize-toolbar #greasemonkey-tbb .toolbarbutton-menubutton-button,
+  #liberator-customize-toolbar #greasemonkey-tbb .toolbarbutton-menubutton-dropmarker {
+    border: none !important;
+    background: none !important;
+    -moz-appearance: none !important;
     padding: 0 !important;
-    vertical-align: middle;
+    margin: 0 !important;
+  }
+
+  #liberator-customize-toolbar #firebug-button .toolbarbutton-menubutton-button,
+  #liberator-customize-toolbar #firebug-button .toolbarbutton-menubutton-dropmarker {
+    border: none !important;
+    background: none !important;
+    -moz-appearance: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  #liberator-customize-toolbar > #status-bar > * {
+    margin: 0 2px 0 0 !important;
+    -moz-appearance: none !important;
+    background: none !important;
+    fontsize: 11px !important;
   }
 
 EOM
