@@ -3,11 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>Activate Item</key>
-	<true/>
+	<false/>
 	<key>Activate Item Mode</key>
 	<integer>0</integer>
 	<key>Activate On No Modifiers</key>
-	<false/>
+	<true/>
+	<key>After-Close Selection</key>
+	<integer>3</integer>
+	<key>After-Zoom Selection</key>
+	<integer>2</integer>
 	<key>Application Exceptions</key>
 	<array>
 		<string>Yorufukurou</string>
@@ -16,8 +20,8 @@
 	</array>
 	<key>Application Name Color</key>
 	<data>
-	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMBhARm
-	ZmZmgwv5Aj+DC/kCP4ML+QI/AYY=
+	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMDhAJm
+	ZoOyWdg+AYY=
 	</data>
 	<key>Application Name Shadow</key>
 	<true/>
@@ -28,7 +32,7 @@
 	<key>Background Color</key>
 	<data>
 	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMBhARm
-	ZmZmAAAAg83MTD+G
+	ZmZmAAAAg1yPQj+G
 	</data>
 	<key>Cancel Item</key>
 	<true/>
@@ -37,13 +41,13 @@
 		<key>Backward</key>
 		<dict>
 			<key>Character</key>
-			<string>k</string>
+			<string>l</string>
 			<key>Key Code</key>
-			<string>40</string>
+			<string>37</string>
 			<key>Modifiers</key>
-			<string>1048840</string>
+			<string>1310985</string>
 			<key>Visual Representation</key>
-			<string>⌘K</string>
+			<string>^⌘L</string>
 		</dict>
 		<key>Forward</key>
 		<dict>
@@ -52,9 +56,9 @@
 			<key>Key Code</key>
 			<string>38</string>
 			<key>Modifiers</key>
-			<string>1048840</string>
+			<string>1310985</string>
 			<key>Visual Representation</key>
-			<string>⌘J</string>
+			<string>^⌘J</string>
 		</dict>
 	</dict>
 	<key>Cycle Minimized Windows</key>
@@ -64,33 +68,40 @@
 	<key>Ignore Non-Standard Windows</key>
 	<true/>
 	<key>Item Height</key>
-	<real>28</real>
+	<real>30</real>
 	<key>Keep Cycling</key>
 	<true/>
 	<key>Last Tab</key>
 	<string>triggers</string>
 	<key>Maximum Width</key>
-	<real>0.60074669122695923</real>
+	<real>0.56151825189590454</real>
 	<key>Panel Delay</key>
 	<integer>0</integer>
 	<key>Panel Shadow</key>
 	<true/>
 	<key>Preview Border Color</key>
 	<data>
-	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMDhAJm
-	ZoPvvQ4/g5qZWT+G
+	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMBhARm
+	ZmZmAAAAAIY=
 	</data>
 	<key>Process Windows When Done</key>
-	<false/>
+	<true/>
 	<key>Selection Border Color</key>
 	<data>
 	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMBhARm
-	ZmZmAAEAAYY=
+	ZmZmAAAAAIY=
 	</data>
 	<key>Selection Color</key>
 	<data>
 	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMBhARm
-	ZmZmAAAAAYY=
+	ZmZmAAAAg83MzD6G
+	</data>
+	<key>Selection Gradient</key>
+	<integer>0</integer>
+	<key>Selection Window Name Color</key>
+	<data>
+	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMBhARm
+	ZmZmAQEBAYY=
 	</data>
 	<key>Show Application Names</key>
 	<true/>
@@ -98,16 +109,21 @@
 	<integer>1</integer>
 	<key>Show Previews</key>
 	<true/>
+	<key>Space Badge Color</key>
+	<data>
+	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMBhARm
+	ZmZmAAAAAIY=
+	</data>
 	<key>Step Forward Initially</key>
 	<true/>
 	<key>Suppress Background Process Alert</key>
 	<true/>
 	<key>Switch Across Spaces</key>
-	<false/>
+	<true/>
 	<key>Window Name Color</key>
 	<data>
-	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMBhARm
-	ZmZmgxZSPz+DFlI/P4MWUj8/AYY=
+	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMDhAJm
+	ZoOyWdg+AYY=
 	</data>
 	<key>Window Name Shadow</key>
 	<true/>

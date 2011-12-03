@@ -1248,11 +1248,11 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>419 119 625 270 0 0 1280 1024 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>292 137 924 485 0 0 1366 746 </string>
+	<string>235 271 924 485 0 0 1280 1002 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>80 418 592 584 0 0 1280 1002 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>148 33 1095 485 0 0 1366 746 </string>
+	<string>131 184 610 608 0 0 1280 1002 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>152 208 710 546 0 0 1280 1002 </string>
 	<key>NeverWarnAboutShortLivedSessions_AACF6772-2D24-4DCA-B846-26AF91FFC3AE</key>
@@ -1770,11 +1770,11 @@
 			<key>Name</key>
 			<string>Default</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 10</string>
+			<string>Monaco 13</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Monaco 10</string>
+			<string>Monaco 13</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1980,7 +1980,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2011-12-03T02:19:48Z</date>
+	<date>2011-12-02T20:35:25Z</date>
 	<key>SavePasteHistory</key>
 	<true/>
 	<key>Show Toolbelt</key>

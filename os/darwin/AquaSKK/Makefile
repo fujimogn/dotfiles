@@ -5,7 +5,7 @@ APP	:= $(shell basename $(CURDIR))
 SRCS	:=
 DIR	:= $(PREFIX)/Library/$(APP)
 
-APPSSRCS:= keymap.conf azik-supp.rule zw.rule
+APPSSRCS:= keymap.conf azik-supp.rule zw.rule AquaSKK-Hirakana.png AquaSKK-Katakana.png AquaSKK-Jisx0201Kana.png AquaSKK-Ascii.png AquaSKK-Jisx0208Latin.png
 APPSDIR := $(PREFIX)/Library/Application\ Support/$(APP)
 
 PREFSRCS:=
