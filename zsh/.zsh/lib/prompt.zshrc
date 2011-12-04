@@ -1,16 +1,16 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/prompt.zshrc
-# $Date: 2011-12-03T18:54:53+0900$
+# $Date: 2011-12-04T20:32:21+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 autoload -Uz VCS_INFO_get_data_git; VCS_INFO_get_data_git 2> /dev/null
 
 PROMPT='
-%n@%m - %~
+%n@%m %~
 $ '
 
-RPROMPT='[`git-current-branch``git-since-commit`]'
+RPROMPT='`git-current-branch``git-since-commit`'
 
 function git-current-branch {
   local name st color gitdir action
@@ -54,12 +54,12 @@ function git-since-commit() {
 
       if [ ${DAYS} -gt 1 ]; then
         echo "${DAYS} days ago"
-      elif [ ${DAYS} -eq 1 ]; then
+      elif [ ${DAYS} -eq 1 ] || [ ${HOURS} -gt 24 ]; then
         echo "1 day ago"
       elif [ ${HOURS} -gt 1 ]; then
-        echo "${HOURS} hours ago"
+        echo "about ${HOURS} hours ago"
       elif [ ${HOURS} -eq 1 ]; then
-        echo "1 hour ago"
+        echo "about 1 hour ago"
       elif [ ${MINUTES} -gt 1 ]; then
         echo "${MINUTES} mimutes ago"
       elif [ ${MINUTES} -eq 1 ]; then
