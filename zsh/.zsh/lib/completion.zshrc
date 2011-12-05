@@ -1,11 +1,14 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/completion.zshrc
-# $Date: 2011-11-06T12:35:13+0900$
+# $Date: 2011-12-05T21:49:16+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 fpath=(${ZDOTDIR}/modules/zsh-completions $fpath)
 fignore=( .BAK .bak .alt .old .aux .toc .swp \~)
+
+autoload -Uz compinit
+compinit -d ${ZDOTTMP}/.zcompdump
 
 zstyle ':completion:*' completer _expand _complete _match _prefix _approximate _list _history
 zstyle ':completion:*' expand suffix
@@ -76,8 +79,5 @@ compctl -g '*(-/) *.rb' ruby
 compctl -g '*(-/) *.py *.pyc' python
 compctl -g '*(-/) *.c' splint
 
-
-autoload -Uz compinit
-compinit -d ${ZDOTTMP}/.zcompdump
 
 

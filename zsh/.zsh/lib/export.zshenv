@@ -1,7 +1,7 @@
 #!/usr/bin/sh
 #
 # $File: ${DOTDIR}/system/env
-# $Date: 2011-11-06T13:13:02+0900$
+# $Date: 2011-12-05T21:56:43+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # Lang
@@ -11,30 +11,30 @@ export LANG=ja_JP.UTF-8
 export TZ=JST-9
 
 # Terminal
-export COLORTERM=0
-case "$TERM" in
-    xterm*);
-      COLORTERM=1
-      ;;
-    mlterm*);
-      COLORTERM=1
-      TERM='kterm-color'
-      ;;
-    screen*);
-      COLORTERM=1
-      SCREEN=1
-      TERM='xterm-256color'
-      ;;
-    ct100*);
-      COLORTERM=1
-      ;;
-    kterm*);
-      COLORTERM=1
-      TERM='kterm-color'
-      export LANG=ja_JP.eucJP;   #w3m とか mutt とかに必要
-      export LC_ALL=ja_JP.eucJP;;
-    linux);>LC_ALL=C
-esac
+# export COLORTERM=0
+# case "$TERM" in
+    # xterm*);
+      # COLORTERM=1
+      # ;;
+    # mlterm*);
+      # COLORTERM=1
+      # TERM='kterm-color'
+      # ;;
+    # screen*);
+      # COLORTERM=1
+      # SCREEN=1
+      # TERM='xterm-256color'
+      # ;;
+    # ct100*);
+      # COLORTERM=1
+      # ;;
+    # kterm*);
+      # COLORTERM=1
+      # TERM='kterm-color'
+      # export LANG=ja_JP.eucJP;   #w3m とか mutt とかに必要
+      # export LC_ALL=ja_JP.eucJP;;
+    # linux);>LC_ALL=C
+# esac
 
 
 # PAGER

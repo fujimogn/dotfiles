@@ -1,16 +1,18 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/prompt.zshrc
-# $Date: 2011-12-04T20:36:42+0900$
+# $Date: 2011-12-04T23:06:24+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 autoload -Uz VCS_INFO_get_data_git; VCS_INFO_get_data_git 2> /dev/null
 
-PROMPT='
-%n@%m %~
-$ '
 
-RPROMPT='`git-current-branch``git-since-commit`'
+
+PROMPT='
+%B%F{blue}%~%f%b `git-current-branch` %B%F{black}`git-short-sha` `git-since-commit`%f%b
+%0(?|%F{green}%%%f|%F{red}%%%f) '
+
+RPROMPT='%B%F{black}%n@%m%f%b %B%F{yellow}%T%f%b'
 
 function git-current-branch {
   local name st color gitdir action
@@ -33,7 +35,11 @@ function git-current-branch {
   else
     color=%F{red}
   fi
-  echo "$color$name$action%f%b "
+  echo "$color$name$action%f%b"
+}
+
+function git-short-sha() {
+  SHA=$(git rev-parse --short HEAD 2> /dev/null) && echo "<$SHA>"
 }
 
 function git-since-commit() {

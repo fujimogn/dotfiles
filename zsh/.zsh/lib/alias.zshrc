@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/alias.zshrc
-# $Date: 2011-11-06T12:35:42+0900$
+# $Date: 2011-12-05T21:52:16+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 
@@ -14,16 +14,6 @@ alias mkdir='mkdir -p'
 alias la='ls -A'
 alias ll='ls -hl'
 alias lla='ll -A'
-alias l.="__ls 'ls -d .*'"
-alias ll.="__ls 'ls -dhl .*'"
-function __ls() {
-  local dir
-  dir=${PWD}
-  if [[ -n "${2}" ]]; then
-    dir=${2}
-  fi
-  (cd ${dir} && eval ${1})
-}
 
 alias grep='grep --color=auto'
 prefix=(e f z ze zf bz)
@@ -56,11 +46,6 @@ alias 644="chmod 644"
 alias 755="chmod 755"
 
 alias gd='dirs -lv; echo -n "select number: "; read newdir; cd +"$newdir"'
-
-alias utf-8='export LANG=ja_JP.UTF-8; export LANGUAGE=ja_JP.UTF-8; export LC_ALL=ja_JP.UTF-8'
-alias en='export LANG=en; export LANGUAGE=en; export LC_ALL=en'
-alias eucjp='export LANG=ja_JP.eucJP; export LANGUAGE=ja_JP.eucJP; export LC_ALL=ja_JP.eucJP'
-alias sjis='export LANG=ja_JP.SJIS; export LANGUAGE=ja_JP.SJIS; export LC_ALL=ja_JP.SJIS'
 
 alias py=python
 alias irb='irb --readline -r irb/completion'

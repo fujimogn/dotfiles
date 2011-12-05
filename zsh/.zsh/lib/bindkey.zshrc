@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/zsh/lib/bindkey.zshrc
-# $Date: 2011-11-15T16:17:41+0900$
+# $Date: 2011-12-05T21:53:12+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 bindkey -e
