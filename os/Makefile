@@ -1,4 +1,4 @@
-include ../Makefile.rule
+OS	= $(shell uname)
 
 ifeq ($(OS),FreeBSD)
 CHILDS	= freebsd
@@ -16,5 +16,4 @@ ifeq ($(OS),cygwin)
 CHILDS	= cygwin
 endif
 
-install: $(CHILDS)
-clean: clean-childs
+include ../Makefile.rule

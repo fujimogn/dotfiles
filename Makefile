@@ -2,7 +2,7 @@ include Makefile.rule
 
 CONF	:= $(PREFIX)/.dotfilesrc
 
-install: $(CHILDS) install-conf update-submodules
+install: install-conf update-submodules
 
 clean:	clean-childs clean-conf
 

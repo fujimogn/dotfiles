@@ -1,9 +1,8 @@
+SYMLINKS	= .vim .vimrc .gvimrc
 include ../Makefile.rule
 
-SRCS	= .vim .vimrc .gvimrc
-
-install: install-srcs install-mvim
-clean: clean-srcs clean-mvim
+install: install-mvim
+clean: clean-mvim
 
 install-mvim:
 	@sh $(CURDIR)/mvim.sh

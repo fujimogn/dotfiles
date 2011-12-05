@@ -1,7 +1,6 @@
 include ../../Makefile.rule
 
-install: $(CHILDS) install-defaults
-clean: clean-childs
+install: install-defaults
 
 install-defaults:
 	@sh $(CURDIR)/defaults.sh

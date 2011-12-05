@@ -1,6 +1,2 @@
+SYMLINKS = .todo.cfg
 include ../Makefile.rule
-
-SRCS = .todo.cfg
-
-install: install-srcs
-clean: clean-srcs
