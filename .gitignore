@@ -2,6 +2,7 @@
 /*
 !.gitignore
 !/Makefile
+!/Makefile.rule
 !/README.md
 !/earthquake
 !/bin

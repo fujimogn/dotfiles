@@ -1,0 +1,48 @@
+OS	= $(shell uname)
+
+ifeq ($(OS),Cygwin)
+CURDIR  := "$(shell cygpath -w $(CURDIR))"
+PREFIX  ?= "$(shell cygpath -w $(HOME))"
+LN		= cmd /c mklink
+LNF		= cmd /c mklink /d
+RM      = cmd /c rm -rfv
+S       = "\\"
+else
+CURDIR  := $(CURDIR)
+PREFIX  ?= $(HOME)
+LN		= ln -sfv
+RM      = rm -rfv
+S       = "/"
+endif
+
+SRCS	:= $(subst /,$(S),$(SRCS))
+
+all: install
+
+install:
+
+clean:
+
+install-srcs:
+	@for F in $(SRCS); do \
+		$(LN) $(CURDIR)$(S)$${F} $(PREFIX)$(S)$(notdir $${F}); \
+	done
+
+clean-srcs:
+	@for F in $(SRCS); do \
+		$(RM) $(PREFIX)$(S)$${F}; \
+	done
+
+CHILDS	:= $(patsubst $(CURDIR)/%/Makefile,%,$(wildcard $(CURDIR)/*/Makefile))
+
+$(CHILDS):
+	@echo "Install $@..."
+	@cd $(CURDIR)/$@/ && make
+
+clean-childs:
+	@for F in $(CHILDS); do \
+		echo "Uninstall $${F}..."; \
+		cd $(CURDIR)/$${F} && make clean; \
+	done
+
+.PHONY: all install clean install-srcs clean-srcs $(CHILDS) clean-childs
