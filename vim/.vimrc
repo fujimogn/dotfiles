@@ -356,6 +356,10 @@ autocmd FileType python set expandtab
 " Ruby {{{
 autocmd FileType ruby set expandtab tabstop=2 shiftwidth=2 softtabstop=2
 " }}}
+" Makefile {{{
+autocmd BufNewFile,BufRead Makefile.rule setlocal filetype=make
+autocmd Filetype make set noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
+" }}}
 " Help {{{
 
 au FileType help nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
@@ -364,6 +368,7 @@ au FileType help nnoremap <silent> <buffer> <Space><Space> :q<CR>
 au FileType help inoremap <silent> <buffer> <Space><Space> <ESC>:q<CR>
 
 " }}}
+
 " }}}
 " Plugin setting {{{
 

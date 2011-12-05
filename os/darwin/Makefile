@@ -1,21 +1,9 @@
-PREFIX	:= $(HOME)
+include ../../Makefile.rule
 
-SRC	:= $(patsubst $(CURDIR)/%/Makefile,%,$(wildcard $(CURDIR)/*/Makefile))
+install: $(CHILDS) install-defaults
+clean: clean-childs
 
-install: $(SRC)
+install-defaults:
+	@sh $(CURDIR)/defaults.sh
 
-$(SRC):
-	@@if [ -f $(CURDIR)/$@/Makefile ]; then \
-		echo "Install $@..."; \
-		cd $(CURDIR)/$@/ && make; \
-	fi
-
-clean:	clean-src
-
-clean-src:
-	@@for src in $(SRC); do \
-		echo "Uninstall $${src}..."; \
-		cd $(CURDIR)/$${src} && make clean; \
-	done
-
-.PHONY: all install clean clean-src $(SRC)
+.PHONY: install-defaults

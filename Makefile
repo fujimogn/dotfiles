@@ -1,32 +1,10 @@
-PREFIX	:= $(HOME)
+include Makefile.rule
+
 CONF	:= $(PREFIX)/.dotfilesrc
 
-#REMOTE	:=
-#BRANCH	:=
+install: $(CHILDS) install-conf update-submodules
 
-SRC	:= $(patsubst $(CURDIR)/%/Makefile,%,$(wildcard $(CURDIR)/*/Makefile))
-
-all:	help
-
-install: $(SRC) install-conf update-submodules
-
-$(SRC):
-	@@if [ -f $(CURDIR)/$@/Makefile ]; then \
-		echo "Install $@..."; \
-		cd $(CURDIR)/$@/ && make; \
-	fi
-
-clean:	clean-src clean-conf
-
-pull:	pull-submodules
-	@echo "Pull..."
-	@@git pull ${REMOTE} ${BRANCH}
-
-clean-src:
-	@@for src in $(SRC); do \
-		echo "Uninstall $${src}..."; \
-		cd $(CURDIR)/$${src} && make clean; \
-	done
+clean:	clean-childs clean-conf
 
 install-conf:
 	@@if [ ! -f $(CONF) ]; then \
@@ -38,6 +16,10 @@ install-conf:
 clean-conf:
 	@echo "Uninstall config file..."
 	@rm -fv $(CONF)
+
+pull:	pull-submodules
+	@echo "Pull..."
+	@@git pull ${REMOTE} ${BRANCH}
 
 update-submodules:
 	@echo "Update submodules..."
@@ -65,4 +47,4 @@ help:
 	@echo "  pull-submodules	: pull submodules"
 	@echo "  help			: show this text"
 
-.PHONY: all install package clean pull clean-src install-conf clean-conf update-submodules pull-submodules $(SRC)
+.PHONY: pull install-conf clean-conf update-submodules pull-submodules $(CHILDS)

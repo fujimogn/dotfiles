@@ -1,39 +1,20 @@
-PREFIX	:= $(HOME)
+include ../Makefile.rule
 
-OSTYPE = $(shell uname)
-
-ifeq ($(OSTYPE),FreeBSD)
-SRC	= freebsd
+ifeq ($(OS),FreeBSD)
+CHILDS	= freebsd
 endif
-
-ifeq ($(OSTYPE),Linux)
-SRC	= linux
+ifeq ($(OS),Linux)
+CHILDS	= linux
 endif
-
-ifeq ($(OSTYPE),Darwin)
-SRC	= darwin
+ifeq ($(OS),Darwin)
+CHILDS	= darwin
 endif
-
 ifeq ($(OS),Windows_NT)
-SRC	= cygwin
+CHILDS	= cygwin
+endif
+ifeq ($(OS),cygwin)
+CHILDS	= cygwin
 endif
 
-ifeq ($(OSTYPE),cygwin)
-SRC	= cygwin
-endif
-
-all:	install
-
-install:
-	@if [ -f $(CURDIR)/$(SRC)/Makefile ]; then \
-		echo "Install $(SRC)..."; \
-		cd $(CURDIR)/$(SRC) && make; \
-	fi
-
-clean:
-	@if [ -f $(CURDIR)/$(SRC)/Makefile ]; then \
-		echo "Unintall $(SRC)..."; \
-		cd $(CURDIR)/$(SRC) && make clean; \
-	fi
-
-.PHONY: all install clean
+install: $(CHILDS)
+clean: clean-childs

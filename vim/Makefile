@@ -1,69 +1,14 @@
-OSTYPE	   := $(shell uname)
-ifeq ($(OSTYPE),Cygwin)
-CURDIR := "$(shell cygpath -w $(CURDIR))"
-PREFIX ?= "$(shell cygpath -w $(HOME))"
-LN		= cmd /c mklink
-LNF		= cmd /c mklink /d
-RM      = cmd /c rm -rfv
-S       = "\\"
-else
-CURDIR := $(CURDIR)
-PREFIX ?= $(HOME)
-LN		= ln -sfv
-LNF		= ln -snfv
-RM      = rm -rfv
-S       = "/"
-endif
+include ../Makefile.rule
 
-SRCS   ?= .vim .vimrc .gvimrc
+SRCS	= .vim .vimrc .gvimrc
 
-all:	install
-
-ifeq ($(OS),Darwin)
-install: \
-	install-srcs \
-	install-mvim
-else
-install: \
-	install-srcs
-endif
-
-ifeq ($(OS),Darwin)
-clean: \
-	clean-srcs \
-	clean-mvim
-else
-clean: \
-	clean-srcs
-endif
-
-install-srcs:
-	@for F in $(SRCS); do \
-		if [ "$(OS)" = "Cygwin" ] || [ "$(OS)" = "Windows_NT"  ]; then \
-			[ -x /usr/bin/iconv ] && [ $${LANG##*.} = "UTF-8" ] && CONV=" | iconv -f SJIS -t $${LANG##*.}"; \
-			if [ -f $${F} ]; then \
-				$(RM) $(PREFIX)$(S)$${F} && $(LN) $(PREFIX)$(S)$${F} $(CURDIR)$(S)$${F}$${CONV}; \
-			elif [ -d $${F} ]; then \
-				$(RM) $(PREFIX)$(S)$${F} && $(LNF) $(PREFIX)$(S)$${F} $(CURDIR)$(S)$${F}$${CONV}; \
-			fi; \
-		else \
-			if [ -f $${F} ]; then \
-				$(LN) $(CURDIR)$(S)$${F} $(PREFIX)$(S)$${F}; \
-			elif [ -d $${F} ]; then \
-				$(LNF) $(CURDIR)$(S)$${F} $(PREFIX)$(S)$${F}; \
-			fi; \
-		fi; \
-	done
+install: install-srcs install-mvim
+clean: clean-srcs clean-mvim
 
 install-mvim:
 	@sh $(CURDIR)/mvim.sh
 
-clean-srcs:
-	@for F in $(SRCS); do \
-		$(RM) $(PREFIX)$(S)$${F}; \
-	done
-
 clean-mvim:
 	@sh $(CURDIR)/mvim.sh clean
 
-.PHONY: all install clean install-srcs install-mvim clean-srcs clean-mvim
+.PHONY: install-mvim clean-mvim

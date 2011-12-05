@@ -34,11 +34,11 @@ defaults write com.apple.Finder ShowStatusBar -int 0
 chflags nohidden ~/Library
 
 # 以下を非表示
-chflags hidden ~/bin
-chflags hidden ~/opt
-chflags hidden ~/lib
-chflags hidden ~/node_modules
-chflags hidden ~/git
+[ -d "~/bin" ] && chflags hidden ~/bin
+[ -d "~/opt" ] && chflags hidden ~/opt
+[ -d "~/lib" ] && chflags hidden ~/lib
+[ -d "~/node_modules" ] && chflags hidden ~/node_modules
+[ -d "~/git" ] && chflags hidden ~/git
 
 # 拡張子を表示
 defaults write -g AppleShowAllExtensions -int 1
