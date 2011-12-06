@@ -1,3 +1,5 @@
+SYMLINKS	= bin
+
 include Makefile.rule
 
 CONF	:= $(PREFIX)/.dotfilesrc
