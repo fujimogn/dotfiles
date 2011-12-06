@@ -1,0 +1,14 @@
+#!/bin/sh
+
+! which ruby >/dev/null 2>&1 && return 1
+
+if [ -d "${HOME}/Reference/ruby" ]; then
+  LASTEST=`ls -1v ${HOME}/Reference/ruby | tail -1`
+  if [ -n "${LASTEST}" ]; then
+    exec ruby -Ke -I ${HOME}/Reference/ruby/${LASTEST}/bitclust/lib ${HOME}/Reference/ruby/${LASTEST}/bitclust/bin/refe.rb -d ${HOME}/Reference/ruby/${LASTEST}/db-1_9_2 "$@"
+  else
+    return 1
+  fi
+else
+  return 1
+fi

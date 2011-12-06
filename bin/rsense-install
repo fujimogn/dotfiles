@@ -1,0 +1,69 @@
+#!/bin/sh
+
+# RSense
+# A Ruby development tools for Emacs and Vim
+# http://cx4a.org/software/rsense/
+# Tomohiro Matsuyama <tomo@cx4a.org>
+
+PREFIX=/usr/lib
+DIR=rsense
+ARCHIVE_URL="http://cx4a.org/pub/rsense/rsense-0.3.zip"
+ARCHIVE_SRC=${ARCHIVE_URL##*/}
+SRC=${ARCHIVE_SRC%.*}
+
+[ ! -d "${PREFIX}" ] && \
+  echo "${PREFIX} file not exist." && exit 1
+[ ! -w "${PREFIX}" ] && \
+  SUDO="sudo"
+
+if [ -e "${PREFIX}/${DIR}" ]; then
+  echo "Orverwrite ? [y/n]"
+  read y
+  [ ${y} != "y" ] && exit 1
+fi
+
+curl ${ARCHIVE_URL} | tar xz
+${SUDO} rm -rf ${PREFIX}/${DIR}
+${SUDO} mv -f ${SRC} ${PREFIX}/${DIR}
+
+RSENSE_HOME=${PREFIX}/${DIR}
+chmod +x ${RSENSE_HOME}/bin/rsense
+
+# make rcfile
+ruby ${RSENSE_HOME}/etc/config.rb > ~/.rsense
+
+cat << EOF
+
+`${RSENSE_HOME}/bin/rsense version` installed.
+
+RSense User Manual
+http://cx4a.org/software/rsense/manual.html
+
+add the following code .bashrc or .zshrc.
+--------------------------------------------------------
+export RSENSE_HOME=${RSENSE_HOME}
+--------------------------------------------------------
+
+Emacs:
+
+add the following code to .emacs:
+--------------------------------------------------------
+(setq rsense-home "\$RSENSE_HOME")
+(add-to-list 'load-path (concat rsense-home "/etc"))
+(require 'rsense)
+--------------------------------------------------------
+see also: http://cx4a.org/software/rsense/manual.html#Install_Emacs_Extension
+
+Vim:
+
+  cp ${RSENSE_HOME}/etc/rsense.vim ~/.vim/plugin
+
+add the following code to .vimrc:
+--------------------------------------------------------
+let g:rsenseHome = "\$RSENSE_HOME"
+--------------------------------------------------------
+see also: http://cx4a.org/software/rsense/manual.html#Install_Vim_Plugin
+
+EOF
+
+exit 0

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if [ -d "${HOME}/bin" ]; then
+  find ${HOME}/bin/ -name "*" -exec chmod u+x {} \;
+fi
+
+if [ -d "${HOME}/.ssh" ]; then
+  chmod 700 ${HOME}/.ssh
+  [ -f ${HOME}/.ssh/id_rsa ] && chmod 600 ${HOME}/.ssh/id_rsa
+  [ -f ${HOME}/.ssh/id_dsa ] && chmod 600 ${HOME}/.ssh/id_dsa
+  [ -f ${HOME}/.ssh/id_rsa.pub ] && chmod 644 ${HOME}/.ssh/id_rsa.pub
+  [ -f ${HOME}/.ssh/id_dsa.pub ] && chmod 644 ${HOME}/.ssh/id_dsa.pub
+  [ -f ${HOME}/.ssh/authorized_keys ] && chmod 644 ${HOME}/.ssh/authorized_keys
+  [ -f ${HOME}/.ssh/known_hosts ] && chmod 644 ${HOME}/.ssh/known_hosts
+  find ${HOME}/.ssh/ -name "*_[dr]sa" -exec chmod 600 {} \;
+  find ${HOME}/.ssh/ -name "*_[dr]sa.pub" -exec chmod 644 {} \;
+fi
