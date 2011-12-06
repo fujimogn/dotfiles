@@ -47,4 +47,4 @@ help:
 	@echo "  pull-submodules	: pull submodules"
 	@echo "  help			: show this text"
 
-.PHONY: pull install-conf clean-conf update-submodules pull-submodules $(CHILDS)
+.PHONY: pull install-conf clean-conf update-submodules pull-submodules

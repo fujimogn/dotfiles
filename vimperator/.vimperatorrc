@@ -1,5 +1,5 @@
 ""3.3pre
-" $Date: 2011-11-29T12:46:17+0900$
+" $Date: 2011-12-06T22:22:58+0900$
 
 
 
@@ -43,7 +43,7 @@ set! javascript.options.showInConsole=true
 set! browser.dom.window.dump.enabled=true
 
 " Webページが自動的に転送や再読み込みさせようとした場合警告する
-set! accessibility.blockautorefresh=true
+" set! accessibility.blockautorefresh=true
 
 " キャッシュ
 set! browser.cache.memory.enable=true
