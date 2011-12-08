@@ -1,5 +1,5 @@
 ""3.3pre
-" $Date: 2011-12-06T22:22:58+0900$
+" $Date: 2011-12-07T10:39:07+0900$
 
 
 
@@ -46,8 +46,8 @@ set! browser.dom.window.dump.enabled=true
 " set! accessibility.blockautorefresh=true
 
 " キャッシュ
-set! browser.cache.memory.enable=true
-set! browser.cache.memory.capacity=32768
+" set! browser.cache.memory.enable=true
+" set! browser.cache.memory.capacity=32768
 
 " ダウンロードウィンドウを完了後自動で閉じる
 set! browser.download.manager.closeWhenDone=true

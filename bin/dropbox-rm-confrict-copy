@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ -n "$1" ]; then
+  dir=$1
+else
+  dir=.
+fi
+
+find ${dir} -name "* conflicted copy *" -print0 | xargs -0 rm -f
+find ${dir} -name "* 上の問題のあるコ*" -print0 | xargs -0 rm -f

@@ -1,0 +1,124 @@
+#!/bin/sh
+
+### check ostype
+if [ ! `uname -s` == "Darwin" ]; then
+  echo "error : only works with Mac OS X" >&2
+  exit 1
+fi
+
+### comannd, perse options
+
+help() {
+  echo "`basename $0` [ -h ] [ -u ] [ -c filename ]"
+  echo "  -h : display this text"
+  echo "  -u : unmount ramdisk, unlink symlink"
+  echo "  -c : specify the configuration file to use."
+}
+
+while getopts "huc:" OPT; do
+  case $OPT in
+    \?) OPT_ERROR=1; break;;
+    h) help && exit ;;
+    u) opt_u=true;;
+    c) opt_c="$OPTARG";;
+  esac
+done
+
+shift $(( $OPTIND - 1 ))
+[ $OPT_ERROR ] && help && exit 1
+
+ramdisk_laodconfig() {
+  rcfile=~/.ramdisk
+  if [ -n "${opt_c}" ]; then
+    rcfile=${opt_c}
+  elif [ ! -f "${rcfile}" ]; then
+    cat > ${rcfile} <<_EOT_
+## ramdisk config
+
+# volume size (Mb)
+RAMDISK_SIZE=512
+
+# volume name
+RAMDISK_VOLUME="ramdisk"
+
+# disk id
+RAMDISK_HDID=/dev/disk1
+
+# cache target dirs
+CACHE_DIRS=( \
+~/Library/Caches/Google \
+~/Library/Caches/com.apple.iTunes \
+~/Library/Caches/com.apple.Safari \
+~/Library/Caches/Firefox \
+)
+_EOT_
+  fi
+  source ${rcfile}
+}
+
+ramdisk_umount() {
+  local ramdisk=/volumes/${RAMDISK_VOLUME}
+  umount ${ramdisk}
+  hdiutil detach ${RAMDISK_HDID}
+}
+
+ramdisk_mount(){
+  local id=`hdiutil attach -nomount ram://$[RAMDISK_SIZE*1024*1024/512]`
+  if [ ${id} == ${RAMDISK_HDID} ]; then
+    diskutil eraseDisk HFS+ ${RAMDISK_VOLUME} ${RAMDISK_HDID}
+  else
+    return 1
+  fi
+}
+
+ramdisk_make_symlinks() {
+  local ramdisk=/volumes/${RAMDISK_VOLUME}
+  if [ -d "${ramdisk}" ] && [ -n ${CACHE_DIRS} ]; then
+    echo "\nMake symlinks & make backup ...\n"
+    for dir in ${CACHE_DIRS[@]}
+    do
+      mkdir ${ramdisk}/${dir##*/}
+      if [ -d ${dir} ]; then
+        mv -fv ${dir} ${dir}.bak
+      fi
+      if [ ! -L ${dir} ]; then
+        ln -sfv ${ramdisk}/${dir##*/} ${dir}
+      fi
+    done
+    echo "\n... done!\n"
+  else
+    return 1
+  fi
+}
+
+ramdisk_rm_symlinks() {
+  local ramdisk=/volumes/${RAMDISK_VOLUME}
+  if [ ! -d "${ramdisk}" ] && [ -n ${CACHE_DIRS} ]; then
+    echo "\nRemove symlinks & restore backup ...\n"
+    for dir in ${CACHE_DIRS[@]}
+    do
+      if [ -L ${dir} ]; then
+        rm -fv ${dir}
+      fi
+      if [ -d ${dir}.bak ]; then
+        mv -fv ${dir}.bak ${dir}
+      fi
+    done
+    echo "\n... done!\n"
+  else
+    return 1
+  fi
+}
+
+main() {
+  ramdisk_laodconfig
+  if [ ${opt_u} ]; then
+    ramdisk_umount
+    ramdisk_rm_symlinks
+  else
+    ramdisk_mount && \
+    ramdisk_make_symlinks
+  fi
+}
+
+main
