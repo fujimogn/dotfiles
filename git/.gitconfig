@@ -23,6 +23,7 @@
   untracked = cyan
 
 [alias]
+  status = status --ignore-submodules
   br = branch
   ci = commit -v
   cia = commit -v --all
