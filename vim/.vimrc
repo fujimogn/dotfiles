@@ -107,7 +107,7 @@ set showmode
 set wildmenu
 set wildmode=list:longest,full
 set virtualedit+=block
-set textwidth=90
+set textwidth=80
 
 if exists('&colorcolumn')
     set colorcolumn=+1
@@ -368,7 +368,12 @@ au FileType help nnoremap <silent> <buffer> <Space><Space> :q<CR>
 au FileType help inoremap <silent> <buffer> <Space><Space> <ESC>:q<CR>
 
 " }}}
+" AppleScript {{{
 
+autocmd bufnewfile,bufread *.scpt,*.applescript :setl filetype=applescript
+autocmd FileType applescript :inoremap <buffer> <S-CR>  ￢<CR>
+
+" }}}
 " }}}
 " Plugin setting {{{
 

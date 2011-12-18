@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/vim/vim.darwin.zsh
-# $Date: 2011-11-06T13:19:59+0900$
+# $Date: 2011-12-09T03:21:58+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # for MacVim Kaoriya
@@ -22,11 +22,9 @@ else
 fi
 
 alias v=${MACVIM}
-alias vi=${MACVIM}
 alias vim=${MACVIM}
 
 compdef _vim v
-compdef _vim vi
 compdef _vim vim
 
 export EDITOR=${MACVIM}

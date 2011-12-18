@@ -1,7 +1,7 @@
 #!/usr/bin/sh
 #
-# $File: ${DOTDIR}/system/env
-# $Date: 2011-12-06T22:39:02+0900$
+# $File: ${ZDOTDIR}/lib/export.zshenv
+# $Date: 2011-12-12T17:44:30+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # Lang
@@ -22,12 +22,7 @@ else
   alias lv="$PAGER"
 fi
 
-# Firefox
-APPS=${HOME}/Library/Application\ Support
-if [ -d "${APPS}/Firefox" ]; then
-  PROF=`sed -n "s/Path=\(.*\)$/\1/p" "${APPS}/Firefox/profiles.ini"`
-  export FIREFOX_PROF_PATH="${APPS}/Firefox/${PROF}"
-  unset PROF
+## Rsense
+if [ -d /usr/lib/rsense ]; then
+  export RSENSE_HOME=/usr/lib/rsense
 fi
-unset APPS
-

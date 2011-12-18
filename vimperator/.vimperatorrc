@@ -1,5 +1,5 @@
 ""3.3pre
-" $Date: 2011-12-07T10:39:07+0900$
+" $Date: 2011-12-16T06:00:45+0900$
 
 
 
@@ -46,8 +46,9 @@ set! browser.dom.window.dump.enabled=true
 " set! accessibility.blockautorefresh=true
 
 " キャッシュ
-" set! browser.cache.memory.enable=true
-" set! browser.cache.memory.capacity=32768
+set! browser.cache.disk.enable=false
+set! browser.cache.memory.enable=true
+set! browser.cache.memory.capacity=-1
 
 " ダウンロードウィンドウを完了後自動で閉じる
 set! browser.download.manager.closeWhenDone=true
@@ -94,6 +95,10 @@ set! dom.disable_window_move_resize=true
 
 " about:configの編集時の警告を無効
 set! general.warnOnAboutConfig=false
+
+" 画像の多いタブを閉じた時にすぐにメモリ使用量を減らす
+" http://space.geocities.yahoo.co.jp/gl/alice0775/view/20110416/1302920985
+set! image.mem.min_discard_timeout_ms=6000
 
 " IPv6 無効化
 set! network.dns.disableIPv6=true
@@ -337,7 +342,7 @@ let g:ldrc_captureMappings = "['j','k','p','o']"
 
 lazy fmaps -u='mail\.google\.com/mail' c / j k n p o u e x s r a # [ ] ? gi gs gt gd ga gc
 lazy fmaps -u='mail\.google\.com/mail/.*/[0-9a-f]+$' c / j,n k,p n,j p,k o u e x s r a # [ ] ? gi gs gt gd ga gc
-lazy fmaps -u='www\.google\.co\.jp/reader' -events=vkeypress j k n p m s v A r S N P X O gh ga gs gt gu u / ? J K
+lazy fmaps -u='www\.google\.(com|co\.jp)/reader' -events=vkeypress j k n o p m s v A r S N P X O gh ga gs gt gu u / ?
 lazy fmaps -u='(fastladder|livedoor)\.com/reader' j k s a p o v c i,p <Space> <S-Space> z b < > q w e,g
 lazy fmaps -u='https?://www\.rememberthemilk\.com/home/' j k m i c t ? d F,f G,g S,s L,l Y,y H,h M,m <Del> <C-S-Left> <C-S-Right>
 lazy fmaps -u='http://code.google.com/p/vimperator-labs/issues/list' o j k

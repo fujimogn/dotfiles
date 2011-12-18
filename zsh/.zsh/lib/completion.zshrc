@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
-# $File: ${DOTDIR}/zsh/lib/completion.zshrc
-# $Date: 2011-12-05T21:49:16+0900$
+# $File: ${ZDOTDIR}/lib/completion.zshrc
+# $Date: 2011-12-12T17:49:33+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 fpath=(${ZDOTDIR}/modules/zsh-completions $fpath)

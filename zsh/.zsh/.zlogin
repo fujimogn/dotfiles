@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
-# $File: ${DOTDIR}/zsh/.zsh/.zlogin
-# $Date: 2011-12-05T22:02:08+0900$
+# $File: ${ZDOTDIR}/.zlogin
+# $Date: 2011-12-12T17:51:11+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # keychain init

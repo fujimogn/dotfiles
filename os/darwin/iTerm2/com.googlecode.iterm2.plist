@@ -1178,7 +1178,7 @@
 	<key>HotKeyTogglesWindow</key>
 	<false/>
 	<key>Hotkey</key>
-	<true/>
+	<false/>
 	<key>HotkeyChar</key>
 	<integer>96</integer>
 	<key>HotkeyCode</key>
@@ -1248,7 +1248,7 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>419 119 625 270 0 0 1280 1024 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>235 271 924 485 0 0 1280 1002 </string>
+	<string>292 137 924 485 0 0 1366 746 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>80 418 592 584 0 0 1280 1002 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
@@ -1980,7 +1980,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2011-12-02T20:35:25Z</date>
+	<date>2011-12-16T19:35:02Z</date>
 	<key>SavePasteHistory</key>
 	<true/>
 	<key>Show Toolbelt</key>

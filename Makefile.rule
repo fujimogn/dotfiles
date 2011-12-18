@@ -1,42 +1,63 @@
 OS	= $(shell uname)
 
-ifeq ($(OS),Cygwin)
+ifeq ($(OS), Cygwin)
 CURDIR	:= "$(shell cygpath -w $(CURDIR))"
 PREFIX	?= "$(shell cygpath -w $(HOME))"
 LN		 = cmd /c mklink
-LNF		 = cmd /c mklink /d
+CP		 = cmd /c cp -rf
 RM		 = cmd /c rm -rf
 S		 = "\\"
 else
 CURDIR	:= $(CURDIR)
 PREFIX	?= $(HOME)
 LN		 = ln -sf
+CP		 = cp -rf
 RM		 = rm -rf
 S		 = "/"
 endif
 
+ifeq ($(SUDO), true)
+SUDO	 = sudo
+else
+SUDO	 =
+endif
+
 SYMLINKS:= $(subst /,$(S),$(SYMLINKS))
+FILES:= $(subst /,$(S),$(FILES))
 CHILDS	?= $(patsubst $(CURDIR)/%/Makefile,%,$(wildcard $(CURDIR)/*/Makefile))
 
 all:	install
 
-install:install-symlinks $(CHILDS)
+install: install-before install-symlinks install-files $(CHILDS) install-after
 
-clean:	clean-symlinks clean-childs
+clean:	clean-before clean-symlinks clean-files clean-childs clean-after
 
 install-symlinks:
 	@for F in $(SYMLINKS); do \
-		$(RM) $(PREFIX)$(S)$${F} && \
+		$(SUDO) $(RM) $(PREFIX)$(S)$${F} && \
 			echo "rm: $(PREFIX)$(S)$${F}"; \
-		$(LN) $(CURDIR)$(S)$${F} $(PREFIX)$(S)$${F} && \
+		$(SUDO) $(LN) $(CURDIR)$(S)$${F} $(PREFIX)$(S)$${F} && \
 			echo "ln: $(PREFIX)$(S)$${F} -> $(CURDIR)$(S)$${F}"; \
 	done
 
 clean-symlinks:
 	@for F in $(SYMLINKS); do \
-		$(RM) $(PREFIX)$(S)$${F} && \
+		$(SUDO) $(RM) $(PREFIX)$(S)$${F} && \
 			echo "rm: $(PREFIX)$(S)$${F}"; \
 	done
+
+install-files:
+	@for F in $(FILES); do \
+		$(SUDO) $(CP) $(CURDIR)$(S)$${F} $(PREFIX)$(S)$${F} && \
+			echo "cp: $(CURDIR)$(S)$${F} -> $(PREFIX)$(S)$${F}"; \
+	done
+
+clean-files:
+	@for F in $(FILES); do \
+		$(SUDO) $(RM) $(PREFIX)$(S)$${F} && \
+			echo "rm: $(PREFIX)$(S)$${F}"; \
+	done
+
 
 $(CHILDS):
 	@echo "Install $@..."
@@ -48,4 +69,9 @@ clean-childs:
 		cd $(CURDIR)/$${F} && make clean; \
 	done
 
-.PHONY: all install clean install-symlinks clean-symlinks $(CHILDS) clean-childs
+install-before:
+install-after:
+clean-before:
+clean-after:
+
+.PHONY: all install clean install-symlinks clean-symlinks install-files clean-files $(CHILDS) clean-childs install-before install-after clean-after clean-before
