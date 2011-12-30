@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/path.zshenv
-# $Date: 2011-12-13T06:51:46+0900$
+# $Date: 2011-12-25T02:13:29+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
 ## ${HOME}/bin
@@ -28,12 +28,12 @@ if [[ "${rvm_bin_path}" != "${rvm_path}/bin" ]] ; then
   fi
 fi
 
-## pybrew
-# if [ -s "${HOME}/.pythonbrew/etc/bashrc" ]; then
-  # source ${HOME}/.pythonbrew/etc/bashrc
-  # if [ -s "${HOME}/.pythonbrew/bin/virtualenvwrapper.sh" ]; then
-    # export VIRTUALENVWRAPPER_PYTHON=py2.7.2
-    # source ${HOME}/.pythonbrew/bin/virtualenvwrapper.sh
-  # fi
-# fi
+# pybrew
+if [ -s "${HOME}/.pythonbrew/etc/bashrc" ]; then
+  source ${HOME}/.pythonbrew/etc/bashrc
+  if [ -s "${HOME}/.pythonbrew/bin/virtualenvwrapper.sh" ]; then
+    export VIRTUALENVWRAPPER_PYTHON=py2.7.2
+    source ${HOME}/.pythonbrew/bin/virtualenvwrapper.sh
+  fi
+fi
 

@@ -1,0 +1,71 @@
+<resources script="Javascript Library 1" version="0.03.00" language="en">
+	<resource id="MenuOptions" type="string">
+		{0} - Options
+	</resource>
+	<resource id="HiddenStyle" type="string">
+		.hidden{display:none; visibility:hidden;}
+	</resource>
+	<resource id="NoPaddedListStyle" type="string">
+		.noPaddedList{margin:0px;padding:0px 0px 0px 15px;}
+	</resource>
+	<resource id="ModalDivStyle" type="string">
+		#{0}ModalDiv{position:fixed;top:0px;left:0px;z-index:1000;width:100%;height:100%;color:white;background-color:black;opacity:0.75;}
+	</resource>
+	<resource id="ModalDivHTML" type="string">
+		<div id="{0}ModalDiv" class="hidden" title="{1}">{2}</div>
+	</resource>
+	<resource id="ModalDivTexts" type="object">
+		[null,"Click to close","Click anywhere to close"]
+	</resource>
+	<resource id="NewVersionStyle" type="string">
+		#{0}NewVersionPanel{background-color:#ffff99;border:Dashed 1px black;}
+		#{0}Close{float:right;}
+	</resource>
+	<resource id="NewVersionHTML" type="string">
+		<div id="{0}NewVersionPanel" class="{1}">
+			<div>
+				<a id="{0}Close" href="javascript:void(0);" title="{2}">{3}</a>
+				{4} 
+				<a id="{0}Install" href="{5}" title="{6}" onclick="{7}">{8}</a> 
+				(<a id="{0}More" href="javascript:void(0);" title="{9}">{10}</a>)
+				{11} 
+				<a id="{0}Home" href="{12}" title="{13}" target="_blank">{14}</a> 
+				{15}
+			</div>
+			<div id="{0}Changes" class="hidden">
+				{16} {17}
+				<br/>
+				{18}
+				{19}
+			</div>
+		</div>
+	</resource>
+	<resource id="NewVersionTexts" type="object">
+		[null,null,"Close","[X]","A",null,"install the new version","","new version","More informations","more infos","of",null,"navigate to the home page",null,"is available!","The online version is:",null,"The characteristics of the new version are:","none"]
+	</resource>
+	<resource id="NewVersionReloadHTML" type="string">
+		<div id="{0}NewVersionPanel" class="{1}">
+			<a id="{0}Close" href="javascript:void(0);" title="{2}">{3}</a>
+			{4}
+			<a href="javascript:void(location.reload(true));" title="{5}">{6}</a>
+			{7}
+		</div>
+	</resource>
+	<resource id="NewVersionReloadTexts" type="object">
+		[null,null,"Close","[X]","To finish the installation","Reload the page","reload","the page."]
+	</resource>
+	<resource id="NewVersionDialog_false" type="string">
+		{0} v.{1} is up to date.
+		The online version is v. {2}.
+	</resource>
+	<resource id="NewVersionDialog_true" type="string">
+		The current version of {0} is v. {1}.
+		Online is available a newer version: v. {2}.
+		The characteristics of the new version are:
+		{3}
+		Install the new version?
+	</resource>
+	<resource id="NewVersionDialogReload" type="string">
+		Reload the page to finish the installation?
+	</resource>
+</resources>

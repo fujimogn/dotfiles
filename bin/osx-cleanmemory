@@ -1,13 +1,11 @@
 #!/usr/bin/zsh
 #
 # $File: ${ZDOTDIR}/misc/cleanmemory.darwin.zsh
-# $Date: 2011-11-01T19:25:34+0900$
+# $Date: 2011-12-31T00:54:28+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # via http://d.hatena.ne.jp/zariganitosh/20110617/free_memory
 
-function cleanmemory(){
-  purge
-  diskutil repairpermissions /
-  du -sx / >& /dev/null & sleep 5 && kill $!
-}
+purge
+diskutil repairpermissions /
+du -sx / >& /dev/null & sleep 5 && kill $!

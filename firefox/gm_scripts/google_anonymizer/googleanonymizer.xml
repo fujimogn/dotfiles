@@ -1,0 +1,334 @@
+<resources script="Google Anonymizer" version="2.0.0" language="en">
+	<resource id="NoGooglePREFId" type="string">
+		You don't have it.
+	</resource>
+	<resource id="ConveringTextToObjectError" type="string">
+		Error converting "{0}" to an object, the text is an invalid JSON:
+		{1}
+		See the error console for more information.
+	</resource>
+	<resource id="SearchPreferencesSavedLocally" type="string">
+		{0} has saved your Google's search preferences locally
+	</resource>
+	<resource id="DeletedCookie" type="string">
+		{0} cookie has been deleted: {1}
+	</resource>
+	<resource id="WarningImage" type="string">
+		data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5Ojf/2wBDAQoKCg0MDRoPDxo3JR8lNzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzf/wAARCAAQABADASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAQMFB//EACMQAAICAgEEAgMAAAAAAAAAAAECAwQFEQAGEhMhMTIHFCL/xAAVAQEBAAAAAAAAAAAAAAAAAAADBv/EAB8RAAEDAwUAAAAAAAAAAAAAAAECBBEAAyESEzFRYf/aAAwDAQACEQMRAD8A0D8hZ6DEYu1asVzaq0EWSaFSNSyOQsaHfrQ7u5tjY/gjfxw9CZfzl6TNMa9mBcjjTN9v15NFo/Q1uNm1oE6V4xyD1LnKK4jJYm8jHKTxsLENmjZeIyONkF40JKgEAFSdALo+uKt9S4+w2ImxCTyZenPH4oo6E0SOjaSWPueMAKUJIG/sifJAHJiw5cl7um0qFKKeDhOIMR3JJ9NMUjTE1//Z
+	</resource>
+	<resource id="OptionsContainerStyle" type="string">
+		#{0}OptionsContainer{position:fixed; top:5%; left:10%; z-index:1100; width:80%; height:86%; background-color:#999; border:solid 1px blue;text-align:justify;padding:1%}
+		#{0}OptionsLeftSide{float:left;width:20%;height:96%;background:#EEE;border:solid 1px #AAA;padding:1%;overflow:auto;}
+		#{0}OptionsRightSide{float:right;width:74%;height:96%;background:#EEE;border:solid 1px #AAA;padding:1%;overflow:auto;}
+		#{0}OptionsMenu {background:#444;}
+		#{0}OptionsMenu ul {margin:0px;padding:0px;list-style:none;}
+		#{0}OptionsMenu li {margin:0px;padding:0px;border-top:solid 1px #AAA;}
+		#{0}OptionsMenu li span {color:#999;font-weigth:bold;padding:2px 2px 2px 5px;border-left:solid 5px #DDD;}
+		#{0}OptionsMenu li a {color:#DDD;text-decoration:none;display:block;font-weigth:bold;padding:2px 2px 2px 5px;border-left:solid 5px #DDD;cursor:pointer;}
+		#{0}OptionsMenu li a:hover {color:blue;background:#222;border-left:solid 5px blue;}
+		#{0}OptionsMenu li ul li a {padding:2px 2px 2px 15px;}
+	</resource>
+	<resource id="OptionsContainerHTML" type="string">
+		<div id="{0}OptionsContainer" class="hidden">
+			<form id="{0}FormOptions" name="{0}FormOptions" onsubmit="return false;">
+				<div id="{0}OptionsLeftSide">{1}</div>
+				<div id="{0}OptionsRightSide">{2}</div>
+			</form>
+		</div>
+	</resource>
+	<resource id="OptionsContainerTexts" type="object">
+		[null,null,null]
+	</resource>
+	<resource id="OptionsLeftSideHTML" type="string">
+		<center><h2>Google<br/>Anonymizer<br/><span style="font-size: 10px;">{1} {2}</span></h2></center>
+		<div id="{0}OptionsMenu">
+			<ul>
+				<li><a id="{0}Header_01" href="#general">{3}</a></li>
+				<li><a id="{0}Header_02" href="#update">{4}</a></li>
+				<li><span>{6}</span><ul>
+					<li><a id="{0}Header_03" href="#webProxy">{5}</a></li>
+					<li><a id="{0}Header_04" href="#cookies">{7}</a></li>
+					<li><a id="{0}Header_05" href="#javascriptFunctions">{8}</a></li>
+					<li><a id="{0}Header_06" href="#linksRedirection">{9}</a></li>
+				</ul></li>
+				<li><span>{10}</span><ul>
+					<li><a id="{0}Header_07" href="#searchPreferences">{11}</a></li>
+					<li><a id="{0}Header_08" href="#extraSearchPreferences">{12}</a></li>
+					<li><a id="{0}Header_09" href="#iGooglePreferences">{13}</a></li>
+				</ul></li>
+			</ul>
+		</div>
+		<center>
+			<input type="button" id="{0}Apply" name="{0}Apply" value="{14}" /> 
+			<input type="button" id="{0}OK" name="{0}OK" value="{15}" /> 
+			<input type="button" id="{0}Cancel" name="{0}Cancel" value="{16}" />
+		</center>
+	</resource>
+	<resource id="OptionsLeftSideTexts" type="object">
+		[null,"ver.",null,"General","Update","WebProxy","Tracking Systems","Cookies","Javascript Functions","Link Redirection","Google's Preferences","Search","Extra Search","iGoogle","Apply","Ok","Cancel"]
+	</resource>
+	<resource id="OptionsGeneralHTML" type="string">
+		<div id="{0}Content_01"><div>
+		<a name="general"><h2>{1}</h2></a>
+			<input id="{0}Version" name="{0}Version" type="hidden" />
+			{2} 
+			<select id="{0}Language" name="{0}Language">
+				<option value="de">{3}</option>
+				<option value="en">{4}</option>
+				<option value="es">{5}</option>
+				<option value="fr">{6}</option>
+				<option value="it">{7}</option>
+			</select>
+			<br/>
+			{8} <a id="{0}HomeLink" href="{9}" target="_blank">{9}</a>
+		</div></div>
+	</resource>
+	<resource id="OptionsGeneralTexts" type="object">
+		[null,"General","Language:","DE - German","EN - English","ES - Spanish","FR - French","IT - Italian","Google Anonymizer's home is:","http://userscripts.org/scripts/show/10448"]
+	</resource>
+	<resource id="OptionsUpdaterHTML" type="string">
+		<div id="{0}Content_02"><div>
+			<a name="update"><h2>{1}</h2></a>
+			{2} 
+			<input id="{0}CheckForUpdate" name="{0}CheckForUpdate" type="button" value="{3}" />
+			<br/>
+			{4}
+			<select id="{0}UpdateCheckFrequency" name="{0}UpdateCheckFrequency">
+				<option value="0">{5}</option>
+				<option value="1">{6}</option>
+				<option value="7">{7}</option>
+				<option value="30">{8}</option>
+			</select>
+			<br/>
+			{9} <span id="{0}LastUpdate">{10}</span>
+		</div></div>
+	</resource>
+	<resource id="OptionsUpdaterTexts" type="object">
+		[null,"Update","Check for an update:","Now","Frequency of the automatic update:","Never","Daily","Weekly","Monthly","Date of the last check for an update:","Unknown"]
+	</resource>
+	<resource id="OptionsWebProxyHTML" type="string">
+		<div id="{0}Content_03"><div>
+			<a name="webProxy"><h2>{1}</h2></a>
+			{2}
+			<br/>
+			<br/>
+			<input id="{0}UseWebProxy" name="{0}UseWebProxy" type="checkbox" />
+			<label for="{0}UseWebProxy">{3}</label> 
+			<br/>
+			{4}
+			<input id="{0}WebProxyAction" name="{0}WebProxyAction" type="text" size="70" />
+			<br/>
+			{5} <input id="{0}WebProxyTarget" name="{0}WebProxyTarget" type="text" size="10" />
+			<br/>
+			{6}
+			<input id="{0}WebProxyMethodPost" name="{0}WebProxyMethod" value="Post" type="radio" />
+			<label for="{0}WebProxyMethodPost">{7}</label>
+			<input id="{0}WebProxyMethodGet" name="{0}WebProxyMethod" value="Get" type="radio" />
+			<label for="{0}WebProxyMethodGet">{8}</label>
+			<br/>
+			{9}
+			<input id="{0}WebProxyEncodingXWWWForm" name="{0}WebProxyEncoding" value="application/x-www-form-urlencoded" type="radio" />
+			<label for="{0}WebProxyEncodingXWWWForm">{10}</label>
+			<input id="{0}WebProxyEncodingFormData" name="{0}WebProxyEncoding" value="multipart/form-data" type="radio" />
+			<label for="{0}WebProxyEncodingFormData">{11}</label>
+			<input id="{0}WebProxyEncodingTextPlain" name="{0}WebProxyEncoding" value="text/plain" type="radio" />
+			<label for="{0}WebProxyEncodingTextPlain">{12}</label>
+			<br/>
+			{13}
+			<br/>
+			<textarea id="{0}WebProxyFields" name="{0}WebProxyFields" style="width:100%;height:60px;"> </textarea>
+		</div></div>
+	</resource>
+	<resource id="OptionsWebProxyTexts" type="object">
+		[null,"Web-Proxy","Experimental! Send requests through a web proxy, that will hide the IP but is to note that Google Anonymizer won't run on the result page due the different site url.","Submit request through a web-proxy","Url:","Target:","Method:","Post","Get","Encoding:","x-www-form-urlencoded","multipart/form-data","text/plain","Fields names and values, use \"{0}\" for the url field value [JSON]"]
+	</resource>
+	<resource id="OptionsCookiesHTML">
+		<div id="{0}Content_04"><div>
+			<a name="cookies"><h2>{1}</h2></a>
+			{2}
+			<br/>
+			<br/>
+			<input id="{0}DeleteGoogleCookies" name="{0}DeleteGoogleCookies" type="checkbox" />
+			<label for="{0}DeleteGoogleCookies">{3}</label>
+			<br/>
+			<input id="{0}NotWhenLoggedInGoogleNetwork" name="{0}NotWhenLoggedInGoogleNetwork" type="checkbox" />
+			<label for="{0}NotWhenLoggedInGoogleNetwork">{4}</label>
+			<br/>
+			<input id="{0}LogDeletedCookies" name="{0}LogDeletedCookies" type="checkbox" />
+			<label for="{0}LogDeletedCookies">{5}</label>
+			<br/>
+			<br/>
+			{6}
+			<br/>
+			<input id="{0}DeleteGoogleCookiesBeginning" name="{0}DeleteGoogleCookiesBeginning" type="checkbox" />
+			<label for="{0}DeleteGoogleCookiesBeginning">{7}</label>
+			<br/>
+			<input id="{0}DeleteGoogleCookiesEnd" name="{0}DeleteGoogleCookiesEnd" type="checkbox" />
+			<label for="{0}DeleteGoogleCookiesEnd">{8}</label>
+			<br/>
+			
+		</div></div>
+	</resource>
+	<resource id="OptionsCookiesTexts" type="object">
+		[null,"Cookies","Cookies are fundamental to hold an users authenticated after the login, such cookies are called \"authentication\" cookies and normally they contain an random unique id used to identify and authenticate the user's requests. Normally these cookies have an expiration period of few minutes, this means that the browser will delete them after few minutes of inactivity. Cookies that last longer than few minutes, normally many months, are called \"permanent\" cookies and they are used to save users preferences and other information. A permanent cookie, which contains an unique id, which isn't used to keep an user logged in a system is a \"tracking\" cookie. Google, like many other companies, like to track their users and collect informations about them and to do it, it places many tracking cookies.",
+		"Delete Google's cookies","Not when logged in Google's network","Log deleted cookies","Delete Google's cookies:","When the page is loaded (beginning)","When the page is unloaded (end)"]
+	</resource>
+	<resource id="OptionsJavascriptFunctionsHTML" type="string">
+		<div id="{0}Content_05"><div>
+			<a name="javascriptFunctions"><h2>{1}</h2></a>
+			{2} 
+			<br/>
+			<br/>
+			<input id="{0}RemoveMouseDown" name="{0}RemoveMouseDown" type="checkbox" />
+			<label for="{0}RemoveMouseDown">{3}</label>
+			<br/>
+			<select id="{0}ClkFunction" name="{0}ClkFunction">
+				<option value="Leave">{4}</option>
+				<option value="Delete">{5}</option>
+				<option value="Rewrite">{6}</option>
+			</select>
+			<label for="{0}ClkFunction" onclick="var s=document.getElementById('{0}ClkFunction'); var i=s.selectedIndex+1; s.selectedIndex=i==s.options.length?0:i;">{7}</label>
+			<br/>
+			<select id="{0}RwtFunction" name="{0}RwtFunction">
+				<option value="Leave">{4}</option>
+				<option value="Delete">{5}</option>
+				<option value="Rewrite">{6}</option>
+			</select>
+			<label for="{0}RwtFunction" onclick="var s=document.getElementById('{0}RwtFuncion'); var i=s.selectedIndex+1; s.selectedIndex=i==s.options.length?0:i;">{8}</label>
+		</div></div>
+	</resource>
+	<resource id="OptionsJavascriptFunctionsTexts" type="object">
+		[null,"Javascript Functions","Google adds on the mouse down event of the links on the search results page a Javascript tracking function. So far two different functions are known, whose names are \"clk\" and \"rwt\". Removing the mouse down event from all the links and delete or rewrite both tracking functions is the best way to remain anonymous. A rewritten function is replaced with an empty function ({return true;}), instead a deleted function will be completely erased (undefined).",
+		"Remove \"mousedown\" event from links","Leave","Delete","Rewrite"," \"clk\" Javascript tracking function"," \"rwt\" Javascript tracking function"]
+	</resource>
+	<resource id="OptionsLinkRedirectionHTML" type="text">
+		<div id="{0}Content_06"><div>
+			<a name="linksRedirection"><h2>{1}</h2></a>
+			{2}
+			<br/>
+			<br/>
+			{3}
+			<a href="http://www.google.com/support/bin/answer.py?answer=45449&amp;topic=360&amp;hl=en&amp;sa=X&amp;oi=malwarewarninglink&amp;resnum=26&amp;ct=help" target="_blank">{4}</a>
+			{5}
+			<br/>
+			<br/>
+			<input id="{0}RewriteDangerousSitesUrl" name="{0}RewriteDangerousSitesUrl" type="checkbox" />
+			<label for="{0}RewriteDangerousSitesUrl">{6}</label>
+			<br/>
+			<input id="{0}ConfirmDangerousSites" name="{0}ConfirmDangerousSites" type="checkbox" />
+			<label for="{0}ConfirmDangerousSites">{7}</label>
+			<br/>
+			<br/>
+			{8}
+			<br/>
+			<br/>
+			<input id="{0}RewriteImagesUrl" name="{0}RewriteImagesUrl" type="checkbox" />
+			<label for="{0}RewriteImagesUrl">{9}</label>
+			<br/>
+			<input id="{0}AddLinkImagesOriginalPage" name="{0}AddLinkImagesOriginalPage" type="checkbox" />
+			<label for="{0}AddLinkImagesOriginalPage">{10}</label>
+		</div></div>
+	</resource>
+	<resource id="OptionsLinkRedirectionTexts" type="object">
+		[null,"Link Redirection","Some links on the result pages of Google don't point directly to the result page but again back to Google, which will afterward redirect you to the result page. This is also a tracking system to know which links on the results page have been clicked. To prevent this tracking system the links will be rewritten to point directly to the result page.",
+		"Some results on the web search are signaled from Google to be dangerous. Those results are linked to a ","warning page",". Instead of the redirection it will be added a warning icon with a confirm dialog to the link. Note that opening the links  from the context menu in a new window or tab won't trigger click event and therefore also the warning dialog won't show up.","Remove redirection for dangerous sites","Add a confirm dialog for dangerous sites",
+		"All the images on the result pages of Google images search link back to Google.","Rewrite image's links to the original image","Add a link to the original page"]
+	</resource>
+	<resource id="OptionsSearchPreferencesHTML" type="string">
+		<div id="{0}Content_07"><div>
+			<a name="searchPreferences"><h2>{1}</h2></a>
+			{2} <span id="{0}GoogleId"> </span>
+			<br/>
+			<br/>
+			<input id="{0}LeavePREFCookie" name="{0}LeavePREFCookie" type="checkbox" />
+			<label for="{0}LeavePREFCookie">{3}</label>
+			<br/>
+			<input id="{0}UseImillyPREFCookie" name="{0}UseImillyPREFCookie" type="checkbox" />
+			<label for="{0}UseImillyPREFCookie">{4}</label> 
+			<br/>
+			<a href="http://www.imilly.com/google-cookie.htm" target="_blank">{5}</a>
+			<br/>
+			<br/>
+			{6} <a href="/preferences">{7}</a> {8}
+			<br/>
+			<br/>
+			<input id="{0}SaveGooleSearchPreference" name="{0}SaveGooleSearchPreference" type="checkbox" />
+			<label for="{0}SaveGooleSearchPreference">{9}</label>
+			<br/>
+			<input id="{0}RemoveGoogleAlertSavedPreferences" name="{0}RemoveGoogleAlertSavedPreferences" type="checkbox" />
+			<label for="{0}RemoveGoogleAlertSavedPreferences">{10}</label>
+			<br/>
+			<input id="{0}ShowAnonymizerAlertSavedPreferences" name="{0}ShowAnonymizerAlertSavedPreferences" type="checkbox" />
+			<label for="{0}ShowAnonymizerAlertSavedPreferences">{11}</label>
+			<br/>
+			<br/>
+			{12}
+			<br/>
+			<br/>
+			<input id="{0}SearchPreferenceHiddenFields" name="{0}SearchPreferencesHiddenFields" type="checkbox" />
+			<label for="{0}SearchPreferenceHiddenFields">{13}</label>
+			<br/>
+			<input id="{0}SearchPreferenceCookie" name="{0}SearchPreferenceCookie" type="checkbox" />
+			<label for="{0}SearchPreferenceCookie">{14}</label>
+			<br/>
+			<br/>
+			{15}
+			<br/>
+			<textarea id="{0}GoogleSearchPreferences" name="{0}GoogleSearchPreferences" style="width:100%;height:60px;"> </textarea>
+		</div></div>
+	</resource>
+	<resource id="OptionsSearchPreferencesTexts" type="object">
+		[null,"Search Preferences","Google's search preferences are saved in the PREF cookie, which unfortunately is also a tracking cookie, your Google's id is: ","Leave Google's PREF cookie","Use Imilly's annulled Google's id cookie","Imilly's \"Anonymizing Google's Cookie\" page",
+		"Fortunately it's possible to save Google's","search preferences","locally and add them in two different ways to each requests. The saved preferences are global and not localized.","Save Google's preferences locally","Remove Google's saved preferences alert message","Show Google Anonymizer's saved preferences alert message",
+		"Add locally saved Google's search preferences as:","As hidden fields to each Google's search form","To the PREF cookie with two background requests to Google","Saved Google's search preferences [JSON]"]
+	</resource>
+	<resource id="OptionsExtraSearchPreferencesHTML" type="string">
+		<div id="{0}Content_08"><div>
+			<a name="extraSearchPreferences"><h2>{1}</h2></a>
+			{2}
+			<a href="http://www.google.com/coop/docs/cse/resultsxml.html#wsRequestParameters" target="_blank">{3}</a> 
+			{4}
+			<br/>
+			<br/>
+			<input id="{0}ExtraSearchPreferencesHiddenFields" name="{0}ExtraSearchPreferencesHiddenFields" type="checkbox" />
+			<label for="{0}ExtraSearchPreferencesHiddenFields">{5}</label>
+			<br/>
+			<br/>
+			{6}
+			<br/>
+			<textarea id="{0}GoogleExtraSearchPreferences" name="{0}GoogleExtraSearchPreferences" style="width:100%;height:60px;"> </textarea>
+		</div></div>
+	</resource>
+	<resource id="OptionsExtraSearchPreferencesTexts" type="object">
+		[null,"Extra Search Preferences","To the Google's search request can also be added other parameters that are not present on the Google's preferences page, an almost complete list of these parameters can be found on the Google's ","request parameters"," page. The extra parameters can be added as hidden fields to all Google's search forms.",
+		"Add Google's extra preferences as hidden fields","Saved Google's extra search preferences [JSON]"]
+	</resource>
+	<resource id="OptionsIGooglePreferencesHTML" type="string">
+		<div id="{0}Content_09"><div>
+			<a name="iGooglePreferences"><h2>{1}</h2></a>
+			{2}
+			<br/>
+			<br/>
+			<input id="{0}IGoogleLeaveIGTPCookie" name="{0}IGoogleLeaveIGTPCookie" type="checkbox" />
+			<label for="{0}IGoogleLeaveIGTPCookie">{3}</label>
+			<br/>
+			<input id="{0}IGoogleSaveIGTPCookie" name="{0}IGoogleSaveIGTPCookie" type="checkbox" />
+			<label for="{0}IGoogleSaveIGTPCookie">{4}</label>
+			<br/>
+			<input id="{0}IGoogleReloadPage" name="{0}IGoogleReloadPage" type="checkbox" />
+			<label for="{0}IGoogleReloadPage">{5}</label>
+			<br/>
+			<input id="{0}IGoogleRemoveSignUp" name="{0}IGoogleRemoveSignUp" type="checkbox" />
+			<label for="{0}IGoogleRemoveSignUp">{6}</label>
+			<br/>
+			<br/>
+			{7}
+			<br/>
+			<textarea id="{0}IGoogleSavedIGTPCookie" name="{0}IGoogleSavedIGTPCookie" wrap="hard" style="width:100%;height:100px;"> </textarea>
+			<br/>
+		</div></div>
+	</resource>
+	<resource id="OptionsIGooglePreferencesTexts" type="object">
+		[null,"iGoogle Preferences","Google's IGTP cookie contains the iGoogle preferences, if you don't save them on Google's servers, this is if you aren't logged into Google's network. Some people love to clear all the private data when closing the browser, this good behavior has the disadvantage, that if the preferences are saved in the IGTP cookie, they will be lost. This option allows to save the iGoogle preferences cookie IGTP locally and reset it when surfing again to iGoogle page. Attention iGoogle seems not work very well without the PREF cookie, that could mean that also the IGTP is a tracking cookie!","Leave iGoogle's IGTP cookie","Save iGoogle's IGTP cookie locally","Reload the page after resetting iGoogle's IGTP cookie","Remove the \"Sign In\" label","The locally saved iGoogle's preferences cookie"]
+	</resource>
+</resources>

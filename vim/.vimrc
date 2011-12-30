@@ -29,6 +29,7 @@ set shortmess+=I
 set vb t_vb=
 set helplang=ja,en
 set hidden
+set clipboard+=autoselect
 set clipboard+=unnamed
 set tags=./tags,tags,~/tags
 set splitbelow
@@ -56,8 +57,8 @@ set backupdir=~/.vim/.tmp
 set backupskip=/tmp/*,/private/tmp/*"
 set swapfile
 set directory=~/.vim/.tmp
-set undofile
-set undodir=~/.vim/.tmp
+" set undofile
+" set undodir=~/.vim/.tmp
 set undolevels=1000
 set viminfo='50,<1000,s100,:100
 set viminfo+=n~/.vim/.tmp/viminfo
@@ -177,10 +178,10 @@ endif
 
 " }}}
 " Forlding {{{
-set foldenable
-set foldmethod=marker
-set foldcolumn=2
-set foldlevelstart=0
+" set foldenable
+" set foldmethod=marker
+" set foldcolumn=2
+" set foldlevelstart=0
 nnoremap zz za
 nnoremap Z za
 vnoremap zz zf
@@ -347,8 +348,8 @@ autocmd BufNewFile,BufRead *.less,*.css command! Cleansort ?{<CR>jV/\v^\s*\}?$<C
 autocmd FileType css,less setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
 " }}}
 " JavaScript {{{
-autocmd FileType javascript setlocal foldmethod=marker
-autocmd FileType javascript setlocal foldmarker={,}
+" autocmd FileType javascript setlocal foldmethod=marker
+" autocmd FileType javascript setlocal foldmarker={,}
 " }}}
 " Python {{{
 autocmd FileType python set expandtab

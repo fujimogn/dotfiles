@@ -25,7 +25,7 @@ if [ ! -d "${ZDOTDIR}" ]; then
 fi
 
 if [ -z ${ZDOTTEMP} ]; then
-  export ZDOTTMP=${ZDOTDIR}/.tmp
+  export ZDOTTMP=${HOME}/.tmp
 fi
 
 if [ -f ${ZDOTDIR}/.zshenv ]; then

@@ -1,5 +1,5 @@
 ""3.3pre
-" $Date: 2011-12-16T06:00:45+0900$
+" $Date: 2011-12-25T16:52:46+0900$
 
 
 
@@ -13,7 +13,8 @@ js liberator.execute('set titlestring=Vimp" '+liberator.version.match(/\d+\.\d+/
 set autocomplete
 set complete=tsl
 set focuscontent
-set gui=noaddons,bookmarks,nomenu,nonavigation,tabs
+set gui=noaddons,bookmarks,nomenu,nonavigation,notabs
+" set gui=noaddons,bookmarks,nomenu,navigation,tabs
 set hintchars=hjklasdfgyuiopqwertnmzxcvb
 set history=1000
 set hlsearch
@@ -37,100 +38,100 @@ EOM
 " }}}
 " about:config ----------------------------------------------------------------------- {{{
 
-" アドオン/プラグイン開発用
-set! javascript.options.strict=true
-set! javascript.options.showInConsole=true
-set! browser.dom.window.dump.enabled=true
+" " アドオン/プラグイン開発用
+" set! javascript.options.strict=true
+" set! javascript.options.showInConsole=true
+" set! browser.dom.window.dump.enabled=true
 
-" Webページが自動的に転送や再読み込みさせようとした場合警告する
-" set! accessibility.blockautorefresh=true
+" " Webページが自動的に転送や再読み込みさせようとした場合警告する
+" " set! accessibility.blockautorefresh=true
 
-" キャッシュ
-set! browser.cache.disk.enable=false
-set! browser.cache.memory.enable=true
-set! browser.cache.memory.capacity=-1
+" " キャッシュ
+" set! browser.cache.disk.enable=false
+" set! browser.cache.memory.enable=true
+" set! browser.cache.memory.capacity=-1
 
-" ダウンロードウィンドウを完了後自動で閉じる
-set! browser.download.manager.closeWhenDone=true
+" " ダウンロードウィンドウを完了後自動で閉じる
+" set! browser.download.manager.closeWhenDone=true
 
-" ダウンロード履歴を終了時に削除
-set! browser.download.manager.retention=1
+" " ダウンロード履歴を終了時に削除
+" set! browser.download.manager.retention=1
 
-" ファイルダウンロード完了時のウイルススキャン機能オフ
-set! browser.download.manager.scanWhenDone=false
+" " ファイルダウンロード完了時のウイルススキャン機能オフ
+" set! browser.download.manager.scanWhenDone=false
 
-" 検索やフォームの入力履歴を保存しない
-set! browser.formfill.enable=false
+" " 検索やフォームの入力履歴を保存しない
+" set! browser.formfill.enable=false
 
-" 起動時に前回終了時のウィンドウとタブを表示する
-set! browser.startup.page=3
+" " 起動時に前回終了時のウィンドウとタブを表示する
+" set! browser.startup.page=3
 
-" タブが選択されるまでページを読み込まない
-set! browser.sessionstore.restore_on_demand=true
+" " タブが選択されるまでページを読み込まない
+" set! browser.sessionstore.restore_on_demand=true
 
-" セッションの保存間隔
-set! browser.sessionstore.interval=120000
+" " セッションの保存間隔
+" set! browser.sessionstore.interval=120000
 
-" undo limit
-set! browser.sessionstore.max_tabs_undo=100
+" " undo limit
+" set! browser.sessionstore.max_tabs_undo=100
 
-" タブバーを自動で隠さない
-set! browser.tabs.autoHide=false
+" " タブバーを自動で隠さない
+" set! browser.tabs.autoHide=false
 
-" 閉じるボタンを表示
-set! browser.tabs.closeButtons=3
+" " 閉じるボタンを表示
+" set! browser.tabs.closeButtons=3
 
-" 新規タブをバックグラウンドで開く
-set! browser.tabs.loadDivertedInBackground=true
+" " 新規タブをバックグラウンドで開く
+" set! browser.tabs.loadDivertedInBackground=true
 
-" Awesomebarの補完対象にBookmarkletを追加、件数を50件に変更
-set! browser.urlbar.filter.javascript=false
-set! browser.urlbar.maxRichResults=50
+" " Awesomebarの補完対象にBookmarkletを追加、件数を50件に変更
+" set! browser.urlbar.filter.javascript=false
+" set! browser.urlbar.maxRichResults=50
 
-" ポップアップを 10000 まで許可する
-set! dom.popup_maximum=10000
+" " ポップアップを 10000 まで許可する
+" set! dom.popup_maximum=10000
 
-" JavaScriptでのウィンドウ移動・リサイズ拒否
-set! dom.disable_window_move_resize=true
+" " JavaScriptでのウィンドウ移動・リサイズ拒否
+" set! dom.disable_window_move_resize=true
 
-" about:configの編集時の警告を無効
-set! general.warnOnAboutConfig=false
+" " about:configの編集時の警告を無効
+" set! general.warnOnAboutConfig=false
 
-" 画像の多いタブを閉じた時にすぐにメモリ使用量を減らす
-" http://space.geocities.yahoo.co.jp/gl/alice0775/view/20110416/1302920985
-set! image.mem.min_discard_timeout_ms=6000
+" " 画像の多いタブを閉じた時にすぐにメモリ使用量を減らす
+" " http://space.geocities.yahoo.co.jp/gl/alice0775/view/20110416/1302920985
+" set! image.mem.min_discard_timeout_ms=6000
 
-" IPv6 無効化
-set! network.dns.disableIPv6=true
+" " IPv6 無効化
+" set! network.dns.disableIPv6=true
 
-" パイプライン
-set! network.http.pipelining=true
-set! network.http.proxy.pipelining=true
-set! network.http.pipelining.maxrequests=10
+" " パイプライン
+" set! network.http.pipelining=true
+" set! network.http.proxy.pipelining=true
+" set! network.http.pipelining.maxrequests=10
 
-" 接続数
-set! network.http.max-connections=48
-set! network.http.max-connections-per-server=20
-set! network.http.max-persistent-connections-per-proxy=16
-set! network.http.max-persistent-connections-per-server=8
+" " 接続数
+" set! network.http.max-connections=48
+" set! network.http.max-connections-per-server=20
+" set! network.http.max-persistent-connections-per-proxy=16
+" set! network.http.max-persistent-connections-per-server=8
 
-" レンダリング待ち時間
-set! nglayout.initialpaint.delay=0
+" " レンダリング待ち時間
+" set! nglayout.initialpaint.delay=0
 
-" アドオンインストール時の待ち時間カット
-set! security.dialog_enable_delay=0
+" " アドオンインストール時の待ち時間カット
+" set! security.dialog_enable_delay=0
 
-" サイトのパスワードを保存しない
-set! signon.rememberSignons=false
+" " サイトのパスワードを保存しない
+" set! signon.rememberSignons=false
 
-" ページのアクセスキーを無効化
-set! ui.key.generalAccessKey=0
+" " ページのアクセスキーを無効化
+" set! ui.key.generalAccessKey=0
 
-" サブメニューが表示されるまでに費やす時間
-set! ui.submenuDelay=0
+" " サブメニューが表示されるまでに費やす時間
+" set! ui.submenuDelay=0
 
-" キャレットモードのカーソルを太くする
-set! ui.caretWidth=8
+" " キャレットモードのカーソルを太くする
+" set! ui.caretWidth=8
 
 " }}}
 " Style ------------------------------------------------------------------------------ {{{
@@ -266,7 +267,7 @@ imap <C-p> <Up>
 " qmarks追加キーMを無効化
 noremap M <Nop>
 
-silent qmark a https://www.google.com/analytics/settings/?pli=1
+silent qmark a https://www.google.com/analytics/
 silent qmark d http://www.tumblr.com/dashboard
 silent qmark e https://www.evernote.com/Home.action
 silent qmark f https://www.facebook.com
@@ -291,21 +292,21 @@ js <<EOM
 liberator.globalVariables.plugin_loader_roots = "~/.vimperator/plugin/ ~/.vimperator/vimpr/";
 liberator.globalVariables.plugin_loader_plugins = [
   '_libly',
-  'auto_reload',
-  'auto_source',
-  'auto-focus-frame',
-  'bookmarktoolbar-hint',
-  'caret-hint',
-  'command_menu',
-  'commandBookmarklet',
+//  'auto_reload',
+//  'auto_source',
+//  'auto-focus-frame',
+//  'bookmarktoolbar-hint',
+//  'caret-hint',
+//  'command_menu',
+//  'commandBookmarklet',
   'copy',
   'direct_bookmark',
   'feedSomeKeys_3',
   'ldrize_cooperation',
-  'migemo_completion',
-  'migemo_hint',
-  'migemo_find',
-  'opener',
+//  'migemo_completion',
+//  'migemo_hint',
+//  'migemo_find',
+//  'opener',
   'statusline-toolbar',
   'twittperator',
 ];

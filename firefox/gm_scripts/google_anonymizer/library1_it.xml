@@ -1,0 +1,28 @@
+<resources script="Javascript Library 1" version="0.03.00" language="it">
+	<resource id="MenuOptions" type="string">
+		{0} - Opzioni
+	</resource>
+	<resource id="ModalDivTexts" type="object">
+		[null,"Cliccare per chiudere","Cliccare ovunque per chiudere"]
+	</resource>
+	<resource id="NewVersionTexts" type="object">
+		[null,null,"Chiudere","[X]","Una",null,"installare la nuova versione","","nuova versione","Più informazioni","più infos","di",null,"navigare sulla home page",null,"è disponibile!","La versione online è:",null,"Le caratteristiche della nuova versione sono:","Nessuna"]
+	</resource>
+	<resource id="NewVersionReloadTexts" type="object">
+		[null,null,"Chiudere","[X]","Per finire l'installazione","Ricaricare la pagina","ricaricare","la pagina."]
+	</resource>
+	<resource id="NewVersionDialog_false" type="string">
+		{0} v.{1} è aggiornato.
+		La versione online è v. {2}.
+	</resource>
+	<resource id="NewVersionDialog_true" type="string">
+		La corrente versione di {0} è v. {1}.
+		Online è disponibile una versione più nuova: v. {2}.
+		Le caratteristiche della nuova versione sono:
+		{3}
+		Installare la nuova versione?
+	</resource>
+	<resource id="NewVersionDialogReload" type="string">
+		Ricaricare la pagina per finire l'installazione?
+	</resource>
+</resources>
