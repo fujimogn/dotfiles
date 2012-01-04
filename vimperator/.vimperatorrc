@@ -13,8 +13,8 @@ js liberator.execute('set titlestring=Vimp" '+liberator.version.match(/\d+\.\d+/
 set autocomplete
 set complete=tsl
 set focuscontent
-set gui=noaddons,bookmarks,nomenu,nonavigation,notabs
-" set gui=noaddons,bookmarks,nomenu,navigation,tabs
+" set gui=noaddons,bookmarks,nomenu,nonavigation,notabs
+set gui=noaddons,bookmarks,nomenu,nonavigation,tabs
 set hintchars=hjklasdfgyuiopqwertnmzxcvb
 set history=1000
 set hlsearch

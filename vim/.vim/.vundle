@@ -1,10 +1,10 @@
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/unite.vim'
+" vim: ft=vim
+" Bundle 'Shougo/neocomplcache'
+" Bundle 'Shougo/unite.vim'
 Bundle 'The-NERD-Commenter'
 Bundle 'gmarik/vundle.git'
 Bundle 'kana/vim-fakeclip'
 Bundle 'majutsushi/tagbar'
-Bundle 'skammer/vim-css-color'
 Bundle 'thinca/vim-quickrun'
 Bundle 'thinca/vim-ref'
 Bundle 'vim-jp/vimdoc-ja'
