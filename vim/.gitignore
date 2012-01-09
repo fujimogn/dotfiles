@@ -1,4 +1,4 @@
-/.vim/bundles
+/.vim/bundle
 /.vim/.tmp/*
 !/.vim/.tmp/empty
 .netrwhist

@@ -10,10 +10,6 @@
 	path = zsh/.zsh/modules/zsh-history-substring-search
 	url = git://github.com/zsh-users/zsh-history-substring-search.git
   ignore = dirty
-[submodule "vim/.vim/bundles/vundle"]
-	path = vim/.vim/bundles/vundle
-	url = git://github.com/gmarik/vundle.git
-  ignore = dirty
 [submodule "zsh/.zsh/modules/zaw"]
 	path = zsh/.zsh/modules/zaw
 	url = git://github.com/zsh-users/zaw.git
@@ -22,3 +18,6 @@
 	path = vimperator/.vimperator/vimpr
 	url = git://github.com/vimpr/vimperator-plugins.git
   ignore = dirty
+[submodule "vim/.vim/bundle/neobundle.vim"]
+	path = vim/.vim/bundle/neobundle.vim
+	url = git://github.com/Shougo/neobundle.vim.git

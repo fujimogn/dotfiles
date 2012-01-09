@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/bin/sh
 #
 # $File: ${ZDOTDIR}/misc/cleanmemory.darwin.zsh
 # $Date: 2011-12-31T00:54:28+0900$
