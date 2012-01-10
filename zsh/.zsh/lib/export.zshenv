@@ -1,7 +1,7 @@
 #!/usr/bin/sh
 #
 # $File: ${ZDOTDIR}/lib/export.zshenv
-# $Date: 2011-12-12T17:44:30+0900$
+# $Date: 2012-01-10T10:38:17+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # Lang
@@ -21,6 +21,9 @@ if [ "$PAGER" = "lv" ]; then
 else
   alias lv="$PAGER"
 fi
+
+## Mercurial
+export HGENCODING=utf-8
 
 ## Rsense
 if [ -d /usr/lib/rsense ]; then
