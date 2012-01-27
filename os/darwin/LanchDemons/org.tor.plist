@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>org.tor</string>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>UserName</key>
+    <string>fujimogn</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/local/Cellar/tor/0.2.2.35/bin/tor</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/usr/local</string>
+  </dict>
+</plist>

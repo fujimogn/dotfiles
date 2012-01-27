@@ -1,5 +1,5 @@
 SUDO	= true
-FILES	= polipo.plist rombouts.pdnsd.plist
+FILES	= polipo.plist rombouts.pdnsd.plist org.tor.plist
 PREFIX	= /Library/LaunchDaemons
 
 include ../../../Makefile.rule

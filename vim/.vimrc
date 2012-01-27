@@ -21,6 +21,7 @@ NeoBundle 'thinca/vim-ref'
 NeoBundle 'vim-scripts/sudo.vim'
 NeoBundle 'The-NERD-Commenter'
 NeoBundle 'vim-jp/vimdoc-ja'
+NeoBundle 'mattn/zencoding-vim/'
 " }}}
 
 filetype plugin indent on
