@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/path.darwin.zshenv
-# $Date: 2011-12-13T00:13:45+0900$
+# $Date: 2012-01-27T11:30:08+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
 ## Xcode
@@ -35,6 +35,5 @@ fi
 if [ -d /usr/local/lib/node_modules/npm/bin ]; then
   export PATH=$PATH:/usr/local/lib/node_modules/npm/bin
 fi
-
 
 

@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/opt.zshrc
-# $Date: 2011-12-31T01:17:35+0900$
+# $Date: 2012-01-29T05:57:11+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # {{{ basic
@@ -11,7 +11,7 @@ setopt auto_name_dirs           # "~$var" でディレクトリにアクセス
 setopt auto_pushd               # 移動したディレクトリを記録しておく
 setopt brace_ccl                # {a-za-z} をブレース展開
 setopt cdable_vars              # 先頭に "~" を付けたもので展開
-setopt chase_links              # シンボリックリンクはリンク先のパスに変換してから実行
+# setopt chase_links              # シンボリックリンクはリンク先のパスに変換してから実行
 setopt interactive_comments     # コマンドラインで # 以降をコメントとする
 setopt multios                  # 複数のリダイレクトやパイプに対応
 setopt no_beep                  # ビープ音を出さない

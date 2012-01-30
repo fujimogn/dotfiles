@@ -1,7 +1,7 @@
 #!/usr/bin/sh
 #
 # $File: ${ZDOTDIR}/lib/export.zshenv
-# $Date: 2012-01-27T11:23:47+0900$
+# $Date: 2012-01-27T11:28:26+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # Lang
@@ -28,12 +28,5 @@ export HGENCODING=utf-8
 ## Rsense
 if [ -d "/usr/lib/rsense" ]; then
   export RSENSE_HOME=/usr/lib/rsense
-fi
-
-## gisty
-if which gisty > /dev/null 2>&1; then
-  export GISTY_DIR=${HOME}/gist
-  export GISTY_SSL_CA=`ruby -ropenssl -e 'p OpenSSL::X509::DEFAULT_CERT_FILE'`
-  export GISTY_SSL_VERIFY="none"
 fi
 

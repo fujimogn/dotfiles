@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/path.zshenv
-# $Date: 2011-12-25T02:13:29+0900$
+# $Date: 2012-01-27T11:30:26+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
 ## ${HOME}/bin
@@ -35,5 +35,12 @@ if [ -s "${HOME}/.pythonbrew/etc/bashrc" ]; then
     export VIRTUALENVWRAPPER_PYTHON=py2.7.2
     source ${HOME}/.pythonbrew/bin/virtualenvwrapper.sh
   fi
+fi
+
+## gisty
+if which gisty >/dev/null 2>&1 ; then
+  export GISTY_DIR=${HOME}/gist
+  export GISTY_SSL_CA=`ruby -ropenssl -e 'p OpenSSL::X509::DEFAULT_CERT_FILE'`
+  export GISTY_SSL_VERIFY="none"
 fi
 

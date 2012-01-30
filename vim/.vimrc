@@ -8,7 +8,6 @@ endif
 
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/vimfiler'
-" NeoBundle 'Shougo/vimproc'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimshell.git'
@@ -21,7 +20,14 @@ NeoBundle 'thinca/vim-ref'
 NeoBundle 'vim-scripts/sudo.vim'
 NeoBundle 'The-NERD-Commenter'
 NeoBundle 'vim-jp/vimdoc-ja'
-NeoBundle 'mattn/zencoding-vim/'
+NeoBundle 'mattn/zencoding-vim'
+NeoBundle 'bbommarito/vim-slim'
+NeoBundle 'mattn/gist-vim'
+NeoBundle 'vim-scripts/Markdown'
+NeoBundle 'hail2u/vim-css3-syntax'
+NeoBundle 'othree/html5.vim'
+NeoBundle 'cakebaker/scss-syntax.vim'
+
 " }}}
 
 filetype plugin indent on
@@ -154,10 +160,12 @@ set modelines=10
 
 " }}}
 " Forlding {{{
+
 set foldenable
 set foldmethod=marker
 set foldcolumn=2
 set foldlevelstart=0
+
 " }}}
 " Search {{{
 set wrapscan
@@ -293,6 +301,7 @@ command! Iso2022jp edit ++enc=iso-2022-jp
 command! Utf8 edit ++enc=utf-8
 command! Jis Iso2022jp
 command! Sjis Cp932
+
 " }}}
 " neocomplcache {{{
 
