@@ -24,6 +24,7 @@ NeoBundle 'mattn/zencoding-vim'
 NeoBundle 'bbommarito/vim-slim'
 NeoBundle 'mattn/gist-vim'
 NeoBundle 'vim-scripts/Markdown'
+NeoBundle 'css_color.vim'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'cakebaker/scss-syntax.vim'
@@ -32,7 +33,6 @@ NeoBundle 'cakebaker/scss-syntax.vim'
 
 filetype plugin indent on
 let $PATH = $PATH.':/usr/local/bin/'.':'.$HOME.'/bin'
-
 
 set shortmess+=I
 set vb t_vb=
@@ -303,7 +303,47 @@ command! Jis Iso2022jp
 command! Sjis Cp932
 
 " }}}
-" neocomplcache {{{
+" Filetype {{{
+" HTML {{{
+autocmd FileType html,xhtml,xml setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+" }}}
+" CSS {{{
+autocmd BufNewFile,BufRead *.css setlocal foldmethod=marker
+autocmd BufNewFile,BufRead *.css setlocal foldmarker={,}
+autocmd BufNewFile,BufRead *.css inoremap <buffer> {<cr> {}<left><cr><space><space><space><space>.<cr><esc>kA<bs>
+autocmd BufNewFile,BufRead *.css command! Cleansort ?{<CR>jV/\v^\s*\}?$<CR>k:sort<CR>:noh<CR>
+autocmd FileType css setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+" }}}
+" JavaScript {{{
+autocmd FileType javascript setlocal foldmethod=marker
+autocmd FileType javascript setlocal foldmarker={,}
+" }}}
+" Python {{{
+autocmd FileType python set expandtab
+" }}}
+" Ruby {{{
+autocmd FileType ruby set expandtab tabstop=2 shiftwidth=2 softtabstop=2
+" }}}
+" Makefile {{{
+autocmd BufNewFile,BufRead Makefile.rule setlocal filetype=make
+autocmd Filetype make set noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
+" }}}
+" Help {{{
+
+au FileType help nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+au FileType help inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+au FileType help nnoremap <silent> <buffer> <Space><Space> :q<CR>
+au FileType help inoremap <silent> <buffer> <Space><Space> <ESC>:q<CR>
+
+" }}}
+" AppleScript {{{
+
+autocmd bufnewfile,bufread *.scpt,*.applescript :setl filetype=applescript
+autocmd FileType applescript :inoremap <buffer> <S-CR> ￢<CR>
+
+" }}}
+" }}}
+" Plugin/neocomplcache {{{
 
 " AutoComplPopを無効
 let g:acp_enableAtStartup = 0
@@ -411,7 +451,7 @@ let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
 let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 
 " }}}
-" RSense {{{
+" Plugin/RSense {{{
 
 let g:rsenseUseOmniFunc = 1
 
@@ -425,7 +465,7 @@ if !empty( $RSENSE_HOME ) && filereadable(expand( $RSENSE_HOME.'/bin/rsense'))
 endif
 
 " }}}
-" unite {{{
+" Plugin/Unite {{{
 
 let g:unite_enable_start_insert=1
 nnoremap <silent> <Space>ub :<C-u>Unite buffer<CR>
@@ -444,7 +484,7 @@ autocmd FileType unite inoremap <silent> <buffer> <ESC><ESC> :q<CR>
 autocmd FileType unite nnoremap <silent> <buffer> <Space><Space> <ESC>:q<CR>
 autocmd FileType unite inoremap <silent> <buffer> <Space><Space> <ESC>:q<CR>
  "}}}
-" NERD_commenter {{{
+" Plugin/NERD_commenter {{{
 
 let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
@@ -460,14 +500,14 @@ vmap <Space>xs <Plug>NERDCommenterSexy
 nmap <Space>xa <Plug>NERDCommenterAltDelims
 
 " }}}
-" autodate {{{
+" Plugin/autodate {{{
 
 let g:autodate_format = ': %FT%T%z'
 let g:autodate_keyword_pre = '$Date'
 let g:autodate_keyword_post = '\$'
 
  " }}}
-" tagbar {{{
+" Plugin/tagbar {{{
 nnoremap <silent> <F8> :TagbarToggle<CR>
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 let g:tagbar_autoshowtag = 1
@@ -476,12 +516,12 @@ autocmd FileType tagbar nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 autocmd FileType tagbar inoremap <silent> <buffer> <Space><Space> <ESC>:q<CR>
 autocmd FileType tagbar inoremap <silent> <buffer> <Space><Space> <ESC>:q<CR>
 " }}}
-" vim-ref {{{
+" Plugin/vim-ref {{{
 
 let g:ref_phpmanual_path = $HOME.'/Reference/php/php-chunked-xhtml'
 
 " }}}
-" quickrun {{{
+" Plugin/quickrun {{{
 "<Leader>r を使わない
 let g:quickrun_no_default_key_mappings = 1
 " quickrun_configの初期化
@@ -504,4 +544,6 @@ autocmd FileType quickrun nnoremap <silent> <buffer> <Space><Space> <ESC>:q<CR>
 autocmd FileType quickrun inoremap <silent> <buffer> <Space><Space> <ESC>:q<CR>
 
 " }}}
-
+" Plugin/vim-slim {{{
+autocmd BufNewFile,BufRead *.slim setlocal filetype=slim
+" }}}
