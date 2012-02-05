@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/prompt.zshrc
-# $Date: 2011-12-25T00:59:01+0900$
+# $Date: 2012-02-05T22:09:12+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # autoload -Uz VCS_INFO_get_data_git; VCS_INFO_get_data_git 2> /dev/null
@@ -10,7 +10,7 @@
 
 PROMPT='
 %0(?|%F{green}%%%f|%F{red}%%%f) '
-RPROMPT='%B%F{black}%n@%m%f%b %B%F{yellow}%T%f%b'
+RPROMPT='%F{black}%n@%m%f%b %F{yellow}%T%f%b'
 
 # PROMPT='
 # %B%F{blue}%~%f%b `git-current-branch` %B%F{black}`git-short-sha` `git-since-commit`%f%b

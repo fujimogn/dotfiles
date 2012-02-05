@@ -10,6 +10,8 @@
 	<integer>0</integer>
 	<key>AppleSmoothFixedFontsSizeThreshold</key>
 	<integer>1</integer>
+	<key>AutoHideTmuxClientSession</key>
+	<false/>
 	<key>CheckTestRelease</key>
 	<true/>
 	<key>ClosingHotkeySwitchesSpaces</key>
@@ -1048,31 +1050,10 @@
 	<real>1</real>
 	<key>GlobalKeyMap</key>
 	<dict>
-		<key>0x68-0x100000</key>
+		<key>0x9-0x40000</key>
 		<dict>
 			<key>Action</key>
-			<integer>18</integer>
-			<key>Text</key>
-			<string></string>
-		</dict>
-		<key>0x6a-0x100000</key>
-		<dict>
-			<key>Action</key>
-			<integer>21</integer>
-			<key>Text</key>
-			<string></string>
-		</dict>
-		<key>0x6b-0x100000</key>
-		<dict>
-			<key>Action</key>
-			<integer>20</integer>
-			<key>Text</key>
-			<string></string>
-		</dict>
-		<key>0x6c-0x100000</key>
-		<dict>
-			<key>Action</key>
-			<integer>19</integer>
+			<integer>32</integer>
 			<key>Text</key>
 			<string></string>
 		</dict>
@@ -1100,7 +1081,7 @@
 		<key>0xf702-0x320000</key>
 		<dict>
 			<key>Action</key>
-			<integer>2</integer>
+			<integer>33</integer>
 			<key>Text</key>
 			<string></string>
 		</dict>
@@ -1114,7 +1095,7 @@
 		<key>0xf703-0x320000</key>
 		<dict>
 			<key>Action</key>
-			<integer>0</integer>
+			<integer>34</integer>
 			<key>Text</key>
 			<string></string>
 		</dict>
@@ -1197,18 +1178,8 @@
 	<true/>
 	<key>MaxVertically</key>
 	<true/>
-	<key>NSColorPanelMode</key>
-	<string>1</string>
-	<key>NSColorPickerPageableNameListDefaults</key>
-	<string>1Fujimogn</string>
-	<key>NSColorPickerSlidersDefaults</key>
-	<string>1</string>
-	<key>NSColorPickerUserDefaults</key>
-	<string>Spectrum</string>
 	<key>NSFontPanelAttributes</key>
 	<string>1, 0</string>
-	<key>NSFontPanelPreviewHeight</key>
-	<real>0.0</real>
 	<key>NSNavLastRootDirectory</key>
 	<string>~/Dropbox/dotfiles/os/darwin/iTerm2</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -1226,35 +1197,16 @@
 		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
 		hAErATGG
 		</data>
-		<string>198</string>
+		<string>302</string>
 	</array>
 	<key>NSTableView Hidden Columns KeyBingingTable</key>
 	<array/>
 	<key>NSTableView Sort Ordering KeyBingingTable</key>
 	<array/>
-	<key>NSToolbar Configuration Terminal Toolbar</key>
-	<dict>
-		<key>TB Display Mode</key>
-		<integer>2</integer>
-		<key>TB Icon Size Mode</key>
-		<integer>2</integer>
-		<key>TB Is Shown</key>
-		<integer>0</integer>
-		<key>TB Size Mode</key>
-		<integer>1</integer>
-	</dict>
-	<key>NSWindow Frame NSColorPanel</key>
-	<string>175 265 214 309 0 0 1280 1002 </string>
-	<key>NSWindow Frame NSFontPanel</key>
-	<string>419 119 625 270 0 0 1280 1024 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>292 137 924 485 0 0 1366 746 </string>
-	<key>NSWindow Frame UKCrashReporter</key>
-	<string>80 418 592 584 0 0 1280 1002 </string>
+	<string>269 101 924 485 0 0 1366 746 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>131 184 610 608 0 0 1280 1002 </string>
-	<key>NSWindow Frame iTerm Window 1</key>
-	<string>152 208 710 546 0 0 1280 1002 </string>
+	<string>148 4 1010 742 0 0 1366 746 </string>
 	<key>NeverWarnAboutShortLivedSessions_AACF6772-2D24-4DCA-B846-26AF91FFC3AE</key>
 	<true/>
 	<key>New Bookmarks</key>
@@ -1423,6 +1375,8 @@
 			</dict>
 			<key>Background Image Location</key>
 			<string></string>
+			<key>Blend</key>
+			<real>0.30000001192092896</real>
 			<key>Blink Allowed</key>
 			<true/>
 			<key>Blinking Cursor</key>
@@ -1493,6 +1447,8 @@
 			</dict>
 			<key>Guid</key>
 			<string>AACF6772-2D24-4DCA-B846-26AF91FFC3AE</string>
+			<key>Hide After Opening</key>
+			<false/>
 			<key>Horizontal Spacing</key>
 			<real>1</real>
 			<key>Idle Code</key>
@@ -1770,11 +1726,11 @@
 			<key>Name</key>
 			<string>Default</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 13</string>
+			<string>PanicSans 16</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Monaco 13</string>
+			<string>PanicSans 16</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1947,7 +1903,7 @@
 			<string>/Users/fujimogn</string>
 		</dict>
 	</array>
-	<key>NoSyncNeverRemindPrefsChangesLost</key>
+	<key>NoSyncNeverRemindPrefsChangesCopy</key>
 	<true/>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
@@ -1955,6 +1911,8 @@
 	<false/>
 	<key>OpenBookmark</key>
 	<false/>
+	<key>OpenTmuxWindowsIn</key>
+	<integer>0</integer>
 	<key>PassOnControlClick</key>
 	<false/>
 	<key>PasteFromClipboard</key>
@@ -1971,8 +1929,6 @@
 	<integer>8</integer>
 	<key>RightOption</key>
 	<integer>3</integer>
-	<key>SUAutomaticallyUpdate</key>
-	<true/>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedURL</key>
@@ -1980,7 +1936,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2011-12-16T19:35:02Z</date>
+	<date>2012-02-05T13:02:22Z</date>
 	<key>SavePasteHistory</key>
 	<true/>
 	<key>Show Toolbelt</key>
@@ -1989,6 +1945,8 @@
 	<false/>
 	<key>ShowFullScreenTabBar</key>
 	<false/>
+	<key>ShowPaneTitles</key>
+	<true/>
 	<key>SmartPlacement</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
@@ -2001,14 +1959,14 @@
 	<integer>0</integer>
 	<key>ThreeFingerEmulates</key>
 	<true/>
+	<key>TmuxDashboardLimit</key>
+	<integer>10</integer>
 	<key>ToolbeltTools</key>
 	<array>
-		<string>Profiles</string>
 		<string>Jobs</string>
-		<string>Paste History</string>
 	</array>
-	<key>UKCrashReporterLastCrashReportDate</key>
-	<real>1316201728</real>
+	<key>TripleClickSelectsFullWrappedLines</key>
+	<false/>
 	<key>URLHandlersByGuid</key>
 	<dict/>
 	<key>UseBorder</key>
@@ -2028,6 +1986,6 @@
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
-	<string>1.0.0.20111020</string>
+	<string>1.0.0.20120203</string>
 </dict>
 </plist>
