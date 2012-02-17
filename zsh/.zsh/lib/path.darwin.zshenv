@@ -4,7 +4,7 @@
 # $Date: 2012-02-06T01:57:35+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
-
+cdpath=($HOME/Dropbox/Projects $HOME/Dropbox)
 
 ## Xcode
 export CC=/usr/bin/gcc-4.2
