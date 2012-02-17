@@ -5,9 +5,14 @@
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 zshenv_main() {
+
   export PATH=$PATH:${ZDOTDIR}/bin
-  for file in ${ZDOTTMP}/.*.zshenv; source ${file}
-  unset file
+  setopt nonomatch
+
+  if ls ${ZDOTTMP}/.*.zshenv > /dev/null 2>&1; then
+    for file in ${ZDOTTMP}/.*.zshenv; source ${file}
+    unset file
+  fi
 
   if [ -r "${HOME}/.zshenv.local" ]; then
     source ${HOME}/.zshenv.local

@@ -6,9 +6,17 @@
 
 zshrc_main() {
 
-  for file in ${ZDOTTMP}/.*.zshrc; source ${file}
-  for file in ${ZDOTTMP}/.*.zsh; source ${file}
-  unset file
+  setopt nonomatch
+
+  if ls ${ZDOTTMP}/.*.zshrc > /dev/null 2>&1; then
+    for file in ${ZDOTTMP}/.*.zshrc; source ${file}
+    unset file
+  fi
+
+  if ls ${ZDOTTMP}/.*.zsh > /dev/null 2>&1; then
+    for file in ${ZDOTTMP}/.*.zsh; source ${file}
+    unset file
+  fi
 
   if [ -r "${HOME}/.zshrc.local" ]; then
     source ${HOME}/.zshrc.local

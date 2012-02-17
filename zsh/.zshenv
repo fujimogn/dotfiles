@@ -24,8 +24,12 @@ if [ ! -d "${ZDOTDIR}" ]; then
   echo "no such file or directory: ${ZDOTDIR}" >&2
 fi
 
-if [ -z ${ZDOTTEMP} ]; then
-  export ZDOTTMP=${HOME}/.tmp
+if [ -z ${ZDOTTMP} ]; then
+  export ZDOTTMP=${ZDOTDIR}/.tmp
+fi
+
+if [ ! -d "${ZDOTTMP}" ]; then
+  echo "no such file or directory: ${ZDOTTMP}" >&2
 fi
 
 if [ -f ${ZDOTDIR}/.zshenv ]; then
