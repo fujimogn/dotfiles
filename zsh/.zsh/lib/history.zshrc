@@ -4,7 +4,7 @@
 # $Date: 2011-12-12T17:50:43+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
-HISTFILE=${ZDOTDIR}/.history
+HISTFILE=${HOME}/.history/.zsh_history
 HISTIGNORE='?:??:rm *:\\rm *:r\\m *'
 HISTSIZE=100000
 SAVEHIST=100000
