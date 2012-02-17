@@ -3,10 +3,10 @@
   email = fujimogn@gmail.com
 
 [color]
-  status = auto
-  diff = auto
-  branch = auto
-  interactive = auto
+	status = always
+	diff = always
+	branch = always
+	interactive = always
   grep = auto
 [color "branch"]
   current = yellow reverse
