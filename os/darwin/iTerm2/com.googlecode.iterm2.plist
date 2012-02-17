@@ -1178,8 +1178,6 @@
 	<true/>
 	<key>MaxVertically</key>
 	<true/>
-	<key>NSFontPanelAttributes</key>
-	<string>1, 0</string>
 	<key>NSNavLastRootDirectory</key>
 	<string>~/Dropbox/dotfiles/os/darwin/iTerm2</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -1197,16 +1195,16 @@
 		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
 		hAErATGG
 		</data>
-		<string>302</string>
+		<string>319</string>
 	</array>
 	<key>NSTableView Hidden Columns KeyBingingTable</key>
 	<array/>
 	<key>NSTableView Sort Ordering KeyBingingTable</key>
 	<array/>
 	<key>NSWindow Frame Preferences</key>
-	<string>269 101 924 485 0 0 1366 746 </string>
+	<string>269 110 924 485 0 0 1280 938 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>148 4 1010 742 0 0 1366 746 </string>
+	<string>188 10 1170 928 0 0 1280 938 </string>
 	<key>NeverWarnAboutShortLivedSessions_AACF6772-2D24-4DCA-B846-26AF91FFC3AE</key>
 	<true/>
 	<key>New Bookmarks</key>
@@ -1726,11 +1724,11 @@
 			<key>Name</key>
 			<string>Default</string>
 			<key>Non Ascii Font</key>
-			<string>PanicSans 16</string>
+			<string>Ricty-Regular 20</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>PanicSans 16</string>
+			<string>Ricty-Regular 20</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1903,8 +1901,6 @@
 			<string>/Users/fujimogn</string>
 		</dict>
 	</array>
-	<key>NoSyncNeverRemindPrefsChangesCopy</key>
-	<true/>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -1936,7 +1932,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2012-02-05T13:02:22Z</date>
+	<date>2012-02-15T22:33:20Z</date>
 	<key>SavePasteHistory</key>
 	<true/>
 	<key>Show Toolbelt</key>
