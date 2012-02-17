@@ -9,6 +9,7 @@
 alias tm='tmux'
 alias tma="tmux attach"
 alias tmls='tmux list-sessions'
+alias tmlw='tmux list-window'
 
 function tmux-edit-rc {
   ${EDITOR-vi} ${DOTDIR}/tmux/.tmux.conf
