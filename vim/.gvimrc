@@ -1,6 +1,6 @@
 
 set t_Co=<t_co>
-colorscheme molokai
+colorscheme monokai_256
 set background=dark
 
 set guioptions=
@@ -10,7 +10,7 @@ set columns=90
 " for MacVim-Kaoriya
 if has('gui_macvim')
   " set guifont=Panic\ Sans:h13
-  set guifont=MigMix\ 2M:h13
+  set guifont=Ricty:h20
   " set transparency=2
 endif
 
