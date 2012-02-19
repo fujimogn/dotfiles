@@ -6,14 +6,6 @@
   path = zsh/.zsh/modules/auto-fu
   url = git://github.com/hchbaw/auto-fu.zsh.git
   ignore = dirty
-[submodule "zsh/.zsh/modules/zsh-history-substring-search"]
-  path = zsh/.zsh/modules/zsh-history-substring-search
-  url = git://github.com/zsh-users/zsh-history-substring-search.git
-  ignore = dirty
-[submodule "zsh/.zsh/modules/zaw"]
-  path = zsh/.zsh/modules/zaw
-  url = git://github.com/zsh-users/zaw.git
-  ignore = dirty
 [submodule "vimperator/.vimperator/vimpr"]
   path = vimperator/.vimperator/vimpr
   url = git://github.com/vimpr/vimperator-plugins.git
@@ -22,3 +14,6 @@
   path = vim/.vim/neobundle
   url = git://github.com/Shougo/neobundle.vim.git
   ignore = dirty
+[submodule "zsh/.zsh/modules/zaw"]
+	path = zsh/.zsh/modules/zaw
+	url = git://github.com/zsh-users/zaw.git

@@ -1,2 +1,2 @@
-SYMLINKS = .tmux.conf
+SYMLINKS = .tmux.conf .tmux
 include ../Makefile.rule
