@@ -1,8 +1,0 @@
-rm -f ${ZDOTTMP}/.zcompdump
-rm -f ${ZDOTDIR}/.zcompdump
-zwc add --extension ~/.zshenv
-zwc add --extension ${ZDOTDIR}/.z*
-zwc add --extension --ostype --suffix . ${ZDOTDIR}/lib/* ${ZDOTTMP}
-zwc add --extension --ostype --suffix . ${ZDOTDIR}/misc/*.zsh ${ZDOTTMP}
-zwc add --extension --ostype --suffix . ${DOTDIR}/*/*.zsh ${ZDOTTMP}
-source ${HOME}/.zshenv
