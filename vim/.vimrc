@@ -6,24 +6,30 @@ if has('vim_starting')
     call neobundle#rc(expand('~/.vim/bundle'))
 endif
 
+" vim.org
+NeoBundle 'The-NERD-Commenter'
+NeoBundle 'css_color.vim'
+
+" github.com
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/vimproc'
-NeoBundle 'kana/vim-smartchr'
+NeoBundle 'Shougo/vimshell'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
-NeoBundle 'The-NERD-Commenter'
+NeoBundle 'kana/vim-smartchr'
+NeoBundle 'kana/vim-altr'
 NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'bbommarito/vim-slim'
 NeoBundle 'mattn/gist-vim'
 NeoBundle 'vim-scripts/Markdown'
-NeoBundle 'css_color.vim'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'kchmck/vim-coffee-script'
 
 " }}}
 " Encording {{{
@@ -119,13 +125,17 @@ if exists('&ambiwidth')
   set ambiwidth=double
 endif
 
+set cmdheight=3
+set equalalways
+set updatetime=500
 
 " }}}
 " Completion {{{
 
-set wildmenu
+" set wildmenu
 set wildchar=<tab>
 " set wildmode=list:full
+" set wildmode=list:longest
 set complete+=k
 
 " }}}
@@ -184,6 +194,8 @@ augroup END
 set whichwrap=b,s,h,l,<,>,[,]
 set backspace=indent,eol,start
 set keywordprg=:help
+set iminsert=0
+set imsearch=0
 
 " }}}
 " Tab, Indent {{{
@@ -191,17 +203,18 @@ set keywordprg=:help
 set expandtab
 set tabstop=2
 set shiftwidth=2
-set softtabstop=0
+" set softtabstop=0
 " set nosmarttab
 " set formatoptions=qrn1
 set autoindent
-set smartindent
+" set smartindent
+set nosmartindent
+set nocindent
 
 " }}}
 " Modeline {{{
 
 set modeline
-set modelines=10
 
 " }}}
 " Forlding {{{
@@ -246,7 +259,7 @@ command! Sjis Cp932
 " Keymap "{{{
 
 " キーマップリーダー
-let mapleader=" "
+" let mapleader=","
 
 " Dvorak {{{
 " SandS, <Shift>to<ESC>
@@ -306,6 +319,12 @@ noremap L $
 nnoremap J <C-d>
 nnoremap K <C-u>
 
+" ウィンドウ移動
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+
 " Fold
 " inoremap z <C-O>za
 nnoremap z za
@@ -322,26 +341,33 @@ nnoremap vy vawy
 vnoremap v $h
 
 " 保存・終了
-nnoremap <leader>s :<C-u>w<CR>
-nnoremap <leader>wq :<C-u>wq<CR>
-nnoremap <leader>q :<C-u>q<CR>
+nnoremap <Space>w :<C-u>write<Return>
+nnoremap <Space>q :<C-u>quit<Return>
+nnoremap <Space>Q :<C-u>quit!<Return>
+
+command! Editrc tabedit $MYVIMRC
+command! Editgrc tabedit $MYGVIMRC
+command! Reloadrc source $MYVIMRC
+command! Reloadgrc source $MYGVIMRC
+nnoremap <Space>.. :<C-u>Editrc<Cr>
+nnoremap <Space>.r :<C-u>Reloadrc<Cr>
 
 " タブ
-nnoremap <Leader>] gt
-nnoremap <Leader>[ gT
-nnoremap <Leader>tt :<C-u>tabnew<CR>
-nnoremap <Leader>tf :<C-u>tabfirst<CR>
-nnoremap <Leader>tl :<C-u>tablast<CR>
-nnoremap <Leader>tn :<C-u>tabnext<CR>
-nnoremap <Leader>tN :<C-u>tabNext<CR>
-nnoremap <Leader>tp :<C-u>tabprevious<CR>
-nnoremap <Leader>te :<C-u>tabedit<Space>
-nnoremap <Leader>tc :<C-u>tabclose<CR>
-nnoremap <Leader>to :<C-u>tabonly<CR>
-nnoremap <Leader>ts :<C-u>tabs<CR>
-nnoremap <Leader>td :<C-u>tabdo<Space>
-nnoremap <Leader>tf :<C-u>tabfind<Space>
-nnoremap <Leader>tm :<C-u>tabmove<Space>
+nnoremap <Space>] gt
+nnoremap <Space>[ gT
+nnoremap <Space>tt :<C-u>tabnew<CR>
+nnoremap <Space>tf :<C-u>tabfirst<CR>
+nnoremap <Space>tl :<C-u>tablast<CR>
+nnoremap <Space>tn :<C-u>tabnext<CR>
+nnoremap <Space>tN :<C-u>tabNext<CR>
+nnoremap <Space>tp :<C-u>tabprevious<CR>
+nnoremap <Space>te :<C-u>tabedit<Space>
+nnoremap <Space>tc :<C-u>tabclose<CR>
+nnoremap <Space>to :<C-u>tabonly<CR>
+nnoremap <Space>ts :<C-u>tabs<CR>
+nnoremap <Space>td :<C-u>tabdo<Space>
+nnoremap <Space>tf :<C-u>tabfind<Space>
+nnoremap <Space>tm :<C-u>tabmove<Space>
 
 " インサートモード
 imap <C-e> <End>
@@ -403,14 +429,17 @@ autocmd BufNewFile,BufRead *.css command! Cleansort ?{<CR>jV/\v^\s*\}?$<CR>k:sor
 autocmd FileType css setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
 " }}}
 " JavaScript {{{
-autocmd FileType javascript setlocal foldmethod=marker
-autocmd FileType javascript setlocal foldmarker={,}
+" autocmd FileType javascript setlocal foldmethod=marker
+" autocmd FileType javascript setlocal foldmarker={,}
 " }}}
 " Python {{{
-autocmd FileType python set expandtab
+" autocmd FileType python set expandtab
 " }}}
 " Ruby {{{
-autocmd FileType ruby set expandtab tabstop=2 shiftwidth=2 softtabstop=2
+" autocmd FileType ruby set expandtab tabstop=2 shiftwidth=2 softtabstop=2
+" }}}
+" RSpec {{{
+autocmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
 " }}}
 " Makefile {{{
 autocmd BufNewFile,BufRead Makefile.rule setlocal filetype=make
@@ -432,59 +461,95 @@ autocmd FileType applescript :inoremap <buffer> <S-CR> ￢<CR>
 autocm BufNewFile,BufRead *vimperatorrc*,*.vimp set filetype=vimperator
 " }}}
 " }}}
+" Plugin/Autodate {{{
+
+let g:autodate_format = ': %FT%T%z'
+let g:autodate_keyword_pre = '$Date'
+let g:autodate_keyword_post = '\$'
+
+ " }}}
+" Plugin/vimshell {{{
+
+let g:vimshell_prompt =  '$ '
+let g:vimshell_split_command = 'vnew'
+nmap <Space>v <Plug>(vimshell_split_switch)
+
+autocmd FileType vimshell
+  \ call vimshell#altercmd#define('g', 'git')
+  \| call vimshell#altercmd#define('l', 'll')
+  \| call vimshell#altercmd#define('ll', 'ls -l')
+  \| call vimshell#hook#add('chpwd', 'my_chpwd', 'g:my_chpwd')
+
+function! g:my_chpwd(args, context)
+  call vimshell#execute('ls')
+endfunction
+
+ " }}}
 " Plugin/NERD_commenter {{{
 
 let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
 let NERDShutUp = 1
-vmap <leader>cc <Plug>NERDCommenterToggle
-nmap <leader>cc <Plug>NERDCommenterToggle
 
-nmap <Leader>ca <Plug>NERDCommenterAppend
-nmap <leader>c$ <Plug>NERDCommenterToEOL
-vmap <Leader>cs <Plug>NERDCommenterSexy
-vmap <Leader>cb <Plug>NERDCommenterMinimal
+vmap <Space>cc <Plug>NERDCommenterToggle
+nmap <Space>cc <Plug>NERDCommenterToggle
+nmap <Space>ca <Plug>NERDCommenterAppend
+nmap <Space>c$ <Plug>NERDCommenterToEOL
+vmap <Space>cs <Plug>NERDCommenterSexy
+vmap <Space>cb <Plug>NERDCommenterMinimal
 
 " }}}
 " Plugin/quickrun {{{
 
-let g:quickrun_config = {}
-let g:quickrun_no_default_key_mappings = 1
-if !has("g:quickrun_config")
-  let g:quickrun_config = {'*': {'split': 'below'}}
-endif
-" use rvm
-" via http://d.hatena.ne.jp/uasi/20110411/1302531017
-if strlen($rvm_bin_path)
-  let g:quickrun_config['ruby'] = {
-\   'command': 'ruby',
-\   'exec': '$rvm_bin_path/ruby %s',
-\   'tempfile': '{tempname()}.rb'
-\ }
-endif
+let g:quickrun_direction = 'rightbelow vertical'
+" keymap {{{
+let g:quickrun_no_default_key_mappings = 0
+nnoremap <Space>r :<C-u>call <SID>quickrun_of_buffer()<Cr>
+function! s:quickrun_of_buffer()
+  if !exists('b:quickrun_of_buffer')
+    let b:quickrun_of_buffer = ''
+  endif
+  echo 'QuickRun' b:quickrun_of_buffer
+  execute 'QuickRun' b:quickrun_of_buffer
+endfunction
+autocmd FileType quickrun nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+autocmd FileType quickrun inoremap <silent> <buffer> <ESC><ESC> :q<CR>
+" }}}
+" config {{{
 
-" for rspec
-" via http://d.hatena.ne.jp/joker1007/20111208/1323324569
-let g:quickrun_config._ = {'runner' : 'vimproc'}
+let g:quickrun_config = {}
+let g:quickrun_config._ = {'runner': 'vimproc', 'split': 'below'}
+
+" coffee
+let g:quickrun_config.coffee = {'command': 'coffee', 'exec': '%c -cpb %s'}
+
+" ruby
+let g:quickrun_config['ruby'] = {'command': 'ruby'}
+
+" rspec
 let g:quickrun_config['rspec/bundle'] = {
   \ 'type': 'rspec/bundle',
   \ 'command': 'rspec',
   \ 'exec': 'bundle exec %c %s'
-  \}
+  \ }
 let g:quickrun_config['rspec/normal'] = {
   \ 'type': 'rspec/normal',
   \ 'command': 'rspec',
   \ 'exec': '%c %s'
-  \}
+  \ }
 function! RSpecQuickrun()
   let b:quickrun_config = {'type' : 'rspec/bundle'}
 endfunction
 autocmd BufReadPost *_spec.rb call RSpecQuickrun()
 
-" keymap
-nmap <Leader>r <Plug>(quickrun)<CR>
-autocmd FileType quickrun nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-autocmd FileType quickrun inoremap <silent> <buffer> <ESC><ESC> :q<CR>
+" markdown
+let g:quickrun_config['markdown'] = {
+  \ 'type': 'markdown/pandoc',
+  \ 'cmdopt': '-s',
+  \ 'outputter': 'browser'
+  \ }
+
+" }}}
 
 " }}}
 " Plugin/neocomplcache {{{
@@ -677,7 +742,7 @@ function! EnableSmartchrRubyHash()
   inoremap <buffer><expr> > smartchr#one_of('>', ' => ')
 endfunction
 
-autocmd FileType c,cpp,php,python,javascript,ruby,coffee,vim,css call EnableSmartchrBasic()
+autocmd FileType c,cpp,php,python,javascript,ruby,coffee,vim call EnableSmartchrBasic()
 autocmd FileType python,ruby,coffee,vim call EnableSmartchrRegExp()
 autocmd FileType ruby call EnableSmartchrRubyHash()
 
@@ -686,4 +751,24 @@ autocmd FileType ruby call EnableSmartchrRubyHash()
 " Plugin/syntastic {{{
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=2
+" }}}
+" Plugin/vim-altr {{{
+
+nmap <F3> <Plug>(altr-forward)
+nmap <F2> <Plug>(altr-back)
+
+" For ruby tdd
+call altr#define('%.rb', 'spec/%_spec.rb')
+" For rails tdd
+call altr#define('app/models/%.rb', 'spec/models/%_spec.rb', 'spec/factories/%s.rb')
+call altr#define('app/controllers/%.rb', 'spec/controllers/%_spec.rb')
+call altr#define('app/helpers/%.rb', 'spec/helpers/%_spec.rb')
+
+" }}}
+" Plugin/vim-coffee-script {{{
+
+autocmd BufNewFile,BufRead *.coffee set filetype=coffee
+autocmd BufWritePost *.coffee :CoffeeCompile watch vert
+autocmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
+
 " }}}
