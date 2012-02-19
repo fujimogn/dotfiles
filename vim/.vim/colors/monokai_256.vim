@@ -21,7 +21,9 @@ hi Cursor       guibg=fg ctermbg=9 cterm=none
 "hi CursorIM
 hi CursorColumn ctermbg=9 cterm=none
 
-hi CursorLine  guibg=#3E3D32 gui=none ctermfg=none ctermbg=9 cterm=none
+hi CursorLine   guibg=#3E3D32 gui=none ctermfg=none ctermbg=9 cterm=none
+
+hi ColorColumn  guibg=#3E3E3E ctermbg=236
 
 hi Directory    guifg=#66D9EF gui=none ctermfg=6 cterm=none
 hi DiffAdd      guifg=bg guibg=#A6E22E ctermfg=2 cterm=none

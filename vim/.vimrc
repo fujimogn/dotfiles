@@ -19,6 +19,7 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'kana/vim-smartchr'
 NeoBundle 'kana/vim-altr'
+" NeoBundle 'kana/vim-fakeclip'
 NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'bbommarito/vim-slim'
 NeoBundle 'mattn/gist-vim'
@@ -125,7 +126,7 @@ if exists('&ambiwidth')
   set ambiwidth=double
 endif
 
-set cmdheight=3
+set cmdheight=1
 set equalalways
 set updatetime=500
 
