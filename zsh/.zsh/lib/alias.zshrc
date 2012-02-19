@@ -1,8 +1,12 @@
 #!/usr/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/alias.zshrc
-# $Date: 2011-12-31T01:05:39+0900$
+# $Date: 2012-02-20T04:29:35+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
+
+alias e="$EDITOR"
+alias q='exit'
+alias h='history'
 
 alias cp='cp -i'
 alias mv='mv -i'
@@ -16,11 +20,10 @@ alias grep='grep --color=auto'
 alias more=less
 alias yum='sudo yum'
 alias port='sudo port'
-
 alias 644="chmod 644"
 alias 755="chmod 755"
 
-alias gd='dirs -lv; echo -n "select number: "; read newdir; cd +"$newdir"'
+which anupack >/dev/null 2>&1 && alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=aunpack
 
 alias -g G='| grep'
 alias -g M='| more'
@@ -29,14 +32,3 @@ alias -g H='| head'
 alias -g L='| less'
 alias -g S='| sort'
 alias -g W='| wc'
-
-# via http://d.hatena.ne.jp/mollifier/20100317/p1
-if which pbcopy >/dev/null 2>&1 ; then
-  alias -g C='| pbcopy'
-  alias -g P='`pbpaste`'
-  alias p='pbpaste'
-elif which xsel >/dev/null 2>&1 ; then
-  alias -g C='| xsel --input --clipboard'
-elif which putclip >/dev/null 2>&1 ; then
-  alias -g C='| putclip'
-fi

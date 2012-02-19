@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/path.darwin.zshenv
-# $Date: 2012-02-06T01:57:35+0900$
+# $Date: 2012-02-19T16:20:07+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
 cdpath=($HOME/Dropbox/Projects $HOME/Dropbox)
@@ -21,23 +21,10 @@ if [ -d /usr/local/Cellar/ruby ]; then
   unset LASTEST
 fi
 
-## python
-# prefix=/usr/local
-# if [ -d "${prefix}/share/python" ]; then
-  # export PATH=${prefix}/share/python:$PATH
-  # export WORKON_HOME=${HOME}/.virtualenvs
-  # ## virtualenvwrapper
-  # if [ -f "${prefix}/share/python/virtualenvwrapper.sh" ]; then
-      # source ${prefix}/share/python/virtualenvwrapper.sh
-  # fi
-# fi
-# unset prefix
-
 ## npm
 if [ -d /usr/local/lib/node_modules/npm/bin ]; then
   export PATH=$PATH:/usr/local/lib/node_modules/npm/bin
 fi
-
 
 ## MacUIM
 if [ -d /Library/Frameworks/UIM.framework/Versions/Current/bin ]; then

@@ -1,13 +1,14 @@
 #!/usr/bin/zsh
 #
 # $File: ${ZDOTDIR}/.zshenv
-# $Date: 2011-12-13T06:50:30+0900$
+# $Date: 2012-02-19T14:46:23+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 zshenv_main() {
 
   export PATH=$PATH:${ZDOTDIR}/bin
   setopt nonomatch
+  umask 022
 
   if ls ${ZDOTTMP}/.*.zshenv > /dev/null 2>&1; then
     for file in ${ZDOTTMP}/.*.zshenv; source ${file}

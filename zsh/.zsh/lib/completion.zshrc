@@ -1,72 +1,11 @@
 #!/usr/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/completion.zshrc
-# $Date: 2011-12-12T17:49:33+0900$
+# $Date: 2012-02-19T16:33:25+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 fpath=(${ZDOTDIR}/modules/zsh-completions $fpath)
 fignore=( .BAK .bak .alt .old .aux .toc .swp \~)
-
-autoload -Uz compinit
-compinit -d ${ZDOTTMP}/.zcompdump
-
-zstyle ':completion:*' completer _expand _complete _match _prefix _approximate _list _history
-zstyle ':completion:*' expand suffix
-zstyle ':completion:*' file-sort access
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' ignore-parents parent pwd
-zstyle ':completion:*' insert-tab false
-zstyle ':completion:*' keep-prefix
-# zstyle ':completion:*' list-colors di=34 ln=35 so=32 pi=33 ex=31 bd=46\;34 cd=43\;34 su=41\30 sg=46\30 tw=42\30 ow=43\30
-zstyle ':completion:*' list-prompt ''
-zstyle ':completion:*' list-separator '-->'
-zstyle ':completion:*' list-suffixes true
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' matcher-list '+' '+m:{[:lower:]}={[:upper:]}' '+r:|[._-]=** r:|=**' '+l:|=* r:|=*'
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-zstyle ':completion:*' prompt ''\''%e'\'''
-zstyle ':completion:*' remove-all-dups true
-zstyle ':completion:*' select-prompt ''
-zstyle ':completion:*' verbose true
-zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
-zstyle ':completion:*:cd:*' tag-order local-directories path-directories
-zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
-zstyle ':completion:*:cd:*' ignore-parents parent pwd
-zstyle ':completion:*:*:zcompile:*' ignored-patterns '(*~|*.zwc)'
-zstyle ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
-zstyle ':completion:*:correct:*' insert-unambiguous true
-zstyle ':completion:*:correct:*' original true
-zstyle ':completion:*:corrections' format $Yellow'%B%d '$Red'(errors: %e)%b'$Reset
-zstyle ':completion:*:default' menu select=2
-zstyle ':completion:*:descriptions' format $Yellow'completing %B%d%b'$Reset
-zstyle ':completion:*:expand:*' tag-order all-expansions
-zstyle ':completion:*:kill:*' command 'ps -u$USER'
-zstyle ':completion:*:matches' group true
-zstyle ':completion:*:messages' $Yellow'%d'$Reset
-zstyle ':completion:*:options' description true
-zstyle ':completion:*:processes' command 'ps -au$USER'
-zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
-zstyle ':completion:*:warnings' format $Red'No matches for:'$Yellow' %d'$Reset
-zstyle ':completion::expand:*' tag-order 'expansions all-expansions'
-
-# history
-zstyle ':completion:*:history-words' list false
-zstyle ':completion:*:history-words' menu true
-zstyle ':completion:*:history-words' remove-all-dups true
-zstyle ':completion:*:history-words' stop true
-
-# man
-zstyle ':completion:*:manuals' separate-sections true
-zstyle ':completion:*:manuals.*' insert-sections true
-zstyle ':completion:*:man:*' menu yes select
-
-# caching
-zstyle ':completion:*' use-cache true
-# zstyle ':completion::complete:*' cache-path ${ZDOTTMP}
-
-# url auto quote
-autoload -Uz url-quote-magic
-zle -N self-insert url-quote-magic
 
 # filetypes based completion
 compctl -g '*.Z *.gz *.tgz' + -g '*' zcat zless zgrep gunzip gzip
@@ -79,5 +18,81 @@ compctl -g '*(-/) *.rb' ruby
 compctl -g '*(-/) *.py *.pyc' python
 compctl -g '*(-/) *.c' splint
 
+zstyle ':completion:*' menu select
+zstyle ':completion:*' format '%F{white}%d%f'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' keep-prefix
+zstyle ':completion:*' completer _oldlist _expand _complete _match _ignored _approximate _list _history
+zstyle ':completion:*' list-separator '-->'
+# zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS} # tmux feeze!!!
+# zstyle ':completion:*' format '%F{yellow}Completing %d%f'
+zstyle ':completion:*' format 'Completing %d'
 
+# PIDs
+zstyle ':completion:*:processes' command ps --forest -A -o pid,cmd
+zstyle ':completion:*:processes' list-colors '=(#b)( #[0-9]#)[^[/0-9a-zA-Z]#(*)=34=37;1=30;1'
+zstyle ':completion:*:(killall|pkill|kill):*' menu yes select
+zstyle ':completion:*:(killall|pkill|kill):*' force-list always
+
+# hosts (background = red, foreground = black)
+zstyle ':completion:*:*:*:*:hosts' list-colors '=*=30;41'
+
+# usernames (background = white, foreground = blue)
+zstyle ':completion:*:*:*:*:users' list-colors '=*=34;47'
+
+# history
+zstyle ':completion:*:history-words' list false
+zstyle ':completion:*:history-words' menu yes
+zstyle ':completion:*:history-words' remove-all-dups yes
+zstyle ':completion:*:history-words' stop yes
+
+# man
+zstyle ':completion:*:manuals' separate-sections true
+zstyle ':completion:*:manuals.*' insert-sections true
+zstyle ':completion:*:man:*' menu yes select
+
+# approximation
+zstyle ':completion:*:match:*' original only
+zstyle -e ':completion:*:approximate:*' max-errors 'reply=( $(( ($#PREFIX+$#SUFFIX)/3 )) numeric )'
+
+# caching
+zstyle ':completion:*' use-cache true
+zstyle ':completion::complete:*' cache-path ${ZDOTTMP}
+
+
+autoload -U compinit
+compinit -d ${ZDOTTMP}/.zcompdump
+
+# zaw.zsh
+if [ -e "$ZDOTDIR/modules/zaw/zaw.zsh" ];then
+  source $ZDOTDIR/modules/zaw/zaw.zsh
+  bindkey 'zh' zaw-history
+  bindkey 'zc' zaw-cdr
+  zstyle ':filter-select:highlight' matched fg=yellow,standout
+  zstyle ':filter-select' max-lines 10
+  zstyle ':filter-select' max-lines -10
+  zstyle ':filter-select' case-insensitive yes
+  zstyle ':filter-select' extended-search yes
+fi
+
+
+# incremental completion
+if [ -e "${ZDOTDIR}/modules/auto-fu/auto-fu.zsh" ]; then
+  source ${ZDOTDIR}/modules/auto-fu/auto-fu.zsh
+  function auto-fu-init () {
+    {
+      local -a region_highlight
+      local afu_in_p=0
+      afu-recursive-edit-and-accept
+      zle -I
+    } always {
+      POSTDISPLAY=''
+    }
+  }
+  function zle-line-init () {
+    auto-fu-init
+  }
+  zle -N zle-line-init
+fi
 

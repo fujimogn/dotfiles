@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/bindkey.zshrc
-# $Date: 2011-12-12T17:49:10+0900$
+# $Date: 2012-02-19T16:23:57+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 bindkey -e
@@ -12,5 +12,3 @@ bindkey "^N" history-beginning-search-forward-end   # Ctrl-n で履歴を前方�
 bindkey "^I" menu-complete                          # Ctrl-i で補完するようにする
 setopt ignore_eof                                   # Ctrl-d でログアウトしない
 setopt no_flow_control                              # Ctrl-s,   Ctrl-qを無効にする
-WORDCHARS='*?_-.[]~=&;!#$%^(){}'                    # Ctrl+w で直前の/までを削除する
-

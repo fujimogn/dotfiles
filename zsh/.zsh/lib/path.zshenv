@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/path.zshenv
-# $Date: 2012-01-27T11:30:26+0900$
+# $Date: 2012-02-19T16:20:25+0900$
 # vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
 
 ## ${HOME}/bin
@@ -13,20 +13,6 @@ fi
 if [ -d "${DOTDIR}/bin" ]; then
   export PATH=${DOTDIR}/bin:${PATH}
 fi
-
-## rvm
-# if [ -s "/usr/local/rvm/scripts/rvm" ];then
-  # source "/usr/local/rvm/scripts/rvm"
-  # alias rvm="sudo rvm"
-# elif [ -s "${HOME}/.rvm/scripts/rvm" ]; then
-  # source "${HOME}/.rvm/scripts/rvm"
-# fi
-# if [[ "${rvm_bin_path}" != "${rvm_path}/bin" ]] ; then
-  # regex="^([^:]*:)*${rvm_bin_path}(:[^:]*)*$"
-  # if [[ ! "${PATH}" =~ $regex ]] ; then
-    # export PATH="${rvm_bin_path}:${PATH}"
-  # fi
-# fi
 
 # rbenv
 if which rbenv >/dev/null 2>&1 ; then
