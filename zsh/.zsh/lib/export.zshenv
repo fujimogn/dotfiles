@@ -25,6 +25,9 @@ fi
 ## Mercurial
 export HGENCODING=utf-8
 
+## ruby
+export RUBYLIB=.:$RUBYLIB
+
 ## Rsense
 if [ -d "/usr/lib/rsense" ]; then
   export RSENSE_HOME=/usr/lib/rsense

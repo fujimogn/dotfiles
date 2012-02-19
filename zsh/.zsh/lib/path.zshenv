@@ -15,17 +15,22 @@ if [ -d "${DOTDIR}/bin" ]; then
 fi
 
 ## rvm
-if [ -s "/usr/local/rvm/scripts/rvm" ];then
-  source "/usr/local/rvm/scripts/rvm"
-  alias rvm="sudo rvm"
-elif [ -s "${HOME}/.rvm/scripts/rvm" ]; then
-  source "${HOME}/.rvm/scripts/rvm"
-fi
-if [[ "${rvm_bin_path}" != "${rvm_path}/bin" ]] ; then
-  regex="^([^:]*:)*${rvm_bin_path}(:[^:]*)*$"
-  if [[ ! "${PATH}" =~ $regex ]] ; then
-    export PATH="${rvm_bin_path}:${PATH}"
-  fi
+# if [ -s "/usr/local/rvm/scripts/rvm" ];then
+  # source "/usr/local/rvm/scripts/rvm"
+  # alias rvm="sudo rvm"
+# elif [ -s "${HOME}/.rvm/scripts/rvm" ]; then
+  # source "${HOME}/.rvm/scripts/rvm"
+# fi
+# if [[ "${rvm_bin_path}" != "${rvm_path}/bin" ]] ; then
+  # regex="^([^:]*:)*${rvm_bin_path}(:[^:]*)*$"
+  # if [[ ! "${PATH}" =~ $regex ]] ; then
+    # export PATH="${rvm_bin_path}:${PATH}"
+  # fi
+# fi
+
+# rbenv
+if which rbenv >/dev/null 2>&1 ; then
+  eval "$(rbenv init -)"
 fi
 
 # pybrew
