@@ -758,9 +758,12 @@ let g:syntastic_auto_loc_list=2
 nmap <F3> <Plug>(altr-forward)
 nmap <F2> <Plug>(altr-back)
 
-" For ruby tdd
+" http://d.hatena.ne.jp/joker1007/20111107/1320671775
+" ruby tdd
 call altr#define('%.rb', 'spec/%_spec.rb')
-" For rails tdd
+" gem tdd
+call altr#define('lib/%.rb', 'spec/%_spec.rb')
+" rails tdd
 call altr#define('app/models/%.rb', 'spec/models/%_spec.rb', 'spec/factories/%s.rb')
 call altr#define('app/controllers/%.rb', 'spec/controllers/%_spec.rb')
 call altr#define('app/helpers/%.rb', 'spec/helpers/%_spec.rb')
