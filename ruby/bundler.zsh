@@ -1,7 +1,35 @@
 #!/usr/local/bin/zsh
 # http://d.hatena.ne.jp/willnet/20110612/1307849053
 
-BUNDLED_COMMANDS=(cucumber heroku rackup rails rake rspec ruby shotgun spec spork)
+BUNDLED_COMMANDS=(
+cap
+capify
+cucumber
+foreman
+guard
+haml
+heroku
+html2haml
+jekyll
+pry
+rackup
+rails
+rake
+rake2thor
+rspec
+ruby
+sass
+sass-convert
+serve
+shotgun
+spec
+spork
+thin
+thor
+tilt
+tt
+unicorn
+unicorn_rails)
 
 ## Functions
 
