@@ -1,18 +1,19 @@
 #!/usr/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/alias.zshrc
-# $Date: 2012-02-20T04:29:35+0900$
+# $Date: 2012-02-20T09:49:10+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 alias e="$EDITOR"
 alias q='exit'
 alias h='history'
 
-alias cp='cp -i'
-alias mv='mv -i'
-alias rm='rm -i'
-alias rr='rm -rf'
-alias mkdir='mkdir -p'
+alias rm='nocorrect rm -i'
+alias cp='nocorrect cp -i'
+alias mv='nocorrect mv -i'
+alias ln='nocorrect ln -i'
+alias mkdir='nocorrect mkdir -p'
+
 alias la='ls -A'
 alias ll='ls -hl'
 alias lla='ll -A'
