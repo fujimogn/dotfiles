@@ -1,4 +1,4 @@
-#!/usr/local/bin/zsh
+#!/bin/zsh
 # http://d.hatena.ne.jp/willnet/20110612/1307849053
 
 BUNDLED_COMMANDS=(

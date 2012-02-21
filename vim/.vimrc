@@ -277,7 +277,7 @@ command! Sjis Cp932
 " Keymap "{{{
 
 " キーマップリーダー
-" let mapleader=","
+let mapleader=","
 
 " Dvorak {{{
 " SandS, <Shift>to<ESC>
@@ -371,8 +371,6 @@ nnoremap <Space>.. :<C-u>Editrc<Cr>
 nnoremap <Space>.r :<C-u>Reloadrc<Cr>
 
 " タブ
-nnoremap <Space>] gt
-nnoremap <Space>[ gT
 nnoremap <Space>tt :<C-u>tabnew<CR>
 nnoremap <Space>tf :<C-u>tabfirst<CR>
 nnoremap <Space>tl :<C-u>tablast<CR>
@@ -423,16 +421,18 @@ cnoremap <C-n> <Down>
 cnoremap <Down>  <C-n>
 
 " バッファ
-nnoremap <Leader>1 :e #1<CR>
-nnoremap <Leader>2 :e #2<CR>
-nnoremap <Leader>3 :e #3<CR>
-nnoremap <Leader>4 :e #4<CR>
-nnoremap <Leader>5 :e #5<CR>
-nnoremap <Leader>6 :e #6<CR>
-nnoremap <Leader>7 :e #7<CR>
-nnoremap <Leader>8 :e #8<CR>
-nnoremap <Leader>9 :e #9<CR>
-nmap <Leader>b :buffers<CR>
+nnoremap <Space>1 :e #1<CR>
+nnoremap <Space>2 :e #2<CR>
+nnoremap <Space>3 :e #3<CR>
+nnoremap <Space>4 :e #4<CR>
+nnoremap <Space>5 :e #5<CR>
+nnoremap <Space>6 :e #6<CR>
+nnoremap <Space>7 :e #7<CR>
+nnoremap <Space>8 :e #8<CR>
+nnoremap <Space>9 :e #9<CR>
+
+nnoremap <Space>[ :<C-u>bp<CR>
+nnoremap <Space>] :<C-u>bn<CR>
 
 "}}}
 " Filetype {{{
@@ -760,15 +760,15 @@ inoremap <expr><C-g>     neocomplcache#undo_completion()
 " let g:unite_enable_start_insert=1
 " バッファ一覧
 nnoremap <silent> <Space>ub :<C-u>Unite buffer<CR>
-nnoremap <C-p> :Unite buffer<CR>
+nnoremap <C-p> :<C-u>Unite buffer<CR>
 " ファイル一覧
 nnoremap <silent> <Space>uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-noremap <C-n> :Unite -buffer-name=file file<CR>
+noremap <C-n> :<C-u>Unite -buffer-name=file file<CR>
 " レジスタ一覧
 nnoremap <silent> <Space>ur :<C-u>Unite -buffer-name=register register<CR>
 " 最近使用したファイル一覧
 nnoremap <silent> <Space>um :<C-u>Unite file_mru<CR>
-nnoremap <C-z> :Unite file_mru<CR>
+nnoremap <C-z> :<C-u>Unite file_mru<CR>
 " 常用セット
 nnoremap <silent> <Space>uu :<C-u>Unite buffer file_mru<CR>
 " 全部乗せ

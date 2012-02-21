@@ -1,7 +1,7 @@
-#!/usr/bin/zsh
+#!/bin/zsh
 #
 # $File: ${DOTDIR}/todo.txt/todo.txt.zsh
-# $Date: 2011-12-25T01:44:06+0900$
+# $Date: 2012-02-22T00:45:01+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # ostype prefix

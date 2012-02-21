@@ -1,7 +1,7 @@
-#!/usr/bin/zsh
+#!/bin/zsh
 #
 # $File: ${DOTDIR}/os/darwin/aquaskk.darwin.zsh
-# $Date: 2011-11-18T01:58:48+0900$
+# $Date: 2012-02-22T00:45:01+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 

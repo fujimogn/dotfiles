@@ -1,7 +1,7 @@
-#!/usr/bin/zsh
+#!/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/cdd.zshrc
-# $Date: 2012-02-21T17:57:03+0900$
+# $Date: 2012-02-22T00:21:23+0900$
 #
 
 # cdd

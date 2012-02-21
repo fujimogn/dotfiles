@@ -1,7 +1,7 @@
-#!/usr/bin/zsh
+#!/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/history.zshrc
-# $Date: 2011-12-12T17:50:43+0900$
+# $Date: 2012-02-22T00:22:33+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 

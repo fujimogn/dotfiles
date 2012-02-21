@@ -1,7 +1,7 @@
-#!/usr/bin/zsh
+#!/bin/zsh
 #
 # $File: ${DOTDIR}/dircolors/dircolors.zsh
-# $Date: 2011-10-29T19:07:46+0900$
+# $Date: 2012-02-22T00:45:00+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 function dircolors_main {

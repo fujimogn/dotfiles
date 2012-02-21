@@ -1,11 +1,5 @@
 #!/bin/zsh
 
-# ダウンロードフォルダ
-export DOWNLOAD_DIR=${DOWNLOAD_DIR:-${HOME}/Downloads}
-
-# # 新しくつくる
-DOWNLOAD_DIR_MKDIR=${DOWNLOAD_DIR}/`date +"%Y-%m-%d"`
-
 # 指定ディレクトリ下すべてのファイル文字化けを直す
 function nkf-recursive {
 
@@ -27,6 +21,12 @@ function nkf-recursive {
 function wget-apachedir {
 
   [ -z "${1}" ] && return 1
+
+  # ダウンロードフォルダ
+  DOWNLOAD_DIR=${DOWNLOAD_DIR:-${HOME}/Downloads}
+
+  # 新しくつくる
+  DOWNLOAD_DIR_MKDIR=${DOWNLOAD_DIR}/`date +"%Y-%m-%d"`
 
   local opt=
   # 出力の冗長無効
@@ -65,3 +65,4 @@ function wget-apachedir {
 
 }
 
+wget-apachedir $1

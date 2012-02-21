@@ -1,7 +1,7 @@
-#!/usr/bin/zsh
+#!/bin/zsh
 #
 # $File: ${DOTDIR}/.zshrc
-# $Date: 2012-02-20T17:08:21+0900$
+# $Date: 2012-02-22T00:40:24+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 zshrc_main() {

@@ -1,7 +1,7 @@
-#!/usr/bin/zsh
+#!/bin/zsh
 #
 # $file: ${DOTDIR}/vim/vim.zsh
-# $date: 2012-02-21T23:24:23+0900$
+# $date: 2012-02-22T00:45:05+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 if which vim >/dev/null 2>&1 ; then

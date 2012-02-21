@@ -1,7 +1,7 @@
-#!/usr/bin/zsh
+#!/bin/zsh
 #
 # $File: ${DOTDIR}/KeyRemap4MacBook/KeyRemap4MacBook.zsh
-# $Date: 2011-10-01T22:18:16+0900$
+# $Date: 2012-02-22T00:45:02+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 

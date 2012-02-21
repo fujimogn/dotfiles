@@ -1,8 +1,8 @@
-#!/usr/bin/zsh
+#!/bin/zsh
 #
 #
 # $File: ${DOTDIR}/homebrew/homebrew.darwin.zsh
-# $Date: 2011-12-04T00:50:33+0900$
+# $Date: 2012-02-22T00:45:02+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 ! which brew >/dev/null 2>&1 && return 1
