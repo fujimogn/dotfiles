@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/completion.zshrc
-# $Date: 2012-02-20T09:58:11+0900$
+# $Date: 2012-02-20T17:08:03+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 WORDCHARS='*?_-.[]~=&;!#$%^(){}'
@@ -27,14 +27,14 @@ zstyle ':completion:*' keep-prefix
 zstyle ':completion:*' completer _oldlist _expand _complete _match _ignored _approximate _list _history
 zstyle ':completion:*' list-separator '-->'
 # zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS} # tmux feeze!!!
-# zstyle ':completion:*' format '%F{yellow}Completing %d%f'
-zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' format '%F{yellow}Completing %d%f'
+# zstyle ':completion:*' format 'Completing %d'
 
 # PIDs
-zstyle ':completion:*:processes' command ps --forest -A -o pid,cmd
-zstyle ':completion:*:processes' list-colors '=(#b)( #[0-9]#)[^[/0-9a-zA-Z]#(*)=34=37;1=30;1'
-zstyle ':completion:*:(killall|pkill|kill):*' menu yes select
-zstyle ':completion:*:(killall|pkill|kill):*' force-list always
+# zstyle ':completion:*:processes' command ps --forest -A -o pid,cmd
+# zstyle ':completion:*:processes' list-colors '=(#b)( #[0-9]#)[^[/0-9a-zA-Z]#(*)=34=37;1=30;1'
+# zstyle ':completion:*:(killall|pkill|kill):*' menu yes select
+# zstyle ':completion:*:(killall|pkill|kill):*' force-list always
 
 # hosts (background = red, foreground = black)
 zstyle ':completion:*:*:*:*:hosts' list-colors '=*=30;41'
@@ -64,9 +64,6 @@ zstyle ':completion::complete:*' cache-path ${ZDOTTMP}
 # sudo
 zstyle ':completion:sudo:*' environ PATH="$SUDO_PATH:$PATH"
 
-
-autoload -U compinit
-compinit -d ${ZDOTTMP}/.zcompdump
 
 # zaw.zsh
 if [ -e "$ZDOTDIR/modules/zaw/zaw.zsh" ];then

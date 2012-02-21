@@ -1,8 +1,8 @@
 #!/usr/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/path.zshenv
-# $Date: 2012-02-19T16:20:25+0900$
-# vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
+# $Date: 2012-02-20T13:07:49+0900$
+# vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 ## ${HOME}/bin
 if [ -d "${HOME}/bin" ]; then

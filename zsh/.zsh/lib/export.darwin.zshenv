@@ -1,8 +1,8 @@
-#!/usr/bin/sh
+#!/usr/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/export.darwin.zshrc
-# $Date: 2011-12-25T00:47:54+0900$
-# vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
+# $Date: 2012-02-20T13:05:05+0900$
+# vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 ## android-sdk
 if [ -d /usr/local/Cellar/android-sdk ]; then

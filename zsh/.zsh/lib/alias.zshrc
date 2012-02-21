@@ -1,18 +1,14 @@
 #!/usr/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/alias.zshrc
-# $Date: 2012-02-20T09:49:10+0900$
+# $Date: 2012-02-20T18:08:35+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 alias e="$EDITOR"
 alias q='exit'
 alias h='history'
 
-alias rm='nocorrect rm -i'
-alias cp='nocorrect cp -i'
-alias mv='nocorrect mv -i'
-alias ln='nocorrect ln -i'
-alias mkdir='nocorrect mkdir -p'
+alias mkdir='mkdir -p'
 
 alias la='ls -A'
 alias ll='ls -hl'
@@ -33,3 +29,13 @@ alias -g H='| head'
 alias -g L='| less'
 alias -g S='| sort'
 alias -g W='| wc'
+alias -g NUL="> /dev/null 2>&1"
+
+# via http://d.hatena.ne.jp/mollifier/20100317/p1
+if which pbcopy >/dev/null 2>&1 ; then
+  alias -g C='| pbcopy'
+elif which xsel >/dev/null 2>&1 ; then
+  alias -g C='| xsel --input --clipboard'
+elif which putclip >/dev/null 2>&1 ; then
+  alias -g C='| putclip'
+fi

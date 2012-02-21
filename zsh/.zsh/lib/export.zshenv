@@ -1,8 +1,8 @@
-#!/usr/bin/sh
+#!/usr/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/export.zshenv
-# $Date: 2012-01-27T11:28:26+0900$
-# vim:filetype=sh:tabstop=2:shiftwidth=2:fdm=marker:
+# $Date: 2012-02-20T13:08:12+0900$
+# vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # Lang
 export LANG=ja_JP.UTF-8
