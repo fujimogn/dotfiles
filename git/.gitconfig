@@ -1,59 +1,59 @@
 [user]
-  name = fujimogn
-  email = fujimogn@gmail.com
+	name = fujimogn
+	email = fujimogn@gmail.com
 
 [color]
 	status = always
 	diff = always
 	branch = always
 	interactive = always
-  grep = auto
+	grep = auto
 [color "branch"]
-  current = yellow reverse
-  local = yellow
-  remote = green
+	current = yellow reverse
+	local = yellow
+	remote = green
 [color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red bold
-  new = green bold
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
 [color "status"]
-  added = yellow
-  changed = green
-  untracked = cyan
+	added = yellow
+	changed = green
+	untracked = cyan
 
 [alias]
-  status = status --ignore-submodules
-  br = branch
-  ci = commit -v
-  cia = commit -v --all
-  ciam = commit -v --amend
-  l = log --stat
-  last = log -p --reverse HEAD@{1}..
-  lp = log -p
-  ls = ls-files
-  st = status
-  co = checkout
-  df = diff
-  sm = submodule
-  smadd = submodule add
-  sminit = submodule update --init
-  smco = submodule foreach "git checkout master; git pull origin master"
-  wh = whatchanged
-  zip = archive --format=zip
+	status = status --ignore-submodules
+	br = branch
+	ci = commit -v
+	cia = commit -v --all
+	ciam = commit -v --amend
+	l = log --stat
+	last = log -p --reverse HEAD@{1}..
+	lp = log -p
+	ls = ls-files
+	st = status
+	co = checkout
+	df = diff
+	sm = submodule
+	smadd = submodule add
+	sminit = submodule update --init
+	smco = submodule foreach "git checkout master; git pull origin master"
+	wh = whatchanged
+	zip = archive --format=zip
 
 [core]
-  excludesfile = ~/.gitignore_global
-  editor = vim
+	excludesfile = ~/.gitignore_global
+	editor = vim
 
 [rerere]
-  enabled = true
+	enabled = true
 
 [interactive]
-  singlekey = true
+	singlekey = true
 
 [help]
-  autocorrect = -1
+	autocorrect = -1
 
 [github]
 	user = fujimogn

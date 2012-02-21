@@ -477,10 +477,13 @@ autocmd FileType applescript :inoremap <buffer> <S-CR> ￢<CR>
 
 " }}}
 " vimperator {{{
-autocm BufNewFile,BufRead *vimperatorrc*,*.vimp set filetype=vimperator
+autocmd BufNewFile,BufRead *vimperatorrc*,*.vimp set filetype=vimperator
 " }}}
 " apache {{{
 autocmd FileType apache setlocal path+=./;/
+" }}}
+" git {{{
+autocmd FileType gitconfig setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4
 " }}}
 " }}}
 " Plugin/Autodate {{{
