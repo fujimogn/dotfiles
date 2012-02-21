@@ -1,32 +1,21 @@
 #!/usr/bin/zsh
 #
 # $File: ${DOTDIR}/vim/vim.darwin.zsh
-# $Date: 2011-12-09T03:21:58+0900$
+# $Date: 2012-02-21T23:34:58+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # for MacVim Kaoriya
 # http://code.google.com/p/macvim-kaoriya/
 
-! which vim >/dev/null 2>&1 && return 1
 
-VIMAPP="MacVim.app/Contents/MacOS/Vim"
-APP_DIR="/Applications"
-BREW_DIR="/usr/local/Cellar/macvim"
-
-if [ -f "${APP_DIR}/${VIMAPP}" ]; then
-  MACVIM="${APP_DIR}/${VIMAPP}"
-elif [ -d "${BREW_DIR}" ]; then
-  MACVIM=`find ${BREW_DIR} -maxdepth 1 -mindepth 1 -type d | tail -1`"/${VIMAPP}"
-else
-  return 1
+if which vim >/dev/null 2>&1 ; then
+  MACVIM="/Applications/MacVim.app/Contents/MacOS/Vim"
+  if [ -e "${MACVIM}" ]; then
+    alias vim=${MACVIM}
+    compdef _vim vim
+  fi
+  if which mvim >/dev/null 2>&1 ; then
+    alias gvim=mvim
+    compdef _vim gvim
+  fi
 fi
-
-alias v=${MACVIM}
-alias vim=${MACVIM}
-
-compdef _vim v
-compdef _vim vim
-
-export EDITOR=${MACVIM}
-
-unset VIMAPP APP_DIR BREW_DIR
