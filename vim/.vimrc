@@ -660,19 +660,19 @@ let g:neocomplcache_include_suffixes = {
 " タグ補完 {{{
 
 " タグファイルの場所
-augroup SetTagsFile
-  autocmd!
-  autocmd FileType php set tags=$HOME/.vim/tags/php.tags
-augroup END
+" augroup SetTagsFile
+  " autocmd!
+  " autocmd FileType php set tags=$HOME/.vim/tags/php.tags
+" augroup END
 
-" タグ補完の呼び出しパターン
-if !exists('g:neocomplcache_member_prefix_patterns')
-  let g:neocomplcache_member_prefix_patterns = {}
-endif
+" " タグ補完の呼び出しパターン
+" if !exists('g:neocomplcache_member_prefix_patterns')
+  " let g:neocomplcache_member_prefix_patterns = {}
+" endif
 
-let g:neocomplcache_member_prefix_patterns  = {
-  \ 'php' : '->\|::',
-  \ }
+" let g:neocomplcache_member_prefix_patterns  = {
+  " \ 'php' : '->\|::',
+  " \ }
 
 " }}}
 " スニペット補完 {{{
