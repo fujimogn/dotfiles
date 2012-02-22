@@ -2,13 +2,10 @@
 #
 #
 # $File: ${DOTDIR}/homebrew/homebrew.darwin.zsh
-# $Date: 2012-02-22T00:45:02+0900$
+# $Date: 2012-02-22T13:19:29+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 ! which brew >/dev/null 2>&1 && return 1
-
-export PATH="$(brew --prefix)/bin:$PATH"
-export PATH=/usr/local/sbin:$PATH
 
 brew-fix-chmod() {
   sudo chown -R $USER `brew --prefix`
