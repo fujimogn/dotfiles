@@ -586,7 +586,7 @@ let g:acp_enableAtStartup = 0
 let g:neocomplcache_enable_at_startup = 1
 
 " 補完が自動で開始される文字数。初期値は2
-let g:neocomplcache_auto_completion_start_length = 3
+let g:neocomplcache_auto_completion_start_length = 2
 
 " 表示される候補の数。初期値は100
 let g:neocomplcache_max_list = 20
@@ -641,7 +641,7 @@ let g:neocomplcache_dictionary_filetype_lists = {
 
 " インクルードパスの指定
 let g:neocomplcache_include_paths = {
-    \ 'ruby' : '.,'.$HOME.'/.rbenv/versions/1.9.2-p290/lib/ruby/1.9.1',
+    \ 'ruby' : '.,'.$HOME.'/.rbenv/versions/1.9.2-p290/lib/ruby/*'
     \ }
 
 " インクルード文のパターンを指定
@@ -654,19 +654,20 @@ let g:neocomplcache_include_exprs = {
     \ 'ruby' : substitute(substitute(v:fname,'::','/','g'),'$','.rb','')
     \ }
 
-" ファイルを探す際に、この値を末尾に追加したファイルも探す。
-let g:neocomplcache_include_suffixes = {
-  \ 'ruby' : '.rb'
-  \ }
+" " ファイルを探す際に、この値を末尾に追加したファイルも探す。
+" let g:neocomplcache_include_suffixes = {
+  " \ 'ruby' : '.rb'
+  " \ }
 
 " }}}
 " タグ補完 {{{
 
 " タグファイルの場所
-" augroup SetTagsFile
-  " autocmd!
-  " autocmd FileType php set tags=$HOME/.vim/tags/php.tags
-" augroup END
+augroup SetTagsFile
+autocmd!
+autocmd FileType php set tags=$HOME/tags/php.tags
+autocmd FileType php set tags=$HOME/tags/ruby.tags
+augroup END
 
 " " タグ補完の呼び出しパターン
 " if !exists('g:neocomplcache_member_prefix_patterns')
@@ -828,8 +829,6 @@ let g:rsenseUseOmniFunc = 1
 if !empty( $RSENSE_HOME ) && filereadable(expand( $RSENSE_HOME.'/bin/rsense'))
   let g:rsenseHome = $RSENSE_HOME
   let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-  autocmd FileType ref-refe nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-  autocmd FileType ref-refe inoremap <silent> <buffer> <ESC><ESC> :q<CR>
 endif
 
 " }}}
@@ -896,4 +895,7 @@ autocmd BufNewFile,BufRead *.coffee set filetype=coffee
 autocmd BufWritePost *.coffee :CoffeeCompile watch vert
 autocmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
 
+" }}}
+" Plugin/vim-powerline {{{
+let g:Powerline_symbols = 'fancy'
 " }}}
