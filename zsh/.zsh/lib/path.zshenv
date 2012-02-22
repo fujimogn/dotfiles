@@ -1,8 +1,11 @@
 #!/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/path.zshenv
-# $Date: 2012-02-22T00:35:58+0900$
+# $Date: 2012-02-22T13:22:06+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
+
+
+export PATH=/usr/local/sbin:/usr/local/bin:$PATH
 
 ## ${HOME}/bin
 if [ -d "${HOME}/bin" ]; then
@@ -12,11 +15,6 @@ fi
 ## ${DOTDIR}/bin
 if [ -d "${DOTDIR}/bin" ]; then
   export PATH=${DOTDIR}/bin:${PATH}
-fi
-
-# rbenv
-if which rbenv >/dev/null 2>&1 ; then
-  eval "$(rbenv init -)"
 fi
 
 # pybrew
