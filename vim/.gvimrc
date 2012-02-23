@@ -1,29 +1,25 @@
-
 set t_Co=<t_co>
-colorscheme monokai_256
-set background=dark
-
+set anti
 set guioptions=
 set lines=60
 set columns=90
+set background=dark
 
 " for MacVim-Kaoriya
 if has('gui_macvim')
-  " set guifont=Panic\ Sans:h13
   set guifont=Ricty:h20
-  " set transparency=2
+  " 透明度
+  set transparency=2
+  " フォーカスを離れたときに透明度を上げる
+  " via http://vim-users.jp/2011/10/hack234
+  augroup hack234
+    autocmd!
+      autocmd FocusGained * set transparency=2
+      autocmd FocusLost * set transparency=50
+    endif
+  augroup END
 endif
 
-" C-Enter でフルスクリーンをトグル
+" <C-Enter> でフルスクリーンをトグル
 nnoremap <C-Return> :set invfullscreen<CR>
-
-" via http://vim-users.jp/2011/10/hack234
-" augroup hack234
-  " autocmd!
-  " if has('mac')
-    " autocmd FocusGained * set transparency=2
-    " autocmd FocusLost * set transparency=50
-  " endif
-" augroup END
-
 

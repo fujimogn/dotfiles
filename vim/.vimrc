@@ -6,10 +6,6 @@ if has('vim_starting')
     call neobundle#rc(expand('~/.vim/bundle'))
 endif
 
-" vim.org
-NeoBundle 'The-NERD-Commenter'
-NeoBundle 'css_color.vim'
-
 " github.com
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplcache'
@@ -33,6 +29,12 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'kchmck/vim-coffee-script'
+
+" vim.org
+NeoBundle 'Taglist'
+NeoBundle 'The-NERD-Commenter'
+NeoBundle 'css_color.vim'
+
 
 " }}}
 " Encording {{{
@@ -882,7 +884,7 @@ nmap <F2> <Plug>(altr-back)
 " ruby tdd
 call altr#define('%.rb', 'spec/%_spec.rb')
 " gem tdd
-call altr#define('lib/%.rb', 'spec/%_spec.rb')
+call altr#define('lib/%.rb', 'spec/lib/%_spec.rb')
 " rails tdd
 call altr#define('app/models/%.rb', 'spec/models/%_spec.rb', 'spec/factories/%s.rb')
 call altr#define('app/controllers/%.rb', 'spec/controllers/%_spec.rb')

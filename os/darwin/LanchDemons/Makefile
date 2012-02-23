@@ -1,5 +1,5 @@
 SUDO	= true
-FILES	= polipo.plist rombouts.pdnsd.plist org.tor.plist google-ime-skk.plist
+FILES	= rombouts.pdnsd.plist google-ime-skk.plist
 PREFIX	= /Library/LaunchDaemons
 
 include ../../../Makefile.rule
