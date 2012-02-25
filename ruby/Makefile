@@ -1,2 +1,2 @@
-SYMLINKS = .irbrc .pryrc .gemrc
+SYMLINKS = .irbrc .pryrc .gemrc .rspec .rdebugrc
 include ../Makefile.rule

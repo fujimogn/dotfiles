@@ -1,7 +1,7 @@
 #!/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/completion.zshrc
-# $Date: 2012-02-25T16:01:43+0900$
+# $Date: 2012-02-25T16:55:10+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 WORDCHARS='*?_-.[]~=&;!#$%^(){}'
@@ -94,6 +94,7 @@ if is-at-least 4.3.10 && \
   zstyle ':auto-fu:highlight' completion/one fg=blue,dim
   zstyle ':auto-fu:var' postdisplay ''
   zstyle ':auto-fu:var' track-keymap-skip opp
+  zstyle ':auto-fu:var' autoable-function/skiplbuffers 'rake *' 'gem *'
 
   function zle-line-init () { auto-fu-init }; zle -N zle-line-init
   zle -N zle-keymap-select auto-fu-zle-keymap-select

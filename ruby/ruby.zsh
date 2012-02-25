@@ -2,9 +2,6 @@
 
 export RUBYLIB=.:$RUBYLIB
 
-alias r='bundle exec rake'
-alias sp='bundle exec rake spec'
-
 # rbenv# {{{
 if which rbenv >/dev/null 2>&1 ; then
   eval "$(rbenv init -)"
@@ -75,12 +72,20 @@ for CMD in $BUNDLED_COMMANDS; do
     alias $CMD="run-with-bundler $CMD"
 done
 # }}}
+# Alias {{{
+
+alias r="rake"
+alias rs="rake spec"
+
+
+# }}}
 # rake completion# {{{
+
 _rake_does_task_list_need_generating () {
   if [ ! -f .rake_tasks ]; then return 0;
   else
-    accurate=$(stat -c %Y .rake_tasks)
-    changed=$(stat -c %Y Rakefile)
+    accurate=$(stat -f%m .rake_tasks)
+    changed=$(stat -f%m Rakefile)
     return $(expr $accurate '>=' $changed)
   fi
 }
@@ -94,7 +99,10 @@ _rake () {
     compadd `cat .rake_tasks`
   fi
 }
+
 compdef _rake rake
+
+
 # }}}
 # RSense# {{{
 # http://cx4a.org/software/rsense/
