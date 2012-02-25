@@ -1,7 +1,7 @@
 #!/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/completion.zshrc
-# $Date: 2012-02-22T00:21:45+0900$
+# $Date: 2012-02-25T16:01:43+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 WORDCHARS='*?_-.[]~=&;!#$%^(){}'
@@ -26,7 +26,6 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' keep-prefix
 zstyle ':completion:*' completer _oldlist _expand _complete _match _ignored _approximate _list _history
 zstyle ':completion:*' list-separator '-->'
-# zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS} # tmux feeze!!!
 zstyle ':completion:*' format '%F{yellow}Completing %d%f'
 # zstyle ':completion:*' format 'Completing %d'
 

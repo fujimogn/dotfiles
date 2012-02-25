@@ -1,2 +1,2 @@
-SYMLINKS = .irbrc .pryrc
+SYMLINKS = .irbrc .pryrc .gemrc
 include ../Makefile.rule

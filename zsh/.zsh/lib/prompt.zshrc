@@ -1,7 +1,7 @@
 #!/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/prompt.zshrc
-# $Date: 2012-02-23T15:02:03+0900$
+# $Date: 2012-02-25T15:52:43+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 autoload -Uz VCS_INFO_get_data_git; VCS_INFO_get_data_git 2> /dev/null
@@ -76,14 +76,20 @@ git-since-commit() {
   fi
 }
 
-
+rbenv_current_gemset() {
+  if $(which rbenv &> /dev/null)
+  then
+    gemset_name=$(rbenv gemset active 2> /dev/null )
+    [ -n "${gemset_name}" ] && echo "@${gemset_name}"
+  fi
+}
 
 rbenv_prompt(){
   if $(which rbenv &> /dev/null)
   then
-    echo "%B%F{yellow}$(rbenv version-name)%f%b"
+    echo "%B%F{yellow}$(rbenv version-name)$(rbenv_current_gemset)%f%b"
   else
-    echo ""
+    echo "system: $(ruby -v | cut -f-2 -d ' ')"
   fi
 }
 
