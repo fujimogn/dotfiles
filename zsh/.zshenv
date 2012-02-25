@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 #
 # $File: ${DOTDIR}/zsh/.zshenv
-# $Date: 2011-12-12T17:56:54+0900$
+# $Date: 2012-02-24T07:23:38+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 if [ -f "${HOME}/.dotfilesrc" ]; then
@@ -25,7 +25,7 @@ if [ ! -d "${ZDOTDIR}" ]; then
 fi
 
 if [ -z ${ZDOTTMP} ]; then
-  export ZDOTTMP=${ZDOTDIR}/.tmp
+  export ZDOTTMP=${HOME}/.tmp/zsh
 fi
 
 if [ ! -d "${ZDOTTMP}" ]; then

@@ -2,8 +2,8 @@ set nocompatible
 
 " NeoBundle {{{
 if has('vim_starting')
-    set runtimepath+=~/.vim/neobundle
-    call neobundle#rc(expand('~/.vim/bundle'))
+  set runtimepath+=~/.vim/neobundle
+  call neobundle#rc(expand('~/.vim/bundle'))
 endif
 
 " github.com
@@ -12,11 +12,14 @@ NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/vimproc'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'h1mesuke/unite-outline'
+NeoBundle 'tsukkee/unite-help'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'kana/vim-smartchr'
 NeoBundle 'kana/vim-altr'
 " NeoBundle 'kana/vim-fakeclip'
+NeoBundle 'rhysd/my-endwise'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'bbommarito/vim-slim'
@@ -29,73 +32,45 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'banyan/recognize_charcode.vim'
+NeoBundle 'scrooloose/nerdtree'
+
 
 " vim.org
-NeoBundle 'Taglist'
+NeoBundle 'taglist.vim'
 NeoBundle 'The-NERD-Commenter'
 NeoBundle 'css_color.vim'
 
 
 " }}}
 " Encording {{{
+
+" デフォルトエンコード"
 set encoding=utf-8
-set fileencodings=ucs_bom,utf8,ucs-2le,ucs-2
+" 改行コード
 set fileformats=unix,dos,mac
 
-" via http://www.kawaz.jp/pukiwiki/?vim#content_1_7
-" 文字コードの自動認識
-if &encoding !=# 'utf-8'
-  set encoding=japan
-  set fileencoding=japan
-endif
-if has('iconv')
-  let s:enc_euc = 'euc-jp'
-  let s:enc_jis = 'iso-2022-jp'
-  " iconvがeucJP-msに対応しているかをチェック
-  if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'eucjp-ms'
-    let s:enc_jis = 'iso-2022-jp-3'
-  " iconvがJISX0213に対応しているかをチェック
-  elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'euc-jisx0213'
-    let s:enc_jis = 'iso-2022-jp-3'
-  endif
-  " fileencodingsを構築
-  if &encoding ==# 'utf-8'
-    let s:fileencodings_default = &fileencodings
-    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
-    let &fileencodings = s:fileencodings_default .','. &fileencodings
-    unlet s:fileencodings_default
-  else
-    let &fileencodings = &fileencodings .','. s:enc_jis
-    set fileencodings+=utf-8,ucs-2le,ucs-2
-    if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
-      set fileencodings+=cp932
-      set fileencodings-=euc-jp
-      set fileencodings-=euc-jisx0213
-      set fileencodings-=eucjp-ms
-      let &encoding = s:enc_euc
-      let &fileencoding = s:enc_euc
-    else
-      let &fileencodings = &fileencodings .','. s:enc_euc
-    endif
-  endif
-  " 定数を処分
-  unlet s:enc_euc
-  unlet s:enc_jis
-endif
 " }}}
 
 filetype plugin indent on
 let $PATH = $PATH.':/usr/local/bin/'.':'.$HOME.'/bin'
+" タグファイルを探す場所
 set tags=./.tags,./../.tags,./*/.tags,./../../.tags,./../../../.tags,./../../../../.tags,./../../../../../.tags
+" 起動時のメッセージを表示しない
 set shortmess+=I
+" ビープをならさない
 set vb t_vb=
-set helplang=ja,en
+" vimのヘルプを日本語で表示
+set helplang=ja
+" 変更中のファイルでも、保存しないで他のファイルを表示することが出来るようにする
 set hidden
+" ヴィジュアル選択をクリップボードに
 set clipboard+=autoselect
+" OSのクリップボードを使う
 set clipboard+=unnamed
+" ウィンドウの横分割で新しいウィンドウをカレントウィンドウの下に開く
 set splitbelow
+" ウィンドウの縦分割で新しいウィンドウをカレントウィンドウの右に開く
 set splitright
 
 " Display {{{
@@ -156,15 +131,15 @@ autocmd bufwritepre * :%s/\s\+$//ge
 " Backup, History {{{
 
 set backup
-set backupdir=~/.vim/.tmp
-set backupskip=/tmp/*,/private/tmp/*"
+set backupdir=~/.tmp/vim/backup
+set backupskip=/tmp/*,/private/tmp/*",~/.tmp/*
 set swapfile
-set directory=~/.vim/.tmp
+set directory=~/.tmp/vim/swap
 set undofile
-set undodir=~/.vim/.tmp
+set undodir=~/.tmp/vim/swap
 set undolevels=1000
 set viminfo='50,<1000,s100,:100
-set viminfo+=n~/.vim/.tmp/viminfo
+set viminfo+=n~/.tmp/vim/viminfo
 set history=1000
 
 " }}}
@@ -497,6 +472,7 @@ let g:autodate_keyword_post = '\$'
  " }}}
 " Plugin/vimshell {{{
 
+let g:vimshell_temporary_directory = '~/.tmp/vim/vimshell'
 let g:vimshell_prompt =  '$ '
 let g:vimshell_split_command = 'vnew'
 nmap <Space>v <Plug>(vimshell_split_switch)
@@ -580,7 +556,7 @@ let g:quickrun_config['markdown'] = {
 
 " }}}
 " Plugin/neocomplcache {{{
-
+" 設定 {{{
 " AutoComplPopを無効
 let g:acp_enableAtStartup = 0
 
@@ -621,6 +597,10 @@ let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 " ctags
 let g:neocomplcache_ctags_program = '/usr/local/bin/ctags'
 
+" cache dir
+let g:neocomplcache_temporary_dir = '~/.tmp/vim/neocon'
+
+" }}}
 " 辞書補完 {{{
 let g:neocomplcache_dictionary_filetype_lists = {
     \ 'default'     : '',
@@ -636,7 +616,7 @@ let g:neocomplcache_dictionary_filetype_lists = {
     \ 'ruby'        : $HOME . '/.vim/dict/ruby.dict',
     \ 'scheme'      : $HOME . '/.vim/dict/scheme.dict',
     \ 'vim'         : $HOME . '/.vim/dict/vim.dict',
-    \ 'vimshell'    : $HOME . '/.vimshell_hist',
+    \ 'vimshell'    : $HOME . '/.tmp/vim/vimshell/int_hist',
     \ }
 "}}}
 " インクルード補完 {{{
@@ -715,16 +695,14 @@ let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 " }}}
 " キーマップ {{{
 
-" 標準の補完を置き換える"{{{
-
+" 標準の補完を置き換える {{{
 " ファイル名補完
 inoremap <expr><C-x><C-f>  neocomplcache#manual_filename_complete()
 " オムニ補完
 inoremap <expr><C-x><C-o>  neocomplcache#manual_filename_complete()
 " キーワード補完
 inoremap <expr><C-n>  pumvisible() ? "\<C-n>" : neocomplcache#manual_keyword_complete()
-
-"}}}
+" }}}
 
 " <TAB> で補完できるようにする
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -733,33 +711,43 @@ inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><C-e> neocomplcache#cancel_popup()
 
 " バックスペースしたときにポップアップを閉じる
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y> neocomplcache#close_popup()
 
-" <CR> で確定
-inoremap <expr><CR> pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+" <CR> で確定してポップアップを閉じる
+inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "<CR>"
 
-" <C-j> で確定
-inoremap <expr><C-j> pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+" <CR> で確定し改行、インデントを保つ
+" inoremap <expr><CR>  pumvisible() ? neocomplcache#smart_close_popup()."\<CR>" : "\<CR>"
 
 " <C-g> で前回行われた補完をキャンセル
 inoremap <expr><C-g>     neocomplcache#undo_completion()
 
 " <C-n> でneocomplcache補完
-" inoremap <expr><C-n>  pumvisible() ? "\<C-n>" : "\<C-x>\<C-u>\<C-p>"
+inoremap <expr><C-n>  pumvisible() ? "\<C-n>" : "\<C-x>\<C-u>\<C-p>"
 
 " <C-p> でkeyword補完
-" inoremap <expr><C-p> pumvisible() ? "\<C-p>" : "\<C-p>\<C-n>"
+inoremap <expr><C-p> pumvisible() ? "\<C-p>" : "\<C-p>\<C-n>"
 
 " <C-k>でスニペットの展開をできるように
-" imap <C-k>     <Plug>(neocomplcache_snippets_expand)
-" smap <C-k>     <Plug>(neocomplcache_snippets_expand)
+imap <C-k> <Plug>(neocomplcache_snippets_expand)
+smap <C-k> <Plug>(neocomplcache_snippets_expand)
 
 "スニペットを編集する
-" noremap <Leader>es :<C-u>vertical belowright NeoComplCacheEditSnippets
+nnoremap <Space>es :<C-u>vertical NeoComplCacheEditSnippets<CR>
+nnoremap es :<C-u>vertical NeoComplCacheEditSnippets<CR>
+
 
 " }}}
+" }}}
+" Plugin/my-endwise {{{
 
+" autocmd FileType ruby imap <buffer> <expr><CR>  pumvisible() ? neocomplcache#smart_close_popup() . "\<CR>\<Plug>DiscretionaryEnd" : "\<CR>\<Plug>DiscretionaryEnd"
+
+" }}}
+" Plugin/vimfiler {{{
+let g:vimfiler_data_directory = '~/.tmp/vim/vimfiler'
 " }}}
 " Plugin/Unite {{{
 
@@ -878,7 +866,9 @@ let g:syntastic_auto_loc_list=2
 " Plugin/vim-altr {{{
 
 nmap <F3> <Plug>(altr-forward)
+imap <F3> <Plug>(altr-forward)
 nmap <F2> <Plug>(altr-back)
+imap <F2> <Plug>(altr-back)
 
 " http://d.hatena.ne.jp/joker1007/20111107/1320671775
 " ruby tdd

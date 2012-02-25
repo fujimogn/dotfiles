@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# chmod
+
 if [ -d "${HOME}/bin" ]; then
   find ${HOME}/bin/ -name "*" -exec chmod u+x {} \;
 fi
@@ -15,3 +17,14 @@ if [ -d "${HOME}/.ssh" ]; then
   find ${HOME}/.ssh/ -name "*_[dr]sa" -exec chmod 600 {} \;
   find ${HOME}/.ssh/ -name "*_[dr]sa.pub" -exec chmod 644 {} \;
 fi
+
+# ${HOME}/.tmp
+
+[ ! -d "${HOME}/.tmp" ] && mkdir ${HOME}/.tmp
+[ ! -d "${HOME}/.tmp/zsh" ] && mkdir ${HOME}/.tmp/zsh
+[ ! -d "${HOME}/.tmp/vim" ] && mkdir ${HOME}/.tmp/vim
+[ ! -d "${HOME}/.tmp/vim/undo" ] && mkdir ${HOME}/.tmp/vim/undo
+[ ! -d "${HOME}/.tmp/vim/swap" ] && mkdir ${HOME}/.tmp/vim/swap
+[ ! -d "${HOME}/.tmp/vim/backup" ] && mkdir ${HOME}/.tmp/vim/backup
+[ ! -d "${HOME}/.tmp/vim/neocon" ] && mkdir ${HOME}/.tmp/vim/neocon
+[ ! -d "${HOME}/.tmp/vim/vimshell" ] && mkdir ${HOME}/.tmp/vim/vimshell

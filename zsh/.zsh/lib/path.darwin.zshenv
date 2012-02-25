@@ -1,7 +1,7 @@
 #!/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/path.darwin.zshenv
-# $Date: 2012-02-22T00:22:48+0900$
+# $Date: 2012-02-25T11:18:17+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 cdpath=($HOME/Dropbox/Projects $HOME/Dropbox)
@@ -10,15 +10,6 @@ cdpath=($HOME/Dropbox/Projects $HOME/Dropbox)
 export CC=/usr/bin/gcc-4.2
 if [ -d /Developer/usr/bin ]; then
   export PATH=$PATH:/Developer/usr/bin
-fi
-
-## ruby
-if [ -d /usr/local/Cellar/ruby ]; then
-  LASTEST=`ls -1v /usr/local/Cellar/ruby | tail -1`
-  if [ -n ${LASTEST} ]; then
-    export PATH=/usr/local/Cellar/ruby/${LASTEST}/bin:${PATH}
-  fi
-  unset LASTEST
 fi
 
 ## npm
