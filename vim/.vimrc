@@ -6,41 +6,43 @@ if has('vim_starting')
   call neobundle#rc(expand('~/.vim/bundle'))
 endif
 
-" github.com
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'ujihisa/neco-ruby'
 NeoBundle 'Shougo/vimproc'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'tsukkee/unite-help'
-NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'kana/vim-smartchr'
 NeoBundle 'kana/vim-altr'
-" NeoBundle 'kana/vim-fakeclip'
-NeoBundle 'rhysd/my-endwise'
+NeoBundle 'kana/vim-fakeclip'
+NeoBundle 'kana/vim-textobj-user'
+NeoBundle 'nelstrom/vim-textobj-rubyblock'
+NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'vim-jp/vimdoc-ja'
+NeoBundle 'rhysd/my-endwise'
+NeoBundle 'vim-scripts/matchit.zip'
+NeoBundle 'vim-scripts/ruby-matchit'
 NeoBundle 'bbommarito/vim-slim'
 NeoBundle 'mattn/gist-vim'
 NeoBundle 'vim-scripts/Markdown'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'cakebaker/scss-syntax.vim'
+NeoBundle 'skammer/vim-css-color'
+NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'banyan/recognize_charcode.vim'
 NeoBundle 'scrooloose/nerdtree'
-
-
-" vim.org
-NeoBundle 'taglist.vim'
-NeoBundle 'The-NERD-Commenter'
-NeoBundle 'css_color.vim'
-
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'mortice/taglist.vim'
 
 " }}}
 " Encording {{{
@@ -132,11 +134,11 @@ autocmd bufwritepre * :%s/\s\+$//ge
 
 set backup
 set backupdir=~/.tmp/vim/backup
-set backupskip=/tmp/*,/private/tmp/*",~/.tmp/*
+set backupskip=/tmp/*,/private/tmp/*"
 set swapfile
 set directory=~/.tmp/vim/swap
 set undofile
-set undodir=~/.tmp/vim/swap
+set undodir=~/.tmp/vim/undo
 set undolevels=1000
 set viminfo='50,<1000,s100,:100
 set viminfo+=n~/.tmp/vim/viminfo
@@ -504,10 +506,11 @@ vmap <Space>cb <Plug>NERDCommenterMinimal
 " }}}
 " Plugin/quickrun {{{
 
-let g:quickrun_direction = 'rightbelow vertical'
 " keymap {{{
-let g:quickrun_no_default_key_mappings = 0
-nnoremap <Space>r :<C-u>call <SID>quickrun_of_buffer()<Cr>
+
+let g:quickrun_no_default_key_mappings = 1
+nmap <Space>r <Plug>(quickrun)
+
 function! s:quickrun_of_buffer()
   if !exists('b:quickrun_of_buffer')
     let b:quickrun_of_buffer = ''
@@ -521,10 +524,16 @@ autocmd FileType quickrun inoremap <silent> <buffer> <ESC><ESC> :q<CR>
 " config {{{
 
 let g:quickrun_config = {}
-let g:quickrun_config._ = {'runner': 'vimproc', 'split': 'below'}
+let g:quickrun_config._ = {'runner': 'vimproc', 'split': 'below10'}
+" markdown
+let g:quickrun_config['markdown'] = {
+  \ 'type': 'markdown/pandoc',
+  \ 'cmdopt': '-s',
+  \ 'outputter': 'browser'
+  \ }
 
 " coffee
-let g:quickrun_config.coffee = {'command': 'coffee', 'exec': '%c -cpb %s'}
+let g:quickrun_config['coffee'] = {'command': 'coffee', 'exec': '%c -cpb %s'}
 
 " ruby
 let g:quickrun_config['ruby'] = {'command': 'ruby'}
@@ -534,23 +543,16 @@ let g:quickrun_config['rspec/bundle'] = {
   \ 'type': 'rspec/bundle',
   \ 'command': 'rspec',
   \ 'exec': 'bundle exec %c %s'
-  \ }
+  \}
 let g:quickrun_config['rspec/normal'] = {
   \ 'type': 'rspec/normal',
   \ 'command': 'rspec',
   \ 'exec': '%c %s'
-  \ }
+  \}
 function! RSpecQuickrun()
   let b:quickrun_config = {'type' : 'rspec/bundle'}
 endfunction
 autocmd BufReadPost *_spec.rb call RSpecQuickrun()
-
-" markdown
-let g:quickrun_config['markdown'] = {
-  \ 'type': 'markdown/pandoc',
-  \ 'cmdopt': '-s',
-  \ 'outputter': 'browser'
-  \ }
 
 " }}}
 
@@ -598,7 +600,7 @@ let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 let g:neocomplcache_ctags_program = '/usr/local/bin/ctags'
 
 " cache dir
-let g:neocomplcache_temporary_dir = '~/.tmp/vim/neocon'
+let g:neocomplcache_temporary_dir = $HOME.'/.tmp/vim/neocon/'
 
 " }}}
 " 辞書補完 {{{
@@ -613,7 +615,6 @@ let g:neocomplcache_dictionary_filetype_lists = {
     \ 'objc'        : $HOME . '/.vim/dict/objc.dict',
     \ 'perl'        : $HOME . '/.vim/dict/perl.dict',
     \ 'php'         : $HOME . '/.vim/dict/php.dict',
-    \ 'ruby'        : $HOME . '/.vim/dict/ruby.dict',
     \ 'scheme'      : $HOME . '/.vim/dict/scheme.dict',
     \ 'vim'         : $HOME . '/.vim/dict/vim.dict',
     \ 'vimshell'    : $HOME . '/.tmp/vim/vimshell/int_hist',
@@ -621,20 +622,20 @@ let g:neocomplcache_dictionary_filetype_lists = {
 "}}}
 " インクルード補完 {{{
 
-" インクルードパスの指定
-let g:neocomplcache_include_paths = {
-    \ 'ruby' : '.,'.$HOME.'/.rbenv/versions/1.9.2-p290/lib/ruby/*'
-    \ }
+" " インクルードパスの指定
+" let g:neocomplcache_include_paths = {
+    " \ 'ruby' : '.,'.$HOME.'/.rbenv/versions/1.9.2-p290/lib/ruby/*'
+    " \ }
 
-" インクルード文のパターンを指定
-let g:neocomplcache_include_patterns = {
-    \ 'ruby' : '^\s*require',
-    \ }
+" " インクルード文のパターンを指定
+" let g:neocomplcache_include_patterns = {
+    " \ 'ruby' : '^\s*require',
+    " \ }
 
-" インクルード先のファイル名の解析パターン
-let g:neocomplcache_include_exprs = {
-    \ 'ruby' : substitute(substitute(v:fname,'::','/','g'),'$','.rb','')
-    \ }
+" " インクルード先のファイル名の解析パターン
+" let g:neocomplcache_include_exprs = {
+    " \ 'ruby' : substitute(substitute(v:fname,'::','/','g'),'$','.rb','')
+    " \ }
 
 " " ファイルを探す際に、この値を末尾に追加したファイルも探す。
 " let g:neocomplcache_include_suffixes = {
@@ -645,11 +646,10 @@ let g:neocomplcache_include_exprs = {
 " タグ補完 {{{
 
 " タグファイルの場所
-augroup SetTagsFile
-autocmd!
-autocmd FileType php set tags=$HOME/tags/php.tags
-autocmd FileType php set tags=$HOME/tags/ruby.tags
-augroup END
+" augroup SetTagsFile
+" autocmd!
+" autocmd FileType php set tags=$HOME/tags/php.tags
+" augroup END
 
 " " タグ補完の呼び出しパターン
 " if !exists('g:neocomplcache_member_prefix_patterns')
@@ -743,7 +743,7 @@ nnoremap es :<C-u>vertical NeoComplCacheEditSnippets<CR>
 " }}}
 " Plugin/my-endwise {{{
 
-" autocmd FileType ruby imap <buffer> <expr><CR>  pumvisible() ? neocomplcache#smart_close_popup() . "\<CR>\<Plug>DiscretionaryEnd" : "\<CR>\<Plug>DiscretionaryEnd"
+autocmd FileType ruby imap <buffer> <expr><CR>  pumvisible() ? neocomplcache#smart_close_popup() . "\<CR>\<Plug>DiscretionaryEnd" : "\<CR>\<Plug>DiscretionaryEnd"
 
 " }}}
 " Plugin/vimfiler {{{
