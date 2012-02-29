@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 export RUBYLIB=.:$RUBYLIB
+export RSPEC=true
 
 # rbenv# {{{
 if which rbenv >/dev/null 2>&1 ; then
