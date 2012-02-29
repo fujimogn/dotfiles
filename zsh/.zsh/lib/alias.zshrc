@@ -1,7 +1,7 @@
 #!/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/alias.zshrc
-# $Date: 2012-02-27T09:17:28+0900$
+# $Date: 2012-03-01T01:48:55+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # my heavy use !!
@@ -24,7 +24,6 @@ alias grep="grep --color=auto"
 alias more=less
 alias emacs="emacs -nw"
 alias yum="sudo yum"
-alias port="sudo port"
 alias 644="chmod 644"
 alias 755="chmod 755"
 alias ymd='date +%y%m%d'
