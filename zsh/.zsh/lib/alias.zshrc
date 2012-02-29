@@ -1,11 +1,11 @@
 #!/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/alias.zshrc
-# $Date: 2012-02-25T18:06:59+0900$
+# $Date: 2012-02-27T09:17:28+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # my heavy use !!
-alias {e,edit}="$EDITOR"
+alias {e,edit}="${EDITOR-vi}"
 alias {q,quit}="exit"
 alias {h,history}="history -n -10"
 alias c="clear"

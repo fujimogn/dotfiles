@@ -1,8 +1,30 @@
 #!/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/completion.zshrc
-# $Date: 2012-02-25T16:55:10+0900$
+# $Date: 2012-02-27T09:10:04+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
+
+setopt always_last_prompt       # 補完してもプロンプトの位置を変えない。デフォルトで有効
+# setopt always_to_end            # 補完時に文字列末尾へカーソル移動
+setopt auto_list                # 補完候補が複数あるとき自動でメニューをリストアップ。デフォルトで有効
+setopt auto_menu                # 補完要求に対してメニューをリストアップ。デフォルトで有効
+setopt auto_param_keys          # カッコの対応などを自動的に補完。デフォルトで有効
+setopt auto_param_slash         # ディレクトリ名の補完で末尾の / を自動的に付加。デフォルトで有効
+# setopt auto_remove_slash        # 無駄な末尾の / を削除する。デフォルトで有効
+# setopt complete_aliases         # 補完実行時にエイリアスを展開せずにそのままのコマンドとしてエイリアスを扱う
+# setopt complete_in_word         # 語の途中でもカーソル位置で補完
+# setopt extended_glob            # ファイル名で #,  ~,  ^ の 3 文字を正規表現として扱う
+# setopt interactive_comments     # コマンドラインでも # 以降をコメントと見なす
+setopt hash_list_all            # 最初のコマンド補完実行時にコマンドパスをハッシュする。デフォルトで有効
+# setopt interactive_comments     # コマンドラインでも # 以降をコメントと見なす
+setopt list_packed              # 補完候補を詰めて表示する
+setopt list_types               # 補完候補で ls -F。デフォルトで有効
+# setopt mark_dirs                # ファイル名の展開でディレクトリにマッチした場合 末尾に / を付加
+# setopt magic_equal_subst        # = 以降でも補完できるようにする
+# setopt nullglob
+setopt rec_exact                # 曖昧さがあっても正確なマッチ
+unsetopt list_beep              # 曖昧な補完にビープ音を鳴らさない
+
 
 WORDCHARS='*?_-.[]~=&;!#$%^(){}'
 fpath=(${ZDOTDIR}/modules/zsh-completions $fpath)
@@ -76,9 +98,9 @@ if [ -e "$ZDOTDIR/modules/zaw/zaw.zsh" ];then
   zstyle ':filter-select' extended-search yes
 fi
 
-# incremental completion
-if is-at-least 4.3.10 && \
-  [ -e "${ZDOTDIR}/modules/auto-fu/auto-fu.zsh" ]; then
+
+# # incremental completion
+if [ -e "${ZDOTDIR}/modules/auto-fu/auto-fu.zsh" ]; then
 
   function () { # precompile
     local A
@@ -94,7 +116,8 @@ if is-at-least 4.3.10 && \
   zstyle ':auto-fu:highlight' completion/one fg=blue,dim
   zstyle ':auto-fu:var' postdisplay ''
   zstyle ':auto-fu:var' track-keymap-skip opp
-  zstyle ':auto-fu:var' autoable-function/skiplbuffers 'rake *' 'gem *'
+  zstyle ':auto-fu:var' autoable-function/skiplbuffers '(rake|gem)*'
+  zstyle ':completion:*' completer _oldlist _complete
 
   function zle-line-init () { auto-fu-init }; zle -N zle-line-init
   zle -N zle-keymap-select auto-fu-zle-keymap-select
