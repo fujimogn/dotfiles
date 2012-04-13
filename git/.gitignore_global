@@ -16,4 +16,4 @@ Thumbs.db
 tags
 tags-*
 .rake_task
-Gemfile.lock
+# Gemfile.lock

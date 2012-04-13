@@ -6,6 +6,10 @@ if [ -d "${HOME}/bin" ]; then
   find ${HOME}/bin/ -name "*" -exec chmod u+x {} \;
 fi
 
+if [ -d "${HOME}/Projects/bin" ]; then
+  find ${HOME}/Projects/bin/ -name "*" -exec chmod u+x {} \;
+fi
+
 if [ -d "${HOME}/.ssh" ]; then
   chmod 700 ${HOME}/.ssh
   [ -f ${HOME}/.ssh/id_rsa ] && chmod 600 ${HOME}/.ssh/id_rsa

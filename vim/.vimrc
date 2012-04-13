@@ -21,6 +21,7 @@ NeoBundle 'kana/vim-smartchr'
 NeoBundle 'kana/vim-altr'
 NeoBundle 'kana/vim-fakeclip'
 NeoBundle 'kana/vim-textobj-user'
+NeoBundle 'kana/vim-textobj-fold'
 NeoBundle 'nelstrom/vim-textobj-rubyblock'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'tpope/vim-surround'
@@ -29,6 +30,7 @@ NeoBundle 'rhysd/my-endwise'
 NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'vim-scripts/ruby-matchit'
 NeoBundle 'bbommarito/vim-slim'
+NeoBundle 'tpope/vim-haml'
 NeoBundle 'mattn/gist-vim'
 NeoBundle 'vim-scripts/Markdown'
 NeoBundle 'hail2u/vim-css3-syntax'
@@ -43,6 +45,7 @@ NeoBundle 'banyan/recognize_charcode.vim'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'mortice/taglist.vim'
+NeoBundle 'vim-scripts/sudo.vim'
 
 " }}}
 " Encording {{{
@@ -80,8 +83,6 @@ set splitright
 set title
 set display=lastline
 set nowrap
-set linespace=0
-set sidescroll=1
 set scrolloff=10
 set sidescrolloff=10
 set ruler
@@ -90,26 +91,24 @@ set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 set cursorline
 set number
 set laststatus=2
-" set showtabline=2
+" 閉じ括弧が入力されたとき、対応する括弧を表示する
 set showmatch
-set lazyredraw
-set ttyfast
 set showcmd
 set showmode
 set virtualedit+=block
-set textwidth=80
 
+" 横幅が長いコードをハイライトする
+" http://vim-users.jp/2011/05/hack217/
+set textwidth=0
 if exists('&colorcolumn')
-  set colorcolumn=+1
+    set colorcolumn=+1
+    autocmd FileType sh,zsh,cpp,perl,vim,ruby,slim,haml,css.saass,less,python,haskell,scheme setlocal textwidth=80
 endif
 
 if exists('&ambiwidth')
   set ambiwidth=double
 endif
 
-set cmdheight=1
-set equalalways
-set updatetime=500
 
 " }}}
 " Completion {{{
@@ -172,6 +171,9 @@ augroup END
 " }}}
 " Edit {{{
 
+" どんな設定の時も勝手に改行しないように
+set formatoptions=q
+" カーソルを行頭、行末で止まらないようにする
 set whichwrap=b,s,h,l,<,>,[,]
 set backspace=indent,eol,start
 set keywordprg=:help
@@ -223,6 +225,7 @@ set foldlevelstart=0
 
 " }}}
 " Search {{{
+
 set wrapscan
 set hlsearch
 set incsearch
@@ -232,9 +235,9 @@ set smartcase
 " }}}
 " Mouse {{{
 
-set mouse=a
-set guioptions+=a
-set ttymouse=xterm2
+" set mouse=a
+" set guioptions+=a
+" set ttymouse=xterm2
 
 " }}}
 " Misc command {{{
@@ -439,6 +442,9 @@ autocmd FileType css setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
 " RSpec {{{
 autocmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
 " }}}
+" Slim {{{
+autocmd BufNewFile,BufRead *.slim set filetype=slim
+" }}}
 " Makefile {{{
 autocmd BufNewFile,BufRead Makefile.rule setlocal filetype=make
 autocmd Filetype make set noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
@@ -566,13 +572,10 @@ let g:acp_enableAtStartup = 0
 let g:neocomplcache_enable_at_startup = 1
 
 " 補完が自動で開始される文字数。初期値は2
-let g:neocomplcache_auto_completion_start_length = 2
+let g:neocomplcache_auto_completion_start_length = 3
 
 " 表示される候補の数。初期値は100
 let g:neocomplcache_max_list = 20
-
-" 自動補完を行う入力数を設定。初期値は2
-let g:neocomplcache_auto_completion_start_length = 2
 
 " バッファや辞書ファイル中で、補完の対象となるキーワードの最小長さ。初期値は4。
 let g:neocomplcache_min_keyword_length = 4
@@ -853,9 +856,9 @@ function! EnableSmartchrRubyHash()
   inoremap <buffer><expr> > smartchr#one_of('>', ' => ')
 endfunction
 
-autocmd FileType c,cpp,php,python,javascript,ruby,coffee,vim call EnableSmartchrBasic()
-autocmd FileType python,ruby,coffee,vim call EnableSmartchrRegExp()
-autocmd FileType ruby call EnableSmartchrRubyHash()
+autocmd FileType c,cpp,php,python,javascript,ruby,rake,coffee,vim call EnableSmartchrBasic()
+autocmd FileType python,ruby,rake,coffee,vim call EnableSmartchrRegExp()
+autocmd FileType ruby,rake call EnableSmartchrRubyHash()
 
 
 " }}}

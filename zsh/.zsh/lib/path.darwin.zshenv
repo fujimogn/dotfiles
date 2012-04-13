@@ -1,7 +1,7 @@
 #!/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/path.darwin.zshenv
-# $Date: 2012-02-25T11:18:17+0900$
+# $Date: 2012-03-05T04:49:44+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 cdpath=($HOME/Dropbox/Projects $HOME/Dropbox)
@@ -10,11 +10,6 @@ cdpath=($HOME/Dropbox/Projects $HOME/Dropbox)
 export CC=/usr/bin/gcc-4.2
 if [ -d /Developer/usr/bin ]; then
   export PATH=$PATH:/Developer/usr/bin
-fi
-
-## npm
-if [ -d /usr/local/lib/node_modules/npm/bin ]; then
-  export PATH=$PATH:/usr/local/lib/node_modules/npm/bin
 fi
 
 ## MacUIM

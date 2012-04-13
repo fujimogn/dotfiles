@@ -1,7 +1,7 @@
 #!/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/export.darwin.zshrc
-# $Date: 2012-02-23T15:24:41+0900$
+# $Date: 2012-03-07T13:41:47+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # OSX GCC Installer
@@ -17,7 +17,7 @@ fi
 
 ## Node.js
 if [ -d /usr/local/lib/node ]; then
-  export NODE_PATH=/usr/local/lib/node
+  export NODE_PATH=/usr/local/lib/node_modules
 fi
 
 # pybrew

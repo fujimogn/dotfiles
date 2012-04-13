@@ -306,7 +306,7 @@ style -name customize-toolbar chrome://* <<EOM
     background: none !important;
     -moz-appearance: none !important;
      margin: 0 !important;
-    padding: 0 i!important;
+    padding: 0 !important;
   }
 
   #liberator-customize-toolbar > toolbarbutton {

@@ -3,6 +3,9 @@
 export RUBYLIB=.:$RUBYLIB
 export RSPEC=true
 
+alias rake="noglob rake"
+alias 3k="open http://localhost:3000"
+
 # rbenv# {{{
 if which rbenv >/dev/null 2>&1 ; then
   eval "$(rbenv init -)"
@@ -24,10 +27,12 @@ heroku
 html2haml
 jekyll
 pry
+padrino
 rackup
 rails
 rake
 rake2thor
+rawler
 rspec
 ruby
 sass
