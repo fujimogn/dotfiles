@@ -28,6 +28,7 @@ html2haml
 jekyll
 pry
 padrino
+powder
 rackup
 rails
 rake

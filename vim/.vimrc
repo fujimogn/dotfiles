@@ -33,9 +33,10 @@ NeoBundle 'bbommarito/vim-slim'
 NeoBundle 'tpope/vim-haml'
 NeoBundle 'mattn/gist-vim'
 NeoBundle 'vim-scripts/Markdown'
-NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'cakebaker/scss-syntax.vim'
+NeoBundle 'groenewege/vim-less'
+NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'skammer/vim-css-color'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'nathanaelkane/vim-indent-guides'
@@ -46,6 +47,7 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'mortice/taglist.vim'
 NeoBundle 'vim-scripts/sudo.vim'
+
 
 " }}}
 " Encording {{{
@@ -219,9 +221,20 @@ set modeline
 " Forlding {{{
 
 set foldenable
+" set foldmethod=indent
 set foldmethod=marker
-set foldcolumn=2
-set foldlevelstart=0
+set foldcolumn=3
+set foldlevel=0
+
+" via http://d.hatena.ne.jp/ns9tks/20080318/1205851539
+" 行頭で h を押すと折畳を閉じる。
+nnoremap <expr> h col('.') == 1 && foldlevel(line('.')) > 0 ? 'zc' : 'h'
+" 折畳上で l を押すと折畳を開く。
+nnoremap <expr> l foldclosed(line('.')) != -1 ? 'zo0' : 'l'
+" 行頭で h を押すと選択範囲に含まれる折畳を閉じる。
+vnoremap <expr> h col('.') == 1 && foldlevel(line('.')) > 0 ? 'zcgv' : 'h'
+" 折畳上で l を押すと選択範囲に含まれる折畳を開く。
+vnoremap <expr> l foldclosed(line('.')) != -1 ? 'zogv0' : 'l'
 
 " }}}
 " Search {{{
@@ -261,37 +274,6 @@ command! Sjis Cp932
 " キーマップリーダー
 let mapleader=","
 
-" Dvorak {{{
-" SandS, <Shift>to<ESC>
-" no d h
-" no h j
-" no t k
-" no n l
-" no j d
-" no l n
-" no L N
-" no s :
-" no S :
-" no , ,
-" " インサートモードを抜ける
-" inoremap hh <ESC>
-" " 基本移動
-" nnoremap d <Left>
-" nnoremap h gj
-" nnoremap t gk
-" nnoremap n <Right>
-" " 移動支援
-" no D ^
-" no N $
-" no H 3gj
-" no T 3gk
-" " ウィンドウ移動
-" nnoremap <C-d> <C-w>l
-" nnoremap <C-h> <C-w>j
-" nnoremap <C-t> <C-w>k
-" nnoremap <C-n> <C-w>h
-" }}}
-
 " : ; 入れ替え
 nnoremap ; :
 
@@ -326,10 +308,10 @@ nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
 
 " Fold
-" inoremap z <C-O>za
-nnoremap z za
-onoremap z <C-C>zw
-vnoremap z zf
+inoremap zz <C-O>za
+nnoremap zz za
+onoremap zz <C-C>zw
+vnoremap zz zf
 
 " ヘルプ
 nnoremap <C-i> :<C-u>vertical help<Space>
@@ -386,8 +368,8 @@ onoremap [ t[
 " }}}
 
 " 空行挿入
-" inoremap <leader><leader> <ESC>:<C-u>call append(expand('.'), '')<CR>ji
-" nnoremap <leader><leader> :<C-u>call append(expand('.'), '')<CR>j
+inoremap <leader><leader> <ESC>:<C-u>call append(expand('.'), '')<CR>ji
+nnoremap <leader><leader> :<C-u>call append(expand('.'), '')<CR>j
 
 " 日付挿入
 inoremap <leader>time <C-R>=strftime('%H:%M')<CR>
@@ -412,7 +394,6 @@ nnoremap <Space>6 :e #6<CR>
 nnoremap <Space>7 :e #7<CR>
 nnoremap <Space>8 :e #8<CR>
 nnoremap <Space>9 :e #9<CR>
-
 nnoremap <Space>[ :<C-u>bp<CR>
 nnoremap <Space>] :<C-u>bn<CR>
 
@@ -425,9 +406,19 @@ autocmd FileType html,xhtml setlocal includeexpr=substitute(v:fname,'^\\/','',''
 " CSS {{{
 autocmd BufNewFile,BufRead *.css setlocal foldmethod=marker
 autocmd BufNewFile,BufRead *.css setlocal foldmarker={,}
-autocmd BufNewFile,BufRead *.css inoremap <buffer> {<cr> {}<left><cr><space><space><space><space>.<cr><esc>kA<bs>
+autocmd BufNewFile,BufRead *.css inoremap <buffer> {<cr> {}<left><cr>.<cr><esc>kA<bs><space><space><space><space>
+autocmd BufNewFile,BufRead *.css nnoremap <buffer> <localleader>S ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR>
 autocmd BufNewFile,BufRead *.css command! Cleansort ?{<CR>jV/\v^\s*\}?$<CR>k:sort<CR>:noh<CR>
 autocmd FileType css setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+" }}}
+" LESS {{{
+autocmd BufNewFile,BufRead *.less setlocal filetype=less
+autocmd BufNewFile,BufRead *.less setlocal foldmethod=marker
+autocmd BufNewFile,BufRead *.less setlocal foldmarker={,}
+autocmd BufNewFile,BufRead *.less inoremap <buffer> {<cr> {}<left><cr>.<cr><esc>kA<bs><space><space><space><space>
+autocmd BufNewFile,BufRead *.less nnoremap <buffer> <localleader>S ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR>
+autocmd BufNewFile,BufRead *.less command! Cleansort ?{<CR>jV/\v^\s*\}?$<CR>k:sort<CR>:noh<CR>
+autocmd FileType less setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
 " }}}
 " JavaScript {{{
 " autocmd FileType javascript setlocal foldmethod=marker
@@ -443,7 +434,7 @@ autocmd FileType css setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
 " }}}
 " Slim {{{
-autocmd BufNewFile,BufRead *.slim set filetype=slim
+" autocmd BufNewFile,BufRead *.slim set filetype=slim
 " }}}
 " Makefile {{{
 autocmd BufNewFile,BufRead Makefile.rule setlocal filetype=make
@@ -744,11 +735,6 @@ nnoremap es :<C-u>vertical NeoComplCacheEditSnippets<CR>
 
 " }}}
 " }}}
-" Plugin/my-endwise {{{
-
-autocmd FileType ruby imap <buffer> <expr><CR>  pumvisible() ? neocomplcache#smart_close_popup() . "\<CR>\<Plug>DiscretionaryEnd" : "\<CR>\<Plug>DiscretionaryEnd"
-
-" }}}
 " Plugin/vimfiler {{{
 let g:vimfiler_data_directory = '~/.tmp/vim/vimfiler'
 " }}}
@@ -859,7 +845,6 @@ endfunction
 autocmd FileType c,cpp,php,python,javascript,ruby,rake,coffee,vim call EnableSmartchrBasic()
 autocmd FileType python,ruby,rake,coffee,vim call EnableSmartchrRegExp()
 autocmd FileType ruby,rake call EnableSmartchrRubyHash()
-
 
 " }}}
 " Plugin/syntastic {{{

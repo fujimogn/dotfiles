@@ -1,0 +1,15 @@
+#!/bin/zsh
+
+eval "$(rbenv init -)"
+
+cd ${HOME}/shops
+
+if [ $# -eq 0 ] || [ $1 == "start" ]; then
+  echo "shops start"
+  bundle exec padrino start -d -p 3333 -e production -a thin && \
+    open "http://localhost:3333"
+elif [ $1 == "stop" ]; then
+  echo "shops stop"
+  bundle exec padrino stop
+fi
+

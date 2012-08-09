@@ -1,7 +1,7 @@
 #!/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/export.darwin.zshrc
-# $Date: 2012-03-07T13:41:47+0900$
+# $Date: 2012-06-30T05:28:38+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # OSX GCC Installer
@@ -36,3 +36,7 @@ if which gisty >/dev/null 2>&1 ; then
   export GISTY_SSL_VERIFY="none"
 fi
 
+
+if [ -d /usr/local/var/postgres ]; then
+  export PGDATA=/usr/local/var/postgres
+fi

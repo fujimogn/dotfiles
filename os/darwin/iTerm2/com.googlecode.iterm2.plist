@@ -1147,9 +1147,9 @@
 	<key>NSTableView Sort Ordering KeyBingingTable</key>
 	<array/>
 	<key>NSWindow Frame Preferences</key>
-	<string>149 367 924 485 0 0 1280 960 </string>
+	<string>149 350 605 485 0 0 1280 938 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 4 1280 934 0 0 1280 938 </string>
+	<string>146 8 1010 930 0 0 1280 938 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>152 79 1010 826 0 0 1280 938 </string>
 	<key>NeverWarnAboutShortLivedSessions_AACF6772-2D24-4DCA-B846-26AF91FFC3AE</key>
@@ -1346,7 +1346,7 @@
 			<key>Columns</key>
 			<integer>100</integer>
 			<key>Command</key>
-			<string></string>
+			<string>/bin/bash</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -1856,6 +1856,8 @@
 	<false/>
 	<key>OpenTmuxWindowsIn</key>
 	<integer>0</integer>
+	<key>PMPrintingExpandedStateForPrint2</key>
+	<false/>
 	<key>PassOnControlClick</key>
 	<false/>
 	<key>PasteFromClipboard</key>
@@ -1917,7 +1919,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2012-03-19T07:04:00Z</date>
+	<date>2012-06-13T14:42:22Z</date>
 	<key>SavePasteHistory</key>
 	<true/>
 	<key>Show Toolbelt</key>
