@@ -1,36 +1,55 @@
 set nocompatible
 
 " NeoBundle {{{
+
 if has('vim_starting')
   set runtimepath+=~/.vim/neobundle
   call neobundle#rc(expand('~/.vim/bundle'))
 endif
 
+if $SUDO_USER == ''
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neocomplcache-snippets-complete'
 NeoBundle 'ujihisa/neco-ruby'
-NeoBundle 'Shougo/vimproc'
+NeoBundle 'ujihisa/neco-look'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'tsukkee/unite-help'
+endif
+
+NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vim-vcs'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'banyan/recognize_charcode.vim'
 NeoBundle 'kana/vim-smartchr'
 NeoBundle 'kana/vim-altr'
 NeoBundle 'kana/vim-fakeclip'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'kana/vim-textobj-fold'
 NeoBundle 'nelstrom/vim-textobj-rubyblock'
-NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'tpope/vim-surround'
-NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'rhysd/my-endwise'
 NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'vim-scripts/ruby-matchit'
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 't9md/vim-textmanip'
+NeoBundle 'mortice/taglist.vim'
+NeoBundle 'vim-scripts/sudo.vim'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'Lokaltog/vim-powerline'
+NeoBundle 'h1mesuke/vim-alignta'
+NeoBundle 'vim-scripts/Align'
+
+NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'tpope/vim-rails'
 NeoBundle 'bbommarito/vim-slim'
 NeoBundle 'tpope/vim-haml'
+NeoBundle 'mattn/zencoding-vim'
 NeoBundle 'mattn/gist-vim'
 NeoBundle 'vim-scripts/Markdown'
 NeoBundle 'othree/html5.vim'
@@ -39,17 +58,11 @@ NeoBundle 'groenewege/vim-less'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'skammer/vim-css-color'
 NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'Lokaltog/vim-powerline'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'banyan/recognize_charcode.vim'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'mortice/taglist.vim'
-NeoBundle 'vim-scripts/sudo.vim'
-
+NeoBundle 'miripiruni/CSScomb-for-Vim'
 
 " }}}
+
+" Settings {{{
 " Encording {{{
 
 " デフォルトエンコード"
@@ -253,7 +266,10 @@ set smartcase
 " set ttymouse=xterm2
 
 " }}}
-" Misc command {{{
+
+" }}}
+
+" Misc Commands {{{
 
 command! Editrc edit $MYVIMRC
 command! Editgrc edit $MYGVIMRC
@@ -269,6 +285,7 @@ command! Jis Iso2022jp
 command! Sjis Cp932
 
 " }}}
+
 " Keymap "{{{
 
 " キーマップリーダー
@@ -277,23 +294,15 @@ let mapleader=","
 " : ; 入れ替え
 nnoremap ; :
 
+nnoremap <CR> :<C-u>call append(expand('.'), '')<CR>ji
+
 " インサートモードを抜ける
 inoremap jj <ESC>
 inoremap kk <ESC>
 
 " 基本移動
-nnoremap <silent> j gj
-nnoremap <silent> gj j
-nnoremap <silent> k gk
-nnoremap <silent> gk k
-nnoremap <silent> $ g$
-nnoremap <silent> g$ $
-vnoremap <silent> j gj
-vnoremap <silent> gj j
-vnoremap <silent> k gk
-vnoremap <silent> gk k
-vnoremap <silent> $ g$
-vnoremap <silent> g$ $
+nnoremap j gj
+nnoremap k gk
 
 " 移動支援
 noremap H ^
@@ -325,7 +334,6 @@ vnoremap v $h
 " 保存・終了
 nnoremap <Space>w :<C-u>write<Return>
 nnoremap <Space>q :<C-u>quit<Return>
-nnoremap <Space>Q :<C-u>quit!<Return>
 
 command! Editrc tabedit $MYVIMRC
 command! Editgrc tabedit $MYGVIMRC
@@ -350,7 +358,7 @@ nnoremap <Space>tf :<C-u>tabfind<Space>
 nnoremap <Space>tm :<C-u>tabmove<Space>
 
 " インサートモード
-imap <C-e> <End>
+" imap <C-e> <End>
 imap <C-a> <Home>
 imap <C-h> <Backspace>
 imap <C-d> <Del>
@@ -398,43 +406,41 @@ nnoremap <Space>[ :<C-u>bp<CR>
 nnoremap <Space>] :<C-u>bn<CR>
 
 "}}}
+
 " Filetype {{{
 " HTML {{{
 autocmd FileType html,xhtml,xml setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType html,xhtml setlocal includeexpr=substitute(v:fname,'^\\/','','') | setlocal path+=./;/
+autocmd FileType html :compiler tidy
+autocmd FileType html :setlocal makeprg=tidy\ -raw\ -quiet\ -errors\ --gnu-emacs\ yes\ \"%\"
 " }}}
 " CSS {{{
-autocmd BufNewFile,BufRead *.css setlocal foldmethod=marker
-autocmd BufNewFile,BufRead *.css setlocal foldmarker={,}
-autocmd BufNewFile,BufRead *.css inoremap <buffer> {<cr> {}<left><cr>.<cr><esc>kA<bs><space><space><space><space>
-autocmd BufNewFile,BufRead *.css nnoremap <buffer> <localleader>S ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR>
-autocmd BufNewFile,BufRead *.css command! Cleansort ?{<CR>jV/\v^\s*\}?$<CR>k:sort<CR>:noh<CR>
-autocmd FileType css setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
-" }}}
-" LESS {{{
 autocmd BufNewFile,BufRead *.less setlocal filetype=less
-autocmd BufNewFile,BufRead *.less setlocal foldmethod=marker
-autocmd BufNewFile,BufRead *.less setlocal foldmarker={,}
-autocmd BufNewFile,BufRead *.less inoremap <buffer> {<cr> {}<left><cr>.<cr><esc>kA<bs><space><space><space><space>
-autocmd BufNewFile,BufRead *.less nnoremap <buffer> <localleader>S ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR>
-autocmd BufNewFile,BufRead *.less command! Cleansort ?{<CR>jV/\v^\s*\}?$<CR>k:sort<CR>:noh<CR>
-autocmd FileType less setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+autocmd BufNewFile,BufRead *.scss setlocal filetype=scss
+autocmd BufNewFile,BufRead *.scss,*.less,*.css setlocal foldmethod=marker
+autocmd BufNewFile,BufRead *.scss,*.less,*.css setlocal foldmarker={,}
+autocmd BufNewFile,BufRead *.scss,*.less,*.css nnoremap <buffer> <leader>S ?{<CR>jV/\v^\s*\}?$<CR>k:sort<CR>:noh<CR>
+autocmd BufNewFile,BufRead *.scss,*.less,*.css inoremap <buffer> {<cr> {}<left><cr>.<cr><esc>kA<bs><space><space>
+autocmd FileType scss,less,css setlocal iskeyword+=-
+autocmd FileType scss,less,css setlocal expandtab ts=2 sw=2 sts=2
+autocmd FileType css setlocal includeexpr=substitute(v:fname,'^\\/','','') | setlocal path+=;/
+autocmd FileType css :compiler css
 " }}}
 " JavaScript {{{
-" autocmd FileType javascript setlocal foldmethod=marker
-" autocmd FileType javascript setlocal foldmarker={,}
+autocmd FileType javascript setlocal foldmethod=marker
+autocmd FileType javascript setlocal foldmarker={,}
 " }}}
 " Python {{{
-" autocmd FileType python set expandtab
+autocmd FileType python set expandtab ts=2 sw=2 sts=2
 " }}}
 " Ruby {{{
-" autocmd FileType ruby set expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType ruby setlocal expandtab ts=2 sw=2 sts=2
 " }}}
 " RSpec {{{
 autocmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
 " }}}
 " Slim {{{
-" autocmd BufNewFile,BufRead *.slim set filetype=slim
+autocmd BufNewFile,BufRead *.slim set filetype=slim
 " }}}
 " Makefile {{{
 autocmd BufNewFile,BufRead Makefile.rule setlocal filetype=make
@@ -462,19 +468,23 @@ autocmd FileType apache setlocal path+=./;/
 autocmd FileType gitconfig setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4
 " }}}
 " }}}
-" Plugin/Autodate {{{
+
+" Plugin {{{
+" Autodate {{{
+
 
 let g:autodate_format = ': %FT%T%z'
 let g:autodate_keyword_pre = '$Date'
 let g:autodate_keyword_post = '\$'
 
  " }}}
-" Plugin/vimshell {{{
+" vimshell {{{
 
 let g:vimshell_temporary_directory = '~/.tmp/vim/vimshell'
 let g:vimshell_prompt =  '$ '
-let g:vimshell_split_command = 'vnew'
-nmap <Space>v <Plug>(vimshell_split_switch)
+let g:vimshell_interactive_update_time = 10
+let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
+let g:vimshell_enable_smart_case = 1
 
 autocmd FileType vimshell
   \ call vimshell#altercmd#define('g', 'git')
@@ -486,8 +496,10 @@ function! g:my_chpwd(args, context)
   call vimshell#execute('ls')
 endfunction
 
+nnoremap <Space>; :<C-u>VimShellPop<CR>
+
  " }}}
-" Plugin/NERD_commenter {{{
+" NERD_commenter {{{
 
 let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
@@ -501,7 +513,7 @@ vmap <Space>cs <Plug>NERDCommenterSexy
 vmap <Space>cb <Plug>NERDCommenterMinimal
 
 " }}}
-" Plugin/quickrun {{{
+" quickrun {{{
 
 " keymap {{{
 
@@ -554,52 +566,27 @@ autocmd BufReadPost *_spec.rb call RSpecQuickrun()
 " }}}
 
 " }}}
-" Plugin/neocomplcache {{{
-" 設定 {{{
-" AutoComplPopを無効
+" neocomplcache {{{
+
+" Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
-
-" 起動時に有効化
+" Use neocomplcache.
 let g:neocomplcache_enable_at_startup = 1
-
-" 補完が自動で開始される文字数。初期値は2
-let g:neocomplcache_auto_completion_start_length = 3
-
-" 表示される候補の数。初期値は100
-let g:neocomplcache_max_list = 20
-
-" バッファや辞書ファイル中で、補完の対象となるキーワードの最小長さ。初期値は4。
-let g:neocomplcache_min_keyword_length = 4
-
-" シンタックスファイル中で、補完の対象となるキーワードの最小長さ。初期値は4。
-let g:neocomplcache_min_syntax_length = 3
-
-" 入力に大文字が入力されている場合、大文字小文字の区別をする。大文字が入力されるまで大文字小文字の区別をなくす
+" Use smartcase.
 let g:neocomplcache_enable_smart_case = 1
-
-" CamelCase補完有効化
+" Use camel case completion.
 let g:neocomplcache_enable_camel_case_completion = 1
-
-" _(アンダーバー)区切りの補完を有効化
+" Use underbar completion.
 let g:neocomplcache_enable_underbar_completion = 1
-
-" 補完候補の一番先頭を選択状態にする(AutoComplPopと似た動作)
-" let g:neocomplcache_enable_auto_select = 1
-
-" neocomplcacheを自動的にロックするバッファ名のパターンを指定
-" ku.vimやfuzzyfinderなど、neocomplcacheと相性が悪いプラグインを使用する場合に設定
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
-" ctags
-let g:neocomplcache_ctags_program = '/usr/local/bin/ctags'
+let g:neocomplcache_enable_fuzzy_completion = 1
 
-" cache dir
-let g:neocomplcache_temporary_dir = $HOME.'/.tmp/vim/neocon/'
-
-" }}}
-" 辞書補完 {{{
+" Define dictionary.
 let g:neocomplcache_dictionary_filetype_lists = {
-    \ 'default'     : '',
+    \ 'default' : '',
     \ 'actionscript': $HOME . '/.vim/dict/actionscript.dict',
     \ 'java'        : $HOME . '/.vim/dict/java.dict',
     \ 'c'           : $HOME . '/.vim/dict/c.dict',
@@ -613,134 +600,78 @@ let g:neocomplcache_dictionary_filetype_lists = {
     \ 'vim'         : $HOME . '/.vim/dict/vim.dict',
     \ 'vimshell'    : $HOME . '/.tmp/vim/vimshell/int_hist',
     \ }
-"}}}
-" インクルード補完 {{{
 
-" " インクルードパスの指定
-" let g:neocomplcache_include_paths = {
-    " \ 'ruby' : '.,'.$HOME.'/.rbenv/versions/1.9.2-p290/lib/ruby/*'
-    " \ }
+" Define keyword.
+if !exists('g:neocomplcache_keyword_patterns')
+  let g:neocomplcache_keyword_patterns = {}
+endif
+let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 
-" " インクルード文のパターンを指定
-" let g:neocomplcache_include_patterns = {
-    " \ 'ruby' : '^\s*require',
-    " \ }
+" ctags
+let g:neocomplcache_ctags_program = '/usr/local/bin/ctags'
 
-" " インクルード先のファイル名の解析パターン
-" let g:neocomplcache_include_exprs = {
-    " \ 'ruby' : substitute(substitute(v:fname,'::','/','g'),'$','.rb','')
-    " \ }
+" cache dir
+let g:neocomplcache_temporary_dir = $HOME.'/.tmp/vim/neocon/'
 
-" " ファイルを探す際に、この値を末尾に追加したファイルも探す。
-" let g:neocomplcache_include_suffixes = {
-  " \ 'ruby' : '.rb'
-  " \ }
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neocomplcache_snippets_expand)
+smap <C-k>     <Plug>(neocomplcache_snippets_expand)
+inoremap <expr><C-g>     neocomplcache#undo_completion()
+inoremap <expr><C-l>     neocomplcache#complete_common_string()
 
-" }}}
-" タグ補完 {{{
+" <CR>: close popup and save indent.
+" inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+" <CR> で確定してポップアップを閉じる
+inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "<CR>"
 
-" タグファイルの場所
-" augroup SetTagsFile
-" autocmd!
-" autocmd FileType php set tags=$HOME/tags/php.tags
-" augroup END
+" <TAB>: completion.
+inoremap <expr><TAB>   pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ neocomplcache#start_manual_complete()
+function! s:check_back_space()
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+" inoremap <expr><C-e>  neocomplcache#cancel_popup()
+" Enable omni completion.
+autocmd FileType css,less,sass setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,erb, markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-" " タグ補完の呼び出しパターン
-" if !exists('g:neocomplcache_member_prefix_patterns')
-  " let g:neocomplcache_member_prefix_patterns = {}
-" endif
-
-" let g:neocomplcache_member_prefix_patterns  = {
-  " \ 'php' : '->\|::',
-  " \ }
-
-" }}}
-" スニペット補完 {{{
-
-" 標準で用意されているスニペットを無効にする
-let g:neocomplcache_snippets_disable_runtime_snippets = 1
-" スニペットファイルの置き場所
-let g:neocomplcache_snippets_dir = $HOME.'/.vim/snippets'
-
-" }}}
-" オムニ補完 {{{
-augroup SetOmniCompletionSetting
-  autocmd!
-  autocmd FileType actionscript setlocal omnifunc=actionscriptcomplete#CompleteAS
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType c setlocal omnifunc=ccomplete#Complete
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-  autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-  autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
-augroup END
-
-" オムニ補完のパターンを設定
+" Enable heavy omni completion.
 if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
 endif
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
 let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 
 " }}}
-" キーマップ {{{
+" neocomplcache-snippets {{{
 
-" 標準の補完を置き換える {{{
-" ファイル名補完
-inoremap <expr><C-x><C-f>  neocomplcache#manual_filename_complete()
-" オムニ補完
-inoremap <expr><C-x><C-o>  neocomplcache#manual_filename_complete()
-" キーワード補完
-inoremap <expr><C-n>  pumvisible() ? "\<C-n>" : neocomplcache#manual_keyword_complete()
-" }}}
+let g:neocomplcache_snippets_dir = $HOME."/.vim/snippets"
+command! -nargs=* Nes NeoComplCacheEditSnippets <args>
 
-" <TAB> で補完できるようにする
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" <C-e> で補完をキャンセルしポップアップを閉じる
-inoremap <expr><C-e> neocomplcache#cancel_popup()
-
-" バックスペースしたときにポップアップを閉じる
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y> neocomplcache#close_popup()
-
-" <CR> で確定してポップアップを閉じる
-inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "<CR>"
-
-" <CR> で確定し改行、インデントを保つ
-" inoremap <expr><CR>  pumvisible() ? neocomplcache#smart_close_popup()."\<CR>" : "\<CR>"
-
-" <C-g> で前回行われた補完をキャンセル
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-
-" <C-n> でneocomplcache補完
-inoremap <expr><C-n>  pumvisible() ? "\<C-n>" : "\<C-x>\<C-u>\<C-p>"
-
-" <C-p> でkeyword補完
-inoremap <expr><C-p> pumvisible() ? "\<C-p>" : "\<C-p>\<C-n>"
-
-" <C-k>でスニペットの展開をできるように
-imap <C-k> <Plug>(neocomplcache_snippets_expand)
-smap <C-k> <Plug>(neocomplcache_snippets_expand)
-
+" imap <expr><C-l> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : "\<C-n>"
 "スニペットを編集する
 nnoremap <Space>es :<C-u>vertical NeoComplCacheEditSnippets<CR>
-nnoremap es :<C-u>vertical NeoComplCacheEditSnippets<CR>
-
 
 " }}}
-" }}}
-" Plugin/vimfiler {{{
+" vimfiler {{{
+
 let g:vimfiler_data_directory = '~/.tmp/vim/vimfiler'
-" }}}
-" Plugin/Unite {{{
 
-" let g:unite_enable_start_insert=1
+" }}}
+" Unite {{{
+
+let g:unite_enable_start_insert=1
 " バッファ一覧
 nnoremap <silent> <Space>ub :<C-u>Unite buffer<CR>
 nnoremap <C-p> :<C-u>Unite buffer<CR>
@@ -754,8 +685,9 @@ nnoremap <silent> <Space>um :<C-u>Unite file_mru<CR>
 nnoremap <C-z> :<C-u>Unite file_mru<CR>
 " 常用セット
 nnoremap <silent> <Space>uu :<C-u>Unite buffer file_mru<CR>
-" 全部乗せ
-nnoremap <silent> <Space>ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+" ブックマーク一覧
+nnoremap <silent> <Space>uc :<C-u>Unite bookmark<CR>
+
 
 function! EnableUniteKeymap()
   " ウィンドウを分割して開く
@@ -765,13 +697,13 @@ function! EnableUniteKeymap()
   nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
   inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
   " ESCキーを2回押すと終了する
-  nnoremap <silent> <buffer> <ESC><ESC> q
-  inoremap <silent> <buffer> <ESC><ESC> <ESC>q
+  nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+  inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 endfunction
 autocmd FileType unite call EnableUniteKeymap()
 
 " }}}
-" Plugin/vim-ref {{{
+" vim-ref {{{
 
 let g:ref_open = 'vsplit'
 let g:ref_phpmanual_path = $HOME.'/Reference/php/php-chunked-xhtml'
@@ -802,7 +734,8 @@ autocmd FileType ref nmap b <Plug>(ref-back)
 autocmd FileType ref nmap <CR> <Plug>(ref-keyword)
 
 " }}}
-" Plugin/Rsense {{{
+" Rsense {{{
+
 let g:rsenseUseOmniFunc = 1
 
 if !empty( $RSENSE_HOME ) && filereadable(expand( $RSENSE_HOME.'/bin/rsense'))
@@ -811,7 +744,7 @@ if !empty( $RSENSE_HOME ) && filereadable(expand( $RSENSE_HOME.'/bin/rsense'))
 endif
 
 " }}}
-" Plugin/vim-indent-guides {{{
+" vim-indent-guides {{{
 
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
@@ -820,7 +753,26 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#454545 ctermbg=237
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3E3E3E ctermbg=236
 
 " }}}
-" Plugin/vim-smartchr {{{
+" vim-textmanip {{{
+
+xmap <Space>d <Plug>(textmanip-duplicate-down)
+nmap <Space>d <Plug>(textmanip-duplicate-down)
+xmap <Space>D <Plug>(textmanip-duplicate-up)
+nmap <Space>D <Plug>(textmanip-duplicate-up)
+
+xmap <C-j> <Plug>(textmanip-move-down)
+xmap <C-k> <Plug>(textmanip-move-up)
+xmap <C-h> <Plug>(textmanip-move-left)
+xmap <C-l> <Plug>(textmanip-move-right)
+
+" vmap <C-j> <Plug>(Textmanip.move_selection_down)
+" vmap <C-k> <Plug>(Textmanip.move_selection_up)
+" vmap <C-h> <Plug>(Textmanip.move_selection_left)
+" vmap <C-l> <Plug>(Textmanip.move_selection_right)
+
+" }}}
+" vim-smartchr {{{
+
 cnoremap <expr> (  smartchr#loop('\(', '(', {'ctype': '/?'})
 function! EnableSmartchrBasic()
   inoremap <buffer> ( ()<Esc>i
@@ -833,7 +785,6 @@ function! EnableSmartchrBasic()
   inoremap <buffer><expr> = search('\(&\<bar><bar>\<bar>+\<bar>-\<bar>/\<bar>>\<bar><\) \%#', 'bcn')? '<bs>= ' : search('\(\*\<bar>!\)\%#')? '= ' : smartchr#one_of(' = ', ' == ', '=')
 endfunction
 
-
 function! EnableSmartchrRegExp()
   inoremap <buffer><expr> ~ search('\(!\<bar>=\) \%#', 'bcn')? '<bs>~ ' : '~'
 endfunction
@@ -842,16 +793,18 @@ function! EnableSmartchrRubyHash()
   inoremap <buffer><expr> > smartchr#one_of('>', ' => ')
 endfunction
 
-autocmd FileType c,cpp,php,python,javascript,ruby,rake,coffee,vim call EnableSmartchrBasic()
+autocmd FileType c,cpp,css,less,php,python,javascript,ruby,rake,coffee,vim call EnableSmartchrBasic()
 autocmd FileType python,ruby,rake,coffee,vim call EnableSmartchrRegExp()
 autocmd FileType ruby,rake call EnableSmartchrRubyHash()
 
 " }}}
-" Plugin/syntastic {{{
+" syntastic {{{
+
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=2
+
 " }}}
-" Plugin/vim-altr {{{
+" vim-altr {{{
 
 nmap <F3> <Plug>(altr-forward)
 imap <F3> <Plug>(altr-forward)
@@ -869,13 +822,42 @@ call altr#define('app/controllers/%.rb', 'spec/controllers/%_spec.rb')
 call altr#define('app/helpers/%.rb', 'spec/helpers/%_spec.rb')
 
 " }}}
-" Plugin/vim-coffee-script {{{
+" vim-coffee-script {{{
 
 autocmd BufNewFile,BufRead *.coffee set filetype=coffee
 autocmd BufWritePost *.coffee :CoffeeCompile watch vert
 autocmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
 
 " }}}
-" Plugin/vim-powerline {{{
+" vim-powerline {{{
 let g:Powerline_symbols = 'fancy'
+" }}}
+" vim-ambicmd {{{
+
+if globpath(&rtp, 'autoload/ambicmd.vim') != ''
+  cnoremap <expr> <Space> ambicmd#expand("\<Space>")
+  cnoremap <expr> <CR>    ambicmd#expand("\<CR>")
+endif
+
+" }}}
+" open-browser {{{
+
+" カーソル下のURLをブラウザで開く
+nmap fu <Plug>(openbrowser-open)
+vmap fu <Plug>(openbrowser-open)
+
+" カーソル下のキーワードをググる
+nnoremap fs :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
+
+" }}}
+" zen-cording {{{
+
+" <C-e>で展開
+let g:user_zen_expandabbr_key = '<c-e>'
+
+" 展開するHTMLの言語を設定
+let g:user_zen_settings = {'lang' : 'ja'}
+
+" }}}
+
 " }}}

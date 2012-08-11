@@ -1,7 +1,7 @@
 #!/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/opt.zshrc
-# $Date: 2012-02-27T08:48:07+0900$
+# $Date: 2012-08-10T04:55:19+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # {{{ basic
@@ -28,7 +28,7 @@ setopt print_exit_value         # 戻り値が 0 以外の場合終了コード�
 # setopt rm_star_wait             # rm * を実行する前に確認
 setopt sh_word_split            # 変数内の文字列分解のデリミタ
 setopt sun_keyboard_hack        # 末尾の ` を無視
-unsetopt no_flow_control        # C-s, C-q を無効にする
-unsetopt promptcr               # 改行コードで終らない出力もちゃんと出力する
+setopt no_flow_control          # C-s, C-q を無効にする
+setopt ignore_eof               # C-dでexitしない
 
 # }}}
