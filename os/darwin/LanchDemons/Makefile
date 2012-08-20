@@ -1,5 +1,5 @@
 SUDO	= true
-FILES	= rombouts.pdnsd.plist google-ime-skk.plist
+FILES	= homebrew.mxcl.pdnsd.plist ruby.google-ime-skk.plist
 PREFIX	= /Library/LaunchDaemons
 
 include ../../../Makefile.rule
