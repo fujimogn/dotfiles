@@ -1,5 +1,5 @@
 ""3.3pre
-" $Date: 2012-07-03T17:52:53+0900$
+" $Date: 2012-09-15T07:50:15+0900$
 
 
 
@@ -15,8 +15,9 @@ set ignorecase
 set autocomplete
 set complete=tsl
 set focuscontent
-set gui=noaddons,bookmarks,nomenu,nonavigation,tabs
+" set gui=noaddons,bookmarks,nomenu,nonavigation,tabs
 " set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
+set gui=noaddons,nobookmarks,nomenu,nonavigation,notabs
 set gui=noaddons
 set hintchars=hjklasdfgyuiopqwertnmzxcvb
 set history=1000
@@ -177,13 +178,8 @@ style -name commandline-ime chrome://* #liberator-commandline-command input {ime
 " キーマップリーダー
 let mapleader = ","
 
-map <Left> <Nop>
-map <Right> <Nop>
-map <Up> <Nop>
-map <Down> <Nop>
-
 " ; でコマンドモードへ
-" nnoremap ; :
+nnoremap ; :
 
 " j/k の移動量を増やす
 nnoremap j 10<C-e>
@@ -205,10 +201,6 @@ nnoremap P p
 nnoremap <Home> :tabfirst<CR>
 nnoremap <End> :tablast<CR>
 
-" Ctrl-h/Ctrl-l でタブ順序変更
-nnoremap <C-h> :tabmove! -1<CR><Esc>
-nnoremap <C-l> :tabmove! +1<CR><Esc>
-
 " 履歴一覧を開く
 nnoremap U :undo<Space>
 
@@ -223,12 +215,6 @@ nnoremap ! :set invusermode<CR>
 " URL デコードしないようにする
 nnoremap <silent> y :<C-u>js util.copyToClipboard(buffer.URL)<CR>
 
-" ページのエンコーディングを変更
-nnoremap <Leader>es :set encoding=Shift_JIS<CR>
-nnoremap <Leader>ec :set encoding=EUC-JP<CR>
-nnoremap <Leader>eu :set encoding=UTF-8<CR>
-nnoremap <Leader>ei :set encodeing=ISO-2022-JP<CR>
-
 " reload vimpreatorrc
 nnoremap <Leader>. :mapc<CR>:cmapc<CR>:imapc<CR>:source ~/.vimperatorrc<CR>
 
@@ -238,14 +224,8 @@ nnoremap <Leader>b :dialog bookmarks<CR>
 nnoremap <Leader>h :dialog history<CR>
 nnoremap <Leader>p :dialog pagesorce<CR>
 
-" private mode
-nnoremap <leader>p :set invprivate
-
 " quit
 nnoremap <Leader>q :quitall<CR>
-
-" save quit
-nnoremap <Leader>wq :xall<CR>
 
 " restart
 nnoremap <Leader>r :restart<CR>
@@ -323,7 +303,7 @@ liberator.globalVariables.plugin_loader_plugins = [
   'direct_bookmark',
   'feedSomeKeys_3',
   'hint-exit',
-  'ldrize_cooperation',
+//  'ldrize_cooperation',
 //  'migemo_completion',
 //  'migemo_hint',
 //  'migemo_find',
@@ -368,11 +348,6 @@ nnoremap a :sbm<Space>
 let use_hints_ext_hinttags=1
 let use_hints_ext_extendedhinttags=1
 " }}}
-" ldrize_cooperation.js {{{
-
-let g:ldrc_captureMappings = "['j','k','p','o']"
-
-" }}}
 " feedSomekeys_3.js {{{
 
 lazy fmaps -u='mail\.google\.com/mail' c / j k n p o u e x s r a # [ ] ? gi gs gt gd ga gc
@@ -382,7 +357,12 @@ lazy fmaps -u='(fastladder|livedoor)\.com/reader' j k s a p o v c i,p <Space> <S
 lazy fmaps -u='https?://www\.rememberthemilk\.com/home/' j k m i c t ? d F,f G,g S,s L,l Y,y H,h M,m <Del> <C-S-Left> <C-S-Right>
 lazy fmaps -u='http://code.google.com/p/vimperator-labs/issues/list' o j k
 lazy fmaps -u='http://code.google.com/p/vimperator-labs/issues/detail' u
-lazy fmaps -u='^http://[^\./]*\.tumblr\.com/' t
+
+" autocmd LocationChange .* js modes.passAllKeys = false
+" autocmd LocationChange www\\.tumblr\\.(co\\.jp|com) js modes.passAllKeys = true
+
+fmap -modes=i -events=keydown,keypress <C-p> <Up>
+fmap -modes=i -events=keydown,keypress <C-n> <Down>
 
 " }}}
 " twittperator {{{

@@ -63,6 +63,9 @@ NeoBundle 'miripiruni/CSScomb-for-Vim'
 " }}}
 
 " Settings {{{
+
+filetype plugin indent on
+
 " Encording {{{
 
 " デフォルトエンコード"
@@ -71,8 +74,8 @@ set encoding=utf-8
 set fileformats=unix,dos,mac
 
 " }}}
+" Basic {{{
 
-filetype plugin indent on
 let $PATH = $PATH.':/usr/local/bin/'.':'.$HOME.'/bin'
 " タグファイルを探す場所
 set tags=./.tags,./../.tags,./*/.tags,./../../.tags,./../../../.tags,./../../../../.tags,./../../../../../.tags
@@ -93,6 +96,7 @@ set splitbelow
 " ウィンドウの縦分割で新しいウィンドウをカレントウィンドウの右に開く
 set splitright
 
+" }}}
 " Display {{{
 
 set title
@@ -202,7 +206,7 @@ set imsearch=0
 set expandtab
 
 " 可視のタブ幅。4スペース分
-set tabstop=4
+set tabstop=2
 
 " cindentやautoindent時や >> で挿入されるタブの幅
 set shiftwidth=2
@@ -408,11 +412,14 @@ nnoremap <Space>] :<C-u>bn<CR>
 "}}}
 
 " Filetype {{{
-" HTML {{{
-autocmd FileType html,xhtml,xml setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+if has("autocmd")
+" TEXT {{{
+autocmd FileType text setlocal shiftwidth=4 tabstop=4
+" }}}
+" HTML, XHTML, XML {{{
+autocmd FileType html,xhtml,xml setlocal noexpandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType html,xhtml setlocal includeexpr=substitute(v:fname,'^\\/','','') | setlocal path+=./;/
 autocmd FileType html :compiler tidy
-autocmd FileType html :setlocal makeprg=tidy\ -raw\ -quiet\ -errors\ --gnu-emacs\ yes\ \"%\"
 " }}}
 " CSS {{{
 autocmd BufNewFile,BufRead *.less setlocal filetype=less
@@ -422,19 +429,17 @@ autocmd BufNewFile,BufRead *.scss,*.less,*.css setlocal foldmarker={,}
 autocmd BufNewFile,BufRead *.scss,*.less,*.css nnoremap <buffer> <leader>S ?{<CR>jV/\v^\s*\}?$<CR>k:sort<CR>:noh<CR>
 autocmd BufNewFile,BufRead *.scss,*.less,*.css inoremap <buffer> {<cr> {}<left><cr>.<cr><esc>kA<bs><space><space>
 autocmd FileType scss,less,css setlocal iskeyword+=-
-autocmd FileType scss,less,css setlocal expandtab ts=2 sw=2 sts=2
+autocmd FileType scss,less,css setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType css setlocal includeexpr=substitute(v:fname,'^\\/','','') | setlocal path+=;/
 autocmd FileType css :compiler css
 " }}}
 " JavaScript {{{
+autocmd FileType javascript setlocal noexpandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType javascript setlocal foldmethod=marker
 autocmd FileType javascript setlocal foldmarker={,}
 " }}}
-" Python {{{
-autocmd FileType python set expandtab ts=2 sw=2 sts=2
-" }}}
 " Ruby {{{
-autocmd FileType ruby setlocal expandtab ts=2 sw=2 sts=2
+autocmd FileType ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 " }}}
 " RSpec {{{
 autocmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
@@ -445,6 +450,10 @@ autocmd BufNewFile,BufRead *.slim set filetype=slim
 " Makefile {{{
 autocmd BufNewFile,BufRead Makefile.rule setlocal filetype=make
 autocmd Filetype make set noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
+" }}}
+" Shellscript {{{
+autocmd Filetype sh set noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
+
 " }}}
 " Help {{{
 
@@ -461,12 +470,7 @@ autocmd FileType applescript :inoremap <buffer> <S-CR> ￢<CR>
 " vimperator {{{
 autocmd BufNewFile,BufRead *vimperatorrc*,*.vimp set filetype=vimperator
 " }}}
-" apache {{{
-autocmd FileType apache setlocal path+=./;/
-" }}}
-" git {{{
-autocmd FileType gitconfig setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4
-" }}}
+endif
 " }}}
 
 " Plugin {{{
@@ -831,6 +835,16 @@ autocmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
 " }}}
 " vim-powerline {{{
 let g:Powerline_symbols = 'fancy'
+let g:Powerline_mode_i  = '挿入'
+let g:Powerline_mode_R  = '置換'
+let g:Powerline_mode_n  = '通常'
+let g:Powerline_mode_v  = 'ビジュアル'
+let g:Powerline_mode_V  = '行ビジュアル'
+let g:Powerline_mode_cv = '矩形ビジュアル'
+let g:Powerline_mode_s  = '選択'
+let g:Powerline_mode_S  = '行選択'
+let g:Powerline_mode_cs = '矩形選択'
+
 " }}}
 " vim-ambicmd {{{
 

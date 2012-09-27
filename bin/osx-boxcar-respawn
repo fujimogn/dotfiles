@@ -1,0 +1,30 @@
+#!/bin/sh
+
+check()
+{
+	ps ax | grep Boxcar\ Ma[c] >/dev/null
+}
+
+spawn()
+{
+	open -a Boxcar\ Mac
+}
+
+# -------------------------------------
+
+check
+
+if [ $? == 1 ]; then
+	spawn
+	exit
+fi
+
+killall Boxcar\ Mac
+
+while [ $? == 0 ]
+do
+	sleep 1
+	check
+done
+
+spawn

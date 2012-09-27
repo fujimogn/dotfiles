@@ -20,6 +20,9 @@ fi
 defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
 # ウィンドウのタイトルバーをダブルクリックしてウィンドウをしまう
 defaults write -g AppleMiniaturizeOnDoubleClick -bool true
+# 起動音を消す
+# osascript -e 'set volume with output muted'
+osascript -e 'set volume without output muted'
 
 # ------------------------------------------------------------------------------
 # Finder
