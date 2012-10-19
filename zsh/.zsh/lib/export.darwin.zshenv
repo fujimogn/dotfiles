@@ -1,7 +1,7 @@
 #!/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/export.darwin.zshrc
-# $Date: 2012-06-30T05:28:38+0900$
+# $Date: 2012-10-02T02:16:44+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # OSX GCC Installer
@@ -30,8 +30,9 @@ if [ -s "${HOME}/.pythonbrew/etc/bashrc" ]; then
 fi
 
 ## gisty
-if which gisty >/dev/null 2>&1 ; then
+if [ -d "${HOME}/gist" ]; then
   export GISTY_DIR=${HOME}/gist
+  export GISTY_ACCESS_TOKEN=08095b8bc8136b1b36d8107a904878f722d89ae1
   export GISTY_SSL_CA=`ruby -ropenssl -e 'p OpenSSL::X509::DEFAULT_CERT_FILE'`
   export GISTY_SSL_VERIFY="none"
 fi

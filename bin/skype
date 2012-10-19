@@ -1,0 +1,46 @@
+#!/bin/sh
+
+### check ostype
+if [ ! `uname -s` == "Darwin" ]; then
+	echo "ERROR: only works with Mac OS X" >&2
+	exit 1
+fi
+
+### check app
+app="/Applications/Skype.app/Contents/MacOS/Skype"
+if [ ! -x ${app} ]; then
+	echo "ERROR: Skype.app does not exist." >&2
+	exit 1
+fi
+
+### perse options
+
+help() {
+	echo "`basename $0` [ -h ] [ -u username ]"
+	echo "  -h : display this text"
+	echo "  -u : skype username"
+}
+
+[ $# -eq 0 ] && help && exit 1
+
+while getopts "hu:" OPT; do
+	case $OPT in
+		h) help && exit ;;
+		u) user_name="$OPTARG";;
+		*) help && exit 1 ;;
+	esac
+done
+
+### check user
+
+id ${user_name} > /dev/null 2>&1
+
+
+### command
+
+if [ $? -eq 0 ]; then
+	sudo -u ${user_name} ${app}
+else
+	echo "ERROR: user ${user_name} does not exist." >&2
+	exit 1
+fi

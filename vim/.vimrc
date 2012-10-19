@@ -7,7 +7,6 @@ if has('vim_starting')
   call neobundle#rc(expand('~/.vim/bundle'))
 endif
 
-if $SUDO_USER == ''
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neocomplcache-snippets-complete'
@@ -17,8 +16,6 @@ NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'tsukkee/unite-help'
-endif
-
 NeoBundle 'Shougo/vimproc'
 NeoBundle 'Shougo/vim-vcs'
 NeoBundle 'thinca/vim-ref'
@@ -44,6 +41,7 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'h1mesuke/vim-alignta'
 NeoBundle 'vim-scripts/Align'
+NeoBundle 'vim-scripts/sudo.vim'
 
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'tpope/vim-rails'
@@ -807,6 +805,10 @@ autocmd FileType ruby,rake call EnableSmartchrRubyHash()
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=2
 
+" }}}
+" sudo.vim {{{
+nnoremap ;es :e sudo:%<CR><C-^>:bd!
+nnoremap ;ws :w sudo:%<CR>
 " }}}
 " vim-altr {{{
 

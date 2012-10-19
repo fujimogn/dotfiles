@@ -20,6 +20,8 @@ if [ -d "${HOME}/.ssh" ]; then
   [ -f ${HOME}/.ssh/known_hosts ] && chmod 644 ${HOME}/.ssh/known_hosts
   find ${HOME}/.ssh/ -name "*_[dr]sa" -exec chmod 600 {} \;
   find ${HOME}/.ssh/ -name "*_[dr]sa.pub" -exec chmod 644 {} \;
+  find ${HOME}/.ssh/ -name "identity.*" -exec chmod 600 {} \;
+  find ${HOME}/.ssh/ -name "identity.*.pub" -exec chmod 644 {} \;
 fi
 
 # ${HOME}/.tmp
