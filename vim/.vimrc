@@ -301,6 +301,7 @@ let mapleader=","
 " : ; 入れ替え
 nnoremap ; :
 
+" Return で改行
 nnoremap <CR> :<C-u>call append(expand('.'), '')<CR>ji
 
 " インサートモードを抜ける
@@ -342,33 +343,29 @@ vnoremap v $h
 nnoremap <Space>w :<C-u>write<Return>
 nnoremap <Space>q :<C-u>quit<Return>
 
-command! Editrc tabedit $MYVIMRC
-command! Editgrc tabedit $MYGVIMRC
-command! Reloadrc source $MYVIMRC
-command! Reloadgrc source $MYGVIMRC
-nnoremap <Space>.. :<C-u>Editrc<Cr>
-nnoremap <Space>.r :<C-u>Reloadrc<Cr>
-
 " タブ
-nnoremap <Space>tt :<C-u>tabnew<CR>
-nnoremap <Space>tf :<C-u>tabfirst<CR>
-nnoremap <Space>tl :<C-u>tablast<CR>
-nnoremap <Space>tn :<C-u>tabnext<CR>
-nnoremap <Space>tN :<C-u>tabNext<CR>
-nnoremap <Space>tp :<C-u>tabprevious<CR>
-nnoremap <Space>te :<C-u>tabedit<Space>
-nnoremap <Space>tc :<C-u>tabclose<CR>
-nnoremap <Space>to :<C-u>tabonly<CR>
-nnoremap <Space>ts :<C-u>tabs<CR>
-nnoremap <Space>td :<C-u>tabdo<Space>
-nnoremap <Space>tf :<C-u>tabfind<Space>
-nnoremap <Space>tm :<C-u>tabmove<Space>
+nnoremap <C-t>  <Nop>
+nnoremap <C-t>n  :<C-u>tabnew<CR>
+nnoremap <C-t>c  :<C-u>tabclose<CR>
+nnoremap <C-t>o  :<C-u>tabonly<CR>
+nnoremap <C-t>j  :<C-u>execute 'tabnext' 1 + (tabpagenr() + v:count1 - 1) % tabpagenr('$')<CR>
+nnoremap <C-t>k  gT
 
 " インサートモード
 " imap <C-e> <End>
 imap <C-a> <Home>
 imap <C-h> <Backspace>
 imap <C-d> <Del>
+
+" 設定をいじるとき
+command! Editrc tabedit $MYVIMRC
+command! Editgrc tabedit $MYGVIMRC
+command! Reloadrc source $MYVIMRC
+command! Reloadgrc source $MYGVIMRC
+
+nnoremap <Space>.. :<C-u>Editrc<Cr>
+nnoremap <Space>.r :<C-u>Reloadrc<Cr>
+
 
 
 " 括弧までを消したり置き換えたりする {{{
@@ -619,7 +616,7 @@ let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 let g:neocomplcache_ctags_program = '/usr/local/bin/ctags'
 
 " cache dir
-let g:neocomplcache_temporary_dir = $HOME.'/.tmp/vim/neocon/'
+let g:neocomplcache_temporary_dir = $HOME.'/.vim/.tmp/neocon/'
 
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neocomplcache_snippets_expand)
