@@ -14,9 +14,8 @@ if has('gui_macvim')
   " via http://vim-users.jp/2011/10/hack234
   augroup hack234
     autocmd!
-      autocmd FocusGained * set transparency=2
-      autocmd FocusLost * set transparency=50
-    endif
+    autocmd FocusGained * set transparency=2
+    autocmd FocusLost * set transparency=50
   augroup END
 endif
 

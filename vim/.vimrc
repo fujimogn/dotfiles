@@ -63,6 +63,9 @@ NeoBundle 'miripiruni/CSScomb-for-Vim'
 " Settings {{{
 
 filetype plugin indent on
+autocmd!
+set modelines=5
+
 
 " Encording {{{
 
@@ -148,17 +151,13 @@ autocmd bufwritepre * :%s/\s\+$//ge
 " }}}
 " Backup, History {{{
 
+set autowrite
+set hidden
 set backup
-set backupdir=~/.tmp/vim/backup
-set backupskip=/tmp/*,/private/tmp/*"
-set swapfile
-set directory=~/.tmp/vim/swap
-set undofile
-set undodir=~/.tmp/vim/undo
-set undolevels=1000
-set viminfo='50,<1000,s100,:100
-set viminfo+=n~/.tmp/vim/viminfo
-set history=1000
+set backupdir=$HOME/.vim/.backup
+set directory=$HOME/.vim/.tmp
+set history=10000
+set updatetime=500
 
 " }}}
 " Color {{{
@@ -228,11 +227,7 @@ set smarttab
 
 
 " }}}
-" Modeline {{{
 
-set modeline
-
-" }}}
 " Forlding {{{
 
 set foldenable
@@ -313,10 +308,10 @@ nnoremap J <C-d>
 nnoremap K <C-u>
 
 " ウィンドウ移動
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
+" nnoremap <C-h> <C-w>h
 
 " Fold
 inoremap zz <C-O>za
@@ -364,6 +359,7 @@ nnoremap <Space>tm :<C-u>tabmove<Space>
 imap <C-a> <Home>
 imap <C-h> <Backspace>
 imap <C-d> <Del>
+
 
 " 括弧までを消したり置き換えたりする {{{
 " from http://vim-users.jp/2011/04/hack214/
@@ -482,7 +478,7 @@ let g:autodate_keyword_post = '\$'
  " }}}
 " vimshell {{{
 
-let g:vimshell_temporary_directory = '~/.tmp/vim/vimshell'
+let g:vimshell_temporary_directory = '~/.vim/.vimshell'
 let g:vimshell_prompt =  '$ '
 let g:vimshell_interactive_update_time = 10
 let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
@@ -600,7 +596,7 @@ let g:neocomplcache_dictionary_filetype_lists = {
     \ 'php'         : $HOME . '/.vim/dict/php.dict',
     \ 'scheme'      : $HOME . '/.vim/dict/scheme.dict',
     \ 'vim'         : $HOME . '/.vim/dict/vim.dict',
-    \ 'vimshell'    : $HOME . '/.tmp/vim/vimshell/int_hist',
+    \ 'vimshell'    : $HOME . '/.vim/.vimshellint_hist',
     \ }
 
 " Define keyword.
@@ -668,7 +664,7 @@ nnoremap <Space>es :<C-u>vertical NeoComplCacheEditSnippets<CR>
 " }}}
 " vimfiler {{{
 
-let g:vimfiler_data_directory = '~/.tmp/vim/vimfiler'
+" let g:vimfiler_data_directory = '~/.tmp/vim/vimfiler'
 
 " }}}
 " Unite {{{

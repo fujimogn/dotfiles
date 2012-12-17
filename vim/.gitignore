@@ -1,5 +1,7 @@
-/.vim/bundle
-/.vim/.tmp/*
-!/.vim/.tmp/empty
+.vim/bundle
+.vim/.tmp/*
+.vim/.backup/*
+.vim/.vimshell/*
+
 .netrwhist
 
