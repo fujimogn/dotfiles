@@ -1,5 +1,5 @@
 ""3.3pre
-" $Date: 2012-10-16T00:48:06+0900$
+" $Date: 2012-12-15T23:53:35+0900$
 
 
 
@@ -15,13 +15,10 @@ set ignorecase
 set autocomplete
 set complete=tsl
 set focuscontent
-" set gui=noaddons,bookmarks,nomenu,nonavigation,tabs
-" set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
 set gui=noaddons,nobookmarks,nomenu,nonavigation,notabs
-set gui=noaddons
 set hintchars=hjklasdfgyuiopqwertnmzxcvb
-set history=1000
-set hlsearch
+set history=0
+" set hlsearch
 set inspectcontentobjects
 set nextpattern=\bnext\b,\bmore\b,next,^次(の)?ページ,\b次.*,→\b,^>$,^(>>|≫)$,^(>|≫),(>|≫)$
 set previouspattern=\bprev|previous\b,prev,^前(の)?ページ,\b前.*,\b←,^<$,^(<<|≪)$,^(<|≪),(<|≪)$
@@ -43,17 +40,17 @@ EOM
 " about:config ----------------------------------------------------------------------- {{{
 
 " アドオン/プラグイン開発用
-set! javascript.options.strict=true
-set! javascript.options.showInConsole=true
-set! browser.dom.window.dump.enabled=true
+" set! javascript.options.strict=true
+" set! javascript.options.showInConsole=true
+" set! browser.dom.window.dump.enabled=true
 
 " Webページが自動的に転送や再読み込みさせようとした場合警告する
 " set! accessibility.blockautorefresh=true
 
 " キャッシュ
-set! browser.cache.disk.enable=false
-set! browser.cache.memory.enable=true
-set! browser.cache.memory.capacity=-1
+" set! browser.cache.disk.enable=false
+" set! browser.cache.memory.enable=true
+" set! browser.cache.memory.capacity=-1
 
 " 最小化した時にメモリを開放
 set! config.trim_on_minimize=true
@@ -68,7 +65,7 @@ set! browser.download.manager.retention=1
 set! browser.download.manager.scanWhenDone=false
 
 " 互換性チェックを行わないように
-set! extensions.checkCompatibility.15.0a=false
+set! extensions.checkCompatibility.17.0.1=false
 
 " 検索やフォームの入力履歴を保存しない
 set! browser.formfill.enable=false
@@ -80,10 +77,10 @@ set! browser.startup.page=3
 set! browser.sessionstore.restore_on_demand=true
 
 " " セッションの保存間隔
-set! browser.sessionstore.interval=120000
+" set! browser.sessionstore.interval=120000
 
 " " undo limit
-set! browser.sessionstore.max_tabs_undo=100
+" set! browser.sessionstore.max_tabs_undo=100
 
 " タブバーを自動で隠さない
 set! browser.tabs.autoHide=false
@@ -99,37 +96,37 @@ set! browser.tabs.loadDivertedInBackground=true
 " set! browser.urlbar.maxRichResults=50
 
 " JavaScriptでのウィンドウ移動・リサイズ拒否
-set! dom.disable_window_move_resize=true
+" set! dom.disable_window_move_resize=true
 
 " JavaScriptのステータスバー操作を無効化
-set! dom.event.contextmenu.enabled=false
+" set! dom.event.contextmenu.enabled=false
 
 " ポップアップを 10000 まで許可する
-set! dom.popup_maximum=10000
+" set! dom.popup_maximum=10000
 
 " about:configの編集時の警告を無効
-set! general.warnOnAboutConfig=false
+" set! general.warnOnAboutConfig=false
 
 " 画像の多いタブを閉じた時にすぐにメモリ使用量を減らす
 " http://space.geocities.yahoo.co.jp/gl/alice0775/view/20110416/1302920985
-set! image.mem.min_discard_timeout_ms=6000
+" set! image.mem.min_discard_timeout_ms=6000
 
 " IPv6 無効化
-set! network.dns.disableIPv6=true
+" set! network.dns.disableIPv6=true
 
 " パイプライン
-set! network.http.pipelining=true
-set! network.http.proxy.pipelining=true
-set! network.http.pipelining.maxrequests=10
+" set! network.http.pipelining=true
+" set! network.http.proxy.pipelining=true
+" set! network.http.pipelining.maxrequests=10
 
 " 接続数
-set! network.http.max-connections=48
-set! network.http.max-connections-per-server=20
-set! network.http.max-persistent-connections-per-proxy=16
-set! network.http.max-persistent-connections-per-server=8
+" set! network.http.max-connections=48
+" set! network.http.max-connections-per-server=20
+" set! network.http.max-persistent-connections-per-proxy=16
+" set! network.http.max-persistent-connections-per-server=8
 
 " レンダリング待ち時間
-set! nglayout.initialpaint.delay=0
+" set! nglayout.initialpaint.delay=0
 
 " アドオンインストール時の待ち時間カット
 set! security.dialog_enable_delay=0
@@ -141,7 +138,7 @@ set! signon.rememberSignons=false
 set! ui.key.generalAccessKey=0
 
 " サブメニューが表示されるまでに費やす時間
-set! ui.submenuDelay=0
+" set! ui.submenuDelay=0
 
 " キャレットモードのカーソルを太くする
 set! ui.caretWidth=8
@@ -219,10 +216,10 @@ nnoremap <silent> y :<C-u>js util.copyToClipboard(buffer.URL)<CR>
 nnoremap <Leader>. :mapc<CR>:cmapc<CR>:imapc<CR>:source ~/.vimperatorrc<CR>
 
 " dialog
-nnoremap <Leader>a :dialog addons<CR>
-nnoremap <Leader>b :dialog bookmarks<CR>
-nnoremap <Leader>h :dialog history<CR>
-nnoremap <Leader>p :dialog pagesorce<CR>
+" nnoremap <Leader>a :dialog addons<CR>
+" nnoremap <Leader>b :dialog bookmarks<CR>
+" nnoremap <Leader>h :dialog history<CR>
+" nnoremap <Leader>p :dialog pagesorce<CR>
 
 " quit
 nnoremap <Leader>q :quitall<CR>
@@ -256,6 +253,9 @@ cmap <C-p> <S-TAB>
 imap <C-n> <Down>
 imap <C-p> <Up>
 
+" 通常の検索を置き換える
+nnoremap <M-f> /
+
 
 " }}}
 " qmark  ----------------------------------------------------------------------------- {{{
@@ -269,21 +269,28 @@ silent qmark c http://www.google.com/calendar/render
 silent qmark d http://www.tumblr.com/dashboard
 silent qmark e https://www.evernote.com/Home.action
 silent qmark f https://www.facebook.com
+silent qmark g https://github.com/fujimogn
+silent qmark h http://himado.in/
 silent qmark l http://www.lastfm.jp/user/fujimogn
 silent qmark n http://www.nicovideo.jp/video_top/
 silent qmark m https://mail.google.com/mail/
 silent qmark p http://plus.google.com
+silent qmark q http://qiita.com/users/fujimogn
 silent qmark r https://www.google.com/reader/view/
 silent qmark t http://twitter.com
 silent qmark y http://www.youtube.com
 
 silent qmark 0 http://localhost
 silent qmark 3 http://localhost:3000
+silent qmark 4 http://localhost:4567
+silent qmark 5 http://localhost:5000
+silent qmark 8 http://localhost:8080
 
 " }}}
 " autocmd {{{
 
 command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
+
 
 " }}}
 " Plugin Setting ---------------------------------------------------------------------- {{{
@@ -293,37 +300,31 @@ liberator.globalVariables.plugin_loader_roots = "~/.vimperator/plugin/ ~/.vimper
 liberator.globalVariables.plugin_loader_plugins = [
   '_libly',
   'auto_reload',
-  'auto_source',
-  'auto-focus-frame',
-//  'bookmarktoolbar-hint',
   'caret-hint',
-//  'command_menu',
-//  'commandBookmarklet',
   'copy',
   'direct_bookmark',
   'feedSomeKeys_3',
-  'hint-exit',
-//  'ldrize_cooperation',
-//  'migemo_completion',
-//  'migemo_hint',
-//  'migemo_find',
-//  'opener',
-  'twittperator',
+  'migemized_find',
+// 'opener',
+// 'twittperator',
   'statusline-toolbar',
+  'pluginManager',
+  'hatena-bookmark-search'
 ];
 EOM
 
 " caret-hint.js {{{
 
-" let g:caret_hint_key = 'i'
-" let g:caret_hint_tail_key = 'C'
-" let g:caret_hint_select_key = ''
-" let g:caret_hint_select_tail_key = ''
-" let g:caret_hint_swap_key = 'c'
+let g:caret_hint_key = 'c'
+let g:caret_hint_tail_key = 'C'
+let g:caret_hint_select_key = ''
+let g:caret_hint_select_tail_key = ''
+let g:caret_hint_swap_key = 'c'
+nnoremap <C-i> ;c
 
 " }}}
 " copy.js {{{
-
+nnoremap <Leader>c :copy<Space>
 js <<EOM
   liberator.globalVariables.copy_templates = [
     { label: 'titleAndURL',    value : '%TITLE%\n%URL%' },
@@ -344,25 +345,14 @@ let g:direct_sbm_is_use_migemo = "true"
 nnoremap a :sbm<Space>
 
 " }}}
-" hint-exit.,js {{{
-let use_hints_ext_hinttags=1
-let use_hints_ext_extendedhinttags=1
-" }}}
 " feedSomekeys_3.js {{{
 
 lazy fmaps -u='mail\.google\.com/mail' c / j k n p o u e x s r a # [ ] ? gi gs gt gd ga gc
 lazy fmaps -u='mail\.google\.com/mail/.*/[0-9a-f]+$' c / j,n k,p n,j p,k o u e x s r a # [ ] ? gi gs gt gd ga gc
 lazy fmaps -u='www\.google\.(com|co\.jp)/reader' -events=vkeypress j k n o p m s v A r S N P X O gh ga gs gt gu u / ?
-lazy fmaps -u='(fastladder|livedoor)\.com/reader' j k s a p o v c i,p <Space> <S-Space> z b < > q w e,g
-lazy fmaps -u='https?://www\.rememberthemilk\.com/home/' j k m i c t ? d F,f G,g S,s L,l Y,y H,h M,m <Del> <C-S-Left> <C-S-Right>
-lazy fmaps -u='http://code.google.com/p/vimperator-labs/issues/list' o j k
-lazy fmaps -u='http://code.google.com/p/vimperator-labs/issues/detail' u
-
+" lazy fmaps -u='http://\w+\.tumblr\.com' -events=vkeydown j k r a l q w e
 " autocmd LocationChange .* js modes.passAllKeys = false
 " autocmd LocationChange www\\.tumblr\\.(co\\.jp|com) js modes.passAllKeys = true
-
-fmap -modes=i -events=keydown,keypress <C-p> <Up>
-fmap -modes=i -events=keydown,keypress <C-n> <Down>
 
 " }}}
 " twittperator {{{
@@ -384,6 +374,6 @@ colorscheme monokai_fujimogn
 
 " }}}
 
-source! ~/.vimperatorrc.locaal
+source! ~/.vimperatorrc.local
 
 echo "Vimperator " + liberator.version
