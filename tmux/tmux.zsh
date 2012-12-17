@@ -1,19 +1,22 @@
 #!/bin/zsh
 #
 # $File: ${DOTDIR}/tmux/tmux.zsh
-# $Date: 2012-02-29T16:59:06+0900$
+# $Date: 2012-12-16T00:58:54+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
-! which tmux >/dev/null 2>&1 && return 1
 
-alias t='tmux'
-alias ta='tmux attach'
-alias tls='tmux list-sessions'
-alias tlw='tmux list-window'
+if which tmux 1>/dev/null 2>&1; then
 
-TMUX_PROG="`whence tmux`"
-[ -x "$TMUX_PROG" ] && [ -n "$TMUX" ] && alias exit="$TMUX_PROG detach"
+  alias tm='tmux'
+  alias tma='tmux attach'
+  alias tmls='tmux list-sessions'
+  alias tmlw='tmux list-window'
 
-function tmux-edit-rc {
-  ${EDITOR-vi} ${DOTDIR}/tmux/.tmux.conf
-}
+  TMUX_PROG="`whence tmux`"
+  [ -x "$TMUX_PROG" ] && [ -n "$TMUX" ] && alias exit="$TMUX_PROG detach"
+
+  function tmux-edit-rc {
+    ${EDITOR-vi} ${DOTDIR}/tmux/.tmux.conf
+  }
+
+fi
