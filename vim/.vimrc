@@ -153,11 +153,21 @@ autocmd bufwritepre * :%s/\s\+$//ge
 
 set autowrite
 set hidden
+
 set backup
-set backupdir=$HOME/.vim/.backup
-set directory=$HOME/.vim/.tmp
+set backupdir=$HOME/.vim/.tmp/backup
+
+set swapfile
+set directory=$HOME/.vim/.tmp/swap
+
+set undofile
+set undodir=$HOME/.vim/.tmp/undo
+
 set history=10000
 set updatetime=500
+
+set viminfo='50,<1000,s100,:100
+set viminfo+=n$HOME/.vim/.tmp/viminfo
 
 " }}}
 " Color {{{
@@ -478,7 +488,7 @@ let g:autodate_keyword_post = '\$'
  " }}}
 " vimshell {{{
 
-let g:vimshell_temporary_directory = '~/.vim/.vimshell'
+let g:vimshell_temporary_directory = $HOME . '/.vim/.tmp/vimshell'
 let g:vimshell_prompt =  '$ '
 let g:vimshell_interactive_update_time = 10
 let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
@@ -596,7 +606,7 @@ let g:neocomplcache_dictionary_filetype_lists = {
     \ 'php'         : $HOME . '/.vim/dict/php.dict',
     \ 'scheme'      : $HOME . '/.vim/dict/scheme.dict',
     \ 'vim'         : $HOME . '/.vim/dict/vim.dict',
-    \ 'vimshell'    : $HOME . '/.vim/.vimshellint_hist',
+    \ 'vimshell'    : $HOME . '/.vim/.tmp/vimfiler/int_hist',
     \ }
 
 " Define keyword.
@@ -664,7 +674,7 @@ nnoremap <Space>es :<C-u>vertical NeoComplCacheEditSnippets<CR>
 " }}}
 " vimfiler {{{
 
-" let g:vimfiler_data_directory = '~/.tmp/vim/vimfiler'
+let g:vimfiler_data_directory = $HOME . '/.vim/.tmp/vimfiler'
 
 " }}}
 " Unite {{{
