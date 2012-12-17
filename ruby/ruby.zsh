@@ -7,9 +7,10 @@ alias rake="noglob rake"
 alias 3k="open http://localhost:3000"
 
 # rbenv# {{{
-if which rbenv >/dev/null 2>&1 ; then
+if [ -d /usr/local/opt/rbenv ]; then
+  export RBENV_ROOT=/usr/local/opt/rbenv
+  export PATH="$RBENV_ROOT/bin:$PATH"
   eval "$(rbenv init -)"
-  gem() { rbenv exec gem "$@" && rbenv rehash && hash -r; }
 fi
 
 # }}}
@@ -20,6 +21,7 @@ BUNDLED_COMMANDS=(
 cap
 capify
 cucumber
+compass
 foreman
 guard
 haml
@@ -34,7 +36,6 @@ rake
 rake2thor
 rawler
 rspec
-ruby
 sass
 sass-convert
 serve
@@ -46,7 +47,8 @@ thor
 tilt
 tt
 unicorn
-unicorn_rails)
+unicorn_rails
+wordless)
 
 bundler-installed()
 {
