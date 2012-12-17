@@ -1,7 +1,7 @@
 #!/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/export.darwin.zshrc
-# $Date: 2012-10-02T02:16:44+0900$
+# $Date: 2012-12-13T00:40:01+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # OSX GCC Installer
@@ -16,9 +16,28 @@ if [ -d /usr/local/Cellar/android-sdk ]; then
 fi
 
 ## Node.js
-if [ -d /usr/local/lib/node ]; then
-  export NODE_PATH=/usr/local/lib/node_modules
+# if [ -d /usr/local/lib/node ]; then
+  # export NODE_PATH=/usr/local/lib/node_modules
+# fi
+
+## nvm
+if [[ -s $HOME/.nvm ]] ; then
+  setopt nullglob
+  export NVM_DIR=$HOME/.nvm
+  source $NVM_DIR/nvm.sh
+
+  if which nvm >/dev/null 2>&1 ;then
+    _nodejs_use_version="v0.8.15"
+    if nvm ls | grep -F -e "${_nodejs_use_version}" >/dev/null 2>&1 ;then
+      nvm use "${_nodejs_use_version}" >/dev/null
+      export NODE_PATH=${NVM_PATH}_modules${NODE_PATH:+:}${NODE_PATH}
+    fi
+    unset _nodejs_use_version
+  fi
+
 fi
+
+
 
 # pybrew
 if [ -s "${HOME}/.pythonbrew/etc/bashrc" ]; then
@@ -29,15 +48,15 @@ if [ -s "${HOME}/.pythonbrew/etc/bashrc" ]; then
   fi
 fi
 
+
 ## gisty
-if [ -d "${HOME}/gist" ]; then
-  export GISTY_DIR=${HOME}/gist
-  export GISTY_ACCESS_TOKEN=08095b8bc8136b1b36d8107a904878f722d89ae1
-  export GISTY_SSL_CA=`ruby -ropenssl -e 'p OpenSSL::X509::DEFAULT_CERT_FILE'`
-  export GISTY_SSL_VERIFY="none"
+if [ -d "${HOME}/gists" ]; then
+  export GISTY_DIR="${HOME}/gists"
+  export GISTY_ACCESS_TOKEN="ddacac16b1e322c18db9e4c04a86182f375cc156"
+  export GISTY_SSL_VERIFY="NONE"
 fi
 
-
+## postgres
 if [ -d /usr/local/var/postgres ]; then
   export PGDATA=/usr/local/var/postgres
 fi

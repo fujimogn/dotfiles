@@ -1,7 +1,7 @@
 #!/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/completion.zshrc
-# $Date: 2012-02-27T09:10:04+0900$
+# $Date: 2012-12-12T23:03:20+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 setopt always_last_prompt       # 補完してもプロンプトの位置を変えない。デフォルトで有効
@@ -27,7 +27,7 @@ unsetopt list_beep              # 曖昧な補完にビープ音を鳴らさな�
 
 
 WORDCHARS='*?_-.[]~=&;!#$%^(){}'
-fpath=(${ZDOTDIR}/modules/zsh-completions $fpath)
+fpath=(${ZDOTDIR}/modules/zsh-completions/src $fpath)
 fignore=( .BAK .bak .alt .old .aux .toc .swp \~)
 
 # filetypes based completion
@@ -116,7 +116,7 @@ if [ -e "${ZDOTDIR}/modules/auto-fu/auto-fu.zsh" ]; then
   zstyle ':auto-fu:highlight' completion/one fg=blue,dim
   zstyle ':auto-fu:var' postdisplay ''
   zstyle ':auto-fu:var' track-keymap-skip opp
-  zstyle ':auto-fu:var' autoable-function/skiplbuffers '(rake|gem)*'
+  zstyle ':auto-fu:var' autoable-function/skiplbuffers '(npm)*'
   zstyle ':completion:*' completer _oldlist _complete
 
   function zle-line-init () { auto-fu-init }; zle -N zle-line-init

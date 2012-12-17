@@ -1,7 +1,7 @@
 #!/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/alias.zshrc
-# $Date: 2012-03-06T03:34:10+0900$
+# $Date: 2012-12-10T19:44:38+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # my heavy use !!
@@ -26,7 +26,7 @@ alias emacs="emacs -nw"
 alias yum="sudo yum"
 alias 644="chmod 644"
 alias 755="chmod 755"
-alias ymd='date +%y%m%d'
+alias ymd="date +%Y%m%d"
 
 # for atools
 if [ -x "`whence aunpack`" ]; then
