@@ -2,21 +2,17 @@
 <root>
 	<list>
 		<item>
-			<name>Private Keybind Setting</name>
+			<name>Private KeyRemap Setting</name>
 			<list>
 
 				<item>
 					<name>Global</name>
 					<list>
-						<item>
-							<name>Disable Escape</name>
-							<identifier>private.drop_escape</identifier>
-							<autogen>--KeyToKey-- KeyCode::ESCAPE, KeyCode::VK_NONE</autogen>
-						</item>
+
 						<item>
 							<name>Control+[ to Escape</name>
+							<not>TERMINAL</not>
 							<identifier>private.control_bracket_to_escape</identifier>
-							<not>EMACS</not>
 							<autogen>--KeyToKey-- KeyCode::BRACKET_LEFT, VK_CONTROL, KeyCode::ESCAPE</autogen>
 						</item>
 						<item>
@@ -44,6 +40,50 @@
 							<identifier>private.shiftR_to_escape</identifier>
 							<autogen>--KeyToKey-- KeyCode::SHIFT_R, KeyCode::ESCAPE</autogen>
 						</item>
+						<item>
+							<name>Shift_R to Fn</name>
+							<identifier>private.shiftR_to_fn</identifier>
+							<autogen>--KeyToKey-- KeyCode::SHIFT_R, KeyCode::FN</autogen>
+						</item>
+						<item>
+							<name>Command_L to toggle IME</name>
+							<appendix>(+ When you type Command_L only, send KANA/EISUU (toggle))</appendix>
+							<identifier>private.commandL_to_toggle_kana_eisuu</identifier>
+							<autogen>--KeyOverlaidModifier-- KeyCode::COMMAND_L, KeyCode::COMMAND_L, KeyCode::VK_JIS_TOGGLE_EISUU_KANA</autogen>
+						</item>
+						<item>
+							<name>Command_R to toggle IME</name>
+							<appendix>(+ When you type Command_R only, send KANA/EISUU (toggle))</appendix>
+							<identifier>private.commandR_to_toggle_kana_eisuu</identifier>
+							<autogen>--KeyOverlaidModifier-- KeyCode::COMMAND_R, KeyCode::COMMAND_R, KeyCode::VK_JIS_TOGGLE_EISUU_KANA</autogen>
+						</item>
+						<item>
+							<name>Command_R to rightclick</name>
+							<identifier>private.commandR_to_rightclick</identifier>
+							<autogen>--KeyToPointingButton-- KeyCode::COMMAND_R, PointingButton::RIGHT</autogen>
+						</item>
+						<item>
+							<name>Option_R to rightclick</name>
+							<identifier>private.optionR_to_rightclick</identifier>
+							<autogen>--KeyToPointingButton-- KeyCode::OPTION_R, PointingButton::RIGHT</autogen>
+						</item>
+
+
+
+					</list>
+				</item>
+
+				<item>
+					<name>IME</name>
+					<list>
+						<item>
+							<name>Vim Leave Insert Mode with IME Off</name>
+							<only>TERMINAL</only>
+							<identifier>private.tarminal_escape_with_ime_off</identifier>
+							<autogen>--KeyToKey-- KeyCode::ESCAPE, KeyCode::ESCAPE, KeyCode::JIS_EISUU</autogen>
+							<autogen>--KeyToKey-- KeyCode::BRACKET_LEFT, VK_CONTROL, KeyCode::BRACKET_LEFT, VK_CONTROL, KeyCode::JIS_EISUU</autogen>
+							<autogen>--KeyToKey-- KeyCode::C, VK_CONTROL, KeyCode::C, VK_CONTROL, KeyCode::JIS_EISUU</autogen>
+						</item>
 					</list>
 				</item>
 
@@ -54,13 +94,13 @@
 							<name>Return Key Opens a file</name>
 							<appendix>(+ Return Key to Command_L+O)</appendix>
 							<only>FINDER</only>
-							<identifier>private.app_finder_return_to_command_o</identifier>
+							<identifier>private.app_finder_return_to_commandO</identifier>
 							<autogen>--KeyToKey-- KeyCode::RETURN, KeyCode::O, ModifierFlag::COMMAND_L, Option::NOREPEAT</autogen>
 						</item>
 						<item>
 							<name>Use Command+R as Rename</name>
 							<appendix>(+ Command+R to Return)</appendix>
-							<identifier>private.app_finder_command_R_to_return</identifier>
+							<identifier>private.app_finder_commandR_to_return</identifier>
 							<only>FINDER</only>
 							<autogen>--KeyToKey-- KeyCode::R, VK_COMMAND, KeyCode::RETURN</autogen>
 						</item>
@@ -71,19 +111,98 @@
 							<only>FINDER</only>
 							<autogen>--KeyToKey-- KeyCode::F2, KeyCode::RETURN</autogen>
 						</item>
+
+					</list>
+				</item>
+
+
+
+				<item>
+					<name>Vi Mode at Finder</name>
+					<list>
+						<item>
+							<name>Vi Mode at Finder</name>
+							<appendix>Finder keybind changes like Vim(Vimperator)</appendix>
+							<appendix></appendix>
+							<appendix>- hjkl to Left/Down/Up/Right</appendix>
+							<appendix></appendix>
+							<appendix>- H to Up to Dir</appendix>
+							<appendix>- J to Shift+Down (Select Down)</appendix>
+							<appendix>- L to Open Dir/File</appendix>
+							<appendix>- K to Shift+UP (Select Up)</appendix>
+							<appendix></appendix>
+							<appendix>- o to Open Dir/File</appendix>
+							<appendix>- y to Copy Dir/File</appendix>
+							<appendix>- p to Paste Dir/File</appendix>
+							<appendix>- x to Delete Dir/File</appendix>
+							<appendix>- u to Undo</appendix>
+							<appendix>- U to Redo</appendix>
+							<appendix></appendix>
+							<appendix>- d to Close Window</appendix>
+							<appendix>- q to Close All Window</appendix>
+							<appendix>- t to New Window</appendix>
+							<appendix>- a to Add Favorites</appendix>
+							<identifier vk_config="true">save.vimode_finder</identifier>
+							<autogen>--ShowStatusMessage-- Vi Mode at Finder</autogen>
+							<only>FINDER</only>
+							<!-- hjkl to Cursor -->
+							<autogen>--KeyToKey-- KeyCode::H, ModifierFlag::NONE, KeyCode::CURSOR_LEFT</autogen>
+							<autogen>--KeyToKey-- KeyCode::J, ModifierFlag::NONE, KeyCode::CURSOR_DOWN</autogen>
+							<autogen>--KeyToKey-- KeyCode::K, ModifierFlag::NONE, KeyCode::CURSOR_UP</autogen>
+							<autogen>--KeyToKey-- KeyCode::L, ModifierFlag::NONE, KeyCode::CURSOR_RIGHT</autogen>
+							<!-- H to History Prev -->
+							<!-- COMMAND_L + CURSOR_UP だとシンボリックリンクを辿った場合、上のディレクトリに行ってしまうので -->
+							<autogen>--KeyToKey-- KeyCode::H, VK_SHIFT | ModifierFlag::NONE, KeyCode::BRACKET_LEFT, ModifierFlag::COMMAND_L</autogen>
+							<!-- L to Open -->
+							<autogen>--KeyToKey-- KeyCode::L, VK_SHIFT | ModifierFlag::NONE, KeyCode::O, ModifierFlag::COMMAND_L, Option::NOREPEAT</autogen>
+							<!-- J/K to Shift+Cursor -->
+							<autogen>--KeyToKey-- KeyCode::J, VK_SHIFT | ModifierFlag::NONE, KeyCode::CURSOR_DOWN, ModifierFlag::SHIFT_L</autogen>
+							<autogen>--KeyToKey-- KeyCode::K, VK_SHIFT | ModifierFlag::NONE, KeyCode::CURSOR_UP, ModifierFlag::SHIFT_L</autogen>
+							<!-- o to Open -->
+							<autogen>--KeyToKey-- KeyCode::O, ModifierFlag::NONE, KeyCode::O, ModifierFlag::COMMAND_L, Option::NOREPEAT</autogen>
+							<!-- y to Copy -->
+							<autogen>--KeyToKey-- KeyCode::Y, ModifierFlag::NONE, KeyCode::C, ModifierFlag::COMMAND_L</autogen>
+							<!-- p to Paste -->
+							<autogen>--KeyToKey-- KeyCode::P, ModifierFlag::NONE, KeyCode::V, ModifierFlag::COMMAND_L</autogen>
+							<!-- x to Delete -->
+							<autogen>--KeyToKey-- KeyCode::X, ModifierFlag::NONE, KeyCode::X, ModifierFlag::COMMAND_L</autogen>
+							<!-- u to Undo -->
+							<autogen>--KeyToKey-- KeyCode::U, ModifierFlag::NONE, KeyCode::Z, ModifierFlag::COMMAND_L</autogen>
+							<!-- U to Redo -->
+							<autogen>--KeyToKey-- KeyCode::U, VK_SHIFT | ModifierFlag::NONE, KeyCode::Z, ModifierFlag::COMMAND_L | ModifierFlag::SHIFT_L</autogen>
+							<!-- d to Close Window -->
+							<autogen>--KeyToKey-- KeyCode::D, ModifierFlag::NONE, KeyCode::W, ModifierFlag::COMMAND_L</autogen>
+							<!-- q to Close All Window -->
+							<autogen>--KeyToKey-- KeyCode::Q, ModifierFlag::NONE, KeyCode::W, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L</autogen>
+							<!-- t to New Window -->
+							<autogen>--KeyToKey-- KeyCode::T, ModifierFlag::NONE, KeyCode::N, ModifierFlag::COMMAND_L</autogen>
+							<!-- a to Add Favorites -->
+							<autogen>--KeyToKey-- KeyCode::A, ModifierFlag::NONE, KeyCode::T, ModifierFlag::COMMAND_L</autogen>
+							<!-- todo: フォルダの作成、名前の変更時に挿入モード -->
+						</item>
+						<item>
+							<name>Control + v to toggle Vi Mode at Finder</name>
+							<only>FINDER</only>
+							<identifier>private.vimode_finder_command_v_to_toggle</identifier>
+							<autogen>--KeyToKey-- KeyCode::V, VK_CONTROL, KeyCode::VK_CONFIG_TOGGLE_save_vimode_finder</autogen>
+						</item>
+						<item>
+							<name>ESC to disable Vi Mode at Finder</name>
+							<only>FINDER</only>
+							<identifier>private.vimode_finder_esc_to_off</identifier>
+							<autogen>--KeyToKey-- KeyCode::ESCAPE, KeyCode::VK_CONFIG_FORCE_OFF_save_vimode_finder</autogen>
+						</item>
+
+
 					</list>
 				</item>
 
 				<item>
 					<name>HHK</name>
 					<list>
+
 						<item>
-							<name>Shift_R to Fn</name>
-							<identifier>private.shiftR_to_fn</identifier>
-							<autogen>--KeyToKey-- KeyCode::SHIFT_R, KeyCode::FN</autogen>
-						</item>
-						<item>
-							<name>Enable HHK compatible Arrow Key Mode</name>
+							<name>Enable HHK compatible Arrow Key Mode </name>
 							<identifier>private.hhkmode</identifier>
 							<autogen>--KeyToKey-- KeyCode::BRACKET_LEFT, ModifierFlag::FN, KeyCode::CURSOR_UP</autogen>
 							<autogen>--KeyToKey-- KeyCode::SEMICOLON,    ModifierFlag::FN, KeyCode::CURSOR_LEFT</autogen>
@@ -106,6 +225,16 @@
 							<autogen>--KeyToKey-- KeyCode::MINUS,        ModifierFlag::FN, KeyCode::F11</autogen>
 							<autogen>--KeyToKey-- KeyCode::EQUAL,        ModifierFlag::FN, KeyCode::F12</autogen>
 						</item>
+
+						<item>
+							<name>Enable Fn + jkhl to Cursor</name>
+							<identifier>private.vimcursormode</identifier>
+							<autogen>--KeyToKey-- KeyCode::K,            ModifierFlag::FN, KeyCode::CURSOR_UP</autogen>
+							<autogen>--KeyToKey-- KeyCode::H,            ModifierFlag::FN, KeyCode::CURSOR_LEFT</autogen>
+							<autogen>--KeyToKey-- KeyCode::L,            ModifierFlag::FN, KeyCode::CURSOR_RIGHT</autogen>
+							<autogen>--KeyToKey-- KeyCode::J,            ModifierFlag::FN, KeyCode::CURSOR_DOWN</autogen>
+						</item>
+
 
 					</list>
 				</item>
