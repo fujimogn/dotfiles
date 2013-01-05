@@ -16,3 +16,6 @@
 [submodule "zsh/.zsh/modules/cdd"]
 	path = zsh/.zsh/modules/cdd
 	url = git://github.com/m4i/cdd.git
+[submodule "vim"]
+	path = vim
+	url = git@github.com:fujimogn/vimrc.git
