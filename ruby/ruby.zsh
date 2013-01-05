@@ -18,6 +18,7 @@ fi
 # http://d.hatena.ne.jp/willnet/20110612/1307849053
 
 BUNDLED_COMMANDS=(
+af
 cap
 capify
 cucumber
