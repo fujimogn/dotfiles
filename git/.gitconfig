@@ -61,3 +61,5 @@
 
 
 [heroku]
+[push]
+	default = matching

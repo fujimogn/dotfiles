@@ -16,3 +16,7 @@ fi
 if [ -d "${HOME}/Projects/bin" ]; then
   export PATH=${HOME}/Projects/bin:${PATH}
 fi
+
+if [ -d "${HOME}/.cabal/bin" ]; then
+  export PATH=${HOME}/.cabal/bin:$PATH
+fi

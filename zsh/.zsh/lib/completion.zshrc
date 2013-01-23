@@ -25,7 +25,6 @@ setopt list_types               # 補完候補で ls -F。デフォルトで有�
 setopt rec_exact                # 曖昧さがあっても正確なマッチ
 unsetopt list_beep              # 曖昧な補完にビープ音を鳴らさない
 
-
 WORDCHARS='*?_-.[]~=&;!#$%^(){}'
 fpath=(${ZDOTDIR}/modules/zsh-completions/src $fpath)
 fignore=( .BAK .bak .alt .old .aux .toc .swp \~)

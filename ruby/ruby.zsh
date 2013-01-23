@@ -18,6 +18,7 @@ fi
 # http://d.hatena.ne.jp/willnet/20110612/1307849053
 
 BUNDLED_COMMANDS=(
+middleman
 af
 cap
 capify
@@ -116,8 +117,9 @@ compdef _rake rake
 # RSense# {{{
 # http://cx4a.org/software/rsense/
 
-if [ -d "/usr/lib/rsense" ]; then
-  export RSENSE_HOME=/usr/lib/rsense
+if [ -d "/usr/local/Cellar/rsense/0.3/libexec" ]; then
+  export RSENSE_HOME="/usr/local/Cellar/rsense/0.3/libexec"
 fi
 
 # }}}
+

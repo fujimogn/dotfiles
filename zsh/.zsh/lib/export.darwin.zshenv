@@ -1,7 +1,7 @@
 #!/bin/zsh
 #
 # $File: ${ZDOTDIR}/lib/export.darwin.zshrc
-# $Date: 2012-12-13T00:40:01+0900$
+# $Date: 2013-01-05T12:07:49+0900$
 # vim:filetype=zsh:tabstop=2:shiftwidth=2:fdm=marker:
 
 # OSX GCC Installer
@@ -10,9 +10,11 @@ export CC=/usr/bin/gcc-4.2
 
 ## android-sdk
 if [ -d /usr/local/Cellar/android-sdk ]; then
-  ver=`ls -1v /usr/local/Cellar/android-sdk | tail -1`
-  export ANDROID_SDK_ROOT=/usr/local/Cellar/android-sdk/${ver}
-  unset ver
+  export ANDROID_SDK_ROOT=/usr/local/opt/android-sdk
+  # ver=`ls -1v /usr/local/Cellar/android-sdk | tail -1`
+  # export ANDROID_SDK_ROOT=/usr/local/Cellar/android-sdk/${ver}
+  # unset ver
+  export PATH=${PATH}:${ANDROID_SDK_ROOT}/tools
 fi
 
 ## Node.js

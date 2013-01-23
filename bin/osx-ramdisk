@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 ### check ostype
 if [ ! `uname -s` == "Darwin" ]; then
@@ -6,25 +7,40 @@ if [ ! `uname -s` == "Darwin" ]; then
   exit 1
 fi
 
+
+
 ### comannd, perse options
 
+
 help() {
-  echo "`basename $0` [ -h ] [ -u ] [ -c filename ]"
-  echo "  -h : display this text"
-  echo "  -u : unmount ramdisk, unlink symlink"
-  echo "  -c : specify the configuration file to use."
+  echo "`basename $0` [-m][-r][-c file] | [-u][-r][-c file] | [-g] | [-h]"
+  echo "  -m      : mount ramdisk, link symlink"
+  echo "  -u      : unmount ramdisk, unlink symlink"
+  echo "  -r      : use rsync backup or restore"
+  echo "  -c file : use manual configuration file path"
+  echo "  -g      : generate configuration file in ${HOME}"
+  echo "  -h      : display this text"
 }
 
-while getopts "huc:" OPT; do
+[ $# == 0 ] && help && exit 1
+
+while getopts "hmurgc:" OPT; do
   case $OPT in
     \?) OPT_ERROR=1; break;;
-    h) help && exit ;;
+    h) help && exit 1;;
+    m) opt_m=true;;
     u) opt_u=true;;
+    r) opt_r=true;;
+    g) opt_g=true;;
     c) opt_c="$OPTARG";;
   esac
 done
 
-shift $(( $OPTIND - 1 ))
+### 
+
+
+### args
+shift `expr $OPTIND - 1`
 [ $OPT_ERROR ] && help && exit 1
 
 ramdisk_laodconfig() {
@@ -45,12 +61,15 @@ RAMDISK_VOLUME="ramdisk"
 RAMDISK_HDID=/dev/disk1
 
 # cache target dirs
-CACHE_DIRS=( \
+TARGET_DIRS=( \
 ~/Library/Caches/Google \
 ~/Library/Caches/com.apple.iTunes \
 ~/Library/Caches/com.apple.Safari \
 ~/Library/Caches/Firefox \
 )
+
+# use rsync backup & restore dir
+BACKUP_DIR=~/.ramdisk_backup
 _EOT_
   fi
   source ${rcfile}
@@ -73,9 +92,9 @@ ramdisk_mount(){
 
 ramdisk_make_symlinks() {
   local ramdisk=/volumes/${RAMDISK_VOLUME}
-  if [ -d "${ramdisk}" ] && [ -n ${CACHE_DIRS} ]; then
+  if [ -d "${ramdisk}" ] && [ -n ${TARGET_DIRS} ]; then
     echo "\nMake symlinks & make backup ...\n"
-    for dir in ${CACHE_DIRS[@]}
+    for dir in ${TARGET_DIRS[@]}
     do
       mkdir ${ramdisk}/${dir##*/}
       if [ -d ${dir} ]; then
@@ -93,9 +112,9 @@ ramdisk_make_symlinks() {
 
 ramdisk_rm_symlinks() {
   local ramdisk=/volumes/${RAMDISK_VOLUME}
-  if [ ! -d "${ramdisk}" ] && [ -n ${CACHE_DIRS} ]; then
+  if [ ! -d "${ramdisk}" ] && [ -n ${TARGET_DIRS} ]; then
     echo "\nRemove symlinks & restore backup ...\n"
-    for dir in ${CACHE_DIRS[@]}
+    for dir in ${TARGET_DIRS[@]}
     do
       if [ -L ${dir} ]; then
         rm -fv ${dir}
@@ -110,15 +129,19 @@ ramdisk_rm_symlinks() {
   fi
 }
 
-main() {
-  ramdisk_laodconfig
-  if [ ${opt_u} ]; then
-    ramdisk_umount
-    ramdisk_rm_symlinks
-  else
-    ramdisk_mount && \
-    ramdisk_make_symlinks
-  fi
-}
+# main() {
 
-main
+  # ramdisk_laodconfig
+
+  # [ $# == 0 ] && help && exit 1
+  
+  # if [ ${opt_u} ]; then
+    # ramdisk_umount
+    # ramdisk_rm_symlinks
+  # else
+    # ramdisk_mount && \
+    # ramdisk_make_symlinks
+  # fi
+# }
+
+# main
