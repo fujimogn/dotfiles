@@ -13,9 +13,12 @@
 [submodule "zsh/.zsh/modules/zaw"]
 	path = zsh/.zsh/modules/zaw
 	url = git://github.com/zsh-users/zaw.git
+	ignore = dirty
 [submodule "zsh/.zsh/modules/cdd"]
 	path = zsh/.zsh/modules/cdd
 	url = git://github.com/m4i/cdd.git
+	ignore = dirty
 [submodule "vim"]
 	path = vim
 	url = git@github.com:fujimogn/vimrc.git
+	ignore = dirty
