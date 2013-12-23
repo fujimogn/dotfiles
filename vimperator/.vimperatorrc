@@ -1,4 +1,4 @@
-""3.3pre
+" 3.3pre
 " $Date: 2012-12-15T23:53:35+0900$
 
 
@@ -15,7 +15,8 @@ set ignorecase
 set autocomplete
 set complete=tsl
 set focuscontent
-set gui=noaddons,nobookmarks,nomenu,nonavigation,notabs
+set gui=noaddons,bookmarks,nomenu,nonavigation,tabs
+" "set gui=noaddons,nobookmarks,nomenu,nonavigation,notabs
 set hintchars=hjklasdfgyuiopqwertnmzxcvb
 set history=0
 " set hlsearch
@@ -241,9 +242,8 @@ vnoremap P y<Esc><Esc>P
 vnoremap p y<Esc><Esc>p
 
 " SKKとキーマップの競合を避ける
-cnoremap <C-j> <Nop>
-cnoremap <C-l> <Nop>
-cnoremap <C-q> <Nop>
+cmap <C-j> <Nop>
+imap <C-j> <Nop>
 
 " C-n, C-pでも補完を選択できるように
 cmap <C-n> <TAB>

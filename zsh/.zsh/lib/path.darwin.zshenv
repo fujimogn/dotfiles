@@ -18,11 +18,11 @@ if [ -d /Library/Frameworks/UIM.framework/Versions/Current/bin ]; then
 fi
 
 ## php
-if [ -d $(brew --prefix)/opt/php54/bin ]; then
-  export PATH="$(brew --prefix)/opt/php54/bin:$PATH"
+if [ -d /usr/local/opt/php54/bin ]; then
+  export PATH=/usr/local/opt/php54/bin:$PATH
 fi
 
 ### python
-if [ -d $(brew --prefix)/lib/python2.7/site-packages ]; then
-  export PYTHONPATH=$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH
+if [ -d /usr/local/lib/python2.7/site-packages ]; then
+  export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 fi
